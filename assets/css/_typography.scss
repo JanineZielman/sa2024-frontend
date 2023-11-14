@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'mono';
+    src: url('../fonts/codabetav3-monoserif-webfont.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'mono-prop';
+    src: url('../fonts/codabetav3-proportionalsans-webfont.woff') format('woff');
+    font-style: normal;
+}
+
+html {
+    @include mobile {
+        font-size: 3.26vw;
+        line-height: 1.1;
+    }
+
+    @include desktop {
+        font-size: 1.2vw;
+        line-height: 1.1;
+    }
+}
+
+
+body {
+    font-family: 'mono', 'Courier', monospace;
+
+    font-size: 1.4rem;
+    line-height: 1.14;
+    letter-spacing: 0.00rem;
+
+    color: black;
+
+    font-variation-settings: 'wght' 400, 'ital' 0;
+    font-feature-settings: "ss02";
+}
+
+.no-feature {
+    font-feature-settings: "ss01";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: normal;
+  font-size: 0.84rem;
+  line-height: 1.1;
+}
+
+
+ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    cursor: pointer;
+    //display: inline-block;
+    color: black;
+    transition: 0.2s all ease;
+    font-variation-settings: 'wght' 400, 'wdth' 104;
+
+}
+
+strong {
+  font-weight: normal;
+  color: $keycolor5;
+}
+
+p, li {
+    margin: 0 0 0 0;
+    font-family: "mono-prop", courier, monospace;
+    font-size: 0.84rem;
+    line-height: 1.28;
+
+    @include mobile {
+      font-size: 1.4rem;
+
+    }
+
+    a:link,
+    a:visited {
+        border-bottom: 1px solid black;
+    }
+
+    a:hover {
+        border-bottom: 1px solid white;
+    }
+}
+
+p + p {
+    //text-indent: 2rem;
+    margin: 0 0 1rem 0;
+}
+
+
+
+h4 {
+    font-size: 1rem;
+    font-variation-settings: 'wght' 500, 'wdth' 104;
+}
+
+h5 {
+    font-size: 1rem;
+    font-variation-settings: 'wght' 500, 'wdth' 104;
+}
+
+strong {
+    font-variation-settings: 'wght' 500, 'wdth' 104;
+}
+
+em {
+    font-variation-settings: 'wght' 400, 'ital' 1;
+}
+
+
+
+@mixin mono {
+    font-family: 'mono', monospace;
+    font-size: 0.7rem;
+    color: black;
+    text-transform: uppercase;
+}
+
+@mixin mono-s {
+    font-family: 'mono', monospace;
+    font-size: 0.7rem;
+    color: black;
+}
+
+@mixin black-label {
+    font-size: 0.8rem;
+    @include mobile {
+      font-size: 1rem;
+    }
+}
+
+@mixin label {
+    font-size: 0.6rem;
+    text-align: right;
+}
