@@ -23,6 +23,9 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
               for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {
                 tags += `${item.attributes.biennial_tags.data[i].attributes.slug} `;
               }
+              
+              {item.attributes.cover_image}
+
               return(
                 <div className={`discover-item ${tags}`}>
                   <LazyLoad height={600}>
@@ -30,7 +33,7 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
                       <a href={`/programme/${item.attributes.slug}`} key={'discover'+i}>
                         <div className="image">
                           {item.attributes.cover_image?.data &&
-                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                            <Image image={item.attributes.cover_image?.data?.attributes} />
                           }
                           <div className="info-overlay">
                             {item.attributes.locations.data[0] && 

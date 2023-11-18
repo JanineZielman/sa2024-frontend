@@ -27,6 +27,9 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
   
   return (
     <section className="festival-wrapper">
+      <div className="title">
+        <h1>Artists</h1>
+      </div>
       <Layout  global={global} festival={festival}>
         <div className="discover">
           <div className="wrapper intro">
@@ -45,23 +48,22 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
               loader={<h4>Loading...</h4>}
             >
               {posts.map((item, i) => {
+                console.log(item.attributes.cover_image.data.attributes.formats);
                 return (
                   <div className="discover-item artist-item">
-                    <LazyLoad height={600}>
-                      <div className="item-wrapper">
-                        <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
-                          <div className="image">
-                            {item.attributes?.cover_image?.data &&
-                              <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
-                            }
-                          </div>
-                          <div className="info">
-                            {item.attributes.name} 
-                            {/* <div>{item.attributes.job_description}</div>  */}
-                          </div>
-                        </a>
-                      </div>
-                    </LazyLoad>
+                    <div className="item-wrapper">
+                      <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
+                        <div className="image">
+                            <img 
+                              src={"https://cms.sonicacts.com/public"+item.attributes.cover_image.data.attributes.formats.small?.url}
+                            />
+                        </div>
+                        <div className="info">
+                          {item.attributes.name} 
+                          {/* <div>{item.attributes.job_description}</div>  */}
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 )
               })}

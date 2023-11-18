@@ -7,6 +7,22 @@ class MyDocument extends Document {
         <Head>
           {/* eslint-disable-next-line */}
           <link rel="canonical" href="https://sonicacts.com/" />
+
+          <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+          
+          <script
+            type="importmap"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                imports: {
+                  three: './assets/js/build/three.module.js',
+                  'three/addons/': './assets/js/jsm/'
+                }
+              })
+            }}
+          />
+          
+          <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" />
           <script
             async
             src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"
