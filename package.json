@@ -35,7 +35,7 @@
     "react-slick": "^0.28.1",
     "react-transition-group": "^4.4.2",
     "sass": "^1.45.0",
-    "strapi-plugin-populate-deep": "^0.1.2",
+    "strapi-plugin-populate-deep": "^3.0.1",
     "three": "^0.158.0"
   },
   "license": "MIT",
