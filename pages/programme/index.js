@@ -8,7 +8,7 @@ import Moment from 'moment';
 const Programme = ({ global, items, params, festival}) => {
   
   return (
-    <section className="festival-wrapper">
+    <section className="festival-wrapper template-programme">
       <Layout global={global} festival={festival}>
         <div className="discover">
           <div className="discover-container programme-container">

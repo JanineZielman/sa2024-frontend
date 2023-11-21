@@ -184,6 +184,58 @@ const Layout = ({ children, global, festival}) => {
 
       });
 
+
+      $(window).scroll(function() {
+
+        //console.log($(window).scrollTop());
+
+        var scrollTop = $(window).scrollTop();
+
+        $("#title-1-sonic, #title-1-sonic-mobile").css({
+            "transform":"translate(-50%, calc(-50% - " + scrollTop * 0.4 + "px))"
+        })
+
+        $("#title-2-acts, #title-2-acts-mobile").css({
+            "transform":"translate(-50%, calc(-50% - " + scrollTop * 0.8 + "px))"
+        })
+
+
+        $("#svg-biennial").css({
+            "transform":"translateY(" + scrollTop * 0.4 + "px)"
+        })
+
+        $("#svg-2024").css({
+            "transform":"translateY(" + scrollTop * 0.8 + "px)"
+        })
+
+
+        $("#svg-bottom-table").css({
+            "transform":"translateY(" + scrollTop * 0.5 + "px)"
+        })
+
+        $("#background-1, #normal-01").css({
+            "opacity": 1 - scrollTop/120
+        })
+
+        $("#background-bottom").css({
+            "transform":"translateY(" + -1 * Math.min(scrollTop, $(window).width()*0.4) + "px)"
+        })
+
+        var maxScroll = $(window).width() * 0.1;
+        var maxScale = $(window).width() * 0.17; //how small it gets, the smaller the number the smaller
+
+        if (
+            scrollTop > ($("#intro-wrapper").outerHeight() + $("#curatorial-statement").outerHeight() - $(window).height())
+            || scrollTop < $(window).height()/2
+        ) {
+            $(".background-layer-1").fadeOut();
+        } else {
+
+            $(".background-layer-1").fadeIn();
+        }
+      })
+
+
     }, 100);
 
 

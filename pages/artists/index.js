@@ -26,7 +26,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
   }, [posts]);
   
   return (
-    <section className="festival-wrapper">
+    <section className="festival-wrapper template-artists">
       <div className="title">
         <h1>Artists</h1>
       </div>

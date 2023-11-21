@@ -128,7 +128,7 @@ body {
 
     @include mobile {
         padding-top: 10rem;
-        padding-bottom: 6rem;
+        padding-bottom: 0rem;
     }
 }
 
@@ -150,6 +150,7 @@ body {
 
     @include mobile {
         position: fixed;
+        width: 100vw;
     }
 
     @include desktop {
@@ -195,7 +196,10 @@ body {
             &:nth-child(4n+3) {
                 background-color: $keycolor5;
             }
-    
+
+            a {
+                text-decoration: none;
+            }
         }
     }
 }
@@ -494,11 +498,9 @@ body {
     flex-direction: column;
 
     position: relative;
-    min-height: 100vh;
     padding-left: 1rem;
     padding-right: 1rem;
     margin-top: 1rem;
-
 
     .image.community {
         img {
@@ -554,10 +556,10 @@ body {
                 top: 0;
                 transform: translateX(0);
                 img {
-                    width: calc(20vw - 1.5rem) !important;                    
+                    width: calc(24vw - 1.5rem) !important;                    
                     max-height: 70vh !important;
-                    max-width: 20vw !important;
-                    
+                    max-width: 24vw !important;
+                    object-fit: cover;
                 }
     
             }
@@ -673,22 +675,61 @@ $bottomDistance: 5.5rem;
 
 
 .filter {
-    display: none;
+    padding: 1rem;
 }
 
 /* artist single page */
 .discover.sub {
-    position: absolute;
-    right: 0;
-    top: 10rem;
-    width: 14rem;
+    @include desktop {
+        position: absolute;
+        right: 1rem;
+        top: 15rem;
+        width: 14rem;    
+    }
 
+    @include mobile {
+        .discover-container.programme-container {
+            display: flex;
+            flex-wrap: wrap;
+
+            .discover-item {
+                width: 50%;
+                padding: 0.5rem;
+            }
+        }
+        
+    }
+    
     .item-wrapper {
         font-size: 1rem;
     }
 
+    .category {
+        font-size: 0.8rem;    
+    }
+ 
     .info-overlay {
         @include mono;
+
+        span {
+            display: none;
+        }
+
+        .locations span {
+            display: block;
+        }
+    }
+
+    .title {
+        font-size: 1.4rem;
+        padding: 0;
+    }
+
+    img {
+        max-height: 10rem !important;
+        max-width: 15rem !important;
+        width: 15rem !important;
+        object-fit: cover;
     }
 }
 
@@ -1850,4 +1891,67 @@ $bottomDistance: 5.5rem;
     }
 }
 
+.festival-wrapper.template-programme {
 
+    .discover-container {
+        display: flex;
+        flex-wrap: wrap;
+
+        .discover-item {
+            width: 33.333%;
+        }
+
+        .image span {
+            position: relative !important;
+        }
+
+        img {
+            position: relative !important;
+            inset: 0px;
+            box-sizing: border-box;
+            padding: 0px;
+            border: none;
+            margin: auto;
+            display: block;
+            width: 20rem !important;
+            height: 10rem !important;
+            min-width: auto !important;
+            max-width: none !important;
+            min-height: auto !important;
+            max-height: none !important;
+            object-fit: cover !important;
+        }
+    }
+}
+
+.caption {
+    display: none;
+}
+
+.container  {
+    padding: 0 1rem;
+}
+
+.festival-wrapper.about-page {
+    .container  {
+        padding: 0 20rem;
+    }   
+}
+
+.image.null.biennial-2022 {
+    img {
+        mix-blend-mode: multiply;
+    }
+}
+
+
+.prefooter {
+    padding-top: 10rem;
+}
+
+
+.template-artists {
+    .filter {
+        display: none;
+    }
+}

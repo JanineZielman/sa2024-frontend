@@ -7,7 +7,7 @@ import ReactMarkdown from "react-markdown";
 const About = ({ global, page}) => {
   return (
 		<>
-		<section className="festival-wrapper">
+		<section className="festival-wrapper about-page">
 			<Layout  global={global} festival={page}>
 				<div className="intro-text">
 					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
