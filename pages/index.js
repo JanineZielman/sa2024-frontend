@@ -8,219 +8,223 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 
 	useEffect(() => {
 		// Your old jQuery code goes here
-		$( document ).ready(function() {
 
-			$(".locations-item").each(function(){
-				$(this).blast({
-					delimiter: "character" // Set the delimiter type (see left)
-				});
-			})
+		setTimeout(function(){
+			$( document ).ready(function() {
 
-			async function getNews() {
-				console.log("news")
+				$(".locations-item").each(function(){
+					//$(this).blast({
+					//	delimiter: "character" // Set the delimiter type (see left)
+					//});
+				})
 
-				const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[cover_image][populate]=*");
+				async function getNews() {
+					console.log("news")
 
-				const news = await response.json();
-				console.log(news.data);
+					const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[cover_image][populate]=*");
 
-				$.each(news.data, function( index, value ) {
+					const news = await response.json();
+					console.log(news.data);
 
-					//console.log(value.attributes);
+					$.each(news.data, function( index, value ) {
 
-					//cms.sonicacts.com/uploads/Anthea_Caddy_Live_02_HKW_9abd4498e9.jpeg?w=1000&q=75
+						//console.log(value.attributes);
 
-					var $news = $("<div className='news-item'></div>");
-					var $newsImage = $("<div className='news-image'></div>");
-					var $newsContent = $("<div className='news-content'></div>");
+						//cms.sonicacts.com/uploads/Anthea_Caddy_Live_02_HKW_9abd4498e9.jpeg?w=1000&q=75
 
-					var $newsHeadlineWrapper = $("<div className='news-headline-wrapper'></div>");
-					var $newsHeadline = $("<h2 className='news-headline'>"+marked.parse(value.attributes.title)+"</h2>");
-					var $newsDate = $("<div className='news-date'>"+value.attributes.date+"</div>");
+						var $news = $("<div className='news-item'></div>");
+						var $newsImage = $("<div className='news-image'></div>");
+						var $newsContent = $("<div className='news-content'></div>");
 
-					$newsHeadlineWrapper.append($newsHeadline);
-					$newsHeadlineWrapper.append($newsDate);
-					$newsContent.append($newsHeadlineWrapper);
+						var $newsHeadlineWrapper = $("<div className='news-headline-wrapper'></div>");
+						var $newsHeadline = $("<h2 className='news-headline'>"+marked.parse(value.attributes.title)+"</h2>");
+						var $newsDate = $("<div className='news-date'>"+value.attributes.date+"</div>");
 
-
-
-					console.log(value.attributes);
-
-					if (value.attributes.cover_image) {
-						console.log(value.attributes.cover_image);
-
-						if (value.attributes.cover_image.data && value.attributes.cover_image.data.attributes && value.attributes.cover_image.data.attributes.formats && value.attributes.cover_image.data.attributes.formats.large && value.attributes.cover_image.data.attributes.formats.large.url) {
-							$newsImage.html("<img src='https://cms.sonicacts.com"+value.attributes.cover_image.data.attributes.formats.large.url+"'>");
-						}
-
-						$news.append($newsImage);
-					}
+						$newsHeadlineWrapper.append($newsHeadline);
+						$newsHeadlineWrapper.append($newsDate);
+						$newsContent.append($newsHeadlineWrapper);
 
 
-					$.each(value.attributes.content, function( index, value ) {
 
-						if (value.__component == "basic.text") {
-							$newsContent.append(marked.parse(value.text_block));
-							return false;
-						}
+						console.log(value.attributes);
 
-					})
+						if (value.attributes.cover_image) {
+							console.log(value.attributes.cover_image);
 
-					$news.append($newsContent);
-
-
-					var $moreContent = $("<div className='more-content' style='max-height:0; overflow:hidden;'></div>");
-
-
-					var ignoreFirst = true;
-
-					$.each(value.attributes.content, function( index, value ) {
-
-						//console.log(value);
-
-						if (value.__component == "basic.text") {
-
-							if (ignoreFirst) {
-								ignoreFirst = false;
-							} else {
-								$moreContent.append(marked.parse(value.text_block));
+							if (value.attributes.cover_image.data && value.attributes.cover_image.data.attributes && value.attributes.cover_image.data.attributes.formats && value.attributes.cover_image.data.attributes.formats.large && value.attributes.cover_image.data.attributes.formats.large.url) {
+								$newsImage.html("<img src='https://cms.sonicacts.com"+value.attributes.cover_image.data.attributes.formats.large.url+"'>");
 							}
+
+							$news.append($newsImage);
 						}
 
-						if (value.__component == "basic.image") {
-							//console.log(value.image.data.attributes.url);
 
-							if (value && value.image && value.image.data && value.image.data.attributes && value.image.data.attributes.formats && value.image.data.attributes.formats.large && value.image.data.attributes.formats.large.url) {
+						$.each(value.attributes.content, function( index, value ) {
 
-								$moreContent.append("<img src='https://cms.sonicacts.com"+value.image.data.attributes.formats.large.url+"'>");
+							if (value.__component == "basic.text") {
+								$newsContent.append(marked.parse(value.text_block));
+								return false;
 							}
-						}
 
-						if (value.__component == "basic.embed") {
-							$moreContent.append(value.url);
-						}
+						})
 
-					})
+						$news.append($newsContent);
 
 
-					$newsContent.append($moreContent);
+						var $moreContent = $("<div className='more-content' style='max-height:0; overflow:hidden;'></div>");
 
 
-					var $readMoreButton = $('<div className="read-more read-more-news"><div className="read-more-inner">read more</div></div>');
+						var ignoreFirst = true;
 
-					$readMoreButton.click(function(){
-						//console.log("click");
+						$.each(value.attributes.content, function( index, value ) {
 
-						$(this).closest(".news-item").addClass("open");
+							//console.log(value);
 
-						$(this).fadeOut();
+							if (value.__component == "basic.text") {
 
-						$moreContent.animate({
-							"max-height": $(window).height(),
-						}, 1000, function() {
+								if (ignoreFirst) {
+									ignoreFirst = false;
+								} else {
+									$moreContent.append(marked.parse(value.text_block));
+								}
+							}
 
-							//console.log("done animating");
+							if (value.__component == "basic.image") {
+								//console.log(value.image.data.attributes.url);
 
-							$moreContent.css({
-								"max-height": "unset"
-							})
+								if (value && value.image && value.image.data && value.image.data.attributes && value.image.data.attributes.formats && value.image.data.attributes.formats.large && value.image.data.attributes.formats.large.url) {
+
+									$moreContent.append("<img src='https://cms.sonicacts.com"+value.image.data.attributes.formats.large.url+"'>");
+								}
+							}
+
+							if (value.__component == "basic.embed") {
+								$moreContent.append(value.url);
+							}
+
+						})
+
+
+						$newsContent.append($moreContent);
+
+
+						var $readMoreButton = $('<div className="read-more read-more-news"><div className="read-more-inner">read more</div></div>');
+
+						$readMoreButton.click(function(){
+							//console.log("click");
+
+							$(this).closest(".news-item").addClass("open");
+
+							$(this).fadeOut();
+
+							$moreContent.animate({
+								"max-height": $(window).height(),
+							}, 1000, function() {
+
+								//console.log("done animating");
+
+								$moreContent.css({
+									"max-height": "unset"
+								})
+							});
 						});
+
+						$news.append($readMoreButton);
+
+
+						$("#news").append($news)
+
+
 					});
+				}
 
-					$news.append($readMoreButton);
-
-
-					$("#news").append($news)
-
-
-				});
-			}
-
-			getNews();
+				getNews();
 
 
 
-
-			setTimeout(function(){
-
-				$("#center-type").addClass("visible");
 
 				setTimeout(function(){
 
-					$("#background-1").addClass("visible");
+					$("#center-type").addClass("visible");
 
 					setTimeout(function(){
 
-						$("#title-1-sonic, #title-1-sonic-mobile").addClass("visible");
-
+						$("#background-1").addClass("visible");
 
 						setTimeout(function(){
 
-							$("#background-2").addClass("visible");
+							$("#title-1-sonic, #title-1-sonic-mobile").addClass("visible");
+
 
 							setTimeout(function(){
 
-								$("#normal-01").addClass("visible");
+								$("#background-2").addClass("visible");
 
 								setTimeout(function(){
 
+									$("#normal-01").addClass("visible");
+
 									setTimeout(function(){
-										$("#title-2-acts, #title-2-acts-mobile, #fake-table, #sa-logo").addClass("visible");
 
 										setTimeout(function(){
-											$("#b-2024, #social-homelink").addClass("visible");
-
-											$("#date").addClass("visible");
+											$("#title-2-acts, #title-2-acts-mobile, #fake-table, #sa-logo").addClass("visible");
 
 											setTimeout(function(){
-												$("#sub-title").addClass("visible");
+												$("#b-2024, #social-homelink").addClass("visible");
+
+												$("#date").addClass("visible");
 
 												setTimeout(function(){
-													$("#table-top").addClass("visible");
-
-													$("#locations").css({
-														"display":"block",
-														"opacity":1
-													})
-
-													$(".locations-item span").each(function(i){
-
-														var span = $(this);
-														span.css({
-															"opacity":0
-														});
-
-														setTimeout(function(){
-															span.css({
-																"opacity":1
-															});
-														}, 100*i)
-
-													})
-
-
-													var counter = 0;
+													$("#sub-title").addClass("visible");
 
 													setTimeout(function(){
+														$("#table-top").addClass("visible");
 
-														$("#normal-02").addClass("visible");
+														$("#locations").css({
+															"display":"block",
+															"opacity":1
+														})
 
-														setInterval(function(){
-															counter++;
+														$(".locations-item span").each(function(i){
 
-															if (counter%2 == 0) {
-																$("#normal-01 .normal-image").fadeOut("slow");
-																$("#normal-02 .normal-image").fadeIn("slow");
-															}
-															if (counter%2 == 1) {
-																$("#normal-02 .normal-image").fadeOut("slow");
-																$("#normal-01 .normal-image").fadeIn("slow");
-															}
+															var span = $(this);
+															span.css({
+																"opacity":0
+															});
 
-														}, 5000);
+															setTimeout(function(){
+																span.css({
+																	"opacity":1
+																});
+															}, 100*i)
 
-													}, 10000);
+														})
 
+
+														var counter = 0;
+
+														setTimeout(function(){
+
+															$("#normal-02").addClass("visible");
+
+															setInterval(function(){
+																counter++;
+
+																if (counter%2 == 0) {
+																	$("#normal-01 .normal-image").fadeOut("slow");
+																	$("#normal-02 .normal-image").fadeIn("slow");
+																}
+																if (counter%2 == 1) {
+																	$("#normal-02 .normal-image").fadeOut("slow");
+																	$("#normal-01 .normal-image").fadeIn("slow");
+																}
+
+															}, 5000);
+
+														}, 10000);
+
+
+													}, 300);
 
 												}, 300);
 
@@ -236,164 +240,164 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 
 						}, 300);
 
-					}, 300);
+					}, 400);
 
-				}, 400);
-
-			}, 300);
+				}, 300);
 
 
-			$("#curatorial-statement").each(function(){
+				$("#curatorial-statement").each(function(){
 
-			var wrapper = $(this);
+					var wrapper = $(this);
 
-			wrapper.find(".read-more-inner").click(function(){
+					wrapper.find(".read-more-inner").click(function(){
 
-				var readMoreButton = $(this);
+						var readMoreButton = $(this);
 
-				wrapper.find(".closed").addClass("opening");
+						wrapper.find(".closed").addClass("opening");
 
-				setTimeout(function(){
+						setTimeout(function(){
 
-					wrapper.find(".closed").removeClass("opening").addClass("open");
+							wrapper.find(".closed").removeClass("opening").addClass("open");
 
-					readMoreButton.fadeOut();
+							readMoreButton.fadeOut();
 
-				}, 2000);
+						}, 2000);
 
-				$(".background-layer-1").fadeIn();
+						$(".background-layer-1").fadeIn();
 
-			});
+					});
 
-			});
-
-
-			$(".news-item").each(function(){
-
-			var wrapper = $(this);
-
-			wrapper.find(".read-more-inner").click(function(){
-
-				var readMoreButton = $(this);
-
-				wrapper.find(".closed").addClass("opening");
-
-				readMoreButton.css({
-					'opacity':0,
-					'pointer-events': 'none'
 				});
 
-				setTimeout(function(){
 
-					wrapper.find(".closed").removeClass("opening").addClass("open");
+				$(".news-item").each(function(){
 
-				}, 2000);
+				var wrapper = $(this);
 
-			});
+				wrapper.find(".read-more-inner").click(function(){
 
+					var readMoreButton = $(this);
 
+					wrapper.find(".closed").addClass("opening");
 
-			wrapper.find("h2.news-headline").click(function(){
+					readMoreButton.css({
+						'opacity':0,
+						'pointer-events': 'none'
+					});
 
-				var readMoreButton = wrapper.find('.read-more-inner');
+					setTimeout(function(){
 
-				wrapper.find(".closed").addClass("opening");
+						wrapper.find(".closed").removeClass("opening").addClass("open");
 
-				readMoreButton.css({
-					'opacity':0,
-					'pointer-events': 'none'
+					}, 2000);
+
 				});
 
-				setTimeout(function(){
 
-					wrapper.find(".closed").removeClass("opening").addClass("open");
 
-				}, 2000);
+				wrapper.find("h2.news-headline").click(function(){
+
+					var readMoreButton = wrapper.find('.read-more-inner');
+
+					wrapper.find(".closed").addClass("opening");
+
+					readMoreButton.css({
+						'opacity':0,
+						'pointer-events': 'none'
+					});
+
+					setTimeout(function(){
+
+						wrapper.find(".closed").removeClass("opening").addClass("open");
+
+					}, 2000);
+
+				});
+
+				});
+
+
+
+				$(window).scroll(function() {
+
+					//console.log($(window).scrollTop());
+
+					var scrollTop = $(window).scrollTop();
+
+					$("#title-1-sonic, #title-1-sonic-mobile").css({
+						"transform":"translate(-50%, calc(-50% - " + scrollTop * 0.4 + "px))"
+					})
+
+					$("#title-2-acts, #title-2-acts-mobile").css({
+						"transform":"translate(-50%, calc(-50% - " + scrollTop * 0.8 + "px))"
+					})
+
+
+					$("#svg-biennial").css({
+						"transform":"translateY(" + scrollTop * 0.4 + "px)"
+					})
+
+					$("#svg-2024").css({
+						"transform":"translateY(" + scrollTop * 0.8 + "px)"
+					})
+
+
+					$("#svg-bottom-table").css({
+						"transform":"translateY(" + scrollTop * 0.5 + "px)"
+					})
+
+					$("#background-1, #normal-01").css({
+						"opacity": 1 - scrollTop/120
+					})
+
+					$("#background-bottom").css({
+						"transform":"translateY(" + -1 * Math.min(scrollTop, $(window).width()*0.4) + "px)"
+					})
+
+
+
+					var maxScroll = $(window).width() * 0.1;
+					var maxScale = $(window).width() * 0.17; //how small it gets, the smaller the number the smaller
+
+
+					if (
+						scrollTop > ($("#intro-wrapper").outerHeight() + $("#curatorial-statement").outerHeight() - $(window).height())
+						|| scrollTop < $(window).height()/2
+					) {
+						$(".background-layer-1").fadeOut();
+					} else {
+
+						$(".background-layer-1").fadeIn();
+					}
+				})
+
+
+				var closer = $("<div className='closer'>x</div>");
+
+				closer.click(function(){
+					$(this).closest(".closer-target").hide();
+				});
+
+
+
+				var formsignup = $('#mc_embed_shell');
+
+				formsignup.append(closer.clone(true));
+
+				$(".newsletter").click(function(){
+					formsignup.show();
+				});
+
+
+				$("#imprint-content").addClass("closer-target").append(closer.clone(true));
+
+				$("#imprint-link").click(function(){
+					$("#imprint-content").show();
+				});
 
 			});
+		},100)
 
-			});
-
-
-
-			$(window).scroll(function() {
-
-				//console.log($(window).scrollTop());
-
-				var scrollTop = $(window).scrollTop();
-
-				$("#title-1-sonic, #title-1-sonic-mobile").css({
-					"transform":"translate(-50%, calc(-50% - " + scrollTop * 0.4 + "px))"
-				})
-
-				$("#title-2-acts, #title-2-acts-mobile").css({
-					"transform":"translate(-50%, calc(-50% - " + scrollTop * 0.8 + "px))"
-				})
-
-
-				$("#svg-biennial").css({
-					"transform":"translateY(" + scrollTop * 0.4 + "px)"
-				})
-
-				$("#svg-2024").css({
-					"transform":"translateY(" + scrollTop * 0.8 + "px)"
-				})
-
-
-				$("#svg-bottom-table").css({
-					"transform":"translateY(" + scrollTop * 0.5 + "px)"
-				})
-
-				$("#background-1, #normal-01").css({
-					"opacity": 1 - scrollTop/120
-				})
-
-				$("#background-bottom").css({
-					"transform":"translateY(" + -1 * Math.min(scrollTop, $(window).width()*0.4) + "px)"
-				})
-
-
-
-				var maxScroll = $(window).width() * 0.1;
-				var maxScale = $(window).width() * 0.17; //how small it gets, the smaller the number the smaller
-
-
-				if (
-					scrollTop > ($("#intro-wrapper").outerHeight() + $("#curatorial-statement").outerHeight() - $(window).height())
-					|| scrollTop < $(window).height()/2
-				) {
-					$(".background-layer-1").fadeOut();
-				} else {
-
-					$(".background-layer-1").fadeIn();
-				}
-			})
-
-
-			var closer = $("<div className='closer'>x</div>");
-
-			closer.click(function(){
-				$(this).closest(".closer-target").hide();
-			});
-
-
-
-			var formsignup = $('#mc_embed_shell');
-
-			formsignup.append(closer.clone(true));
-
-			$(".newsletter").click(function(){
-				formsignup.show();
-			});
-
-
-			$("#imprint-content").addClass("closer-target").append(closer.clone(true));
-
-			$("#imprint-link").click(function(){
-				$("#imprint-content").show();
-			});
-
-		});
 	  }, []); // Empty dependency array means this effect will run once after the initial render
 	
 

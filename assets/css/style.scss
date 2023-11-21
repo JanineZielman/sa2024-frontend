@@ -680,6 +680,8 @@ $bottomDistance: 5.5rem;
 
 /* artist single page */
 .discover.sub {
+    display: none;
+    
     @include desktop {
         position: absolute;
         right: 1rem;

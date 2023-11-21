@@ -25,7 +25,7 @@ const About = ({ global, page}) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
   // Run API calls in parallel
   const [pageRes, globalRes] = await Promise.all([
