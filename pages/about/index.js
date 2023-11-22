@@ -9,8 +9,9 @@ const About = ({ global, page}) => {
 		<>
 		<section className="festival-wrapper about-page">
 			<Layout  global={global} festival={page}>
+        <h1 className="page-title">Information</h1>
+
 				<div className="intro-text">
-          <h1>Information</h1>
 					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
 					<div><p>{page.attributes.IntroText}</p></div>
 				</div>

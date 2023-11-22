@@ -7,16 +7,16 @@ import ReactMarkdown from "react-markdown";
 const About = ({ global, page}) => {
   return (
 		<>
-		<section className="festival-wrapper about-page">
+		<section className="festival-wrapper programme-page about-page">
 			<Layout  global={global} festival={page}>
+        <h1 className="page-title">Programme</h1>
+
 				<div className="intro-text">
-					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
-					<div><p>{page.attributes.IntroText}</p></div>
+					<div>
+            <ReactMarkdown children={page.attributes.programme_intro}/>
+          </div>
 				</div>
-        
-        <div className="content-wrapper">
-          <Landing page={page}/>
-        </div>
+
 			</Layout>
 		</section>
 				</>
