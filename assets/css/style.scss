@@ -416,6 +416,7 @@ body {
     }
     .subtitle {
         text-align: center;
+        font-size: 1.2rem;
     }
 }
 
@@ -1798,7 +1799,7 @@ $bottomDistance: 5.5rem;
 .festival-wrapper.about-page {
 
     .title{
-        padding-bottom: 1rem;
+        padding-bottom: 2rem;
     }
 
     @include desktop {
@@ -1865,6 +1866,7 @@ $bottomDistance: 5.5rem;
         h2 {
             font-size: 1rem;
             margin-top: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         h3 {

@@ -55,7 +55,7 @@ const Article = ({page, relations, params}) => {
 				}
 				{page.attributes.name &&
 					<div className="title">
-						<h1>{page.attributes.name}</h1>
+						<h1 className="page-title">{page.attributes.name}</h1>
 						<div className="subtitle">{page.attributes.job_description}</div>
 					</div>
 				}

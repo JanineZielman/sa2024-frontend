@@ -9,6 +9,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        margin-top: 2rem;
     
         .logo {
             @include desktop {

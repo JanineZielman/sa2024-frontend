@@ -77,7 +77,7 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
                           </div>
                         }
                         <div className="title">
-                          {item.attributes.title}
+                          <h1 className="page-title">{item.attributes.title}</h1>
                         </div>
                         {item.attributes?.authors?.data &&
                           <div className="tags">
