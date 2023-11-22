@@ -108,7 +108,7 @@
 @import "mixins";
 @import "typography";
 @import "footer";
-
+@import "single-artist";
 
 
 /* apply a natural box layout model to all elements, but allowing components to change */
@@ -491,83 +491,6 @@ body {
 
 
 
-.wrapper.community {
-    display: flex;
-    
-    align-items: flex-start;
-    flex-direction: column;
-
-    position: relative;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-top: 1rem;
-
-    .image.community {
-        img {
-            
-            object-fit: cover;
-            @include desktop {
-                width: 50vw;
-                height: 100vh;    
-            }
-            
-            @include mobile {
-                width: 100%;
-                height: auto;    
-            }
-        }
-    }
-
-    .community-block {
-        position: relative;
-        padding-bottom: 1rem;
-
-        @include desktop {
-            width: calc(50vw);
-            left: 50vw;
-            transform: translateX(-50%);
-        }
-
-        @include mobile {
-            width: 100%;
-        }
-
-        p, li {
-            @include desktop {
-                font-size: 1.2rem;    
-            }
-
-            @include mobile {
-                font-size: 1.2rem;    
-            }
-            
-        }
-
-        .caption {
-            p {
-                font-size: 0.84rem;
-            }
-        }
-
-        @include desktop {
-            &:first-child {
-                position: absolute;
-                left: 0.5rem;
-                top: 0;
-                transform: translateX(0);
-                img {
-                    width: calc(24vw - 1.5rem) !important;                    
-                    max-height: 70vh !important;
-                    max-width: 24vw !important;
-                    object-fit: cover;
-                }
-    
-            }
-        }
-        
-    }
-}
-
 
 
 
@@ -681,7 +604,7 @@ $bottomDistance: 5.5rem;
 /* artist single page */
 .discover.sub {
     display: none;
-    
+
     @include desktop {
         position: absolute;
         right: 1rem;
@@ -1935,9 +1858,61 @@ $bottomDistance: 5.5rem;
 }
 
 .festival-wrapper.about-page {
+    
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+        padding: 1rem;
+    }
+
     .container  {
         padding: 0 20rem;
     }   
+
+    .Collapsible {
+        border: 1px solid black;
+        margin-bottom: -1px;
+        
+        .Collapsible__trigger {
+            text-align: center;
+            cursor: pointer;
+            padding: 1rem;
+            display: block;
+            position: relative;
+
+            &:after {
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+                content: "";
+                border-bottom: 1px solid black;
+                width: 1rem;
+                transform: translateY(0.5rem);
+            }
+            
+            &:before {
+                position: absolute;
+                right: 1.5rem;
+                top: 1rem;
+                content: "";
+                border-right: 1px solid black;
+                height: 1rem;
+                //transform: translateX(-0.5rem);
+                transition: 0.3s ease all;
+            }
+
+            &.is-open {
+                &:before {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        .text-block {
+            padding: 1rem;
+        }
+    }
+
 }
 
 .image.null.biennial-2022 {
@@ -1956,4 +1931,9 @@ $bottomDistance: 5.5rem;
     .filter {
         display: none;
     }
+}
+
+
+.text-block.medium {
+    font-size: 1.5rem;
 }

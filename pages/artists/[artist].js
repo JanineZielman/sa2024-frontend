@@ -10,7 +10,7 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
   page.attributes.slug = `community`
 
   return (  
-    <section className="festival-wrapper">
+    <section className="festival-wrapper template-single-artist">
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
         <div className="discover sub">
