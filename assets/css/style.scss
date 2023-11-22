@@ -408,10 +408,16 @@ body {
 
     h1.page-title {
         font-family: "geist", sans-serif;
-        font-size: 3rem;
+
+        font-size: 8rem;
+
+        font-weight: 100;
+        font-variation-settings: "wght" 100;
+
+        letter-spacing: -0.7rem;
+
         text-align: center;
-        font-weight: 300;
-        font-variation-settings: "wght" 300;
+        
         color: $keycolor1;
     }
     .subtitle {
@@ -2011,4 +2017,6 @@ $bottomDistance: 5.5rem;
         display: none;
     }
 }
+
+
 

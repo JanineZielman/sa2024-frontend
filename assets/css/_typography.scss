@@ -74,8 +74,24 @@ a:visited {
 }
 
 strong {
-  font-weight: normal;
-  color: $keycolor5;
+    font-weight: normal;
+    color: $keycolor5;
+
+    &:nth-child(4n) {
+        color: $keycolor2;
+    }
+
+    &:nth-child(4n+1) {
+        color: $keycolor1;
+    }
+
+    &:nth-child(4n+2) {
+        color: $keycolor3;
+    }
+
+    &:nth-child(4n+3) {
+        color: $keycolor1;
+    }
 }
 
 p, li {
