@@ -1,0 +1,88 @@
+.template-single-artist {
+
+
+    .wrapper.community {
+        display: flex;
+        
+        align-items: flex-start;
+        flex-direction: column;
+    
+        position: relative;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-top: 1rem;
+    
+        .image.community {
+            img {
+                
+                object-fit: cover;
+                @include desktop {
+                    width: 50vw;
+                    height: 100vh;    
+                }
+                
+                @include mobile {
+                    width: 100%;
+                    height: auto;    
+                }
+            }
+        }
+    
+        .community-block {
+            position: relative;
+            padding-bottom: 1rem;
+    
+            @include desktop {
+                width: calc(45vw);
+                left: 49vw;
+                //transform: translateX(-50%);
+            }
+    
+            @include mobile {
+                width: 100%;
+            }
+    
+            p, li {
+                @include desktop {
+                    font-size: 1.2rem;    
+                }
+    
+                @include mobile {
+                    font-size: 1.2rem;    
+                }
+                
+            }
+    
+            .caption {
+                p {
+                    font-size: 0.84rem;
+                }
+            }
+    
+            @include desktop {
+                &:first-child {
+                    position: absolute;
+                    left: 0.5rem;
+                    top: 0;
+                    transform: translateX(0);
+                    img {
+                        width: calc(24vw - 1.5rem) !important;  
+                        width: 48vw !important;                  
+                        max-height: 70vh !important;
+                        max-width: 24vw !important;
+                        max-width: 48vw !important;
+                        object-fit: cover;
+                    }
+        
+                }
+            }
+            
+        }
+    }
+    
+    .text-block {
+        strong {
+            color: black;
+        }
+    }
+}
