@@ -9,6 +9,116 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 	useEffect(() => {
 		// Your old jQuery code goes here
 
+		async function getNews() {
+			console.log("news")
+		
+			const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[cover_image][populate]=*");
+	
+			const news = await response.json();
+	
+			$.each(news.data, function( index, value ) {
+	
+				//console.log(value.attributes);
+		
+				var $news = $("<div class='news-item'></div>");
+				var $newsImage = $("<div class='news-image'></div>");
+				var $newsContent = $("<div class='news-content'></div>");
+	
+				var $newsHeadlineWrapper = $("<div class='news-headline-wrapper'></div>");
+				var $newsHeadline = $("<h2 class='news-headline'>"+marked.parse(value.attributes.title)+"</h2>");
+				var $newsDate = $("<div class='news-date'>"+value.attributes.date+"</div>");
+	
+				$newsHeadlineWrapper.append($newsHeadline);
+				$newsHeadlineWrapper.append($newsDate);
+				$newsContent.append($newsHeadlineWrapper);
+		
+				if (value.attributes.cover_image) {
+					console.log(value.attributes.cover_image);
+	
+					if (value.attributes.cover_image.data && value.attributes.cover_image.data.attributes && value.attributes.cover_image.data.attributes.formats && value.attributes.cover_image.data.attributes.formats.large && value.attributes.cover_image.data.attributes.formats.large.url) {
+						$newsImage.html("<img src='https://cms.sonicacts.com"+value.attributes.cover_image.data.attributes.formats.large.url+"'>");
+					}
+	
+					$news.append($newsImage);
+				}
+	
+				$.each(value.attributes.content, function( index, value ) {
+	
+					if (value.__component == "basic.text") {
+						$newsContent.append(marked.parse(value.text_block));
+						return false;
+					}
+	
+				})
+	
+				$news.append($newsContent);
+	
+				var $moreContent = $("<div class='more-content' style='max-height:0; overflow:hidden;'></div>");
+	
+				var ignoreFirst = true;
+	
+				$.each(value.attributes.content, function( index, value ) {
+	
+					//console.log(value);
+	
+					if (value.__component == "basic.text") {
+	
+						if (ignoreFirst) {
+							ignoreFirst = false;
+						} else {
+							$moreContent.append(marked.parse(value.text_block));
+						}
+					}
+	
+					if (value.__component == "basic.image") {
+						//console.log(value.image.data.attributes.url);
+	
+						if (value && value.image && value.image.data && value.image.data.attributes && value.image.data.attributes.formats && value.image.data.attributes.formats.large && value.image.data.attributes.formats.large.url) {
+	
+							$moreContent.append("<img src='https://cms.sonicacts.com"+value.image.data.attributes.formats.large.url+"'>");
+						}
+					}
+	
+					if (value.__component == "basic.embed") {
+						$moreContent.append(value.url);
+					}
+	
+				})
+	
+				$newsContent.append($moreContent);
+	
+				var $readMoreButton = $('<div class="read-more read-more-news"><div class="read-more-inner">read more</div></div>');
+	
+				$readMoreButton.click(function(){
+					//console.log("click");
+	
+					$(this).closest(".news-item").addClass("open");
+	
+					$(this).fadeOut();
+	
+					$moreContent.animate({
+						"max-height": $(window).height(),
+					}, 1000, function() {
+	
+						//console.log("done animating");
+	
+						$moreContent.css({
+							"max-height": "unset"
+						})
+					});
+				});
+	
+				$news.append($readMoreButton);
+	
+				$("#news-container").append($news);
+				console.log("append");
+	
+			});
+		}
+	
+		getNews();
+	
+
 		setTimeout(function(){
 			$( document ).ready(function() {
 
@@ -24,7 +134,7 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 					const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[cover_image][populate]=*");
 
 					const news = await response.json();
-					console.log(news.data);
+					//console.log(news.data);
 
 					$.each(news.data, function( index, value ) {
 
@@ -44,12 +154,10 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 						$newsHeadlineWrapper.append($newsDate);
 						$newsContent.append($newsHeadlineWrapper);
 
-
-
-						console.log(value.attributes);
+						//console.log(value.attributes);
 
 						if (value.attributes.cover_image) {
-							console.log(value.attributes.cover_image);
+							//console.log(value.attributes.cover_image);
 
 							if (value.attributes.cover_image.data && value.attributes.cover_image.data.attributes && value.attributes.cover_image.data.attributes.formats && value.attributes.cover_image.data.attributes.formats.large && value.attributes.cover_image.data.attributes.formats.large.url) {
 								$newsImage.html("<img src='https://cms.sonicacts.com"+value.attributes.cover_image.data.attributes.formats.large.url+"'>");
@@ -57,7 +165,6 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 
 							$news.append($newsImage);
 						}
-
 
 						$.each(value.attributes.content, function( index, value ) {
 
@@ -272,47 +379,47 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 
 				$(".news-item").each(function(){
 
-				var wrapper = $(this);
+					var wrapper = $(this);
 
-				wrapper.find(".read-more-inner").click(function(){
+					wrapper.find(".read-more-inner").click(function(){
 
-					var readMoreButton = $(this);
+						var readMoreButton = $(this);
 
-					wrapper.find(".closed").addClass("opening");
+						wrapper.find(".closed").addClass("opening");
 
-					readMoreButton.css({
-						'opacity':0,
-						'pointer-events': 'none'
+						readMoreButton.css({
+							'opacity':0,
+							'pointer-events': 'none'
+						});
+
+						setTimeout(function(){
+
+							wrapper.find(".closed").removeClass("opening").addClass("open");
+
+						}, 2000);
+
 					});
 
-					setTimeout(function(){
-
-						wrapper.find(".closed").removeClass("opening").addClass("open");
-
-					}, 2000);
-
-				});
 
 
+					wrapper.find("h2.news-headline").click(function(){
 
-				wrapper.find("h2.news-headline").click(function(){
+						var readMoreButton = wrapper.find('.read-more-inner');
 
-					var readMoreButton = wrapper.find('.read-more-inner');
+						wrapper.find(".closed").addClass("opening");
 
-					wrapper.find(".closed").addClass("opening");
+						readMoreButton.css({
+							'opacity':0,
+							'pointer-events': 'none'
+						});
 
-					readMoreButton.css({
-						'opacity':0,
-						'pointer-events': 'none'
+						setTimeout(function(){
+
+							wrapper.find(".closed").removeClass("opening").addClass("open");
+
+						}, 2000);
+
 					});
-
-					setTimeout(function(){
-
-						wrapper.find(".closed").removeClass("opening").addClass("open");
-
-					}, 2000);
-
-				});
 
 				});
 
@@ -350,10 +457,9 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 						"opacity": 1 - scrollTop/120
 					})
 
-					$("#background-bottom").css({
-						"transform":"translateY(" + -1 * Math.min(scrollTop, $(window).width()*0.4) + "px)"
-					})
-
+					//$("#background-bottom").css({
+					//	"transform":"translateY(" + (-1 * Math.min(scrollTop, $(window).width()*0.4) + $(window).height()) + "px)"
+					//})
 
 
 					var maxScroll = $(window).width() * 0.1;
@@ -413,12 +519,7 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 
 						<div id="background-1" className="hide-at-pageload">
 							<img src="assets/img/background-1.jpg" alt="background" width="" height="" />
-						</div>
-
-						<div id="background-bottom">
-							<img src="assets/img/background-bottom.png" alt="background" width="" height="" />
-						</div>
-
+						</div>					
 
 						<div id="title-1-sonic" class="hide-at-pageload visible">
 							<svg x="0px" y="0px" viewBox="0 0 3840 2500" preserveAspectRatio="none">
@@ -804,6 +905,7 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 
 						</div>
 
+					<div id="news-container"></div>
 				</Layout>
 			</section>
 		</>
