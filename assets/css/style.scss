@@ -179,7 +179,10 @@ body {
         flex-wrap: wrap;
         li {
             width: calc(100% / 3);
-            padding: 0.5rem 1rem 0.5rem 1rem;
+
+            &:hover {
+                background-color: white !important;
+            }
 
             &:nth-child(4n) {
                 background-color: $keycolor2;
@@ -199,6 +202,9 @@ body {
 
             a {
                 text-decoration: none;
+                display: block;
+                text-align: center;
+                padding: 0.5rem 1rem 0.5rem 1rem;
             }
         }
     }
@@ -245,87 +251,7 @@ body {
 
 }
 
-.infinite-scroll-component {
-    display: flex;
-    flex-wrap: wrap;
-    //padding: 0.5rem;
-    //padding-right: 1.5rem;
 
-    @include mobile {
-        padding: 0;
-    }
-
-    .artist-item {
-        width: calc(100% / 8 + 0.99rem);
-
-        @include mobile {
-            width: calc(100% / 3 + 0.99rem);
-        }
-
-        mask-image: radial-gradient(circle at 0% 0%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
-                             
-        mask-size: 100% 100%;
-
-        margin-right: -1rem;
-
-        .info {
-            width: calc(100% - 1rem);
-            font-size: 0.84rem;
-        }
-
-        padding: 0.5rem;
-
-        &:nth-child(5n) {
-            background-color: $keycolor2;
-            mask-image: radial-gradient(circle at 0% 100%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
-        }
-
-        &:nth-child(5n+1) {
-            background-color: $keycolor1;
-        }
-
-        &:nth-child(5n+2) {
-            background-color: $keycolor4;
-        }
-
-        &:nth-child(5n+3) {
-            background-color: $keycolor3;
-        }
-
-        &:nth-child(5n+4) {
-            background-color: $keycolor1;
-        }
-
-        img {
-            width: calc(100% - 1rem);
-            height: 10rem;
-            object-fit: cover;
-            filter: brightness(1.3) contrast(1.2) grayscale(100%);
-            
-            //border: 1px black solid;
-            //border-radius: 0.3rem;
-
-            mix-blend-mode: multiply;
-
-            mask-image: linear-gradient(to top,  transparent 10%, #fff 25% 80%, transparent 95%),
-            linear-gradient(to left, transparent 10%, #fff 15% 80%, transparent 95%);
-                                 
-            mask-size: 100% 100%;
-
-            transition: all 0.3s ease;
-
-            &:hover {
-                transform: scale(1.05);
-                mask-size: 95% 95%;
-            }
-        }
-
-        &:nth-child(2n) img {
-            mask-image: radial-gradient(circle at 100% 100%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-            mask-size: 100% 100%;
-        }
-    }
-}
 
 .info {
     font-size: 1.3rem;
@@ -477,17 +403,31 @@ body {
 }
 
 
-.title {
-    padding-bottom: 1rem;
+.title {    
+    padding: 5rem 0 5rem 0;
 
-    h1 {
-        font-size: 2rem;
+    h1.page-title {
+        font-family: "geist", sans-serif;
+        font-size: 3rem;
         text-align: center;
+        font-weight: 300;
+        font-variation-settings: "wght" 300;
+        color: $keycolor1;
     }
     .subtitle {
         text-align: center;
     }
 }
+
+
+#writing {
+    display: none;
+
+    .festival-home & {
+        display: block;
+    }
+}
+
 
 
 
@@ -1748,8 +1688,6 @@ $bottomDistance: 5.5rem;
                 border-left: $tableBorder;
                 font-size: 1.2rem;
 
-
-
                 transition: color 0.3s ease;
 
                 @include mobile {
@@ -1858,16 +1796,25 @@ $bottomDistance: 5.5rem;
 }
 
 .festival-wrapper.about-page {
-    
-    h1 {
-        font-size: 2rem;
-        text-align: center;
-        padding: 1rem;
+
+    .title{
+        padding-bottom: 1rem;
     }
 
-    .container  {
-        padding: 0 20rem;
-    }   
+    @include desktop {
+        .container  {
+            padding: 0 20rem;
+        }  
+    }
+    
+    .content-wrapper {
+        .article {
+            h5 {
+                padding: 1rem 0 2rem 0;
+                font-size: 1.5rem;
+            }
+        }
+    }
 
     .Collapsible {
         border: 1px solid black;
@@ -1931,7 +1878,7 @@ $bottomDistance: 5.5rem;
         }
 
         .text-block {
-            padding: 1rem;
+            padding: 0 1rem 1rem 1rem;
         }
     }
 
@@ -1953,9 +1900,113 @@ $bottomDistance: 5.5rem;
     .filter {
         display: none;
     }
+
+    .discover-container, .infinite-scroll-component__outerdiv, .infinite-scroll-component {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden !important;
+    }
+    
+    .infinite-scroll-component {
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: center;
+      
+        //padding: 0.5rem;
+        //padding-right: 1.5rem;
+    
+        @include mobile {
+            padding: 0;
+        }
+    
+        .artist-item {
+            width: calc(100% / 8 + 0.99rem);
+    
+            @include mobile {
+                width: calc(100% / 3 + 0.99rem);
+            }
+    
+            mask-image: radial-gradient(circle at 0% 0%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
+                                 
+            mask-size: 100% 100%;
+    
+            margin-right: -1rem;
+    
+            .info {
+                width: calc(100% - 1rem);
+                font-size: 0.84rem;
+            }
+    
+            padding: 0.5rem;
+    
+            &:nth-child(5n) {
+                background-color: $keycolor2;
+                mask-image: radial-gradient(circle at 0% 100%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
+            }
+    
+            &:nth-child(5n+1) {
+                background-color: $keycolor1;
+            }
+    
+            &:nth-child(5n+2) {
+                background-color: $keycolor4;
+            }
+    
+            &:nth-child(5n+3) {
+                background-color: $keycolor3;
+            }
+    
+            &:nth-child(5n+4) {
+                background-color: $keycolor1;
+            }
+    
+            img {
+                width: calc(100% - 1rem);
+                height: 10rem;
+                object-fit: cover;
+                filter: brightness(1.3) contrast(1.2) grayscale(100%);
+                
+                //border: 1px black solid;
+                //border-radius: 0.3rem;
+    
+                mix-blend-mode: multiply;
+    
+                mask-image: linear-gradient(to top,  transparent 10%, #fff 25% 80%, transparent 95%),
+                linear-gradient(to left, transparent 10%, #fff 15% 80%, transparent 95%);
+                                     
+                mask-size: 100% 100%;
+    
+                transition: all 0.3s ease;
+    
+                &:hover {
+                    transform: scale(1.05);
+                    mask-size: 95% 95%;
+                }
+            }
+    
+            &:nth-child(2n) img {
+                mask-image: radial-gradient(circle at 100% 100%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+                mask-size: 100% 100%;
+            }
+        }
+    }
 }
 
 
 .text-block.medium {
     font-size: 1.5rem;
 }
+
+
+
+
+#small-logo {
+    padding: 0 1rem;
+    .uuid-1b36f86d-6d74-44e6-b3b4-37d62bac4ab9,.uuid-4c84452d-7097-4022-a1de-bfb3db769bbe{fill:none;stroke-linecap:square;stroke-width:7.93px;}.uuid-1b36f86d-6d74-44e6-b3b4-37d62bac4ab9,.uuid-4c84452d-7097-4022-a1de-bfb3db769bbe,.uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904{stroke-miterlimit:10;}.uuid-1b36f86d-6d74-44e6-b3b4-37d62bac4ab9,.uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904{stroke:#ff820a;}.uuid-4c84452d-7097-4022-a1de-bfb3db769bbe{stroke:#ffbbf1;}.uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904{fill:#ffbbf1;}
+
+    .festival-home & {
+        display: none;
+    }
+}
+
