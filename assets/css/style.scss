@@ -462,6 +462,14 @@ body {
 }
 $bottomDistance: 5.5rem;
 
+
+#svg-biennial, #svg-2024, #svg-bottom-table {
+    display: none;
+
+    body.slug- & {
+        display: block;
+    }
+}
 #svg-biennial {
     position: fixed;
     left: 0;
@@ -484,6 +492,7 @@ $bottomDistance: 5.5rem;
         bottom: calc(#{$bottomDistance} + 1rem);
         right: 0.5rem;
     }
+    
 }
 
 #svg-bottom-table {
@@ -853,7 +862,8 @@ $bottomDistance: 5.5rem;
     z-index: 6;
 
     position: absolute;
-    top: calc(100vh - 3.5rem);
+    top: calc(100vh - 11rem);
+
     @include desktop {
         left: 50%;
         transform: translateX(-50%) translateY(-100%);
@@ -962,8 +972,8 @@ $bottomDistance: 5.5rem;
       @include desktop {
         z-index: 20;
         position: absolute;
-        right: 1rem;
-        top: calc(100vh - 7.7rem);
+        right: 2rem;
+        top: calc(100vh - 15.7rem);   
 
         transform: translateY(-100%);
 
@@ -981,10 +991,10 @@ $bottomDistance: 5.5rem;
 
     #date-location {
       @include desktop {
-        z-index: 20;
+        z-index: 30;
         position: absolute;
         right: 9rem;
-        top: calc(100vh - 4vh);
+        top: calc(100vh - 10rem);
         transform: translateY(-100%);
         margin: 0 auto;
 

@@ -90,6 +90,7 @@
                 a {
                     display: inline-block;
                     @include more-button;
+                    margin-top: 1rem;
 
                     &:link, &:visited {
                         border-bottom: 0px solid black;

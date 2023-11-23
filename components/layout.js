@@ -406,31 +406,32 @@ const Layout = ({ children, global, festival}) => {
                   <span class="table-item">Paradiso</span><span class="table-item">Muziekgebouw</span>
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item">Looiersgracht 60</span><span class="table-item">Stedelijk Museum</span>
+                  <span class="table-item"></span><span class="table-item">Stedelijk Museum</span>
               </div>
           </div>
           <div class="table-row">
               <div class="table-col table-col-left">
-
+              EYE FILMMUSEUM
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item">Eye Filmmuseum</span><span class="table-item">W139</span>
+                  <span class="table-item">STEDELIJK MUSEUM</span><span class="table-item">W139</span>
               </div>
           </div>
           <div class="table-row">
               <div class="table-col table-col-left">
-                  <span class="table-item">Zone2Source</span>
+                  <span class="table-item">LOOIERSGRACHT 60</span>
+                  <span class="table-item">&nbsp;</span>
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item">Oude Kerk</span><span class="table-item">Garage Noord</span>
+                  <span class="table-item">ZONE2SOURCE</span><span class="table-item">OUDE KERK</span>
               </div>
           </div>
           <div class="table-row">
               <div class="table-col table-col-left">
-                  <span class="table-item"></span>
+                  <span class="table-item">GARAGE NOORD&nbsp;&nbsp;KANAAL40</span>
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item">kanaal40 </span><span class="table-item">&amp; more </span>
+                  <span class="table-item">OT301 </span><span class="table-item">&amp; AND MORE </span> <span>&nbsp;</span>
               </div>
           </div>
       </div>

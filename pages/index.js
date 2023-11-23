@@ -772,46 +772,7 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 
 						</div>
 
-						<div id="table-top" className="table hide-at-pageload">
-							<div className="table-wrapper">
-
-								<div className="table-row">
-									<div className="table-col table-col-left">
-										<span className="table-item">Paradiso</span><span className="table-item">Muziekgebouw</span>
-									</div>
-									<div className="table-col table-col-right">
-										<span className="table-item">Looiersgracht 60</span><span className="table-item">Stedelijk Museum</span>
-									</div>
-								</div>
-
-								<div className="table-row">
-									<div className="table-col table-col-left">
-
-									</div>
-									<div className="table-col table-col-right">
-										<span className="table-item">Eye Filmmuseum</span><span className="table-item">W139</span>
-									</div>
-								</div>
-
-								<div className="table-row">
-									<div className="table-col table-col-left">
-										<span className="table-item">Zone2Source</span>
-									</div>
-									<div className="table-col table-col-right">
-										<span className="table-item">Oude Kerk</span><span className="table-item">Garage Noord</span>
-									</div>
-								</div>
-
-								<div className="table-row">
-									<div className="table-col table-col-left">
-										<span className="table-item"></span>
-									</div>
-									<div className="table-col table-col-right">
-										<span className="table-item">kanaal40 </span><span className="table-item">& more </span>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 
 						<div id="center-type" className="mono-s hide-at-pageload">
 							<p>
@@ -860,9 +821,6 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 										workshops
 									</div>
 									<div className="locations-item locations-right-item">
-										and <br />
-										various <br />
-										other <br />
 										public <br />
 										programmes
 									</div>

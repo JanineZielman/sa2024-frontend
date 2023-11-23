@@ -105,7 +105,7 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
 
 export async function getServerSideProps({params, query}) {
   const biennial = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
 
   const preview = query.preview
