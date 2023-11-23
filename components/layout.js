@@ -431,7 +431,7 @@ const Layout = ({ children, global, festival}) => {
                   <span class="table-item">GARAGE NOORD&nbsp;&nbsp;KANAAL40</span>
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item">OT301 </span><span class="table-item">&amp; AND MORE </span> <span>&nbsp;</span>
+                  <span class="table-item">OT301 </span><span class="table-item">AND MORE </span> <span>&nbsp;</span>
               </div>
           </div>
       </div>
