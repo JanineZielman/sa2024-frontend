@@ -1,7 +1,12 @@
 import Document, { Html, Head, Main, NextScript } from "next/document"
+import slugify from 'slugify';
 
 class MyDocument extends Document {
   render() {
+    // Extract the page path and generate a slug
+    const pathName = this.props.__NEXT_DATA__.page;
+    const slug = "slug-" + slugify(pathName);
+
     return (
       <Html>
         <Head>
@@ -44,7 +49,8 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body>
+        <body className={slug}>
+
           <div id="small-logo">
             <a href="/">
               <svg viewBox="0 0 884.17 190.55">
