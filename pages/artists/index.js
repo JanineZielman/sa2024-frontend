@@ -15,9 +15,13 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name&pagination[start]=${posts.length}&populate=*`
+      `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[start]=${posts.length}&pagination[limit]=100 
+      &populate=*`
     );
     const newPosts = await res.data;
+
+    //console.log(res.data);
+
     setPosts((posts) => [...posts, ...newPosts]);
   };
 
@@ -48,7 +52,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
               loader={<h4>Loading...</h4>}
             >
               {posts.map((item, i) => {
-                console.log(item.attributes.cover_image.data.attributes.formats);
+                //console.log(item.attributes.cover_image.data.attributes.formats);
                 return (
                   <div className="discover-item artist-item">
                     <div className="item-wrapper">
@@ -85,11 +89,29 @@ export async function getServerSideProps() {
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug&populate=*`);
+  const items = await fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100 
+  &populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
+    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100`
   );
+
+  console.log("items items items items ");
+  console.log(items);
+
+  // Sorting the items array by the slug property in a case-insensitive manner
+  items.data.sort((a, b) => {
+    const slugA = a.attributes.slug.toLowerCase();
+    const slugB = b.attributes.slug.toLowerCase();
+
+    if (slugA < slugB) {
+        return -1;
+    }
+    if (slugA > slugB) {
+        return 1;
+    }
+    return 0;
+  });
 
   const numberOfPosts = totalItems.meta.pagination.total;
 

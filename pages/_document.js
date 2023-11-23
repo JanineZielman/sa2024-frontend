@@ -14,6 +14,7 @@ class MyDocument extends Document {
           <link rel="canonical" href="https://sonicacts.com/" />
 
           <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+          <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
           
           <script
             type="importmap"

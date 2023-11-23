@@ -502,6 +502,15 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 				});
 
 			});
+
+			var formsignup = $('#mc_embed_shell');
+
+			formsignup.append(closer.clone(true));
+		
+			$(".newsletter").click(function(){
+				formsignup.show();
+			});
+
 		},100)
 
 	  }, []); // Empty dependency array means this effect will run once after the initial render
@@ -864,6 +873,7 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 						</div>
 
 					<div id="news-container"></div>
+					
 				</Layout>
 			</section>
 		</>
