@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import * as THREE from 'three';
 
 
-const Layout = ({ children, global, festival}) => {
+const Layout = ({ children, festival}) => {
 
   const [loading, setLoading] = useState(true);
 
@@ -512,9 +512,9 @@ const Layout = ({ children, global, festival}) => {
         :
         <div className="prefooter prefooter-portal">
           <div className="text-block medium">
-            <p className="visually-hidden">{global.attributes.prefooter?.title}</p>
+            <p className="visually-hidden">{festival?.attributes.prefooter?.title}</p>
             <div className="logos">
-              {global.attributes.prefooter?.logos.data.map((logo, i) => {
+              {festival?.attributes.prefooter?.logos.data.map((logo, i) => {
                 return(
                   <div className="logo">
                     <Image image={logo.attributes}/>

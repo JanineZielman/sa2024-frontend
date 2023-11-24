@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 import { fetchAPI } from "../lib/api"
 import Hero from "./hero"
 
-const Festival = ({ global, page, params, programmes, artists, news }) => {
+const Festival = ({ global, festival}) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -494,7 +494,7 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
   return (
 		<>
 			<section className="festival-home">
-				<Layout  global={global} festival={page}>
+				<Layout  global={global} festival={festival}>
 
 					<div id="intro-wrapper">
 
@@ -797,6 +797,24 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 			</section>
 		</>
   )
+}
+
+export async function getServerSideProps({params, query}) {
+  const biennial = {
+		slug: "biennial-2024"
+	}
+
+  const [festivalRes, globalRes] = await Promise.all([
+    fetchAPI(`/biennials?filters[slug][$eq]=${biennial.slug}&populate[prefooter][populate]=*`),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
+  ])
+
+  return {
+    props: { 
+      festival: festivalRes.data[0],
+      global: globalRes.data, 
+    },
+  };
 }
 
 export default Festival
