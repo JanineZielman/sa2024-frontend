@@ -16,6 +16,8 @@
         padding-left: 1rem;
         padding-right: 1rem;
         margin-top: 1rem;
+
+        min-height: 36rem;
     
         .image.community {
             img {
@@ -54,7 +56,6 @@
                 @include mobile {
                     font-size: 1.2rem;    
                 }
-                
             }
     
             .caption {
@@ -74,6 +75,9 @@
                     top: 0;
                     transform: translateX(0);
                     text-align: right;
+
+                    display: flex;
+
                     img {
                         width: 100% !important;                  
                         max-width: none !important;

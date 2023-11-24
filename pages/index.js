@@ -484,13 +484,6 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 					$(this).closest(".closer-target").hide();
 				});
 
-
-				$("#imprint-content").addClass("closer-target").append(closer.clone(true));
-
-				$("#imprint-link").click(function(){
-					$("#imprint-content").show();
-				});
-
 			});
 
 		},100)

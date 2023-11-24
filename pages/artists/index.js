@@ -92,8 +92,7 @@ export async function getServerSideProps() {
   &populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100`
-  );
+    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100`);
 
   //console.log("items items items items ");
   //console.log(items);

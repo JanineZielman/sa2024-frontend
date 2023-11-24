@@ -381,8 +381,6 @@ body {
 
 
 
-
-
 #b-2024-inner {
     z-index: 10;
     position: absolute;
@@ -400,6 +398,10 @@ body {
             height: auto;
             width: 100vw;
         }
+    }
+
+    @include mobile {
+        display: none;
     }
 }
 $bottomDistance: 5.5rem;
@@ -830,72 +832,6 @@ $bottomDistance: 5.5rem;
 
 }
 
-#b-2024-inner {
-    z-index: 10;
-    position: absolute;
-    pointer-events: none;
-
-
-    svg {
-
-        @include mobile {
-            width: auto;
-            height: 10vh;
-        }
-
-        @include desktop {
-            height: auto;
-            width: 100vw;
-        }
-    }
-}
-
-#svg-biennial {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    z-index: 10;
-
-    @include mobile {
-        bottom: 1rem;
-        left: 0.5rem;
-    }
-}
-
-#svg-2024 {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
-
-     @include mobile {
-        bottom: 1rem;
-        right: 0.5rem;
-    }
-}
-
-#svg-bottom-table {
-    position: fixed;
-
-    left: 0vw;
-
-    bottom: 0;
-
-    z-index: 9;
-
-    @include mobile {
-        bottom: 0rem;
-
-        svg {
-            width: 100vw;
-            height: auto;
-        }
-    }
-
-    line {
-        stroke-width: $tableBorderStrokeWidth;
-    }
-}
 
 #date {
     @include mobile {
@@ -1986,3 +1922,22 @@ $bottomDistance: 5.5rem;
 
 
 
+
+
+
+
+
+/*
+* Hide only visually, but have it available for screenreaders: h5bp.com/v
+*/
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}

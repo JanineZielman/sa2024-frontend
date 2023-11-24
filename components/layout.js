@@ -478,7 +478,7 @@ const Layout = ({ children, global, festival}) => {
       {festival && festival.attributes.prefooter ?
         <div className="prefooter">
           <div className="text-block medium">
-            <p>{festival.attributes.prefooter.title}</p>
+            <p className="visually-hidden">{festival.attributes.prefooter.title}</p>
             <div className="logos">
               {festival.attributes.prefooter.logos.data.map((logo, i) => {
                 return(
@@ -498,7 +498,7 @@ const Layout = ({ children, global, festival}) => {
         :
         <div className="prefooter prefooter-portal">
           <div className="text-block medium">
-            <p>{global.attributes.prefooter?.title}</p>
+            <p className="visually-hidden">{global.attributes.prefooter?.title}</p>
             <div className="logos">
               {global.attributes.prefooter?.logos.data.map((logo, i) => {
                 return(
