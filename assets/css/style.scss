@@ -309,7 +309,6 @@ body {
         text-align: center;
         padding: 0.2rem;
         cursor: pointer;
-        display: none;
     }
 
     svg {
@@ -1924,6 +1923,130 @@ $bottomDistance: 5.5rem;
         display: none;
     }
 }
+
+
+
+#mc_embed_shell, .ReactModal__Content {
+    position: fixed;
+    z-index: 1000;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 1rem;
+
+    background-color: #ff820a;
+    box-shadow: 0 0 1rem #ff820a;
+
+    width: 28rem;
+
+    .indicates-required, .mce-EMAIL {
+        display: none;
+    }
+
+    .mc_fieldset label {
+        display: flex;
+    }
+
+    label[for=mce-EMAIL] {
+        display: none;
+
+    }
+
+
+    .newsletter-headline {
+        font-size: 1.2rem;
+        padding-bottom: 1rem;
+        color: #ffbbf1;
+        text-align: center;
+    }
+
+    input[type="email"] {
+
+        width: 50%;
+
+        height: 1.5rem;
+
+        padding: 1.2rem 0 1.2rem 0;
+
+        border-radius: 0.25rem;
+        border: 1px solid black;
+
+        margin: 1rem auto;
+
+        text-align: center;
+        display: block;
+
+        @include mono-s;
+    }
+
+    p, label {
+        @include label;
+        text-align: left;
+    }
+
+    label.checkbox.subfield  {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    input[type="checkbox" i] {
+        margin: 0;
+        margin-right: 0.5rem;
+
+    }
+
+    .clear {
+
+        display: flex;
+        justify-content: center;
+
+        #mc-embedded-subscribe {
+            @include more-button;
+            height: 2rem;
+            border: 0px transparent solid;
+            margin-top: 1rem;
+        }
+
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .wp-block-button__link {
+            @include more-button;
+            height: 2rem;
+            border: 0px transparent solid;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+    }
+
+    #mce-responses {
+        margin-top: 2rem;
+
+        @include mono-s;
+
+        color: $keycolor3;
+
+    }
+
+    .close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        svg {
+            width: 1rem;
+            height: auto;
+        }
+    }
+
+
+}
+
 
 
 

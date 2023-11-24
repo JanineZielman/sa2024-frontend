@@ -4,11 +4,25 @@ import React, {useEffect, useState} from "react"
 import Image from "./image"
 import ReactMarkdown from "react-markdown";
 import * as THREE from 'three';
+import NewsletterSubscribe from "../components/NewsletterSubscribe";
+import Modal from 'react-modal';
+
 
 
 const Layout = ({ children, festival}) => {
 
   const [loading, setLoading] = useState(true);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const modalStyles = {
+    overlay: {
+      backgroundColor: 'transparent',
+    },
+  };
 
   useEffect(() => {
     setTimeout(function() {
@@ -258,13 +272,7 @@ const Layout = ({ children, festival}) => {
   
   return(
     <>
-    <section class="minimal-nav">
-      <ul>
-        <li><a href="/artists">Artists</a></li>
-        <li><a href="/programme">Programme</a></li>
-        <li><a href="/about">Information</a></li>
-      </ul>
-    </section>
+
 
     <div id="b-2024" class="hide-at-pageload visible">
             <div id="b-2024-inner">
@@ -356,7 +364,7 @@ const Layout = ({ children, festival}) => {
             </a>
         </div>
 
-        <div class="newsletter">
+        <div class="newsletter" onClick={handleShow}>
             Newsletter
         </div>
       </div>
@@ -565,6 +573,16 @@ const Layout = ({ children, festival}) => {
   
       </div>
     </footer>
+
+    <Modal  isOpen={show} onHide={handleClose} className={`mail-modal`} ariaHideApp={false} style={modalStyles}>
+        <div onClick={handleClose} className="close">
+          <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 0.698933 -0.715187 0.698933 1.5 2)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+            <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 -0.698933 0.715187 0.698933 1.5 34)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+          </svg>
+        </div>
+        <NewsletterSubscribe/>
+      </Modal>
     </>
   )
 }
