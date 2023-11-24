@@ -137,6 +137,8 @@ body {
     z-index: 1;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
+    max-width: 96vw; //<- no horizontal scroller
 
     pointer-events: none;
     
