@@ -69,13 +69,13 @@ const Article = ({page, relations, params}) => {
 										<LazyLoad height={600}>
 											{item.image_caption ?
 												<div className="columns" key={'column'+i}>
+													<div className={`image ${page.attributes.slug}`}>
+														<Image image={item.image.data.attributes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8VQ8AAnkBewKPWHQAAAAASUVORK5CYII="/>
+													</div>
 													<div className="caption">
 														<ReactMarkdown 
 															children={item.image_caption} 
 														/>
-													</div>
-													<div className={`image ${page.attributes.slug}`}>
-														<Image image={item.image.data.attributes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8VQ8AAnkBewKPWHQAAAAASUVORK5CYII="/>
 													</div>
 												</div>
 												:

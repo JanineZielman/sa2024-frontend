@@ -1752,10 +1752,6 @@ $bottomDistance: 5.5rem;
     }
 }
 
-.caption {
-    display: none;
-}
-
 .container  {
     padding: 0 1rem;
 }
@@ -1768,24 +1764,22 @@ $bottomDistance: 5.5rem;
 
     .intro-text {
         p {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        h5 {
+            padding: 1rem 0 2rem 0;
+            font-size: 1.3rem;
         }
     }
 
     @include desktop {
         .container  {
-            padding: 0 20rem;
+            padding: 0 18rem;
         }  
     }
     
-    .content-wrapper {
-        .article {
-            h5 {
-                padding: 1rem 0 2rem 0;
-                font-size: 1.5rem;
-            }
-        }
-    }
+
 
     .Collapsible {
         border: 1px solid black;
@@ -1835,7 +1829,7 @@ $bottomDistance: 5.5rem;
 
         h2 {
             font-size: 1rem;
-            margin-top: 1rem;
+            margin-top: 2rem;
             margin-bottom: 0.5rem;
         }
 
@@ -1851,6 +1845,10 @@ $bottomDistance: 5.5rem;
 
         .text-block {
             padding: 0 1rem 1rem 1rem;
+        }
+
+        p {
+            font-size: 1rem;
         }
     }
 
