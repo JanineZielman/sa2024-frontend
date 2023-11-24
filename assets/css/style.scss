@@ -138,7 +138,6 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    max-width: 96vw; //<- no horizontal scroller
 
     pointer-events: none;
     
@@ -1698,6 +1697,10 @@ $bottomDistance: 5.5rem;
 
 .container  {
     padding: 0 1rem;
+
+    @include mobile {
+        padding: 0;
+    }
 }
 
 .festival-wrapper.about-page {
