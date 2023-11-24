@@ -406,7 +406,7 @@ const Layout = ({ children, global, festival}) => {
                   <span class="table-item">Paradiso</span><span class="table-item">Muziekgebouw</span>
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item"></span><span class="table-item">Stedelijk Museum</span>
+                  <span class="table-item"></span><span class="table-item">BIMHUIS</span>
               </div>
           </div>
           <div class="table-row">
@@ -431,7 +431,7 @@ const Layout = ({ children, global, festival}) => {
                   <span class="table-item">GARAGE NOORD&nbsp;&nbsp;KANAAL40</span>
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item">OT301 </span><span class="table-item">AND MORE </span> <span>&nbsp;</span>
+                  <span class="table-item">OT301 </span><span class="table-item">AND MORE</span>
               </div>
           </div>
       </div>

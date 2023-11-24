@@ -266,70 +266,6 @@ body {
 
 
 
-.table {
-    @include mono;
-    border-top: $tableBorder;
-
-    .table-row {
-        border-left: $tableBorder;
-        border-right: $tableBorder;
-        display: flex;
-
-        @include desktop {
-            border-bottom: $tableBorder;
-
-        }
-
-    }
-
-    .table-col {
-        width: 50%;
-        padding: 0.12rem;
-        @include desktop {
-          display: flex;
-          justify-content: space-around;
-        }
-        @include mobile {
-            width: 100%;
-            padding: 0;
-            border-bottom: $tableBorder;
-        }
-    }
-
-    .table-col-left {
-        border-right: $tableBorder;
-        @include mobile {
-          width: 40%;
-        }
-    }
-
-    .table-item {
-      @include mobile {
-        display: block;
-        text-align: center;
-        width: 100%;
-
-        &:nth-child(2) {
-            border-top: $tableBorder;
-        }
-
-      }
-    }
-}
-
-#table-top {
-    z-index: 20;
-    position: absolute;
-    top: 1.5rem;
-    left: 0.4rem;
-
-    width: 50%;
-
-    @include mobile {
-      width: 68%;
-    }
-}
-
 
 
 @keyframes rotateAnimation {
@@ -410,11 +346,17 @@ body {
         font-family: "geist", sans-serif;
 
         font-size: 8rem;
+        letter-spacing: -0.7rem;
+
+        @include mobile {
+            font-size: 5.5rem;
+            letter-spacing: -0.4rem;
+        }
 
         font-weight: 100;
         font-variation-settings: "wght" 100;
 
-        letter-spacing: -0.7rem;
+        
 
         text-align: center;
         
@@ -1068,6 +1010,12 @@ $bottomDistance: 5.5rem;
 
         }
 
+        &:first-child {
+            .table-col-right .table-item {
+                border-top: 0px solid black;
+            }
+        }
+
     }
 
     .table-col {
@@ -1078,7 +1026,7 @@ $bottomDistance: 5.5rem;
           justify-content: space-around;
         }
         @include mobile {
-            width: 100%;
+            width: 50%;
             padding: 0;
             border-bottom: $tableBorder;
         }
@@ -1087,7 +1035,7 @@ $bottomDistance: 5.5rem;
     .table-col-left {
         border-right: $tableBorder;
         @include mobile {
-          width: 40%;
+          width: 50%;
         }
     }
 
@@ -2027,6 +1975,10 @@ $bottomDistance: 5.5rem;
 
 #small-logo {
     padding: 0 1rem;
+
+    @include mobile {
+        padding-top: 2rem;
+    }
     .uuid-1b36f86d-6d74-44e6-b3b4-37d62bac4ab9,.uuid-4c84452d-7097-4022-a1de-bfb3db769bbe{fill:none;stroke-linecap:square;stroke-width:7.93px;}.uuid-1b36f86d-6d74-44e6-b3b4-37d62bac4ab9,.uuid-4c84452d-7097-4022-a1de-bfb3db769bbe,.uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904{stroke-miterlimit:10;}.uuid-1b36f86d-6d74-44e6-b3b4-37d62bac4ab9,.uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904{stroke:#ff820a;}.uuid-4c84452d-7097-4022-a1de-bfb3db769bbe{stroke:#ffbbf1;}.uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904{fill:#ffbbf1;}
 
     .slug- & {
