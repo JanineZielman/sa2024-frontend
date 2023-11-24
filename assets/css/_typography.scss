@@ -1,20 +1,32 @@
 @font-face {
     font-family: 'geist';
-    src: url('../fonts/GeistVariableVF.woff2') format('woff');
+    src: url('/assets/fonts/GeistVariableVF.woff2') format('woff');
     font-style: normal;
 }
 
 
 @font-face {
     font-family: 'mono';
-    src: url('../fonts/codabetav3-monoserif-webfont.woff') format('woff');
+    src: url('/fonts/assets/CodaBetaV8-MonoSerif.woff2') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'mono';
+    src: url('/fonts/assets/CodaBetaV8-MonoSerifItalic.woff') format('woff');
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'mono-prop';
+    src: url('/fonts/assets/CodaBetaV8-ProportionalSans.woff2') format('woff');
     font-style: normal;
 }
 
 @font-face {
     font-family: 'mono-prop';
-    src: url('../fonts/codabetav3-proportionalsans-webfont.woff') format('woff');
-    font-style: normal;
+    src: url('/fonts/assets/CodaBetaV8-ProportionalSansItalic.woff2') format('woff');
+    font-style: italic;
 }
 
 html {

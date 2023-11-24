@@ -169,6 +169,7 @@ body {
         top: auto;
         right: auto;
         bottom: 0;
+        width: 100vw;
     }
     
     z-index: 1000;
@@ -176,9 +177,12 @@ body {
 
     ul {
         display: flex;
-        flex-wrap: wrap;
+        align-items: stretch;
+
         li {
-            width: calc(100% / 3);
+            @inclde mobile {
+                width: calc(100% / 3);
+            }
 
             &:hover {
                 background-color: white !important;
@@ -305,6 +309,7 @@ body {
         text-align: center;
         padding: 0.2rem;
         cursor: pointer;
+        display: none;
     }
 
     svg {

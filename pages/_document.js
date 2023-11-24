@@ -68,6 +68,15 @@ class MyDocument extends Document {
               </svg>
             </a>
           </div>
+
+          <section class="minimal-nav">
+            <ul>
+              <li><a href="/artists">Artists</a></li>
+              <li><a href="/programme">Programme</a></li>
+              <li><a href="/about">Information</a></li>
+            </ul>
+          </section>
+          
           <Main />
           <NextScript />
         </body>
