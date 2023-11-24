@@ -1812,6 +1812,12 @@ $bottomDistance: 5.5rem;
 
 
 .template-artists {
+
+    .container {
+        @include mobile {
+            padding: 0;
+        }
+    }
     .filter {
         display: none;
     }
