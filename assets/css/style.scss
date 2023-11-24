@@ -180,7 +180,9 @@ body {
         align-items: stretch;
 
         li {
-            @inclde mobile {
+            width: 100%;
+            
+            @include mobile {
                 width: calc(100% / 3);
             }
 
@@ -1925,6 +1927,12 @@ $bottomDistance: 5.5rem;
 }
 
 
+.ReactModalPortal {
+    position: fixed;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+}
 
 #mc_embed_shell, .ReactModal__Content {
     position: fixed;
