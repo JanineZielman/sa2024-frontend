@@ -15,7 +15,7 @@ const About = ({ global, page}) => {
 
 				<div className="intro-text">
 					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
-					<div><p>{page.attributes.IntroText}</p></div>
+					<div><ReactMarkdown children={page.attributes.information_intro}/></div>
 				</div>
         
         <div className="content-wrapper">

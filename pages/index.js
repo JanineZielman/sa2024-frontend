@@ -485,30 +485,12 @@ const Festival = ({ global, page, params, programmes, artists, news }) => {
 				});
 
 
-
-				var formsignup = $('#mc_embed_shell');
-
-				formsignup.append(closer.clone(true));
-
-				$(".newsletter").click(function(){
-					formsignup.show();
-				});
-
-
 				$("#imprint-content").addClass("closer-target").append(closer.clone(true));
 
 				$("#imprint-link").click(function(){
 					$("#imprint-content").show();
 				});
 
-			});
-
-			var formsignup = $('#mc_embed_shell');
-
-			formsignup.append(closer.clone(true));
-		
-			$(".newsletter").click(function(){
-				formsignup.show();
 			});
 
 		},100)

@@ -513,13 +513,17 @@ const Layout = ({ children, global, festival}) => {
       }
 
       <div id="imprint-menu">  
-        {global.attributes.footer_links?.map((link, i) => {
-          return (
-            <a href={'/'+link.slug} key={'link'+i} className="menu-link">
-              {link.title}
-            </a>
-          )
-        })}
+
+        <div id="imprint-link" class="imprint-item">
+          <a href="/about">Imprint</a>
+        </div>
+        <div class="imprint-item">
+          <a href="https://sonicacts.com/policy" target="_blank">Privacy Policy</a>
+        </div>
+        <div class="imprint-item">
+          <a href="https://sonicacts.com/cookies" target="_blank">Cookies</a>
+        </div>
+  
       </div>
     </footer>
     </>

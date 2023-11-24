@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react"
-
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout"
 import Image from "../../components/image"
@@ -96,8 +95,8 @@ export async function getServerSideProps() {
     await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100`
   );
 
-  console.log("items items items items ");
-  console.log(items);
+  //console.log("items items items items ");
+  //console.log(items);
 
   // Sorting the items array by the slug property in a case-insensitive manner
   items.data.sort((a, b) => {

@@ -49,6 +49,7 @@ const Landing = ({page }) => {
 							<Collapsible trigger={item.title} open={item.open == true && item.open}>
 								<div className={'text-block ' + item.text?.size} key={'textcol'+i}>
 									<ReactMarkdown 
+										linkTarget="_blank"
 										children={item.text?.text_block} 
 									/>
 								</div>

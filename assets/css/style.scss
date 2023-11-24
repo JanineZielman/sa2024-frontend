@@ -1818,6 +1818,12 @@ $bottomDistance: 5.5rem;
         padding-bottom: 2rem;
     }
 
+    .intro-text {
+        p {
+            font-size: 1.5rem;
+        }
+    }
+
     @include desktop {
         .container  {
             padding: 0 20rem;

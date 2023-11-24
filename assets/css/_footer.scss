@@ -40,7 +40,7 @@
     position: relative;
     z-index: 10000;
         
-    a {
+    div {
         @include col-2;
 
         @include mobile {
