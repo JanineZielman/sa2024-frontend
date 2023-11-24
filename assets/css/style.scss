@@ -143,6 +143,7 @@ body {
     
     @include mobile {
       height: 100dvh;
+      width: calc(100vw - 2rem);
     }
 
 }
@@ -694,7 +695,7 @@ $bottomDistance: 5.5rem;
         left: 50vw;
         transform: translate(-50%, -50%);
 
-        width: 100vw;
+        width: 100%;
 
         height: auto;
     }
@@ -1697,10 +1698,6 @@ $bottomDistance: 5.5rem;
 
 .container  {
     padding: 0 1rem;
-
-    @include mobile {
-        padding: 0;
-    }
 }
 
 .festival-wrapper.about-page {
