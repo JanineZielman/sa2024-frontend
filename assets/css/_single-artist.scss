@@ -3,6 +3,11 @@
     .title {
         padding-top: 2rem;
         padding-bottom: 2rem;
+
+        @include desktop {
+            max-width: 80vw;
+            margin: 0 auto;
+        }
     }
 
     $blockMinHeight: 50rem;
@@ -42,7 +47,7 @@
             @include desktop {
                 left: 49vw;
                 //transform: translateX(-50%);
-                width: 48vw;
+                width: 46vw;
             }
     
             @include mobile {
@@ -72,10 +77,12 @@
             @include desktop {
                 &:first-child {
                     position: absolute;
-                    left: 0.5rem;
+                    left: 2rem;
                     top: 0;
                     transform: translateX(0);
                     text-align: right;
+
+                    width: 44vw;
 
                     display: flex;
                     justify-content: right;
