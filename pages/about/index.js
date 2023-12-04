@@ -9,7 +9,7 @@ const About = ({ global, page}) => {
 		<>
 		<section className="festival-wrapper about-page">
 			<Layout  global={global} festival={page}>
-        <div className="title">
+        <div className="title-wrapper">
           <h1 className="page-title">Information</h1>
         </div>
 

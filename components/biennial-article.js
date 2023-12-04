@@ -38,8 +38,7 @@ const Article = ({page, relations, params}) => {
 					</div>
 				}
 				{page.attributes.title &&
-					<div className="title">
-						<h1>{page.attributes.title}</h1>
+					<div className="title-wrapper">
 						{relations.attributes.biennial_tags?.data && 
 							<div className="category">
 								{relations.attributes.biennial_tags.data.map((tag, i) => {
@@ -51,10 +50,11 @@ const Article = ({page, relations, params}) => {
 								})}
 							</div>
 						}
+						<h1 className="page-title">{page.attributes.title}</h1>
 					</div>
 				}
 				{page.attributes.name &&
-					<div className="title">
+					<div className="title-wrapper">
 						<h1 className="page-title">{page.attributes.name}</h1>
 						<div className="subtitle">{page.attributes.job_description}</div>
 					</div>

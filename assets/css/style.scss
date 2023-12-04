@@ -150,6 +150,7 @@ body {
 
 .minimal-nav {
 
+
     @include mobile {
         position: fixed;
         width: 100vw;
@@ -179,10 +180,10 @@ body {
 
     ul {
         display: flex;
-        align-items: stretch;
+        flex-wrap: wrap;
 
         li {
-            width: 100%;
+            width: 33.3333%;
             
             @include mobile {
                 width: calc(100% / 3);
@@ -348,7 +349,7 @@ body {
 }
 
 
-.title {    
+.title-wrapper {    
     padding: 3rem 0 3rem 0;
 
     h1.page-title {
@@ -356,6 +357,7 @@ body {
 
         font-size: 8rem;
         letter-spacing: -0.7rem;
+        line-height: 0.8;
 
         @include mobile {
             font-size: 5.5rem;
@@ -1664,14 +1666,150 @@ $bottomDistance: 5.5rem;
     }
 }
 
-.festival-wrapper.template-programme {
+body.slug-programme {
 
     .discover-container {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: wrap;;
 
         .discover-item {
-            width: 33.333%;
+            margin-bottom: 2rem;
+            width: 33.3333%;
+
+            .item-wrapper {
+                font-size: 1rem;
+
+                a {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .when {
+                        background-color: black;
+                        text-align: right;
+                        top: 0;
+                        left: 0;
+                        position: absolute;
+                        span.black-label {
+                            padding: 0 0.1rem 0 0.1rem;
+                            display: inline-block;
+                        }
+                        
+                    }        
+
+                    .image {
+                        width: 35%;
+                        padding: 0 0.5rem 0 0;
+                        top: 0.15rem;
+                        position: relative;
+                        display: block;
+                        position: relative;
+
+                        img {
+                            @include addContrastMultiply;
+                            //mask-image: linear-gradient(to top,  transparent 10%, #fff 25% 80%, transparent 95%),
+                            //linear-gradient(to left, transparent 10%, #fff 15% 80%, transparent 95%);
+                                                 
+                            mask-size: 100% 100%;
+                
+                            transition: all 0.3s ease;
+                            width: 100%;
+                            object-fit: cover;
+                
+                            &:hover {
+                                transform: scale(1.05);
+                                mask-size: 95% 95%;
+                            }
+            
+                        }
+
+                        .image-inner.second {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: calc(100% - 0.5rem);
+                            mask-image: linear-gradient(to bottom, transparent 25%, black 75%);
+                        }
+                    }
+                    
+                    .category-title-wrapper {
+                        width: 61%;
+                        padding: 0 0rem 0 0;
+
+                        .category-location-wrapper {
+                            .category {
+                                display: inline-block;
+                                padding: 0 1rem 0 0;
+                            }
+
+                            .location {
+                                @include mono;
+                                top: -0.1rem;
+                                position: relative;
+                            }
+
+                        }
+                        .title {
+                            font-size: 1.7rem;
+                            font-family: Geist, sans;
+                            padding: 0 1rem 0 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .discover-item {
+            &:nth-child(5n) {
+                .image-inner {
+                    background-color: $keycolor2;
+                    mask-image: radial-gradient(circle at 0% 100%, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);    
+
+                    &.second {
+                        background-color: $keycolor3;
+                    }
+                }
+            }
+    
+            &:nth-child(5n+1) {
+                .image-inner {
+                    background-color: $keycolor1;
+                    &.second {
+                        mask-image: linear-gradient(to left, transparent 25%, black 75%);
+
+                        background-color: $keycolor2;
+                    }
+                }
+            }
+    
+            &:nth-child(5n+2) {
+                .image-inner {
+                    background-color: $keycolor2;
+                    &.second {
+                        background-color: $keycolor1;
+                    }
+                }
+            }
+    
+            &:nth-child(5n+3) {
+                .image-inner {
+                    background-color: $keycolor3;
+                    &.second {
+                        background-color: $keycolor2;
+                        mask-image: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+                        linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+                        linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+                    }
+                }
+            }
+    
+            &:nth-child(5n+4) {
+                .image-inner {
+                    background-color: $keycolor1;
+                    &.second {
+                        background-color: $keycolor4;
+                    }
+                }
+            }
         }
 
         .image span {
@@ -1686,8 +1824,8 @@ $bottomDistance: 5.5rem;
             border: none;
             margin: auto;
             display: block;
-            width: 20rem !important;
-            height: 10rem !important;
+            width: 100% !important;
+            height: 6.5rem !important;
             min-width: auto !important;
             max-width: none !important;
             min-height: auto !important;
@@ -1886,13 +2024,9 @@ $bottomDistance: 5.5rem;
                 width: calc(100% - 1rem);
                 height: 10rem;
                 object-fit: cover;
-                filter: brightness(1.3) contrast(1.2) grayscale(100%);
+
+                @include addContrastMultiply();
                 
-                //border: 1px black solid;
-                //border-radius: 0.3rem;
-    
-                mix-blend-mode: multiply;
-    
                 mask-image: linear-gradient(to top,  transparent 10%, #fff 25% 80%, transparent 95%),
                 linear-gradient(to left, transparent 10%, #fff 15% 80%, transparent 95%);
                                      
@@ -2067,8 +2201,49 @@ $bottomDistance: 5.5rem;
 
 
 
+.biennial-article {
+    .category {
+        text-align: center;
+    }
+}
 
+.slug-programmeprogramme {
+    @include desktop {
+        .container  {
+            padding: 0 18rem;
+        }  
+    }
 
+    .container .wrapper{
+        h1 {
+            font-size: 1rem;
+        }
+
+        h2 {
+            font-size: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+            margin-top: 1rem;
+            opacity: 0.6;
+        }
+
+        h2+h3 {
+            margin-top: 1rem;
+        }
+
+        .text-block {
+            
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+}
 
 
 

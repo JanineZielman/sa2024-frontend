@@ -30,7 +30,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
   
   return (
     <section className="festival-wrapper template-artists">
-      <div className="title">
+      <div className="title-wrapper">
         <h1 className="page-title">Artists</h1>
       </div>
       <Layout  global={global} festival={festival}>

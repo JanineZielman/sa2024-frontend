@@ -8,7 +8,7 @@ import Moment from 'moment';
 const SubProgrammeItem = ({page, global, relations, params, festival, sub}) => {
 
   return (  
-    <section className="festival-wrapper">
+    <section className="festival-wrapper programme-sub">
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
         {sub[0] && 
