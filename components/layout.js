@@ -503,8 +503,9 @@ const Layout = ({ children, festival}) => {
             <p className="visually-hidden">{festival.attributes.prefooter.title}</p>
             <div className="logos">
               {festival.attributes.prefooter.logos.data.map((logo, i) => {
+                let logoId = "logo-id-" + logo.id;
                 return(
-                  <div className="logo">
+                  <div className="logo" id={logoId}>
                     <Image image={logo.attributes}/>
                   </div>
                 )
