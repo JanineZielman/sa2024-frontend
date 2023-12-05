@@ -27,11 +27,21 @@ const Article = ({page, relations, params}) => {
 		<section className="article biennial-article">
 			<>
 				{relations?.attributes?.authors?.data &&
-					<div className="tags">
+					<div className="authors">
 						{relations.attributes.authors.data.map((author, i) => {
 							return(
 								<a className="author" href={`/artists/${author.attributes.slug}`}>
-									{author.attributes.name}
+
+									<div className="image">
+										<img 
+										src={"https://cms.sonicacts.com/public"+author.attributes.cover_image.data.attributes.formats.small?.url}
+										/>
+									</div>
+									<div className="info">
+									{author.attributes.name} 
+									{/* <div>{item.attributes.job_description}</div>  */}
+									</div>
+
 								</a>
 							)
 						})}
