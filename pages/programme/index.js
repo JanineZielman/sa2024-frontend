@@ -34,8 +34,9 @@ const Programme = ({ global, items, params, festival}) => {
                                 <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                               }
                             </div>
+                          </div>
 
-                            {item.attributes.start_date && 
+                          {item.attributes.start_date && 
                             <div className="when">
                               <span className="black-label">
                               {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
@@ -49,21 +50,10 @@ const Programme = ({ global, items, params, festival}) => {
                               }
                               </span>
                             </div>
-                            }
+                          }
 
-                          </div>
-                          <div className="category-title-wrapper">
                             {item.attributes.biennial_tags?.data && 
-                              <div className="category-location-wrapper">
-                                <span className="category">
-                                {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
-                                  return(
-                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                      {tag.attributes.title} 
-                                    </a>
-                                  )
-                                })}
-                                </span>
+                              <div className="location-wrapper">
 
                                 <span className="locations">
                                   {item.attributes.locations.data[0] && 
@@ -79,6 +69,17 @@ const Programme = ({ global, items, params, festival}) => {
 
                               </div>
                             }
+
+                          <div className="category-title-wrapper">
+                            <span className="category">
+                            {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
+                              return(
+                                <div className="category" key={'search'+i}>
+                                  {tag.attributes.title} 
+                                </div>
+                              )
+                            })}
+                            </span>
                             <div className="title">
                               {item.attributes.title}
                             </div>
