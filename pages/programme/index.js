@@ -5,8 +5,8 @@ import Image from '../../components/image'
 import Moment from 'moment';
 
 
-const Programme = ({ global, items, params, festival}) => {
-  
+const Programme = ({ global, festival, programme}) => {
+  console.log(programme.attributes.programme_item[0].programme_item.data)
   return (
     <section className="festival-wrapper template-programme">
       <Layout global={global} festival={festival}>
@@ -15,7 +15,8 @@ const Programme = ({ global, items, params, festival}) => {
         </div>
         <div className="discover">
           <div className="discover-container programme-container">
-            {items.map((item, i) => {
+            {programme.attributes.programme_item.map((pro_item, i) => {
+                let item = pro_item.programme_item.data;
                 return (
                   <div className={`discover-item`}>
                     <LazyLoad height={600}>
@@ -36,7 +37,8 @@ const Programme = ({ global, items, params, festival}) => {
                             </div>
                           </div>
 
-                          {item.attributes.start_date && 
+                          {/* we need to find a good way to showcase the dates, especially when there are multiple */}
+                          {/* {item.attributes.start_date && 
                             <div className="when">
                               <span className="black-label">
                               {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
@@ -50,7 +52,7 @@ const Programme = ({ global, items, params, festival}) => {
                               }
                               </span>
                             </div>
-                          }
+                          } */}
 
                             {item.attributes.biennial_tags?.data && 
                               <div className="location-wrapper">
@@ -100,22 +102,27 @@ const Programme = ({ global, items, params, festival}) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
 
   // Run API calls in parallel
-  const [festivalRes, itemRes, globalRes] = await Promise.all([
+  const [festivalRes, programmePageRes, globalRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
-    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&pagination[limit]=${100}&filters[main][$eq]=true&sort[0]=order%3Adesc&sort[1]=start_date%3Aasc&populate=*`),
+    fetchAPI(`/programme-page?
+    populate[0]=programme_item.programme_item
+    &populate[1]=programme_item.programme_item.cover_image
+    &populate[2]=programme_item.programme_item.biennial_tags
+    &populate[3]=programme_item.programme_item.locations
+    &populate[4]=programme_item.programme_item.WhenWhere
+    `),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
   ])
 
   return {
     props: {
       festival: festivalRes.data[0],
-      items: itemRes.data,
       global: globalRes.data,
-			params: params,
+      programme: programmePageRes.data
     }
   }
 }
