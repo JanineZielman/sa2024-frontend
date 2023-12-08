@@ -6,7 +6,6 @@ import Moment from 'moment';
 
 
 const Programme = ({ global, festival, programme}) => {
-  console.log(programme)
   return (
     <section className="festival-wrapper template-programme">
       <Layout global={global} festival={festival}>
@@ -17,6 +16,11 @@ const Programme = ({ global, festival, programme}) => {
           <div className="discover-container programme-container">
             {programme.attributes.programme_item.map((pro_item, i) => {
                 let item = pro_item.programme_item.data;
+
+                let dates = item.attributes.WhenWhere.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+                let start_date = new Date(dates[0]?.date.split('/').reverse().join('/'));
+                let end_date = new Date(dates[dates.length - 1]?.date.split('/').reverse().join('/'));
+
                 return (
                   <div className={`discover-item`}>
                     <LazyLoad height={600}>
@@ -37,16 +41,16 @@ const Programme = ({ global, festival, programme}) => {
                             </div>
                           </div>
 
-                          {item.attributes.start_date && 
+                          {dates.length > 0 && 
                             <div className="when">
                               <span className="black-label">
-                              {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
+                              { (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
                                 <>
-                                  {Moment(item.attributes.start_date).format('D')}{item.attributes.end_date && <>–{Moment(item.attributes.end_date).format('D MMM')}</>}
+                                  {Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
                                 </>
                               : 
                                 <>
-                                  {Moment(item.attributes.start_date).format('D MMM')}{item.attributes.end_date && <><br />–{Moment(item.attributes.end_date).format('D MMM')}</>}
+                                  {Moment(start_date).format('D MMM')}   {dates.length > 1 && <><br />–{Moment(end_date).format('D MMM')}</>}
                                 </>
                               }
                               </span>
