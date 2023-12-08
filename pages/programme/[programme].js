@@ -9,48 +9,48 @@ import Collapsible from "../../components/collapsible";
 
 const ProgrammeItem = ({page, global, relations, params, sub, festival}) => {
 
-  // const [dates, setDates] = useState([]);
-  // const [locations, setLocations] = useState([]);
+  const [dates, setDates] = useState([]);
+  const [locations, setLocations] = useState([]);
 
-  // function removeusingSet(arr) {
-  //   let outputArray = Array.from(new Set(arr))
-  //   return outputArray
-  // }
+  function removeusingSet(arr) {
+    let outputArray = Array.from(new Set(arr))
+    return outputArray
+  }
 
-  // useEffect(() => {
-  //   let list = []
-  //   let list2 = []
-  //   for (let i = 0; i < sub.length; i++) {
-  //     for (let j = 0; j < sub[i].attributes.WhenWhere?.length; j++) {
-  //       for (let k = 0; k < sub[i].attributes.WhenWhere[j]?.dates.length; k++) {
-  //         list.push(sub[i].attributes.WhenWhere[j]?.dates[k].start_date);
-  //         list.sort(function (a, b) {
-  //           return a.localeCompare(b);
-  //         });
-  //       }
-  //     }
-  //   }
-  //   for (let i = 0; i < sub.length; i++) {
-  //     for (let j = 0; j < sub[i].attributes.locations.data?.length; j++) {
-  //       list2.push(sub[i].attributes.locations.data[j].attributes.title);
-  //     }
-  //   }
+  useEffect(() => {
+    let list = []
+    let list2 = []
+    for (let i = 0; i < sub.length; i++) {
+      for (let j = 0; j < sub[i].attributes.WhenWhere?.length; j++) {
+        for (let k = 0; k < sub[i].attributes.WhenWhere[j]?.dates.length; k++) {
+          list.push(sub[i].attributes.WhenWhere[j]?.dates[k].start_date);
+          list.sort(function (a, b) {
+            return a.localeCompare(b);
+          });
+        }
+      }
+    }
+    for (let i = 0; i < sub.length; i++) {
+      for (let j = 0; j < sub[i].attributes.locations.data?.length; j++) {
+        list2.push(sub[i].attributes.locations.data[j].attributes.title);
+      }
+    }
 
-  //   setDates(removeusingSet(list))
-  //   setLocations(removeusingSet(list2))
+    setDates(removeusingSet(list))
+    setLocations(removeusingSet(list2))
 
-  //   sub.sort(function (a, b) {
-  //     return a.attributes.WhenWhere[0]?.times[0]?.start_time?.localeCompare(b.attributes.WhenWhere[0]?.times[0]?.start_time);
-  //   });
+    sub.sort(function (a, b) {
+      return a.attributes.WhenWhere[0]?.times[0]?.start_time?.localeCompare(b.attributes.WhenWhere[0]?.times[0]?.start_time);
+    });
 
-  // }, [])
+  }, [])
 
 
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
-        {/* {sub[0] && 
+        {sub[0] && 
           <>
             <div className="discover sub">
               <div className="filter">
@@ -155,7 +155,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival}) => {
                         {locations.map((loc, l) => {
                           return(
                             <>
-                              {sub.filter(el2 => el2.attributes.locations.data[0].attributes.title === `${loc}`).map((item, i) => {
+                              {sub.filter(el2 => el2.attributes.locations.data[0]?.attributes.title === `${loc}`).map((item, i) => {
                                 return(
                                   <>
                                     <div className={`discover-item`}>
@@ -225,7 +225,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival}) => {
               </div>
             </div>
           </>
-        } */}
+        }
       </Layout>
     </section> 
   )
@@ -243,12 +243,13 @@ export async function getServerSideProps({params, query}) {
   );
 
   const pageRel = 
-    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programmes][populate]=*&populate[locations][populate]=*&populate[sub_programmes][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
+    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programmes][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
   );
 
+
   const subRes = 
-    await fetchAPI( `/programme-items?filters[biennial][slug][$eq]=${biennial.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&pagination[limit]=${100}&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate[authors][populate]=*&populate=*`
-  );
+  await fetchAPI( `/programme-items?&filters[main_programme_items][slug][$contains]=${params.programme}&pagination[limit]=${100}&populate[biennial][populate]=*&populate[main_programme_items][populate]=*&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate=*`
+);
   
 
   const [globalRes, categoryRes, festivalRes] = await Promise.all([

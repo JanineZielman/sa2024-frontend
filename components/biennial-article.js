@@ -35,8 +35,6 @@ const Article = ({page, relations}) => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	console.log(relations.attributes)
-
   return (   
 		<section className="article biennial-article">
 			<>
@@ -160,7 +158,7 @@ const Article = ({page, relations}) => {
 								<div className="location">
 									<a href={`/visit`}>
 										{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}
-										
+
 									</a>
 								</div>
 							)
