@@ -90,19 +90,21 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                               <div className="item-wrapper">
                                                 <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
                                                   <div className="image">
-                                                    {item.attributes.cover_image?.data &&
-                                                      <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                                    }
-                                                    <div className="info-overlay">
-                                                      {item.attributes.WhenWhere[0] && 
-                                                        <>
-                                                          <div className="times">
-                                                              <div className="time">
-                                                                <span>{item.attributes.WhenWhere[repeatedEvent].start_time} {item.attributes.WhenWhere[repeatedEvent].end_time && `— ${item.attributes.WhenWhere[repeatedEvent].end_time}`}</span>
-                                                              </div>
-                                                          </div>
-                                                        </>
+                                                    <div className="image-inner">
+                                                      {item.attributes.cover_image?.data &&
+                                                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                                                       }
+                                                      <div className="info-overlay">
+                                                        {item.attributes.WhenWhere[0] && 
+                                                          <>
+                                                            <div className="times">
+                                                                <div className="time">
+                                                                  <span>{item.attributes.WhenWhere[repeatedEvent].start_time} {item.attributes.WhenWhere[repeatedEvent].end_time && `— ${item.attributes.WhenWhere[repeatedEvent].end_time}`}</span>
+                                                                </div>
+                                                            </div>
+                                                          </>
+                                                        }
+                                                      </div>
                                                     </div>
                                                   </div>
                                                   {item.attributes.biennial_tags?.data && 
@@ -165,32 +167,24 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                         <div className="item-wrapper">
                                           <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
                                             <div className="image">
-                                              {item.attributes.cover_image?.data &&
-                                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                              }
-                                              <div className="info-overlay">
-                                                {item.attributes.WhenWhere[0] && 
-                                                  <>
-                                                    <div className="times">
-                                                      <div className="time">
-                                                        <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
-                                                      </div>
-                                                    </div>
-                                                  </>
+                                              <div className="image-inner">
+                                                {item.attributes.cover_image?.data &&
+                                                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                                                 }
+                                                <div className="info-overlay">
+                                                  {item.attributes.WhenWhere[0] && 
+                                                    <>
+                                                      <div className="times">
+                                                        <div className="time">
+                                                          <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
+                                                        </div>
+                                                      </div>
+                                                    </>
+                                                  }
+                                                </div>
                                               </div>
                                             </div>
-                                            {item.attributes.biennial_tags?.data && 
-                                              <div className="category">
-                                                {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
-                                                  return(
-                                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                                      {tag.attributes.title}
-                                                    </a>
-                                                  )
-                                                })}
-                                              </div>
-                                            }
+
                                             <div className="category-title-wrapper">
                                               <div className="authors">
                                                 {item.attributes?.authors?.data &&
@@ -201,6 +195,17 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                                   })
                                                 }
                                               </div>
+                                              {item.attributes.biennial_tags?.data && 
+                                              <div className="category">
+                                                {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
+                                                  return(
+                                                    <span key={'search'+i}>
+                                                      {tag.attributes.title}
+                                                    </span>
+                                                  )
+                                                })}
+                                              </div>
+                                              }
                                               <div className="title">{item.attributes.title}</div>
                                             </div>
                                           </a>
