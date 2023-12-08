@@ -82,9 +82,11 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                           <>
                                             {allDates.includes(date) &&
                                             <div className={`discover-item`}>
+                                              <div className="location-wrapper">
                                               {i == 0 &&
-                                                <div className="loc-item">{loc}</div>
+                                                <div className="location">{loc}</div>
                                               }
+                                              </div>
                                               <div className="item-wrapper">
                                                 <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
                                                   <div className="image">
@@ -114,7 +116,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                                       })}
                                                     </div>
                                                   }
-                                                  <div className="title-wrapper">
+                                                  <div className="category-title-wrapper">
                                                     <div className="authors">
                                                       {item.attributes?.authors?.data &&
                                                         item.attributes.authors.data.map((author, i) => {
@@ -154,9 +156,11 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                 return(
                                   <>
                                     <div className={`discover-item`}>
+                                      <div className="location-wrapper">
                                       {i == 0 &&
-                                        <div className="loc-item">{loc}</div>
+                                        <div className="location">{loc}</div>
                                       }
+                                      </div>
                                       <LazyLoad height={600}>
                                         <div className="item-wrapper">
                                           <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
@@ -187,7 +191,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                                 })}
                                               </div>
                                             }
-                                            <div className="title-wrapper">
+                                            <div className="category-title-wrapper">
                                               <div className="authors">
                                                 {item.attributes?.authors?.data &&
                                                   item.attributes.authors.data.map((author, i) => {
