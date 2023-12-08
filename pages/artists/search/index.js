@@ -75,7 +75,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
   // Run API calls in parallel
   const [festivalRes, globalRes] = await Promise.all([

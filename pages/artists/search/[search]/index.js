@@ -108,7 +108,7 @@ const CommunitySearch = ({ global, items, search, numberOfPosts, festival, param
 
 export async function getServerSideProps({params}) {
   const biennial = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
   const [festivalRes, pageRes, globalRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${biennial.slug}&populate=*`),

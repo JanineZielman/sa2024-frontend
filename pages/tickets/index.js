@@ -6,10 +6,6 @@ import Modal from 'react-modal';
 
 
 const Tickets = ({global, tickets, festival, page, params }) => {
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
 
   const modalStyles = {
     overlay: {

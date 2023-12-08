@@ -76,7 +76,7 @@ const Visit = ({ global, visit, festival }) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
   // Run API calls in parallel
   const [festivalRes, visitRes, globalRes] = await Promise.all([

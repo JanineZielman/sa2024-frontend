@@ -207,7 +207,7 @@ const Timetable = ({ global, festival, timetable}) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
   
   // Run API calls in parallel

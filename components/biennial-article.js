@@ -1,11 +1,12 @@
 import ReactMarkdown from "react-markdown";
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import Moment from 'moment';
 import Image from "./image"
 import LazyLoad from 'react-lazyload';
 import Collapsible from "./collapsible";
+import Modal from 'react-modal';
 
-const Article = ({page, relations, params}) => {
+const Article = ({page, relations}) => {
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 
@@ -23,6 +24,19 @@ const Article = ({page, relations, params}) => {
 		}
   }, []);
 
+	const modalStyles = {
+    overlay: {
+      backgroundColor: 'transparent',
+    },
+  };
+
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
+	console.log(relations.attributes)
+
   return (   
 		<section className="article biennial-article">
 			<>
@@ -38,8 +52,7 @@ const Article = ({page, relations, params}) => {
 										/>
 									</div>
 									<div className="info">
-									{author.attributes.name} 
-									{/* <div>{item.attributes.job_description}</div>  */}
+										{author.attributes.name} 
 									</div>
 
 								</a>
@@ -140,143 +153,51 @@ const Article = ({page, relations, params}) => {
 					</div>
 
 					<div className="sidebar">
+						<span>Locations</span>
 
-						{relations.attributes.WhenWhere?.[0] ?
-							<>
-								<span className="locations-sidebar">Location{relations.attributes.WhenWhere.length > 1 && 's'}</span>
-								{relations.attributes.WhenWhere.map((item,i) => {
-									return(
-										<div className="sidebar-info">
-											{item.locations?.data?.map((loc) => {
-												return(
-													<div className="date">
-														<div className="location">
-															<a href={`/visit`}>
-																{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}
-															</a>
-															
-														</div>
-													</div>
-												)
-											})}
-											{item.dates?.map((date) => {
-												return(
-													<div className="date">
-														{Moment(date.start_date).format('D MMM')} {date.end_date && `– ${Moment(date.end_date).format('D MMM')}`}
-													</div>
-												)
-											})}
-											{item.times?.map((time) => {
-												return(
-													<div className="date">
-														{time.start_time?.substring(0, 5)} {time.end_time && `– ${time.end_time?.substring(0, 5)}`}
-													</div>
-												)
-											})}
-											
-										</div>
-									)
-								})}
-							</>
-							:
-							<>
-								{relations.attributes.start_date &&
-									<span>When</span>
-								}
-								{relations?.attributes?.start_date && relations?.attributes?.dates == null &&
-									<>
-									<div className="date">{Moment(relations.attributes.start_date).format('D MMM')} {relations.attributes.end_date && <>– {Moment(relations.attributes.end_date).format('D MMM')}</>}</div>
-									</>
-								}
-								{relations?.attributes?.dates?.[0] &&
-									<>
-										{relations.attributes.start_date &&
-											<div>
-												– {Moment(relations.attributes.start_date).format('D MMM')}
-											</div>
-										}
-										{relations?.attributes?.dates.map((date, i) => {
-											return(
-												<div className="date" key={`dates-${i}`}>
-													{date.single_date &&
-														<div>
-														– {Moment(date.single_date).format('D MMM')}
-														</div>
-													}
-													{date.end_date &&
-														<>
-														{relations?.attributes?.date &&
-															Moment(relations?.attributes?.start_date).format('D MMM')
-														}
-														&nbsp;– {Moment(date.end_date).format('D MMM')}
-														</>
-													}
-												</div>
-											)
-										})}
-									</>
-								}
-
-								{relations.attributes.start_time &&
-									<>
-										<span>Time{relations.attributes?.times?.[0] && 's'}</span>
-										<div className="date">
-											<>
-												{relations.attributes?.start_time?.substring(0, 5)} {relations.attributes.end_time && <>– {relations.attributes?.end_time?.substring(0, 5)}</>}
-												{relations.attributes?.times?.map((time, i) => {
-													return(
-														<div>
-															{time.start_time?.substring(0, 5)} {time.end_time && `– ${time.end_time?.substring(0, 5)}`}
-														</div>
-													)
-												})}
-											</>
-										</div>
-									</>
-								}
-
-
-								{relations.attributes.deadline &&
-									<>
-										<span>Deadline</span>
-										<div className="date">{Moment(relations.attributes.deadline).format('D MMM y')}</div>
-									</>
-								}
-
-
-								{relations?.attributes?.locations?.data[0] && 
-									<div>
-										<span>Location</span>
-										<div className="date">
-											{relations.attributes.locations?.data?.map((loc, j) => {
-												return(
-													<div className="location">
-														<a href={`/visit`}>
-															{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}
-														</a>
-														
-													</div>
-												)
-											})}
-										</div>
-									</div>
-								}
-							</>
-						}
-
-						{relations.attributes.ticket_link &&
-							<a href={relations.attributes.ticket_link} className="sidebar-tickets">
-								<span>Tickets</span>
-								<div>
-									{relations.attributes.free ? 
-										`Free` 
-									:
-										<>
-											{relations.attributes.price ? `€ ${relations.attributes.price}` : `Link to tickets`}
-										</>
-									}
+						{relations?.attributes?.locations?.data?.map((loc, j) => {
+							return(
+								<div className="location">
+									<a href={`/visit`}>
+										{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}
+										
+									</a>
 								</div>
-							</a>
+							)
+						})}
+	
+						{relations.attributes.ticket_link &&
+							<>
+							<br/>
+							<span>Tickets</span>
+							<div style={{'cursor': "pointer"}}>
+								{relations.attributes.embed == true ?
+									<>
+										<div className="ticket" onClick={handleShow}>
+											<div className="ticket-content">
+												<p>{relations.attributes.price}</p>
+											</div>
+										</div>
+										
+										<Modal  isOpen={show} onHide={handleClose} className={`ticket-modal`} ariaHideApp={false} style={modalStyles}>
+											<div onClick={handleClose} className="close">
+												<svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 0.698933 -0.715187 0.698933 1.5 2)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+													<line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 -0.698933 0.715187 0.698933 1.5 34)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+												</svg>
+											</div>
+											<iframe width="100%" height="100%" src={relations.attributes.ticket_link} style={{'aspect-ratio': '1/1', 'border': 'none'}}/>
+										</Modal>
+									</>
+									:
+									<a href={relations.attributes.ticket_link} target="_blank">
+										<div className="ticket-content">
+											<p>{relations.attributes.price}</p>
+										</div>
+									</a>
+								}
+							</div>
+							</>
 						}
 
 						{relations.attributes.registration_link &&
