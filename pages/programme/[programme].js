@@ -24,12 +24,10 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
     let list2 = []
     for (let i = 0; i < sub.length; i++) {
       for (let j = 0; j < sub[i].attributes.WhenWhere?.length; j++) {
-        for (let k = 0; k < sub[i].attributes.WhenWhere[j]?.dates.length; k++) {
-          list.push(sub[i].attributes.WhenWhere[j]?.dates[k].start_date);
-          list.sort(function (a, b) {
-            return a.localeCompare(b);
-          });
-        }
+        list.push(sub[i].attributes.WhenWhere[j]?.date);
+        list.sort(function (a, b) {
+          return a.localeCompare(b);
+        });
       }
     }
     for (let i = 0; i < sub.length; i++) {
@@ -42,7 +40,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
     setLocations(removeusingSet(list2))
 
     sub.sort(function (a, b) {
-      return a.attributes.WhenWhere[0]?.times[0]?.start_time?.localeCompare(b.attributes.WhenWhere[0]?.times[0]?.start_time);
+      return a.attributes.WhenWhere[0]?.start_time?.localeCompare(b.attributes.WhenWhere[0]?.start_time);
     });
 
   }, [])
@@ -77,10 +75,9 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                         let repeatedEvent = 0;
                                         for (let j = 0; j < item.attributes.WhenWhere?.length; j++) {
                                           repeatedEvent = j;
-                                          for (let k = 0; k < item.attributes.WhenWhere[j]?.dates.length; k++) {
-                                            allDates.push(item.attributes.WhenWhere[j]?.dates[k].start_date);
-                                          }
+                                          allDates.push(item.attributes.WhenWhere[j]?.date);
                                         }
+                                        
                                         return(
                                           <>
                                             {allDates.includes(date) &&
@@ -95,16 +92,12 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                                       <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                                                     }
                                                     <div className="info-overlay">
-                                                      {item.attributes.WhenWhere[0]?.times[0] && 
+                                                      {item.attributes.WhenWhere[0] && 
                                                         <>
                                                           <div className="times">
-                                                            {item.attributes.WhenWhere[repeatedEvent]?.times.map((time, j) => {
-                                                              return(
-                                                                <div className="time">
-                                                                  <span>{time.start_time} {time.end_time && `— ${time.end_time}`}</span>
-                                                                </div>
-                                                              )
-                                                            })}
+                                                              <div className="time">
+                                                                <span>{item.attributes.WhenWhere[repeatedEvent].start_time} {item.attributes.WhenWhere[repeatedEvent].end_time && `— ${item.attributes.WhenWhere[repeatedEvent].end_time}`}</span>
+                                                              </div>
                                                           </div>
                                                         </>
                                                       }
