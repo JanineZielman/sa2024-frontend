@@ -6,7 +6,12 @@ import LazyLoad from 'react-lazyload';
 import Collapsible from "./collapsible";
 import Modal from 'react-modal';
 
-const Article = ({page, relations}) => {
+const Article = ({page, relations, programmeLocations}) => {
+
+	let dates = relations.attributes.WhenWhere.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+	let start_date = new Date(dates[0]?.date.split('/').reverse().join('/'));
+	let end_date = new Date(dates[dates.length - 1]?.date.split('/').reverse().join('/'));
+
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 
@@ -151,14 +156,37 @@ const Article = ({page, relations}) => {
 					</div>
 
 					<div className="sidebar">
-						<span>Locations</span>
+
+						{dates.length > 0 && 
+							<>
+								<span>When</span><br/><br/>
+								<div className="when">
+									<span>
+									{ (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
+										<>
+											{Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
+										</>
+									: 
+										<>
+											{Moment(start_date).format('D MMM')}   {dates.length > 1 && <>– {Moment(end_date).format('D MMM')}</>}
+										</>
+									}
+									</span><br/><br/>
+								</div>
+							</>
+						}
+
+
+
+						<span>Locations</span><br/><br/>
 
 						{relations?.attributes?.locations?.data?.map((loc, j) => {
+							let locInfo =  programmeLocations.filter((item) => item.title == loc.attributes.title);
 							return(
 								<div className="location">
 									<a href={`/visit`}>
-										{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}
-
+										<span>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</span><br/>
+										<span>{locInfo[0].opening_times}</span><br/><br/>
 									</a>
 								</div>
 							)

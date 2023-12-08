@@ -7,7 +7,9 @@ import Image from "../../components/image"
 import Moment from 'moment';
 import Collapsible from "../../components/collapsible";
 
-const ProgrammeItem = ({page, global, relations, params, sub, festival}) => {
+const ProgrammeItem = ({page, global, relations, params, sub, festival, programmeLoc}) => {
+
+  let programmeLocations = programmeLoc.attributes.location_item
 
   const [dates, setDates] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -49,7 +51,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival}) => {
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout global={global} festival={festival}>
-        <BiennialArticle page={page} relations={relations} params={params}/>
+        <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations} />
         {sub[0] && 
           <>
             <div className="discover sub">
@@ -246,16 +248,16 @@ export async function getServerSideProps({params, query}) {
     await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programmes][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
   );
 
-
   const subRes = 
   await fetchAPI( `/programme-items?&filters[main_programme_items][slug][$contains]=${params.programme}&pagination[limit]=${100}&populate[biennial][populate]=*&populate[main_programme_items][populate]=*&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate=*`
 );
   
 
-  const [globalRes, categoryRes, festivalRes] = await Promise.all([
+  const [globalRes, categoryRes, festivalRes, programmeLoc] = await Promise.all([
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI(`/biennial-tags?filters[biennials][slug][$eq]=${biennial.slug}&populate=*`),
     fetchAPI(`/biennials?filters[slug][$eq]=${biennial.slug}&populate[prefooter][populate]=*`),
+    fetchAPI(`/programme-pages?&populate[0]=location_item`),
   ])
 
   return {
@@ -267,6 +269,7 @@ export async function getServerSideProps({params, query}) {
 			params: params, 
       categories: categoryRes.data,
       festival: festivalRes.data[0],
+      programmeLoc: programmeLoc.data[0]
     },
   };
 }

@@ -5,12 +5,14 @@ import LazyLoad from 'react-lazyload';
 import Image from "../../../components/image"
 import Moment from 'moment';
 
-const SubProgrammeItem = ({page, global, relations, params, festival, sub}) => {
+const SubProgrammeItem = ({page, global, relations, params, festival, sub, programmeLoc}) => {
+
+  let programmeLocations = programmeLoc.attributes.location_item
 
   return (  
     <section className="festival-wrapper programme-sub">
       <Layout global={global} festival={festival}>
-        <BiennialArticle page={page} relations={relations} params={params}/>
+        <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations}/>
         {sub[0] && 
           <>
             <div className="discover sub">
@@ -136,9 +138,10 @@ export async function getServerSideProps({params, query}) {
   );
   
 
-  const [globalRes, festivalRes] = await Promise.all([
+  const [globalRes, festivalRes, programmeLoc] = await Promise.all([
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI(`/biennials?filters[slug][$eq]=${biennial.slug}&populate[prefooter][populate]=*`),
+    fetchAPI(`/programme-pages?&populate[0]=location_item`),
   ])
 
   return {
@@ -149,6 +152,7 @@ export async function getServerSideProps({params, query}) {
 			params: params, 
       festival: festivalRes.data[0],
       sub: subRes.data,
+      programmeLoc: programmeLoc.data[0]
     },
   };
 }
