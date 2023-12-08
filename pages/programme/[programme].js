@@ -165,16 +165,12 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                                 <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                                               }
                                               <div className="info-overlay">
-                                                {item.attributes.WhenWhere[0]?.times[0] && 
+                                                {item.attributes.WhenWhere[0] && 
                                                   <>
                                                     <div className="times">
-                                                      {item.attributes.WhenWhere[0]?.times.map((time, j) => {
-                                                        return(
-                                                          <div className="time">
-                                                            <span>{time.start_time} {time.end_time && `— ${time.end_time}`}</span>
-                                                          </div>
-                                                        )
-                                                      })}
+                                                      <div className="time">
+                                                        <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
+                                                      </div>
                                                     </div>
                                                   </>
                                                 }
