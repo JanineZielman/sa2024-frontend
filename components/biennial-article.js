@@ -181,12 +181,12 @@ const Article = ({page, relations, programmeLocations}) => {
 						<span>Locations</span><br/><br/>
 
 						{relations?.attributes?.locations?.data?.map((loc, j) => {
-							let locInfo =  programmeLocations.filter((item) => item.title == loc.attributes.title);
+							let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
 							return(
 								<div className="location">
 									<a href={`/visit`}>
 										<span>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</span><br/>
-										<span>{locInfo[0].opening_times}</span><br/><br/>
+										<span>{locInfo[0]?.opening_times}</span><br/><br/>
 									</a>
 								</div>
 							)
