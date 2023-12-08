@@ -29,14 +29,13 @@ const Programme = ({ global, festival, programme}) => {
 
                           
                           <div className="image">
-                            <div className="image-inner first">
+                            <div className="image-inner">
                               {item.attributes.cover_image?.data &&
-                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                              }
-                            </div>
-                            <div className="image-inner second">
-                              {item.attributes.cover_image?.data &&
-                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                <Image 
+                                  image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'
+                                  sizes="10vw"
+
+                                  />
                               }
                             </div>
                           </div>
