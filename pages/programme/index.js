@@ -6,7 +6,7 @@ import Moment from 'moment';
 
 
 const Programme = ({ global, festival, programme}) => {
-  console.log(programme.attributes.programme_item[0].programme_item.data)
+  console.log(programme)
   return (
     <section className="festival-wrapper template-programme">
       <Layout global={global} festival={festival}>
@@ -37,8 +37,7 @@ const Programme = ({ global, festival, programme}) => {
                             </div>
                           </div>
 
-                          {/* we need to find a good way to showcase the dates, especially when there are multiple */}
-                          {/* {item.attributes.start_date && 
+                          {item.attributes.start_date && 
                             <div className="when">
                               <span className="black-label">
                               {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
@@ -52,7 +51,7 @@ const Programme = ({ global, festival, programme}) => {
                               }
                               </span>
                             </div>
-                          } */}
+                          }
 
                             {item.attributes.biennial_tags?.data && 
                               <div className="location-wrapper">
@@ -108,8 +107,8 @@ export async function getServerSideProps() {
   // Run API calls in parallel
   const [festivalRes, programmePageRes, globalRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
-    fetchAPI(`/programme-page?
-    populate[0]=programme_item.programme_item
+    fetchAPI(`/programme-pages?
+    &populate[0]=programme_item.programme_item
     &populate[1]=programme_item.programme_item.cover_image
     &populate[2]=programme_item.programme_item.biennial_tags
     &populate[3]=programme_item.programme_item.locations
@@ -122,7 +121,7 @@ export async function getServerSideProps() {
     props: {
       festival: festivalRes.data[0],
       global: globalRes.data,
-      programme: programmePageRes.data
+      programme: programmePageRes.data[0]
     }
   }
 }
