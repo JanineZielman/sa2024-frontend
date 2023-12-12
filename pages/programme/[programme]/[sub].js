@@ -1,4 +1,5 @@
 import { fetchAPI } from "../../../lib/api"
+import React, { useEffect } from "react"
 import Layout from "../../../components/layout"
 import BiennialArticle from "../../../components/biennial-article"
 import LazyLoad from 'react-lazyload';
@@ -7,6 +8,18 @@ import Image from "../../../components/image"
 const SubProgrammeItem = ({page, global, relations, params, festival, sub, programmeLoc}) => {
 
   let programmeLocations = programmeLoc.attributes.location_item
+
+  useEffect(() => {
+    relations.attributes.community_items.data.sort((a, b) => {
+      if (a.attributes.slug.toLowerCase() < b.attributes.slug.toLowerCase()) {
+        return -1;
+      }
+      if (a.attributes.slug.toLowerCase() > b.attributes.slug.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    })
+  }, [])
 
   return (  
     <section className="festival-wrapper programme-sub">

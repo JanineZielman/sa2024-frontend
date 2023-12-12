@@ -4,53 +4,53 @@ import Layout from "../../components/layout"
 import BiennialArticle from "../../components/biennial-article"
 import LazyLoad from 'react-lazyload';
 import Image from "../../components/image"
-import Moment from 'moment';
-import Collapsible from "../../components/collapsible";
+
+import Moment from "moment";
 
 const ProgrammeItem = ({page, global, relations, params, sub, festival, programmeLoc}) => {
 
-  let programmeLocations = programmeLoc.attributes.location_item
+  let programmeLocations = programmeLoc.attributes.location_item;
 
-  const [dates, setDates] = useState([]);
-  const [locations, setLocations] = useState([]);
-
-  function removeusingSet(arr) {
-    let outputArray = Array.from(new Set(arr))
-    return outputArray
-  }
+  const [subItems, setSubItems] = useState();
 
   useEffect(() => {
-    let list = []
-    let list2 = []
-    for (let i = 0; i < sub.length; i++) {
-      for (let j = 0; j < sub[i].attributes.WhenWhere?.length; j++) {
-        list.push(sub[i].attributes.WhenWhere[j]?.date);
-        list.sort(function (a, b) {
-          return a.localeCompare(b);
-        });
-      }
+
+    if (page.attributes.hide_when_where != true){
+      setSubItems(sub.sort((a, b) => {
+        if (a.attributes.title.toLowerCase() < b.attributes.title.toLowerCase()) {
+          return -1;
+        }
+        if (a.attributes.title.toLowerCase() > b.attributes.title.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      }))
+    } else {
+      setSubItems(sub.sort(function(a,b){
+        let date1 = new Date(a.attributes.WhenWhere[0].date.split('/').reverse().join('/'));
+        let date2 = new Date(b.attributes.WhenWhere[0].date.split('/').reverse().join('/'));
+        return date1 - date2
+
+      }));
     }
-    for (let i = 0; i < sub.length; i++) {
-      for (let j = 0; j < sub[i].attributes.locations.data?.length; j++) {
-        list2.push(sub[i].attributes.locations.data[j].attributes.title);
+
+    relations.attributes.community_items.data.sort((a, b) => {
+      if (a.attributes.slug.toLowerCase() < b.attributes.slug.toLowerCase()) {
+        return -1;
       }
-    }
+      if (a.attributes.slug.toLowerCase() > b.attributes.slug.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    })
 
-    setDates(removeusingSet(list))
-    setLocations(removeusingSet(list2))
-
-    sub.sort(function (a, b) {
-      return a.attributes.WhenWhere[0]?.start_time?.localeCompare(b.attributes.WhenWhere[0]?.start_time);
-    });
-
-  }, [])
-
+  }, [subItems])
 
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations} />
-        {sub[0] && 
+        {subItems && 
           <> 
             <div className="discover sub">
               <div className="subtitle">
@@ -61,70 +61,59 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
               <div className="discover-container programme-container sub-programme-container">
                 <div className="day-programme">
                   <div className="discover-container programme-container sub-programme-container">
-                    {locations.map((loc, l) => {
+                    {subItems.map((item, i) => {
+                      let dates = item.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+                      let start_date = new Date(dates?.[0]?.date.split('/').reverse().join('/'));
+                      let end_date = new Date(dates?.[dates?.length - 1]?.date.split('/').reverse().join('/'));
                       return(
                         <>
-                          {sub.filter(el2 => el2.attributes.locations.data[0]?.attributes.title === `${loc}`).map((item, i) => {
-                            return(
-                              <>
-                                <div className={`discover-item`}>
-                                  <div className="location-wrapper">
-                                  {i == 0 &&
-                                    <div className="location">{loc}</div>
-                                  }
-                                  </div>
-                                  <LazyLoad height={600}>
-                                    <div className="item-wrapper">
-                                      <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                                        <div className="image">
-                                          <div className="image-inner">
-                                            {item.attributes.cover_image?.data &&
-                                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                            }
-                                            <div className="info-overlay">
-                                              {item.attributes.WhenWhere[0] && 
-                                                <>
-                                                  <div className="times">
-                                                    <div className="time">
-                                                      <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
-                                                    </div>
-                                                  </div>
-                                                </>
-                                              }
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="category-title-wrapper">
-                                          <div className="authors">
-                                            {item.attributes?.authors?.data &&
-                                              item.attributes.authors.data.map((author, i) => {
-                                                return( 
-                                                  <div className="author">{author.attributes.name}</div>
-                                                )
-                                              })
-                                            }
-                                          </div>
-                                          {item.attributes.biennial_tags?.data && 
-                                          <div className="category">
-                                            {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
-                                              return(
-                                                <span key={'search'+i}>
-                                                  {tag.attributes.title}
-                                                </span>
-                                              )
-                                            })}
-                                          </div>
+                          <div className={`discover-item`}>
+                            <div className="location-wrapper">
+                              {item.attributes.locations?.data?.map((loc,i) => {
+                                return(
+                                  <div>{loc.attributes.title}</div>
+                                )
+                              })}
+                            </div>
+                            <LazyLoad height={600}>
+                              <div className="item-wrapper">
+                                <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                                  <div className="image">
+                                    {item.attributes.WhenWhere[0] && page.attributes.hide_when_where == true &&
+                                      <div className="info-overlay">
+                                        <div>
+                                          { (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
+                                            <>
+                                              {Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
+                                            </>
+                                          : 
+                                            <>
+                                              {Moment(start_date).format('D MMM')}   {dates.length > 1 && <>– {Moment(end_date).format('D MMM')}</>}
+                                            </>
                                           }
-                                          <div className="title">{item.attributes.title}</div>
                                         </div>
-                                      </a>
+                                        <div className="times">
+                                          <div className="time">
+                                            <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    }
+                                    <div className="image-inner">
+                                      {item.attributes.cover_image?.data &&
+                                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                      }
+                                      
                                     </div>
-                                  </LazyLoad>
-                                </div>
-                              </>
-                            )
-                          })}
+                                  </div>
+
+                                  <div className="category-title-wrapper">
+                                    <div className="title">{item.attributes.title}</div>
+                                  </div>
+                                </a>
+                              </div>
+                            </LazyLoad>
+                          </div>
                         </>
                       )
                     })}

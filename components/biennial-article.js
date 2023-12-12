@@ -157,7 +157,7 @@ const Article = ({page, relations, programmeLocations}) => {
 
 					<div className="sidebar">
 
-						{dates?.length > 0 && 
+						{dates?.length > 0 && page.attributes.hide_when_where != true &&
 							<>
 								<span>When</span><br/><br/>
 								<div className="when">
