@@ -8,9 +8,9 @@ import Modal from 'react-modal';
 
 const Article = ({page, relations, programmeLocations}) => {
 
-	let dates = relations.attributes.WhenWhere.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
-	let start_date = new Date(dates[0]?.date.split('/').reverse().join('/'));
-	let end_date = new Date(dates[dates.length - 1]?.date.split('/').reverse().join('/'));
+	let dates = relations.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+	let start_date = new Date(dates?.[0]?.date.split('/').reverse().join('/'));
+	let end_date = new Date(dates?.[dates?.length - 1]?.date.split('/').reverse().join('/'));
 
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
@@ -157,7 +157,7 @@ const Article = ({page, relations, programmeLocations}) => {
 
 					<div className="sidebar">
 
-						{dates.length > 0 && 
+						{dates?.length > 0 && 
 							<>
 								<span>When</span><br/><br/>
 								<div className="when">

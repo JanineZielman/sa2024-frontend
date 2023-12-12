@@ -3,7 +3,6 @@ import Layout from "../../../components/layout"
 import BiennialArticle from "../../../components/biennial-article"
 import LazyLoad from 'react-lazyload';
 import Image from "../../../components/image"
-import Moment from 'moment';
 
 const SubProgrammeItem = ({page, global, relations, params, festival, sub, programmeLoc}) => {
 
@@ -13,97 +12,32 @@ const SubProgrammeItem = ({page, global, relations, params, festival, sub, progr
     <section className="festival-wrapper programme-sub">
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations}/>
-        {sub[0] && 
-          <>
-            <div className="discover sub">
-              <div className="filter">
-                {relations.attributes.sub_programmes_title &&
-                  <h1>{relations.attributes.sub_programmes_title}</h1>
-                }
-              </div>
-              <div className="discover-container programme-container sub2-programme-container">
-                {sub.map((item, i) => {
-                  let tags = "";
-                  for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {
-                    tags += `${item.attributes.biennial_tags.data[i].attributes.slug} `;
-                  }
+        <div className="discover artists">
+          <div className="subtitle">
+            {relations.attributes.sub_programmes_title &&
+              <h1>Artists</h1>
+            }
+          </div>
+          <div className="discover-container programme-container sub-programme-container">
+            <div className="day-programme">
+              <div className="discover-container programme-container sub-programme-container">
+                {relations.attributes.community_items.data.map((item, i) => {
                   return(
-                      <div className={`discover-item ${tags}`}>
+                    <div className="discover-item">
                       <LazyLoad height={600}>
                         <div className="item-wrapper">
-                          <a href={`/programme/${params.programme}/${item.attributes.slug}`} key={'discover'+i}>
+                          <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
                             <div className="image">
-                              {item.attributes.cover_image?.data &&
-                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                              }
-                              <div className="info-overlay">
-                                {item.attributes.locations.data[0] && 
-                                  <>
-                                    <span>Locations:</span>
-                                    <div className="locations">
-                                      {item.attributes.locations.data.map((loc, j) => {
-                                        return(
-                                          <div className="location">
-                                            <span>{loc.attributes.title}</span>
-                                          </div>
-                                        )
-                                      })}
-                                    </div>
-                                  </>
+                              <div className="image-inner">
+                                {item.attributes.cover_image?.data &&
+                                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                                 }
                               </div>
                             </div>
-                            {item.attributes.biennial_tags?.data && 
-                              <div className="category">
-                                {item.attributes.biennial_tags.data.map((tag, i) => {
-                                  return(
-                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                      {tag.attributes.title}
-                                    </a>
-                                  )
-                                })}
-                              </div>
-                            }
-                            {relations.attributes.sub_programmes_show_times == true ? 
-                              <>
-                                {item.attributes.start_time &&
-                                  <div className="when">
-                                    {item.attributes.start_time?.substring(0, 5)} {item.attributes.end_time && `– ${item.attributes.end_time?.substring(0, 5)}`}
-                                  </div>
-                                }
-                              </>
-                              :
-                              <>
-                                {item.attributes.start_date && 
-                                  <div className="when">
-                                    {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
-                                      <>
-                                        {Moment(item.attributes.start_date).format('D')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-                                      </>
-                                    : 
-                                      <>
-                                        {Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-                                      </>
-                                    }
-                                  </div>
-                                }
-                              </>
-                            }
-                            
-                            <div className="title">
-                              {item.attributes.title}
+
+                            <div className="category-title-wrapper">
+                              <div className="title">{item.attributes.name}</div>
                             </div>
-                            {item.attributes?.authors?.data &&
-                              <div className="tags">
-                                {item.attributes.authors.data.map((author, i) => {
-                                  return(
-                                    <a className="author" href={`/artists/${author.attributes.slug}`}>
-                                      {author.attributes.name}
-                                    </a>
-                                  )
-                                })}
-                              </div>
-                            }
                           </a>
                         </div>
                       </LazyLoad>
@@ -112,8 +46,8 @@ const SubProgrammeItem = ({page, global, relations, params, festival, sub, progr
                 })}
               </div>
             </div>
-          </>
-        }
+          </div>
+        </div>
       </Layout>
     </section> 
   )

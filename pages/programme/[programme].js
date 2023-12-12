@@ -9,6 +9,8 @@ import Collapsible from "../../components/collapsible";
 
 const ProgrammeItem = ({page, global, relations, params, sub, festival, programmeLoc}) => {
 
+  console.log(relations)
+
   let programmeLocations = programmeLoc.attributes.location_item
 
   const [dates, setDates] = useState([]);
@@ -51,9 +53,9 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations} />
         {sub[0] && 
-          <>
+          <> 
             <div className="discover sub">
-              <div className="filter">
+              <div className="subtitle">
                 {relations.attributes.sub_programmes_title &&
                   <h1>{relations.attributes.sub_programmes_title}</h1>
                 }
@@ -134,6 +136,43 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
             </div>
           </>
         }
+
+        <div className="discover artists">
+          <div className="subtitle">
+            {relations.attributes.sub_programmes_title &&
+              <h1>Artists</h1>
+            }
+          </div>
+          <div className="discover-container programme-container sub-programme-container">
+            <div className="day-programme">
+              <div className="discover-container programme-container sub-programme-container">
+                {relations.attributes.community_items.data.map((item, i) => {
+                  return(
+                    <div className="discover-item">
+                      <LazyLoad height={600}>
+                        <div className="item-wrapper">
+                          <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                            <div className="image">
+                              <div className="image-inner">
+                                {item.attributes.cover_image?.data &&
+                                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                }
+                              </div>
+                            </div>
+
+                            <div className="category-title-wrapper">
+                              <div className="title">{item.attributes.name}</div>
+                            </div>
+                          </a>
+                        </div>
+                      </LazyLoad>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
       </Layout>
     </section> 
   )
