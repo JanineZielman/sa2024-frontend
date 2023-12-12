@@ -59,169 +59,77 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                 }
               </div>
               <div className="discover-container programme-container sub-programme-container">
-                {dates.length > 2 ?
-                  <>
-                    {dates.map((date, j) => {
+                <div className="day-programme">
+                  <div className="discover-container programme-container sub-programme-container">
+                    {locations.map((loc, l) => {
                       return(
-                        <div className="day-programme">
-                          <div className="collapsible">
-                            <Collapsible trigger={Moment(date).format('D MMM')} open={true}>
-                              <div className="discover-container programme-container sub-programme-container">
-                                {locations.map((loc, l) => {
-                                  return(
-                                    <>
-                                      {sub.filter(el2 => el2.attributes.locations.data[0]?.attributes.title === `${loc}`).map((item, i) => {
-                                        let allDates = [];
-                                        let repeatedEvent = 0;
-                                        for (let j = 0; j < item.attributes.WhenWhere?.length; j++) {
-                                          repeatedEvent = j;
-                                          allDates.push(item.attributes.WhenWhere[j]?.date);
-                                        }
-                                        
-                                        return(
-                                          <>
-                                            {allDates.includes(date) &&
-                                            <div className={`discover-item`}>
-                                              <div className="location-wrapper">
-                                              {i == 0 &&
-                                                <div className="location">{loc}</div>
-                                              }
-                                              </div>
-                                              <div className="item-wrapper">
-                                                <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                                                  <div className="image">
-                                                    <div className="image-inner">
-                                                      {item.attributes.cover_image?.data &&
-                                                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                                      }
-                                                      <div className="info-overlay">
-                                                        {item.attributes.WhenWhere[0] && 
-                                                          <>
-                                                            <div className="times">
-                                                                <div className="time">
-                                                                  <span>{item.attributes.WhenWhere[repeatedEvent].start_time} {item.attributes.WhenWhere[repeatedEvent].end_time && `— ${item.attributes.WhenWhere[repeatedEvent].end_time}`}</span>
-                                                                </div>
-                                                            </div>
-                                                          </>
-                                                        }
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  {item.attributes.biennial_tags?.data && 
-                                                    <div className="category">
-                                                      {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
-                                                        return(
-                                                          <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                                            {tag.attributes.title}
-                                                          </a>
-                                                        )
-                                                      })}
-                                                    </div>
-                                                  }
-                                                  <div className="category-title-wrapper">
-                                                    <div className="authors">
-                                                      {item.attributes?.authors?.data &&
-                                                        item.attributes.authors.data.map((author, i) => {
-                                                          return( 
-                                                            <div className="author">{author.attributes.name}</div>
-                                                          )
-                                                        })
-                                                      }
-                                                    </div>
-                                                    <div className="title">{item.attributes.title}</div>
-                                                  </div>
-                                                </a>
-                                              </div>
-                                            </div>
+                        <>
+                          {sub.filter(el2 => el2.attributes.locations.data[0]?.attributes.title === `${loc}`).map((item, i) => {
+                            return(
+                              <>
+                                <div className={`discover-item`}>
+                                  <div className="location-wrapper">
+                                  {i == 0 &&
+                                    <div className="location">{loc}</div>
+                                  }
+                                  </div>
+                                  <LazyLoad height={600}>
+                                    <div className="item-wrapper">
+                                      <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                                        <div className="image">
+                                          <div className="image-inner">
+                                            {item.attributes.cover_image?.data &&
+                                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                                             }
-                                          </>
-                                        )
-                                      })}
-                                    </>
-                                  )
-                                })}
-                              </div>
-                            </Collapsible>
-                          </div>
-                        </div>
+                                            <div className="info-overlay">
+                                              {item.attributes.WhenWhere[0] && 
+                                                <>
+                                                  <div className="times">
+                                                    <div className="time">
+                                                      <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              }
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div className="category-title-wrapper">
+                                          <div className="authors">
+                                            {item.attributes?.authors?.data &&
+                                              item.attributes.authors.data.map((author, i) => {
+                                                return( 
+                                                  <div className="author">{author.attributes.name}</div>
+                                                )
+                                              })
+                                            }
+                                          </div>
+                                          {item.attributes.biennial_tags?.data && 
+                                          <div className="category">
+                                            {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
+                                              return(
+                                                <span key={'search'+i}>
+                                                  {tag.attributes.title}
+                                                </span>
+                                              )
+                                            })}
+                                          </div>
+                                          }
+                                          <div className="title">{item.attributes.title}</div>
+                                        </div>
+                                      </a>
+                                    </div>
+                                  </LazyLoad>
+                                </div>
+                              </>
+                            )
+                          })}
+                        </>
                       )
                     })}
-                  </>
-                :
-                  <>
-                    <div className="day-programme">
-                      <div className="discover-container programme-container sub-programme-container">
-                        {locations.map((loc, l) => {
-                          return(
-                            <>
-                              {sub.filter(el2 => el2.attributes.locations.data[0]?.attributes.title === `${loc}`).map((item, i) => {
-                                return(
-                                  <>
-                                    <div className={`discover-item`}>
-                                      <div className="location-wrapper">
-                                      {i == 0 &&
-                                        <div className="location">{loc}</div>
-                                      }
-                                      </div>
-                                      <LazyLoad height={600}>
-                                        <div className="item-wrapper">
-                                          <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                                            <div className="image">
-                                              <div className="image-inner">
-                                                {item.attributes.cover_image?.data &&
-                                                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                                }
-                                                <div className="info-overlay">
-                                                  {item.attributes.WhenWhere[0] && 
-                                                    <>
-                                                      <div className="times">
-                                                        <div className="time">
-                                                          <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
-                                                        </div>
-                                                      </div>
-                                                    </>
-                                                  }
-                                                </div>
-                                              </div>
-                                            </div>
-
-                                            <div className="category-title-wrapper">
-                                              <div className="authors">
-                                                {item.attributes?.authors?.data &&
-                                                  item.attributes.authors.data.map((author, i) => {
-                                                    return( 
-                                                      <div className="author">{author.attributes.name}</div>
-                                                    )
-                                                  })
-                                                }
-                                              </div>
-                                              {item.attributes.biennial_tags?.data && 
-                                              <div className="category">
-                                                {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
-                                                  return(
-                                                    <span key={'search'+i}>
-                                                      {tag.attributes.title}
-                                                    </span>
-                                                  )
-                                                })}
-                                              </div>
-                                              }
-                                              <div className="title">{item.attributes.title}</div>
-                                            </div>
-                                          </a>
-                                        </div>
-                                      </LazyLoad>
-                                    </div>
-                                  </>
-                                )
-                              })}
-                            </>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  </>
-                }
+                  </div>
+                </div>
               </div>
             </div>
           </>
