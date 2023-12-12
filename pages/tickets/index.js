@@ -17,6 +17,9 @@ const Tickets = ({global, tickets, festival, page, params }) => {
   return (
     <section className="festival-wrapper tickets">
       <Layout page={params} global={global} festival={festival}>
+          <div className="title-wrapper">
+            <h1 className="page-title">Tickets</h1>
+          </div>
           <div className="tickets-container">
             {tickets.map((ticket, i) =>{
               const [show, setShow] = useState(false);
