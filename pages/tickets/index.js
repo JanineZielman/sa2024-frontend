@@ -13,6 +13,8 @@ const Tickets = ({global, tickets, festival, page, params }) => {
     },
   };
 
+  console.log(tickets)
+
 
   return (
     <section className="festival-wrapper tickets">
@@ -34,7 +36,11 @@ const Tickets = ({global, tickets, festival, page, params }) => {
                     <>
                       <div className="ticket" onClick={handleShow}>
                         <div className="ticket-content">
-                          <h3>{ticket.title}</h3>
+                          <h3>
+                            {ticket.title} <br/>
+                            <ReactMarkdown children={ticket.subtitle}/>
+                          </h3>
+                          
                           <p>{ticket.price}</p>
                         </div>
                       </div>
@@ -52,7 +58,11 @@ const Tickets = ({global, tickets, festival, page, params }) => {
                     :
                     <a className={`ticket ${ticket.programme.data?.attributes.slug}`} href={ticket.link} target="_blank">
                       <div className="ticket-content">
-                        <h3>{ticket.title}</h3>
+                        <h3>
+                          {ticket.title} <br/>
+                          <ReactMarkdown children={ticket.subtitle}/>
+                        </h3>
+                        
                         <p>{ticket.price}</p>
                       </div>
                     </a>
