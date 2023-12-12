@@ -158,8 +158,8 @@ const Article = ({page, relations, programmeLocations}) => {
 					<div className="sidebar">
 
 						{dates?.length > 0 && page.attributes.hide_when_where != true &&
-							<>
-								<span>When</span><br/><br/>
+							<div className="when-wrapper">
+								<h3>When</h3>
 								<div className="when">
 									<span>
 									{ (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
@@ -171,67 +171,68 @@ const Article = ({page, relations, programmeLocations}) => {
 											{Moment(start_date).format('D MMM')}   {dates.length > 1 && <>– {Moment(end_date).format('D MMM')}</>}
 										</>
 									}
-									</span><br/><br/>
+									</span>
 								</div>
-							</>
+							</div>
 						}
 
 
 
-						<span>Locations</span><br/><br/>
-
-						{relations?.attributes?.locations?.data?.map((loc, j) => {
-							let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
-							return(
-								<div className="location">
-									<a href={`/visit`}>
-										<span>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</span><br/>
-										<span>{locInfo[0]?.opening_times}</span><br/>
-										<ReactMarkdown 
-											children={loc.attributes.additional_info} 
-										/>
-										<br/>
-									</a>
-								</div>
-							)
-						})}
+						{relations?.attributes?.locations?.data &&
+							<div className="locations-wrapper">
+								<h3>Locations</h3>
+								{relations?.attributes?.locations?.data?.map((loc, j) => {
+									let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
+									return(
+										<div className="location">
+											<a href={`/visit`}>
+												<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
+												<p>{locInfo[0]?.opening_times}</p>
+												<ReactMarkdown 
+													children={loc.attributes.additional_info} 
+												/>
+											</a>
+										</div>
+									)
+								})}
+							</div>
+						}
 	
 						{relations.attributes.ticket_link &&
-							<>
-							<br/>
-							<span>Tickets</span>
-							<div style={{'cursor': "pointer"}}>
-								{relations.attributes.embed == true ?
-									<>
-										<div className="ticket" onClick={handleShow}>
+							<div className="tickets-wrapper">
+								<h3>Tickets</h3>
+								<div style={{'cursor': "pointer"}}>
+									{relations.attributes.embed == true ?
+										<>
+											<div className="ticket" onClick={handleShow}>
+												<div className="ticket-content">
+													<p>{relations.attributes.price}</p>
+												</div>
+											</div>
+											
+											<Modal  isOpen={show} onHide={handleClose} className={`ticket-modal`} ariaHideApp={false} style={modalStyles}>
+												<div onClick={handleClose} className="close">
+													<svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 0.698933 -0.715187 0.698933 1.5 2)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+														<line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 -0.698933 0.715187 0.698933 1.5 34)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+													</svg>
+												</div>
+												<iframe width="100%" height="100%" src={relations.attributes.ticket_link} style={{'aspect-ratio': '1/1', 'border': 'none'}}/>
+											</Modal>
+										</>
+										:
+										<a href={relations.attributes.ticket_link} target="_blank">
 											<div className="ticket-content">
 												<p>{relations.attributes.price}</p>
 											</div>
-										</div>
-										
-										<Modal  isOpen={show} onHide={handleClose} className={`ticket-modal`} ariaHideApp={false} style={modalStyles}>
-											<div onClick={handleClose} className="close">
-												<svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 0.698933 -0.715187 0.698933 1.5 2)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
-													<line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 -0.698933 0.715187 0.698933 1.5 34)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
-												</svg>
-											</div>
-											<iframe width="100%" height="100%" src={relations.attributes.ticket_link} style={{'aspect-ratio': '1/1', 'border': 'none'}}/>
-										</Modal>
-									</>
-									:
-									<a href={relations.attributes.ticket_link} target="_blank">
-										<div className="ticket-content">
-											<p>{relations.attributes.price}</p>
-										</div>
-									</a>
-								}
+										</a>
+									}
+								</div>
 							</div>
-							</>
 						}
-
+						
 						{relations.attributes.registration_link &&
-							<a href={relations.attributes.registration_link} className="sidebar-tickets">
+							<a href={relations.attributes.registration_link} className="register-wrapper">
 								<span>Register</span>
 								<div>
 									{relations.attributes.registration_label && relations.attributes.registration_label}
