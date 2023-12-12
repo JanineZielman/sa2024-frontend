@@ -13,9 +13,6 @@ const Tickets = ({global, tickets, festival, page, params }) => {
     },
   };
 
-  console.log(tickets)
-
-
   return (
     <section className="festival-wrapper tickets">
       <Layout page={params} global={global} festival={festival}>

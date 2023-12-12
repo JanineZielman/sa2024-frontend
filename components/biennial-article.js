@@ -186,7 +186,11 @@ const Article = ({page, relations, programmeLocations}) => {
 								<div className="location">
 									<a href={`/visit`}>
 										<span>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</span><br/>
-										<span>{locInfo[0]?.opening_times}</span><br/><br/>
+										<span>{locInfo[0]?.opening_times}</span><br/>
+										<ReactMarkdown 
+											children={loc.attributes.additional_info} 
+										/>
+										<br/>
 									</a>
 								</div>
 							)

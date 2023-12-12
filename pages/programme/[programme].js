@@ -9,8 +9,6 @@ import Collapsible from "../../components/collapsible";
 
 const ProgrammeItem = ({page, global, relations, params, sub, festival, programmeLoc}) => {
 
-  console.log(relations)
-
   let programmeLocations = programmeLoc.attributes.location_item
 
   const [dates, setDates] = useState([]);
