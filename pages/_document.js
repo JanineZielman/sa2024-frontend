@@ -74,6 +74,7 @@ class MyDocument extends Document {
               <li><a href="/artists">Artists</a></li>
               <li><a href="/programme">Programme</a></li>
               <li><a href="/schedule">Schedule</a></li>
+              <li><a href="/tickets">Tickets</a></li>
               <li><a href="/visit">Visit</a></li>
               <li><a href="/about">Information</a></li>
             </ul>
