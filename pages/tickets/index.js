@@ -38,7 +38,7 @@ const Tickets = ({global, tickets, festival, page, params }) => {
                             <ReactMarkdown children={ticket.subtitle}/>
                           </h3>
                           
-                          <p>{ticket.price}</p>
+                          <ReactMarkdown children={ticket.price}/>
                         </div>
                       </div>
                       
@@ -60,7 +60,7 @@ const Tickets = ({global, tickets, festival, page, params }) => {
                           <ReactMarkdown children={ticket.subtitle}/>
                         </h3>
                         
-                        <p>{ticket.price}</p>
+                        <ReactMarkdown children={ticket.price}/>
                       </div>
                     </a>
                   }

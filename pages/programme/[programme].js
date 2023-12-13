@@ -94,7 +94,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                         </div>
                                         <div className="times">
                                           <div className="time">
-                                            <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
+                                            <span>{item.attributes.WhenWhere[0].start_time}{item.attributes.WhenWhere[0].end_time && `—${item.attributes.WhenWhere[0].end_time}`}</span>
                                           </div>
                                         </div>
                                       </div>
