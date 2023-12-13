@@ -159,22 +159,29 @@ const Article = ({page, relations, programmeLocations}) => {
 						<div className="sidebar">
 
 							<div className="sidebar-content">
-								{dates?.length > 0 && page.attributes.hide_when_where != true &&
+								{page.attributes.hide_when_where != true &&
 									<div className="when-wrapper">
 										<h3>When</h3>
-										<div className="when">
-											<span>
-											{ (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
-												<>
-													{Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
-												</>
-											: 
-												<>
-													{Moment(start_date).format('D MMM')}   {dates.length > 1 && <>– {Moment(end_date).format('D MMM')}</>}
-												</>
-											}
-											</span>
-										</div>
+										{dates?.length > 0 &&
+											<div className="when">
+												<span>
+												{ (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
+													<>
+														{Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
+													</>
+												: 
+													<>
+														{Moment(start_date).format('D MMM')}   {dates.length > 1 && <>– {Moment(end_date).format('D MMM')}</>}
+													</>
+												}
+												</span>
+											</div>
+										}
+										{relations.attributes.WhenWhere.length == 1 &&
+											<div className="time">
+												<span>{relations.attributes.WhenWhere[0].start_time}{relations.attributes.WhenWhere[0].end_time && `–${relations.attributes.WhenWhere[0].end_time}`}</span>
+											</div>
+										}
 									</div>
 								}
 
