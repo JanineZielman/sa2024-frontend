@@ -126,9 +126,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
 
         <div className="discover artists">
           <div className="subtitle">
-            {relations.attributes.sub_programmes_title &&
-              <h1>Artists</h1>
-            }
+            <h1>Artists</h1>
           </div>
           <div className="discover-container programme-container sub-programme-container">
             <div className="day-programme">

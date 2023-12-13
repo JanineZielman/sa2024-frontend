@@ -23,9 +23,9 @@ const Visit = ({ global, visit, festival, programmeLoc }) => {
                       {item.locations.data.map((loc, j) => {
                         let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
                         return(
-                          <div className="locations">
-                            <h2>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h2>
-                            <h2>{loc.attributes.location}</h2>
+                          <div className="location" data-gps={loc.attributes.gps}>
+                            <h2>{loc.attributes.title} {loc.attributes.subtitle && <span> – {loc.attributes.subtitle} </span>}</h2>
+                            <h3>{loc.attributes.location}</h3>
                             <ReactMarkdown className="opening-times" children={locInfo[0]?.opening_times}/>
                             <ReactMarkdown className="additional-info"
                               children={loc.attributes.additional_info} 

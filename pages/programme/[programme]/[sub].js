@@ -4,6 +4,7 @@ import Layout from "../../../components/layout"
 import BiennialArticle from "../../../components/biennial-article"
 import LazyLoad from 'react-lazyload';
 import Image from "../../../components/image"
+import Moment from "moment";
 
 const SubProgrammeItem = ({page, global, relations, params, festival, sub, programmeLoc}) => {
 
@@ -27,36 +28,36 @@ const SubProgrammeItem = ({page, global, relations, params, festival, sub, progr
         <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations}/>
         <div className="discover artists">
           <div className="subtitle">
-            {relations.attributes.sub_programmes_title &&
-              <h1>Artists</h1>
-            }
+            <h1>Artists</h1>
           </div>
           <div className="discover-container programme-container sub-programme-container">
             <div className="day-programme">
               <div className="discover-container programme-container sub-programme-container">
-                {relations.attributes.community_items.data.map((item, i) => {
-                  return(
-                    <div className="discover-item">
-                      <LazyLoad height={600}>
-                        <div className="item-wrapper">
-                          <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
-                            <div className="image">
-                              <div className="image-inner">
-                                {item.attributes.cover_image?.data &&
-                                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                }
+                <div className="items-wrapper">
+                  {relations.attributes.community_items.data.map((item, i) => {
+                    return(
+                      <div className="discover-item artist-item">
+                        <LazyLoad height={600}>
+                          <div className="item-wrapper">
+                            <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                              <div className="image">
+                                <div className="image-inner">
+                                  {item.attributes.cover_image?.data &&
+                                    <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                  }
+                                </div>
                               </div>
-                            </div>
 
-                            <div className="category-title-wrapper">
-                              <div className="title">{item.attributes.name}</div>
-                            </div>
-                          </a>
-                        </div>
-                      </LazyLoad>
-                    </div>
-                  )
-                })}
+                              <div className="category-title-wrapper">
+                                <div className="title">{item.attributes.name}</div>
+                              </div>
+                            </a>
+                          </div>
+                        </LazyLoad>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
             </div>
           </div>
