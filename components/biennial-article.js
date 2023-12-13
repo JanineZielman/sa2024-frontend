@@ -211,9 +211,10 @@ const Article = ({page, relations, programmeLocations}) => {
 							<div className="tickets-wrapper">
 
 									{relations.attributes.embed == true ?
-										<div  onClick={handleShow}>
-											<h3>Tickets</h3>
-											<div className="ticket">
+										<>
+											
+											<div className="ticket" onClick={handleShow}>
+												<h3>Tickets</h3>
 												<div className="ticket-content">
 													<ReactMarkdown children={relations.attributes.price}/>
 												</div>
@@ -228,9 +229,9 @@ const Article = ({page, relations, programmeLocations}) => {
 												</div>
 												<iframe width="100%" height="100%" src={relations.attributes.ticket_link} style={{'aspect-ratio': '1/1', 'border': 'none'}}/>
 											</Modal>
-										</div>
+										</>
 										:
-										<a href={relations.attributes.ticket_link} target="_blank">
+										<a className="ticket" href={relations.attributes.ticket_link} target="_blank">
 											<h3>Tickets</h3>
 											<div className="ticket-content">
 												<ReactMarkdown children={relations.attributes.price}/>
