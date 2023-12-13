@@ -5,7 +5,7 @@ import { fetchAPI } from "../../lib/api"
 import Modal from 'react-modal';
 
 
-const Tickets = ({global, tickets, festival, page, params }) => {
+const Tickets = ({global, tickets, festival, params }) => {
 
   const modalStyles = {
     overlay: {
@@ -31,14 +31,18 @@ const Tickets = ({global, tickets, festival, page, params }) => {
                 <>
                   {ticket.embed ?
                     <>
-                      <div className="ticket" onClick={handleShow}>
+                      <div className="ticket">
                         <div className="ticket-content">
                           <h3>
                             {ticket.title} <br/>
                             <ReactMarkdown children={ticket.subtitle}/>
+                            <a href={`/programme/${ticket.programme.data.attributes.slug}`}>Find out more</a>
                           </h3>
                           
-                          <ReactMarkdown children={ticket.price}/>
+                          <div className="price">
+                            <span>Buy tickets</span>
+                            <ReactMarkdown children={ticket.price} onClick={handleShow}/>
+                          </div>
                         </div>
                       </div>
                       
@@ -53,16 +57,20 @@ const Tickets = ({global, tickets, festival, page, params }) => {
                       </Modal>
                     </>
                     :
-                    <a className={`ticket ${ticket.programme.data?.attributes.slug}`} href={ticket.link} target="_blank">
+                    <div className={`ticket ${ticket.programme.data?.attributes.slug}`}>
                       <div className="ticket-content">
                         <h3>
                           {ticket.title} <br/>
                           <ReactMarkdown children={ticket.subtitle}/>
+                          <a href={`/programme/${ticket.programme.data.attributes.slug}`}>Find out more</a>
                         </h3>
                         
-                        <ReactMarkdown children={ticket.price}/>
+                        <a className="price" href={ticket.link} target="_blank">
+                          <span>Buy tickets</span>
+                          <ReactMarkdown children={ticket.price}/>
+                        </a>
                       </div>
-                    </a>
+                    </div>
                   }
                 </>
                 }
