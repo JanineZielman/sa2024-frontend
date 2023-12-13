@@ -133,29 +133,31 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
           <div className="discover-container programme-container sub-programme-container">
             <div className="day-programme">
               <div className="discover-container programme-container sub-programme-container">
-                {relations.attributes.community_items.data.map((item, i) => {
-                  return(
-                    <div className="discover-item">
-                      <LazyLoad height={600}>
-                        <div className="item-wrapper">
-                          <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
-                            <div className="image">
-                              <div className="image-inner">
-                                {item.attributes.cover_image?.data &&
-                                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                }
+                <div className="items-wrapper">
+                  {relations.attributes.community_items.data.map((item, i) => {
+                    return(
+                      <div className="discover-item artist-item">
+                        <LazyLoad height={600}>
+                          <div className="item-wrapper">
+                            <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                              <div className="image">
+                                <div className="image-inner">
+                                  {item.attributes.cover_image?.data &&
+                                    <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                  }
+                                </div>
                               </div>
-                            </div>
 
-                            <div className="category-title-wrapper">
-                              <div className="title">{item.attributes.name}</div>
-                            </div>
-                          </a>
-                        </div>
-                      </LazyLoad>
-                    </div>
-                  )
-                })}
+                              <div className="category-title-wrapper">
+                                <div className="title">{item.attributes.name}</div>
+                              </div>
+                            </a>
+                          </div>
+                        </LazyLoad>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
             </div>
           </div>

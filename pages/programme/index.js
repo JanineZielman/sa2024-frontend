@@ -12,7 +12,7 @@ const Programme = ({ global, festival, programme}) => {
         <div className="title-wrapper">
           <h1 className="page-title">Programme</h1>
         </div>
-        <div className="discover">
+        <div className="discover programme-wrapper">
           <div className="discover-container programme-container">
             {programme.attributes.programme_item.map((pro_item, i) => {
                 let item = pro_item.programme_item.data;

@@ -49,6 +49,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
               next={getMorePosts}
               hasMore={hasMore}
               loader={<h4>Loading...</h4>}
+              className={`items-wrapper`}
             >
               {posts.map((item, i) => {
                 //console.log(item.attributes.cover_image.data.attributes.formats);
@@ -61,7 +62,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
                               src={"https://cms.sonicacts.com/public"+item.attributes.cover_image.data.attributes.formats.small?.url}
                             />
                         </div>
-                        <div className="info">
+                        <div className="title">
                           {item.attributes.name} 
                           {/* <div>{item.attributes.job_description}</div>  */}
                         </div>
