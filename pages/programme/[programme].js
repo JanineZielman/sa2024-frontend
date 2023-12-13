@@ -50,7 +50,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations} />
-        {subItems && 
+        {subItems?.length > 0 && 
           <> 
             <div className="discover sub">
               <div className="subtitle">
@@ -177,7 +177,7 @@ export async function getServerSideProps({params, query}) {
   );
 
   const pageRel = 
-    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programmes][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
+    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
   );
 
   const subRes = 

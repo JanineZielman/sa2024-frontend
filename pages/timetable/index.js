@@ -89,8 +89,8 @@ const Timetable = ({ global, festival, timetable}) => {
                               return(
                                 <>
                                   {event.sub_location.data == null &&
-                                    <a key={`event${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
-                                    className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
+                                    <a key={`event${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programme_items?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
+                                    className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programme_items.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
                                     style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
                                       <div className="inner-programme">
                                         <div className="inner-wrapper">
@@ -126,7 +126,7 @@ const Timetable = ({ global, festival, timetable}) => {
                                     return(
                                       <>
                                         {sub.attributes.title === event.sub_location.data?.attributes.title &&
-                                          <a key={`event-${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} subloc ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                          <a key={`event-${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programme_items?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} subloc ${event.programme.data.attributes.main_programme_items.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
                                             <div className="inner-programme">
                                               <div className="inner-wrapper">
                                                 <div className="time">
@@ -168,7 +168,7 @@ const Timetable = ({ global, festival, timetable}) => {
                               const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
                               const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
                               return(
-                                <a key={`event-prog${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                <a key={`event-prog${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programme_items?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programme_items.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
                                   <div className="inner-programme">
                                     <div className="inner-wrapper">
                                       <div className="time">
@@ -214,7 +214,7 @@ export async function getServerSideProps() {
   const [festivalRes, globalRes, timetableRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-	  fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
+	  fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programme_items][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
   ])
 
 	

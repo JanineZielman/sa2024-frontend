@@ -95,7 +95,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
     const discoverItems = await fetchAPI(`/discover-items?${query}&pagination[start]=${posts.discover.length}&populate=*`);
     const newsItems = await fetchAPI(`/news-items?${query}&pagination[start]=${posts.news.length}&populate=*`);
     const agendaItems = await fetchAPI(`/agenda-items?${query}&pagination[start]=${posts.agenda.length}&populate=*`);
-    const programmeItems = await fetchAPI(`/programmes?${query2}&pagination[start]=${posts.programme.length}&populate=*`);
+    const programmeItems = await fetchAPI(`/programme_items?${query2}&pagination[start]=${posts.programme.length}&populate=*`);
     const communityItems = await fetchAPI(`/community-items?filters[slug][$contains]=${search}&pagination[start]=${posts.community.length}&populate=*`);
 
     const newDiscover = await discoverItems.data;
@@ -272,7 +272,7 @@ export async function getServerSideProps({params}) {
   const discover = await fetchAPI(`/discover-items?${query}&populate=*`);
   const news = await fetchAPI(`/news-items?${query}&populate=*`);
   const agenda = await fetchAPI(`/agenda-items?${query}&populate=*`);
-  const programme = await fetchAPI(`/programmes?${query2}&populate=*`);
+  const programme = await fetchAPI(`/programme_items?${query2}&populate=*`);
   const community = await fetchAPI(`/community-items?filters[slug][$contains]=${params.slug.replace(' ', '-')}&populate=*`);
 
 

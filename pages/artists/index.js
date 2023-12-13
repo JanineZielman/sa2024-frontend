@@ -40,9 +40,6 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
               children={festival.attributes.ArtistsIntro} 
             />
           </div>
-          <div className="filter">
-            <Search params={`artists`}/>
-          </div>
           <div className="discover-container">
             <InfiniteScroll
               dataLength={posts.length}

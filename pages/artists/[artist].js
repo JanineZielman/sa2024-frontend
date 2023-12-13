@@ -9,6 +9,7 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
 
   page.attributes.slug = `community`
 
+
   return (  
     <section className="festival-wrapper template-single-artist">
       <Layout global={global} festival={festival}>
@@ -89,7 +90,7 @@ export async function getServerSideProps({params, query}) {
   );
   
   const programmesRes = 
-    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[programmes][populate]=*`
+    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[programme_items][populate]=*`
   );
 
   
@@ -105,7 +106,7 @@ export async function getServerSideProps({params, query}) {
       page: pageRes.data[0], 
       global: globalRes.data, 
       relations: pageRel.data[0], 
-      programmes: programmesRes.data[0].attributes.programmes,
+      programmes: programmesRes.data[0].attributes.programme_items,
       params: params,
     },
   };
