@@ -19,6 +19,18 @@ const Tickets = ({global, tickets, festival, params }) => {
           <div className="title-wrapper">
             <h1 className="page-title">Tickets</h1>
           </div>
+          <div className="info-wrapper">
+            {tickets.map((ticket, i) =>{
+              return(
+                ticket.__component == 'biennial.info' &&
+                  <div className="ticket-info">
+                    <ReactMarkdown 
+                      children={ticket.text} 
+                    />
+                  </div>
+              )
+            })}
+          </div>
           <div className="tickets-container">
             {tickets.map((ticket, i) =>{
               const [show, setShow] = useState(false);
@@ -82,19 +94,6 @@ const Tickets = ({global, tickets, festival, params }) => {
                   </a>
                 }
                 </>
-              )
-            })}
-          </div>
-          
-          <div className="info-wrapper">
-            {tickets.map((ticket, i) =>{
-              return(
-                ticket.__component == 'biennial.info' &&
-                  <div className="ticket-info">
-                    <ReactMarkdown 
-                      children={ticket.text} 
-                    />
-                  </div>
               )
             })}
           </div>
