@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react"
 import Layout from "../components/layout"
 import { fetchAPI } from "../lib/api"
-import Hero from "./hero"
 
 const Festival = ({ global, festival}) => {
 	const [loading, setLoading] = useState(true);
