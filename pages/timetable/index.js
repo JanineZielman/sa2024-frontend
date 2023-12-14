@@ -4,7 +4,9 @@ import { fetchAPI } from "../../lib/api"
 import Moment from 'moment'
 
 
-const Timetable = ({ global, festival, timetable}) => {
+const Timetable = ({ global, festival, programmes}) => {
+
+  console.log(programmes)
 
 	// const [currentDate, setCurrentDate] = useState('2022-09-30');
 	// const [dates, setDates] = useState([]);
@@ -214,7 +216,7 @@ export async function getServerSideProps() {
   const [festivalRes, globalRes, programmeRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-	  fetchAPI(`/programme_items`),
+	  fetchAPI(`/programme-items?filters[biennial][slug][$eq]=${params.slug}&pagination[limit]=${100}`),
   ])
 
 	
@@ -223,8 +225,7 @@ export async function getServerSideProps() {
     props: {
       festival: festivalRes.data[0],
       global: globalRes.data,
-	    params: params,
-	    timetable: programmeRes.data,
+	    programmes: programmeRes.data,
     }
   }
 }
