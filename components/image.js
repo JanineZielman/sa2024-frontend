@@ -5,10 +5,10 @@ const Image = ({ image, layout, objectFit, sizes  }) => {
   const { name, alternativeText, width, height } = image
 
   const loader = ({ width, quality }) => {
-    return `${getStrapiMedia(image.formats?.large ? image.formats.large : image)}?w=${width}&q=${quality || 75}`
+    return `${getStrapiMedia(image.formats?.medium ? image.formats.medium : image)}`
   }
 
-  let imgUrl = image.formats?.large ? image.formats.large : image;
+  let imgUrl = image.formats?.medium ? image.formats.medium : image;
 
   return (
     <>
