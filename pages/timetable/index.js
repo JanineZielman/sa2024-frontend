@@ -6,34 +6,34 @@ import Moment from 'moment'
 
 const Timetable = ({ global, festival, timetable}) => {
 
-	const [currentDate, setCurrentDate] = useState('2022-09-30');
-	const [dates, setDates] = useState([]);
-  const [loading, setLoading] = useState(true);
+	// const [currentDate, setCurrentDate] = useState('2022-09-30');
+	// const [dates, setDates] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
-	function setDate(e){
-    if (currentDate != e.target[e.target.selectedIndex].value){
-      setCurrentDate(e.target[e.target.selectedIndex].value)
-    }
-  }
+	// function setDate(e){
+  //   if (currentDate != e.target[e.target.selectedIndex].value){
+  //     setCurrentDate(e.target[e.target.selectedIndex].value)
+  //   }
+  // }
 
-	const times = [
-    '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
-  ]
+	// const times = [
+  //   '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
+  // ]
 
-	useEffect(() => {
-		timetable.attributes.day.forEach((element) => {
-				if (!dates.includes(element.date)) {
-						dates.push(element.date);
-				}
-		});
-    setTimeout(function() {
-      setLoading(false)
-    }, 1000);
-	}, [])
+	// useEffect(() => {
+	// 	timetable.attributes.day.forEach((element) => {
+	// 			if (!dates.includes(element.date)) {
+	// 					dates.push(element.date);
+	// 			}
+	// 	});
+  //   setTimeout(function() {
+  //     setLoading(false)
+  //   }, 1000);
+	// }, [])
   
   return (
     <>
-    {loading ?
+    {/* {loading ?
       <div className="loader"></div>
       :
       <section className="festival-wrapper">
@@ -200,7 +200,7 @@ const Timetable = ({ global, festival, timetable}) => {
           </div>
         </Layout>
       </section>
-    }
+    } */}
     </>
   )
 }
@@ -211,10 +211,10 @@ export async function getServerSideProps() {
 	}
   
   // Run API calls in parallel
-  const [festivalRes, globalRes, timetableRes] = await Promise.all([
+  const [festivalRes, globalRes, programmeRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-	  fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programme_items][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
+	  fetchAPI(`/programme_items`),
   ])
 
 	
@@ -224,7 +224,7 @@ export async function getServerSideProps() {
       festival: festivalRes.data[0],
       global: globalRes.data,
 	    params: params,
-	    timetable: timetableRes.data[0],
+	    timetable: programmeRes.data,
     }
   }
 }
