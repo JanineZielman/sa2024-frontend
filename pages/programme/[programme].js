@@ -81,7 +81,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                                   <div className="image">
                                     {item.attributes.WhenWhere[0] && page.attributes.hide_when_where == true &&
                                       <div className="info-overlay">
-                                        <div>
+                                        <div className="date">
                                           { (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
                                             <>
                                               {Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
