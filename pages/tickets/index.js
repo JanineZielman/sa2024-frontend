@@ -48,7 +48,7 @@ const Tickets = ({global, tickets, festival, params }) => {
                           <h3>
                             {ticket.title} <br/>
                             <ReactMarkdown children={ticket.subtitle}/>
-                            <a href={`/programme/${ticket.programme.data?.attributes.slug}`}>Find out more</a>
+                            <a href={`/programme/${ticket.programme_item.data?.attributes.slug}`}>Find out more</a>
                           </h3>
                           
                           <div className="price">
@@ -69,12 +69,12 @@ const Tickets = ({global, tickets, festival, params }) => {
                       </Modal>
                     </>
                     :
-                    <div className={`ticket ${ticket.programme.data?.attributes.slug}`}>
+                    <div className={`ticket ${ticket.programme_item.data?.attributes.slug}`}>
                       <div className="ticket-content">
                         <h3>
                           {ticket.title} <br/>
                           <ReactMarkdown children={ticket.subtitle}/>
-                          <a href={`/programme/${ticket.programme.data?.attributes.slug}`}>Find out more</a>
+                          <a href={`/programme/${ticket.programme_item.data?.attributes.slug}`}>Find out more</a>
                         </h3>
                         
                         <a className="price" href={ticket.link} target="_blank">
