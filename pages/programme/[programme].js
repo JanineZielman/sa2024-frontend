@@ -27,7 +27,7 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
       }))
     } else {
       setSubItems(sub.sort(function(a,b){
-        let date1 = new Date(a.attributes.WhenWhere[0].date.split('/').reverse().join('/'));
+        let date1 = new Date(a.attributes.WhenWhere[0]?.date.split('/').reverse().join('/'));
         let date2 = new Date(b.attributes.WhenWhere[0]?.date.split('/').reverse().join('/'));
         return date1 - date2
 
