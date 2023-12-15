@@ -497,14 +497,15 @@ const Layout = ({ children, festival}) => {
       </>
     </section>
     <footer className="footer">
-      {festival && festival.attributes.prefooter ?
+    {festival && festival.attributes.prefooter ?
         <div className="prefooter">
           <div className="text-block medium">
             <p className="visually-hidden">{festival.attributes.prefooter.title}</p>
             <div className="logos">
               {festival.attributes.prefooter.logos.data.map((logo, i) => {
+                let logoId = "logo-id-" + logo.id;
                 return(
-                  <div className="logo">
+                  <div className="logo" id={logoId}>
                     <Image image={logo.attributes}/>
                   </div>
                 )

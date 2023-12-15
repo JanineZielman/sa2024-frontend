@@ -9,6 +9,8 @@ const Visit = ({ global, visit, festival, programmeLoc }) => {
 
   let programmeLocations = programmeLoc.attributes.location_item;
 
+  
+
   useEffect(() => {
     setTimeout(function(){
 
