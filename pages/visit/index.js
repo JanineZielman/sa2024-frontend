@@ -20,7 +20,7 @@ const Visit = ({ global, visit, festival, programmeLoc }) => {
       // Initialize Mapbox map
       const map = new mapboxgl.Map({
           container: 'map',
-          style: 'mapbox://styles/sonicacts/clq6p1o7f002i01qm5ezo6ikw',
+          style: 'mapbox://styles/sonicacts/clq6p605f002i01pj80v0gh9o',
           center: [4.899, 52.36], // Center map (default location)
           zoom: 12.3 // Set default zoom level
       });
