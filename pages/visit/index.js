@@ -51,7 +51,7 @@ const Visit = ({ global, visit, festival, programmeLoc }) => {
             
           // Set marker options.
           const marker = new mapboxgl.Marker({
-            color: keycolors[i%3],
+            color: keycolors[i%4],
             })
             .setLngLat([latitude, longitude])
             .setPopup(popup) // sets a popup on this marker
