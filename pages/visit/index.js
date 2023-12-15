@@ -35,24 +35,25 @@ const Visit = ({ global, visit, festival, programmeLoc }) => {
           // Split the GPS data into latitude and longitude
           const [longitude, latitude] = gpsData.split(',').map(parseFloat);
 
-          // Set marker options.
-          const marker = new mapboxgl.Marker({
-            color: keycolors[i%3],
-            draggable: true
-            }).setLngLat([latitude, longitude])
-            .addTo(map);
-
           // Popup content
           const popupContent = `
-              <h2>${$(this).find('h2').text()}</h2>
-              <h3>${$(this).find('h3').text()}</h3>
-              <div class="opening-times">${$(this).find('.opening-times').html()}</div>
-              <div class="additional-info">${$(this).find('.additional-info').html()}</div>
+            <h2>${$(this).find('h2').text()}</h2>
+            <h3>${$(this).find('h3').text()}</h3>
+            <div class="opening-times">${$(this).find('.opening-times').html()}</div>
+            <div class="additional-info">${$(this).find('.additional-info').html()}</div>
           `;
 
           // Create a popup for each location
           const popup = new mapboxgl.Popup({ offset: 25 })
-              .setHTML(popupContent);
+            .setHTML(popupContent);
+            
+          // Set marker options.
+          const marker = new mapboxgl.Marker({
+            color: keycolors[i%3],
+            })
+            .setLngLat([latitude, longitude])
+            .setPopup(popup) // sets a popup on this marker
+            .addTo(map);
 
           // Event listener for click
           $(this).find("h2").click(function() {
@@ -62,9 +63,9 @@ const Visit = ({ global, visit, festival, programmeLoc }) => {
             }
   
             // Center the map on the marker's location
-            map.flyTo({
-              center: [latitude, longitude]
-              });
+            //map.flyTo({
+            //  center: [latitude, longitude]
+            //  });
 
             // Open the popup at the marker's location
             setTimeout(function(){
