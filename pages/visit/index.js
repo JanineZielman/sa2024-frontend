@@ -25,7 +25,7 @@ const Visit = ({ global, visit, festival, programmeLoc }) => {
           zoom: 12.3 // Set default zoom level
       });
 
-      var keycolors = ["#58de60", "#ff820a", "#ffbbf1", "#FFFFFF", "#6c4b34"]; //green, orange, pink, white, brown
+      var keycolors = ["#ff820a", "#ffbbf1", "#FFFFFF", "#6c4b34", "#58de60"]; //orange pink white brown green
 
       let lastPopup = null; // To keep track of the current open popup
 
