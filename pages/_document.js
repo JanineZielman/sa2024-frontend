@@ -15,6 +15,9 @@ class MyDocument extends Document {
 
           <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
           <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+
+          <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+          <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
           
           <script
             type="importmap"
