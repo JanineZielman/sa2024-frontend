@@ -51,9 +51,9 @@ const Tickets = ({global, tickets, festival, params }) => {
                             <a href={`/programme/${ticket.programme_item.data?.attributes.slug}`}>Find out more</a>
                           </h3>
                           
-                          <div className="price">
+                          <div className="price" onClick={handleShow}>
                             <span>Buy tickets</span>
-                            <ReactMarkdown children={ticket.price} onClick={handleShow}/>
+                            <ReactMarkdown children={ticket.price}/>
                           </div>
                         </div>
                       </div>
