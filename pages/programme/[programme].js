@@ -27,8 +27,8 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
       }))
     } else {
       setSubItems(sub.sort(function(a,b){
-        let date1 = new Date(a.attributes.WhenWhere[0]?.date.split('/').reverse().join('/'));
-        let date2 = new Date(b.attributes.WhenWhere[0]?.date.split('/').reverse().join('/'));
+        let date1 = new Date(`${a.attributes.WhenWhere[0]?.date.split('/').reverse().join('-')}T${a.attributes.WhenWhere[0]?.start_time}Z`);
+        let date2 = new Date(`${b.attributes.WhenWhere[0]?.date.split('/').reverse().join('-')}T${b.attributes.WhenWhere[0]?.start_time}Z`);
         return date1 - date2
 
       }));
@@ -124,42 +124,45 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
           </>
         }
 
-        <div className="discover artists">
-          <div className="subtitle">
-            <h1>Artists</h1>
-          </div>
-          <div className="discover-container programme-container sub-programme-container">
-            <div className="day-programme">
-              <div className="discover-container programme-container sub-programme-container">
-                <div className="items-wrapper">
-                  {relations.attributes.community_items.data.map((item, i) => {
-                    return(
-                      <div className="discover-item artist-item">
-                        <LazyLoad height={600}>
-                          <div className="item-wrapper">
-                            <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
-                              <div className="image">
-                                <div className="image-inner">
-                                  {item.attributes.cover_image?.data &&
-                                    <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                  }
+        {relations.attributes.community_items.data.length > 0 &&
+          <div className="discover artists">
+            <div className="subtitle">
+              <h1>Artists</h1>
+            </div>
+            <div className="discover-container programme-container sub-programme-container">
+              <div className="day-programme">
+                <div className="discover-container programme-container sub-programme-container">
+                  <div className="items-wrapper">
+                    {relations.attributes.community_items.data.map((item, i) => {
+                      return(
+                        <div className="discover-item artist-item">
+                          <LazyLoad height={600}>
+                            <div className="item-wrapper">
+                              <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                                <div className="image">
+                                  <div className="image-inner">
+                                    {item.attributes.cover_image?.data &&
+                                      <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                    }
+                                  </div>
                                 </div>
-                              </div>
 
-                              <div className="category-title-wrapper">
-                                <div className="title">{item.attributes.name}</div>
-                              </div>
-                            </a>
-                          </div>
-                        </LazyLoad>
-                      </div>
-                    )
-                  })}
+                                <div className="category-title-wrapper">
+                                  <div className="title">{item.attributes.name}</div>
+                                </div>
+                              </a>
+                            </div>
+                          </LazyLoad>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        }
+
       </Layout>
     </section> 
   )
@@ -177,7 +180,7 @@ export async function getServerSideProps({params, query}) {
   );
 
   const pageRel = 
-    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
+    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[community_items][populate]=*`
   );
 
   const subRes = 

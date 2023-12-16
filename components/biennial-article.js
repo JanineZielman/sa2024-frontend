@@ -43,26 +43,6 @@ const Article = ({page, relations, programmeLocations}) => {
   return (   
 		<section className="article biennial-article">
 			<>
-				{relations?.attributes?.authors?.data &&
-					<div className="authors">
-						{relations.attributes.authors.data.map((author, i) => {
-							return(
-								<a className="author" href={`/artists/${author.attributes.slug}`}>
-
-									<div className="image">
-										<img 
-										src={"https://cms.sonicacts.com/public"+author.attributes.cover_image.data.attributes.formats.small?.url}
-										/>
-									</div>
-									<div className="info">
-										{author.attributes.name} 
-									</div>
-
-								</a>
-							)
-						})}
-					</div>
-				}
 				{page.attributes.title &&
 					<div className="title-wrapper">
 						{relations.attributes.biennial_tags?.data && 
@@ -185,9 +165,9 @@ const Article = ({page, relations, programmeLocations}) => {
 									</div>
 								}
 
-								{relations?.attributes?.locations?.data &&
+								{relations?.attributes?.locations?.data.length > 0 &&
 									<div className="locations-wrapper">
-										<h3>Locations</h3>
+										<h3>{`Location${relations?.attributes?.locations?.data.length > 1 ? 's' : ''}`}</h3>
 										{relations?.attributes?.locations?.data?.map((loc, j) => {
 											let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
 											return(

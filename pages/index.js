@@ -11,7 +11,7 @@ const Festival = ({ global, festival}) => {
 		async function getNews() {
 			console.log("news")
 		
-			const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[cover_image][populate]=*");
+			const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[biennial_cover_image][populate]=*&populate[cover_image][populate]=*");
 	
 			const news = await response.json();
 	
@@ -31,10 +31,12 @@ const Festival = ({ global, festival}) => {
 				$newsHeadlineWrapper.append($newsDate);
 				$newsContent.append($newsHeadlineWrapper);
 		
-				if (value.attributes.cover_image) {
-					console.log(value.attributes.cover_image);
+				if (value.attributes.biennial_cover_image) {
 	
-					if (value.attributes.cover_image.data && value.attributes.cover_image.data.attributes && value.attributes.cover_image.data.attributes.formats && value.attributes.cover_image.data.attributes.formats.large && value.attributes.cover_image.data.attributes.formats.large.url) {
+					if ( value.attributes.biennial_cover_image?.data?.attributes?.formats?.large?.url) {
+						$newsImage.html("<img src='https://cms.sonicacts.com"+value.attributes.biennial_cover_image.data.attributes.formats.large.url+"'>");
+					} 
+					if (value.attributes.biennial_cover_image.data == null && value.attributes.cover_image?.data?.attributes?.formats?.large?.url) {
 						$newsImage.html("<img src='https://cms.sonicacts.com"+value.attributes.cover_image.data.attributes.formats.large.url+"'>");
 					}
 	
