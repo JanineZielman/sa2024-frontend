@@ -64,6 +64,28 @@ const Layout = ({ children, festival}) => {
 
           console.log("init");
 
+          var browserCheck = "";
+
+          if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1) {
+              browserCheck = 'opera';
+            } else if (navigator.userAgent.indexOf("Edg") != -1) {
+              browserCheck = 'edge';
+            } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+              browserCheck = 'chrome';
+            } else if (navigator.userAgent.indexOf("Safari") != -1) {
+              browserCheck = 'safari';
+            } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+              browserCheck = 'firefox';
+            } else if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) //IF IE > 10
+            {
+              browserCheck = 'ie';
+            } else {
+              browserCheck = 'unkown';
+          }
+          
+          $("html").addClass("browser-"+browserCheck);
+          
+
           const threeWapper = $("<div class='three-normal'></div>");
           threeWapper.hide();
 
@@ -218,8 +240,8 @@ const Layout = ({ children, festival}) => {
       console.log(randomNumber);
 
       function setColoredBG() {
-        if (randomNumber > 0.7) {
-          console.log("case 1");
+        if (randomNumber > 0.6) {
+          //console.log("case 1");
 
           $(".colored-bg-01").css({
             "transform":"translateY(" + Math.min(scrollTop * 0.5, 300) + "px scale(" + Math.min(scrollTop / 2000 + 0.5, 5) + ")",
@@ -232,8 +254,8 @@ const Layout = ({ children, festival}) => {
           })
         }
 
-        if (randomNumber <= 0.7 && randomNumber > 0.3) {
-          console.log("case 2");
+        if (randomNumber <= 0.6 && randomNumber > 0.3) {
+          //console.log("case 2");
           $(".colored-bg-01").css({
             "transform":"translateY(" + -1 * Math.min(scrollTop * 0.5, 300) + "px)"
           })
@@ -244,7 +266,7 @@ const Layout = ({ children, festival}) => {
         }
 
         if (randomNumber <= 0.3) {
-          console.log("case 3");
+          //console.log("case 3");
           $(".colored-bg-01").css({
             "transform":"translateY(" + Math.min(scrollTop * 0.5, 300) + "px)"
           })
