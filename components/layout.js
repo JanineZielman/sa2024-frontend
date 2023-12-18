@@ -613,8 +613,22 @@ const Layout = ({ children, festival}) => {
       }
 
 
+      <div id="imprint-menu">  
 
-      <div id="imprint-content" class="closer-target">
+        <div id="imprint-link" class="imprint-item">
+          <a href="/about">Imprint</a>
+        </div>
+        <div class="imprint-item">
+          <a href="https://sonicacts.com/policy" target="_blank">Privacy Policy</a>
+        </div>
+        <div class="imprint-item">
+          <a href="https://sonicacts.com/cookies" target="_blank">Cookies</a>
+        </div>
+  
+      </div>
+    </footer>
+
+    <div id="imprint-content" class="closer-target">
         <div class="imprint-inner">
           <p>
               <a href="https://www.knoth-renner.com/" target="_blank">Knoth &amp; Renner</a> teamed up with <a href="https://www.instagram.com/aeni.kaiser/" target="_blank">Anja Kaiser</a> for the identity and concept of this website, working with Janine Zielman on its development.
@@ -634,23 +648,6 @@ const Layout = ({ children, festival}) => {
           </p>
         </div>    
       </div>
-
-
-
-      <div id="imprint-menu">  
-
-        <div id="imprint-link" class="imprint-item">
-          <a href="/about">Imprint</a>
-        </div>
-        <div class="imprint-item">
-          <a href="https://sonicacts.com/policy" target="_blank">Privacy Policy</a>
-        </div>
-        <div class="imprint-item">
-          <a href="https://sonicacts.com/cookies" target="_blank">Cookies</a>
-        </div>
-  
-      </div>
-    </footer>
 
     <Modal  isOpen={show} onHide={handleClose} className={`mail-modal`} ariaHideApp={false} style={modalStyles}>
         <div onClick={handleClose} className="close">
