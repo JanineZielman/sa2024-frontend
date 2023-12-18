@@ -200,7 +200,7 @@ const Article = ({page, relations, programmeLocations}) => {
 
 										{relations.attributes.embed == true ?
 											<>
-												<div className={`ticket ${relations.attributes.programme_item.data?.attributes.slug} ${relations.attributes.title.replace(/\s/g, '')}`} onClick={handleShow}>
+												<div className={`ticket ${relations.attributes.programme_item.data?.attributes.slug} ${relations.attributes.title.replace(/\s|:/g, '')}`} onClick={handleShow}>
 
 													<h3>Tickets</h3>
 
@@ -220,7 +220,7 @@ const Article = ({page, relations, programmeLocations}) => {
 												</Modal>
 											</>
 											:
-											<a className={`ticket ${relations.attributes.title.replace(/\s/g, '')}`} target="_blank">
+											<a className={`ticket ${relations.attributes.title.replace(/\s|:/g, '')}`} target="_blank">
 												<h3>Tickets</h3>
 												<div className="ticket-content">
 													<ReactMarkdown children={relations.attributes.price}/>
