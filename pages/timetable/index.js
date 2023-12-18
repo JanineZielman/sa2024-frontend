@@ -35,7 +35,16 @@ const Timetable = ({ global, festival, programmes}) => {
   
   return (
     <>
-    {/* {loading ?
+    {
+      <section className="festival-wrapper">
+      <Layout  global={global} festival={festival}>
+        <div className="title-wrapper">
+          <h1 className="page-title">Timetable coming up in the first weeks of January!</h1>
+        </div>
+      </Layout>
+      </section>
+    
+    /* {loading ?
       <div className="loader"></div>
       :
       <section className="festival-wrapper">
