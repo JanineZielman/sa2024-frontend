@@ -37,13 +37,14 @@ const Tickets = ({global, tickets, festival, params }) => {
 
               const handleClose = () => setShow(false);
               const handleShow = () => setShow(true);
+
               return(
                 <>
                 {ticket.__component == 'biennial.ticket' &&
                 <>
                   {ticket.embed ?
                     <>
-                      <div className="ticket">
+                    <div className={`ticket ${ticket.programme_item.data?.attributes.slug} ${ticket.title.replace(/\s/g, '')}`}>
                         <div className="ticket-content">
                           <h3>
                             {ticket.title} <br/>
@@ -69,7 +70,7 @@ const Tickets = ({global, tickets, festival, params }) => {
                       </Modal>
                     </>
                     :
-                    <div className={`ticket ${ticket.programme_item.data?.attributes.slug}`}>
+                    <div className={`ticket ${ticket.programme_item.data?.attributes.slug} ${ticket.title.replace(/\s/g, '')}`}>
                       <div className="ticket-content">
                         <h3>
                           {ticket.title} <br/>
