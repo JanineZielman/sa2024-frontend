@@ -13,6 +13,8 @@ const Tickets = ({global, tickets, festival, params }) => {
     },
   };
 
+  console.log(tickets)
+
   return (
     <section className="festival-wrapper tickets">
       <Layout page={params} global={global} festival={festival}>
@@ -44,7 +46,7 @@ const Tickets = ({global, tickets, festival, params }) => {
                 <>
                   {ticket.embed ?
                     <>
-                    <div className={`ticket ${ticket.programme_item.data?.attributes.slug} ${ticket.title.replace(/\s/g, '')}`}>
+                    <div className={`ticket ${ticket.link ? '' : 'available-soon' } ${ticket.title.replace(/\s/g, '')}`}>
                         <div className="ticket-content">
                           <h3>
                             {ticket.title} <br/>
@@ -70,7 +72,7 @@ const Tickets = ({global, tickets, festival, params }) => {
                       </Modal>
                     </>
                     :
-                    <div className={`ticket ${ticket.programme_item.data?.attributes.slug} ${ticket.title.replace(/\s/g, '')}`}>
+                    <div className={`ticket ${ticket.link ? '' : 'available-soon' } ${ticket.title.replace(/\s/g, '')}`}>
                       <div className="ticket-content">
                         <h3>
                           {ticket.title} <br/>
