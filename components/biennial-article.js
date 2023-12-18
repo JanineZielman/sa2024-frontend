@@ -174,7 +174,9 @@ const Article = ({page, relations, programmeLocations}) => {
 												<div className="location">
 													<a href={`/visit`}>
 														<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
-														<ReactMarkdown children={locInfo[0]?.opening_times}/>
+														{relations?.attributes.hide_opening_times != true &&
+															<ReactMarkdown children={locInfo[0]?.opening_times}/>
+														}
 														<ReactMarkdown 
 															children={loc.attributes.additional_info} 
 														/>
