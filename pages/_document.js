@@ -65,7 +65,7 @@ class MyDocument extends Document {
           <meta property="og:description" content="Celebrating 30 years of cutting-edge experiments in sound, moving image and contemporary theory 🟢 2 Feb – 24 Mar 2024">
           <meta property="og:type" content="website">
           <meta property="og:url" content="https://2024.sonicacts.com">
-          <meta property="og:image" content="/assets/img/teaser-07/assets/img/ogimage-230905-SonicActs-2024-16by9-1920x1080px.jpg">
+          <meta property="og:image" content="/assets/img/ogimage-230905-SonicActs-2024-16by9-1920x1080px.jpg">
 
 
         </Head>
