@@ -173,7 +173,7 @@ const Article = ({page, relations, programmeLocations}) => {
 											return(
 												<div className="location">
 													{
-														loc.attributes.title === "Online" ? (
+													    loc.attributes.title.startsWith("Online") ? (
 															<div>
 																<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
 																{relations?.attributes.hide_opening_times != true &&
