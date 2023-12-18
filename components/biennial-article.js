@@ -172,15 +172,29 @@ const Article = ({page, relations, programmeLocations}) => {
 											let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
 											return(
 												<div className="location">
-													<a href={`/visit`}>
-														<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
-														{relations?.attributes.hide_opening_times != true &&
-															<ReactMarkdown children={locInfo[0]?.opening_times}/>
-														}
-														<ReactMarkdown 
-															children={loc.attributes.additional_info} 
-														/>
-													</a>
+													{
+														loc.attributes.title === "Online" ? (
+															<div>
+																<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
+																{relations?.attributes.hide_opening_times != true &&
+																	<ReactMarkdown children={locInfo[0]?.opening_times}/>
+																}
+																<ReactMarkdown 
+																	children={loc.attributes.additional_info} 
+																/>
+															</div>
+														) : (
+															<a href={`/visit`}>
+																<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
+																{relations?.attributes.hide_opening_times != true &&
+																	<ReactMarkdown children={locInfo[0]?.opening_times}/>
+																}
+																<ReactMarkdown 
+																	children={loc.attributes.additional_info} 
+																/>
+															</a>
+														)
+													}
 												</div>
 											)
 										})}
