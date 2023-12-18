@@ -64,25 +64,6 @@ const Layout = ({ children, festival}) => {
 
           console.log("init");
 
-          var browserCheck = "";
-
-          if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1) {
-              browserCheck = 'opera';
-            } else if (navigator.userAgent.indexOf("Edg") != -1) {
-              browserCheck = 'edge';
-            } else if (navigator.userAgent.indexOf("Chrome") != -1) {
-              browserCheck = 'chrome';
-            } else if (navigator.userAgent.indexOf("Safari") != -1) {
-              browserCheck = 'safari';
-            } else if (navigator.userAgent.indexOf("Firefox") != -1) {
-              browserCheck = 'firefox';
-            } else if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) //IF IE > 10
-            {
-              browserCheck = 'ie';
-            } else {
-              browserCheck = 'unkown';
-          }
-          
           $("html").addClass("browser-"+browserCheck);
           
 
@@ -234,10 +215,32 @@ const Layout = ({ children, festival}) => {
         $("#imprint-content").show();
       });  
 
+
+
+
+      var browserCheck = "";
+
+      if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1) {
+          browserCheck = 'opera';
+        } else if (navigator.userAgent.indexOf("Edg") != -1) {
+          browserCheck = 'edge';
+        } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+          browserCheck = 'chrome';
+        } else if (navigator.userAgent.indexOf("Safari") != -1) {
+          browserCheck = 'safari';
+        } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+          browserCheck = 'firefox';
+        } else if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) //IF IE > 10
+        {
+          browserCheck = 'ie';
+        } else {
+          browserCheck = 'unkown';
+      }
+      
+      
+
       var scrollTop = 0;
       var randomNumber = Math.random();
-
-      console.log(randomNumber);
 
       function setColoredBG() {
         if (randomNumber > 0.6) {
