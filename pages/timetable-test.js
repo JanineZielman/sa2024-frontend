@@ -85,7 +85,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                           </div>
                         )
                       })}
-                     
+                    
                         {/* {programmes.map((item, j) => {
                           // console.log(item)
                           let items = item.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
