@@ -58,9 +58,6 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                       {locRes.map((loc, j) => {
                         return(
                           <div className="timetable-row">
-                            {/* <div className="location">
-                              {loc.attributes.title}
-                            </div> */}
                             {loc.attributes.programme_items.data.map((prog, k) => {
                               let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
                               let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
