@@ -58,9 +58,9 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                       {locRes.map((loc, j) => {
                         return(
                           <div className="timetable-row">
-                            <div className="location">
+                            {/* <div className="location">
                               {loc.attributes.title}
-                            </div>
+                            </div> */}
                             {loc.attributes.programme_items.data.map((prog, k) => {
                               let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
                               let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
@@ -69,8 +69,15 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                  {items?.map((item, l) => {
                                   return(
                                     <>
+                                    {l == 0 && k == 0 &&
+                                      <div className="location">
+                                        <p>{loc.attributes.title}</p>
+                                      </div>
+                                    }
                                     { loc.attributes.title == item.location.data?.attributes.title &&
-                                      <div className="title">{prog.attributes.title}</div>
+                                      <div className="title" style={{'marginRight': '24px'}}>
+                                        {prog.attributes.title} {item.start_time}–{item.end_time}
+                                      </div>
                                     }  
                                     </>                        
                                   )
