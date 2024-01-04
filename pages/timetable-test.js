@@ -50,11 +50,21 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
         <Layout  global={global} festival={festival}>
           <div className="timetable">
             <div className="timetable-locations">
-              <div className="timetable-wrapper">		
+              <div className="timetable-wrapper">	
                 {dates.map((day, i) => {
+                  const number = 0;
                   return(
                     <div className="day">
-                      <h1>{Moment(day).format('ddd D MMM')}</h1>
+                      <h1 className="date">{Moment(day).format('ddd D MMM')}</h1>
+                      <div key={`times${i}`} className="timetable-times">
+                        {times.map((time, i) => {
+                          return(
+                            <div key={`time${i}`} className="time-block">
+                              <div className="time">{time}</div>
+                            </div>
+                          )
+                        })}
+                      </div>
                       {locRes.map((loc, j) => {
                         return(
                           <div className="timetable-row">
@@ -64,6 +74,8 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                               return(
                                 <>
                                  {items?.map((item, l) => {
+                                  const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
+                                  const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
                                   return(
                                     <>
                                     {l == 0 && k == 0 &&
@@ -72,8 +84,15 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                       </div>
                                     }
                                     { loc.attributes.title == item.location.data?.attributes.title &&
-                                      <div className="title" style={{'marginRight': '24px'}}>
-                                        {prog.attributes.title} {item.start_time}–{item.end_time}
+                                      <div id="programme_wrapper" className={`programme-wrapper`}>
+                                        <div 
+                                        className={`programme`} 
+                                        style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}
+                                        >
+                                          <div className="title" style={{'marginRight': '24px'}}>
+                                            {prog.attributes.title} {item.start_time}–{item.end_time}
+                                          </div>
+                                        </div>
                                       </div>
                                     }  
                                     </>                        
