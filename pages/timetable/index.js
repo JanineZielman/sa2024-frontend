@@ -4,206 +4,126 @@ import { fetchAPI } from "../../lib/api"
 import Moment from 'moment'
 
 
-const Timetable = ({ global, festival, programmes}) => {
+const Timetable = ({ global, festival, programmes, locRes}) => {
 
-  console.log(programmes)
+  const [loading, setLoading] = useState(true);
 
-	// const [currentDate, setCurrentDate] = useState('2022-09-30');
-	// const [dates, setDates] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  function getDates (startDate, endDate) {
+    const dates = []
+    let currentDate = startDate
+    const addDays = function (days) {
+      const date = new Date(this.valueOf())
+      date.setDate(date.getDate() + days)
+      return date
+    }
+    while (currentDate <= endDate) {
+      dates.push(currentDate)
+      currentDate = addDays.call(currentDate, 1)
+    }
+    return dates
+  }
+  
+  // Usage
+  const dates = getDates(new Date('2024-02-02'), new Date('2024-03-24'))
+  
 
-	// function setDate(e){
-  //   if (currentDate != e.target[e.target.selectedIndex].value){
-  //     setCurrentDate(e.target[e.target.selectedIndex].value)
-  //   }
-  // }
+	const times = [
+    '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
+  ]
 
-	// const times = [
-  //   '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
-  // ]
-
-	// useEffect(() => {
-	// 	timetable.attributes.day.forEach((element) => {
-	// 			if (!dates.includes(element.date)) {
-	// 					dates.push(element.date);
-	// 			}
-	// 	});
-  //   setTimeout(function() {
-  //     setLoading(false)
-  //   }, 1000);
-	// }, [])
+	useEffect(() => {
+    setTimeout(function() {
+      setLoading(false)
+    }, 1000);
+	}, [])
   
   return (
     <>
-    {
-      <section className="festival-wrapper">
-      <Layout  global={global} festival={festival}>
-        <div className="title-wrapper">
-          <h1 className="page-title">Timetable coming up in the first weeks of January!</h1>
-        </div>
-      </Layout>
-      </section>
     
-    /* {loading ?
+    <div class="timetable"></div>
+    
+    {loading ?
       <div className="loader"></div>
       :
       <section className="festival-wrapper">
         <Layout  global={global} festival={festival}>
+          <div className="title-wrapper"></div>
           <div className="timetable">
-            <div className="timetable-menu custom-select" id="dates">
-            Date:
-              <select onChange={setDate} id="select">
-                {dates.map((item,i) => {
+            <div className="timetable-locations">
+              <div className="timetable-wrapper">	
+                {dates.map((day, i) => {
+                  const number = 0;
+                  // programmes.forEach((programme) => {
+                  //   let items = programme.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
+                  //   let items2 = items.sort((a,b) => a.start_time?.slice(0,2) - b.start_time?.slice(0,2))
+                  //   if(items2[0]?.start_time?.slice(0,2)){
+                  //     number = items[0]?.start_time?.slice(0,2) - 7;
+                  //   }
+                  // });
                   return(
-                    <option key={`dates-item${i}`} className="date" id={item.slice(0, 10)} value={item.slice(0, 10)}>{Moment(item).format('ddd D MMM')}</option>
-                  )
-                  })}
-              </select>
-            </div>
-          <div className="timetable-locations">
-            <div className="timetable-wrapper">		
-                {timetable.attributes.day.filter(item => item.date === currentDate).map((item, i) => {
-                  const number = times.indexOf(timetable.attributes.day.filter(item => item.date === currentDate)[0].programme[0].start_time.replace('30', '00'));
-                  return(
-                    <>
-                      {i == 0 &&
-                        <>
-                          <div key={`times${i}`} className="timetable-times">
-                            {times?.slice(number, 24).map((time, i) => {
-                              return(
-                                <div key={`time${i}`} className="time-block">
-                                  <div className="time">{time}</div>
-                                </div>
-                              )
-                            })}
-                          </div>
-                        </>
-                      }
-                      {item.sub_locations.data[0] ?
-                        <>
-                        <div className="timetable-row">
-                          <div className="location">
-                            <h4>{item.location.data.attributes.title}</h4>
-                            {item.sub_locations.data.map((sub, i) => {
+                    <div className="day" id={`${Moment(day).format('ddd-D-MMM')}`}>
+                      <h1 className="date">{Moment(day).format('ddd D MMM')}</h1>
+                      <div key={`times${i}`} className="timetable-times">
+                        {times.slice(number).map((time, i) => {
+                          return(
+                            <div key={`time${i}`} className="time-block">
+                              <div className="time">{time}</div>
+                            </div>
+                          )
+                        })}
+                      </div>
+                      {locRes.map((loc, j) => {
+                        return(
+                          <div className="timetable-row">
+                            {loc.attributes.programme_items.data.map((prog, k) => {
+                              let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
+                              let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
                               return(
                                 <>
-                                  {sub.attributes.title && <p key={`sub${i}`}>{sub.attributes.title}</p>}
-                                </>
-                              )
-                            })}
-                          </div>
-
-                          <div id="programme_wrapper" className={`programme-wrapper`}>
-                            {item.programme.map((event, i) => {
-                              const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
-                              const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
-                              return(
-                                <>
-                                  {event.sub_location.data == null &&
-                                    <a key={`event${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programme_items?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
-                                    className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programme_items.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
-                                    style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
-                                      <div className="inner-programme">
-                                        <div className="inner-wrapper">
-                                          <div className="time">
-                                            {event.start_time.substring(0,5)} - {event.end_time.substring(0,5)}
-                                          </div>
-                                          <div className="title">
-                                            {event.programme.data.attributes.title}
-                                          </div>
-                                          <div className="artists">
-                                            {event.programme.data.attributes?.authors?.data?.map((artist, i) => {
-                                              return(
-                                                <div>{artist.attributes.name}</div>
-                                              )
-                                            })}
-                                          </div>
-                                        </div>
+                                 {items?.map((item, l) => {
+                                  const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
+                                  const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
+                                  return(
+                                    <>
+                                    { loc.attributes.title == item.location.data?.attributes.title &&
+                                      <div className="location" key={`loc${l}`}>
+                                        <p>{loc.attributes.title}</p>
                                       </div>
-                                    </a>
-                                  }
-                                </>
-                              )
-                            })}
-                          </div>
-
-                          <div className="programme-wrapper">
-                            {item.sub_locations.data.map((sub, index) => {
-                              return(
-                                <div className={`sub-bar`}>
-                                  {item.programme.map((event, i) => {
-                                    const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
-                                    const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
-                                    return(
-                                      <>
-                                        {sub.attributes.title === event.sub_location.data?.attributes.title &&
-                                          <a key={`event-${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programme_items?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} subloc ${event.programme.data.attributes.main_programme_items.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
-                                            <div className="inner-programme">
-                                              <div className="inner-wrapper">
-                                                <div className="time">
-                                                  {event.start_time.substring(0,5)} 
-                                                </div>
-                                                <div className="title">
-                                                  {event.programme.data.attributes.title}
-                                                </div>
-                                                <div className="artists">
-                                                  {event.programme.data.attributes?.authors?.data?.map((artist, i) => {
-                                                    return(
-                                                      <div>{artist.attributes.name}</div>
-                                                    )
-                                                  })}
-                                                </div>
+                                    }
+                                    { loc.attributes.title == item.location.data?.attributes.title &&
+                                      <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
+                                        <a href={`/programme/${prog.attributes.slug}`} className={`programme`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                          <div className="inner-programme">
+                                            <div className="inner-wrapper">
+                                              <div className="time">
+                                                {item.start_time}–{item.end_time}
+                                              </div>
+                                              <div className="title" style={{'marginRight': '24px'}}>
+                                                {prog.attributes.title}
+                                              </div>
+                                              <div className="artists">
+                                                {fullProgItem.attributes.community_items.data.map((com, k) => {
+                                                  return(
+                                                    <div>{com.attributes.name}</div>
+                                                  )
+                                                })}
                                               </div>
                                             </div>
-                                          </a>
-                                        }
-                                      </>
-                                    )
-                                  })}
-                                </div>
+                                          </div>
+                                        </a>
+                                      </div>
+                                      
+                                    } 
+                                    </>                       
+                                  )
+                                })}
+                                </>
                               )
                             })}
                           </div>
-                        </div>
-                        </>
-                      :
-                        <div className="timetable-row">
-                          <div className="location">
-                            <h4>{item.location.data.attributes.title}</h4>
-                            {item.location.data.attributes.subtitle &&
-                              <p>{item.location.data.attributes.subtitle}</p>
-                            }
-                          </div>
-                          <div id="programme_wrapper" className={`programme-wrapper`}>
-                            {item.programme.map((event, i) => {
-                              const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
-                              const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
-                              return(
-                                <a key={`event-prog${i}`} href={event.programme.data?.attributes.main ? `/programme/${event.programme.data?.attributes.slug}` : `/programme/${event.programme.data?.attributes.main_programme_items?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programme_items.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
-                                  <div className="inner-programme">
-                                    <div className="inner-wrapper">
-                                      <div className="time">
-                                        {event.start_time.substring(0,5)} - {event.end_time.substring(0,5)}
-                                      </div>
-                                      <div className="title">
-                                        {event.programme.data.attributes.title}
-                                      </div>
-                                      <div className="artists">
-                                        {event.programme.data.attributes?.authors?.data?.map((artist, i) => {
-                                          return(
-                                            <div>{artist.attributes.name}</div>
-                                          )
-                                        })}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </a>
-                              )
-                            })}
-                          </div>
-                        </div>	
-                      }
-                    </>
+                        )
+                      })}
+                    </div>
                   )
                 })}
               </div>
@@ -211,7 +131,7 @@ const Timetable = ({ global, festival, programmes}) => {
           </div>
         </Layout>
       </section>
-    } */}
+    }
     </>
   )
 }
@@ -222,10 +142,11 @@ export async function getServerSideProps() {
 	}
   
   // Run API calls in parallel
-  const [festivalRes, globalRes, programmeRes] = await Promise.all([
+  const [festivalRes, globalRes, programmeRes, locRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-	  fetchAPI(`/programme-items?filters[biennial][slug][$eq]=${params.slug}&pagination[limit]=${100}`),
+	  fetchAPI(`/programme-items?filters[biennial][slug][$eq]=${params.slug}&populate[WhenWhere][populate]=*&populate[WhenWhere][location][populate]=*&populate[community_items][populate]=*&pagination[limit]=${100}`),
+    fetchAPI(`/locations?filters[biennial][slug][$eq]=${params.slug}&populate[programme_items][populate]=*`),
   ])
 
 	
@@ -235,6 +156,7 @@ export async function getServerSideProps() {
       festival: festivalRes.data[0],
       global: globalRes.data,
 	    programmes: programmeRes.data,
+      locRes: locRes.data
     }
   }
 }
