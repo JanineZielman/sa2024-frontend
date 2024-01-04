@@ -15,9 +15,11 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
         <div className="discover sub">
-          <div className="subtitle">
-            <h2>{`Programme${programmes.data.length > 1 ? 's' : ''}`}</h2>
-          </div>
+          {programmes.data.length > 0 &&
+            <div className="subtitle">
+              <h2>{`Programme${programmes.data.length > 1 ? 's' : ''}`}</h2>
+            </div>
+          }
           <div className="discover-container programme-container">
             {programmes.data.map((item, i) => {
               let tags = "";
