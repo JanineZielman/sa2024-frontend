@@ -204,7 +204,6 @@ const Article = ({page, relations, programmeLocations}) => {
 
 								{relations.attributes.registration_link &&
 									<a href={relations.attributes.registration_link} className="register-wrapper">
-										<span>Register</span>
 										<div>
 											{relations.attributes.registration_label && relations.attributes.registration_label}
 										</div>
