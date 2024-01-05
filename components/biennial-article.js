@@ -8,7 +8,8 @@ import Modal from 'react-modal';
 
 const Article = ({page, relations, programmeLocations}) => {
 
-	let dates = relations.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+	// let dates = relations.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+	let dates = relations.attributes.WhenWhere;
 	let start_date = new Date(dates?.[0]?.date.split('/').reverse().join('/'));
 	let end_date = new Date(dates?.[dates?.length - 1]?.date.split('/').reverse().join('/'));
 
