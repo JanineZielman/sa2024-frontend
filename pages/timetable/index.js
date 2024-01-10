@@ -49,8 +49,8 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
         <Layout  global={global} festival={festival}>
           <div className="title-wrapper"></div>
           <div className="timetable">
-            <div className="timetable-locations">
-              <div className="timetable-wrapper">	
+            
+             
                 {dates.map((day, i) => {
                   const number = 0;
                   // programmes.forEach((programme) => {
@@ -61,73 +61,77 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                   //   }
                   // });
                   return(
-                    <div className="day" id={`${Moment(day).format('ddd-D-MMM')}`}>
-                      <h1 className="date">{Moment(day).format('ddd D MMM')}</h1>
-                      <div key={`times${i}`} className="timetable-times">
-                        {times.slice(number).map((time, i) => {
+                    <div className="timetable-locations" id={`${Moment(day).format('ddd-D-MMM')}`}>
+                      <div className="day timetable-wrapper">
+                        <div className="timetable-row">
+                          <h1 className="date">{Moment(day).format('ddd D MMM')}</h1>
+                        </div>
+                        <div key={`times${i}`} className="timetable-times">
+                          {times.slice(number).map((time, i) => {
+                            return(
+                              <div key={`time${i}`} className="time-block">
+                                <div className="time">{time}</div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                        {locRes.map((loc, j) => {
                           return(
-                            <div key={`time${i}`} className="time-block">
-                              <div className="time">{time}</div>
+                            <div className="timetable-row">
+                              {loc.attributes.programme_items.data.map((prog, k) => {
+                                let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
+                                let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
+                                return(
+                                  <>
+                                  {items?.map((item, l) => {
+                                    const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
+                                    const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
+                                    return(
+                                      <>
+                                      { loc.attributes.title == item.location.data?.attributes.title &&
+                                        <div className="location" key={`loc${l}`}>
+                                          <p>{loc.attributes.title}</p>
+                                        </div>
+                                      }
+                                      { loc.attributes.title == item.location.data?.attributes.title &&
+                                        <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
+                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                            <div className="inner-programme">
+                                              <div className="inner-wrapper">
+                                                <div className="time">
+                                                  {item.start_time}–{item.end_time}
+                                                </div>
+                                                <div className="title" style={{'marginRight': '24px'}}>
+                                                  {prog.attributes.title}
+                                                </div>
+                                                <div className="artists">
+                                                  {fullProgItem.attributes.community_items.data.map((com, k) => {
+                                                    return(
+                                                      <div>{com.attributes.name}</div>
+                                                    )
+                                                  })}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </a>
+                                        </div>
+                                        
+                                      } 
+                                      </>                       
+                                    )
+                                  })}
+                                  </>
+                                )
+                              })}
                             </div>
                           )
                         })}
                       </div>
-                      {locRes.map((loc, j) => {
-                        return(
-                          <div className="timetable-row">
-                            {loc.attributes.programme_items.data.map((prog, k) => {
-                              let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
-                              let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
-                              return(
-                                <>
-                                 {items?.map((item, l) => {
-                                  const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
-                                  const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
-                                  return(
-                                    <>
-                                    { loc.attributes.title == item.location.data?.attributes.title &&
-                                      <div className="location" key={`loc${l}`}>
-                                        <p>{loc.attributes.title}</p>
-                                      </div>
-                                    }
-                                    { loc.attributes.title == item.location.data?.attributes.title &&
-                                      <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
-                                        <a href={`/programme/${prog.attributes.slug}`} className={`programme`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
-                                          <div className="inner-programme">
-                                            <div className="inner-wrapper">
-                                              <div className="time">
-                                                {item.start_time}–{item.end_time}
-                                              </div>
-                                              <div className="title" style={{'marginRight': '24px'}}>
-                                                {prog.attributes.title}
-                                              </div>
-                                              <div className="artists">
-                                                {fullProgItem.attributes.community_items.data.map((com, k) => {
-                                                  return(
-                                                    <div>{com.attributes.name}</div>
-                                                  )
-                                                })}
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </a>
-                                      </div>
-                                      
-                                    } 
-                                    </>                       
-                                  )
-                                })}
-                                </>
-                              )
-                            })}
-                          </div>
-                        )
-                      })}
                     </div>
                   )
                 })}
-              </div>
-            </div>
+        
+           
           </div>
         </Layout>
       </section>

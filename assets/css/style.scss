@@ -11,6 +11,8 @@
   position: relative;
   .date{
     height: 50px;
+		position: sticky;
+		left: 0;
   }
   .day{
     position: relative;
@@ -87,7 +89,8 @@
 		}
 
 		overflow-y: hidden;
-		min-height: 80vh;
+		// min-height: 80vh;
+		padding-bottom: 24px;
 		.location{
 			// min-height: 150px;
 			height: 100%;
