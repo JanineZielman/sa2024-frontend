@@ -40,7 +40,8 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
   useEffect(() => {
     let days = document.getElementsByClassName('timetable-locations')
     for (let i = 0; i<days.length; i=i+1){
-      if (days[i].getElementsByClassName('timetable-row').length == 1){
+      console.log(days[i].getElementsByClassName('timetable-row')[2].children)
+      if (days[i].getElementsByClassName('timetable-row')[1].children.length < 1){
         days[i].classList.add('hide');
       }
     }
@@ -86,7 +87,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                         </div>
                         {locRes.map((loc, j) => {
                           return(
-                            <>
+                            <div className="timetable-row">
                               {loc.attributes.programme_items.data.map((prog, k) => {
                                 let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
                                 let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
@@ -96,9 +97,9 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                     const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
                                     const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
                                     return(
-                                      <div className="timetable-row">
+                                      <>
                                       { loc.attributes.title == item.location.data?.attributes.title &&
-                                        <div className="location" key={`loc${l}`}>
+                                        <div className={`location ${l}`} key={`loc${l}`}>
                                           <p>{loc.attributes.title}</p>
                                         </div>
                                       }
@@ -110,15 +111,17 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                                 <div className="time">
                                                   {item.start_time}–{item.end_time}
                                                 </div>
-                                                <div className="title" style={{'marginRight': '1rem'}}>
-                                                  {prog.attributes.title}
-                                                </div>
-                                                <div className="artists">
-                                                  {fullProgItem.attributes.community_items.data.map((com, k) => {
-                                                    return(
-                                                      <div>{com.attributes.name}</div>
-                                                    )
-                                                  })}
+                                                <div className="title-artist-wrapper">
+                                                  <div className="title" style={{'marginRight': '1rem'}}>
+                                                    {prog.attributes.title}
+                                                  </div>
+                                                  <div className="artists">
+                                                    {fullProgItem.attributes.community_items.data.map((com, k) => {
+                                                      return(
+                                                        <div>{com.attributes.name}</div>
+                                                      )
+                                                    })}
+                                                  </div>
                                                 </div>
                                               </div>
                                             </div>
@@ -126,13 +129,13 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                         </div>
                                         
                                       } 
-                                      </div>                       
+                                      </>                       
                                     )
                                   })}
                                   </>
                                 )
                               })}
-                            </>
+                            </div>
                           )
                         })}
                       </div>
