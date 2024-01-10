@@ -36,6 +36,15 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
       setLoading(false)
     }, 1000);
 	}, [])
+
+  useEffect(() => {
+    let days = document.getElementsByClassName('timetable-locations')
+    for (let i = 0; i<days.length; i=i+1){
+      if (days[i].getElementsByClassName('timetable-row').length == 1){
+        days[i].classList.add('hide');
+      }
+    }
+  })
   
   return (
     <>
@@ -77,7 +86,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                         </div>
                         {locRes.map((loc, j) => {
                           return(
-                            <div className="timetable-row">
+                            <>
                               {loc.attributes.programme_items.data.map((prog, k) => {
                                 let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
                                 let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
@@ -87,7 +96,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                     const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
                                     const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
                                     return(
-                                      <>
+                                      <div className="timetable-row">
                                       { loc.attributes.title == item.location.data?.attributes.title &&
                                         <div className="location" key={`loc${l}`}>
                                           <p>{loc.attributes.title}</p>
@@ -95,13 +104,13 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                       }
                                       { loc.attributes.title == item.location.data?.attributes.title &&
                                         <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
-                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme`} style={{'--margin': ((startTime - 7 - number) * 10 + 12) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 10  + 'rem'}}>
                                             <div className="inner-programme">
                                               <div className="inner-wrapper">
                                                 <div className="time">
                                                   {item.start_time}–{item.end_time}
                                                 </div>
-                                                <div className="title" style={{'marginRight': '24px'}}>
+                                                <div className="title" style={{'marginRight': '1rem'}}>
                                                   {prog.attributes.title}
                                                 </div>
                                                 <div className="artists">
@@ -117,13 +126,13 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                         </div>
                                         
                                       } 
-                                      </>                       
+                                      </div>                       
                                     )
                                   })}
                                   </>
                                 )
                               })}
-                            </div>
+                            </>
                           )
                         })}
                       </div>

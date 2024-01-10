@@ -3,12 +3,14 @@
 *:focus {outline:0;}
 
 
-
 .timetable{
 	height: auto;
 	overflow-y: hidden;
 	zoom: 90%;
   position: relative;
+	.hide{
+		display: none;
+	}
   .date{
     height: 50px;
 		position: sticky;
@@ -127,13 +129,13 @@
 		display: flex;
 		// height: auto;
 		&:nth-child(2){
-			margin-top: 100px;
+			margin-top: 5rem;
 		}
 		// margin-top: 10px;
 		.sub-bar{
 			height: 80px;
 			position: sticky;
-			margin-left: -250px;
+			margin-left: -10rem;
 			&:first-child{
 				margin-top: 70px;
 			}
@@ -144,7 +146,7 @@
 		}
 		.subloc-wrapper{
 			position: sticky;
-			margin-left: -250px;
+			margin-left: -10rem;
 			.subloc {
 				position: relative;
 				display: flex;
@@ -178,7 +180,7 @@
 				display: flex;
 				.inner-wrapper{
 					position: sticky;
-					left: 260px;
+					left: 13rem;
 					
 					// display: flex;
 					// flex-wrap: wrap;
@@ -204,14 +206,14 @@
 	}
 	.timetable-times{
 		white-space: nowrap;
-		margin-left: 250px;
-		width: calc(24 * 200px + 250px);
+		margin-left: 12rem;
+		width: calc(24 * 10rem + 12rem);
 		position: absolute;
 		height: 100%;
 		top: -48px;
 		.time-block{
 			display: inline-block;
-			width: 200px;
+			width: 10rem;
 			border-left: 1px solid black;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
@@ -228,51 +230,3 @@
 	}
 }
 
-@media only screen and (max-width: 900px) {
-	.timetable{
-		.timetable-menu{
-			margin-top: 14px;
-			select{
-				font-size: 80%;
-			}
-		}
-		.timetable-times{
-			margin-left: 100px;
-			width: calc(24 * 100px + 50px);
-		}
-		.timetable-locations{
-			.timetable-wrapper{
-				width: calc(24 * 100px + 50px);
-			}
-			.location{
-				width: 100px;
-				margin-left: -5px;
-				h4{
-					padding: 24px 0;
-					font-size: 80%;
-				}
-				p{
-					font-size: 70%;
-					padding-left: 0px;
-					word-break: keep-all;
-				}
-			}
-		}
-		.timetable-row{
-			.sub-bar{
-				&:first-child{
-					margin-top: 74px;
-				}
-				height: 68px;
-			}
-			.programme{
-				left: calc(var(--margin) - 150px);
-				.inner-programme{
-					.inner-wrapper{
-						left: 110px;
-					}
-				}
-			}
-		} 
-	}
-}
