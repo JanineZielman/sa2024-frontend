@@ -45,6 +45,20 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
       }
     }
   })
+
+  useEffect(() => {
+    const currentDate = Moment(new Date().toDateString()).format('ddd-D-MMM');
+    setTimeout(function() {
+      $("body, html").animate({
+        scrollTop: 200
+      });
+    }, 1000);
+    setTimeout(function() {
+      document.getElementById(currentDate)?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 2000);
+  }, [])
   
   return (
     <>

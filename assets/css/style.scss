@@ -2,6 +2,10 @@
 
 *:focus {outline:0;}
 
+body{
+	scroll-behavior: smooth;
+}
+
 
 .timetable{
 	height: auto;
@@ -36,7 +40,10 @@
 	}
 
 	.timetable-locations{
-		margin-top: 4rem;
+		padding-top: 7rem;
+		&:first-child{
+			padding-top: 0;
+		}
 		.timetable-wrapper {
 			width: calc(24 * 10rem);
 			position: relative;
