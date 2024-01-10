@@ -61,14 +61,18 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
             
              
                 {dates.map((day, i) => {
-                  const number = 0;
-                  // programmes.forEach((programme) => {
-                  //   let items = programme.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
-                  //   let items2 = items.sort((a,b) => a.start_time?.slice(0,2) - b.start_time?.slice(0,2))
-                  //   if(items2[0]?.start_time?.slice(0,2)){
-                  //     number = items[0]?.start_time?.slice(0,2) - 7;
-                  //   }
-                  // });
+                  let number = 0;
+                  let list = [];
+                  programmes.forEach((programme) => {
+                    let items = programme.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
+                    if(items[0]?.start_time){
+                      list.push(items[0].start_time.slice(0,2))
+                    }
+                   
+                  });
+                  if (list.sort()[0]){
+                    number = list.sort()[0] - 7
+                  }
                   return(
                     <div className="timetable-locations" id={`${Moment(day).format('ddd-D-MMM')}`}>
                       <div className="day timetable-wrapper">
