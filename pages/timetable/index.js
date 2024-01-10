@@ -37,15 +37,14 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
     }, 1000);
 	}, [])
 
-  // useEffect(() => {
-  //   let days = document.getElementsByClassName('timetable-locations')
-  //   for (let i = 0; i<days.length; i=i+1){
-  //     // console.log(days[i].getElementsByClassName('timetable-row')[2].children)
-  //     if (days[i].getElementsByClassName('timetable-row')[1].children.length < 1){
-  //       days[i].classList.add('hide');
-  //     }
-  //   }
-  // })
+  useEffect(() => {
+    let days = document.getElementsByClassName('timetable-locations')
+    for (let i = 0; i<days.length; i=i+1){
+      if (days[i].getElementsByClassName('loc-text').length < 1){
+        days[i].classList.add('hide');
+      }
+    }
+  })
   
   return (
     <>
@@ -100,7 +99,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                       <>
                                       { loc.attributes.title == item.location.data?.attributes.title  &&
                                         <div className={`location ${loc.attributes.sub ? 'sub' : ''} ${l}`} key={`loc${l}`}>
-                                          <p>{loc.attributes.title}</p>
+                                          <p className="loc-text">{loc.attributes.title}</p>
                                         </div>
                                       }
                                       { loc.attributes.title == item.location.data?.attributes.title &&
