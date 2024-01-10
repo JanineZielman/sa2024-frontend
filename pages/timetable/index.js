@@ -38,13 +38,15 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
 	}, [])
 
   useEffect(() => {
-    let days = document.getElementsByClassName('timetable-locations')
-    for (let i = 0; i<days.length; i=i+1){
-      if (days[i].getElementsByClassName('loc-text').length < 1){
-        days[i].classList.add('hide');
+    setTimeout(function() {
+      let days = document.getElementsByClassName('timetable-locations');
+      for (let i = 0; i<days.length; i=i+1){
+        if (days[i].getElementsByClassName('loc-text').length < 1){
+          days[i].classList.add('hide');
+        }
       }
-    }
-  })
+    }, 2000);
+  }, [])
 
   useEffect(() => {
     const currentDate = Moment(new Date().toDateString()).format('ddd-D-MMM');
