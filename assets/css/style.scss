@@ -105,6 +105,13 @@
 			display: none;
 			vertical-align: middle;
 			word-break: break-all;
+			&.sub{
+				border-top: none;
+				margin-top: -1px;
+				p{
+					opacity: 0;
+				}
+			}
 			h4{
 				font-weight: 500;
 				margin: 0;

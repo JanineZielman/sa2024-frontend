@@ -37,15 +37,15 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
     }, 1000);
 	}, [])
 
-  useEffect(() => {
-    let days = document.getElementsByClassName('timetable-locations')
-    for (let i = 0; i<days.length; i=i+1){
-      console.log(days[i].getElementsByClassName('timetable-row')[2].children)
-      if (days[i].getElementsByClassName('timetable-row')[1].children.length < 1){
-        days[i].classList.add('hide');
-      }
-    }
-  })
+  // useEffect(() => {
+  //   let days = document.getElementsByClassName('timetable-locations')
+  //   for (let i = 0; i<days.length; i=i+1){
+  //     // console.log(days[i].getElementsByClassName('timetable-row')[2].children)
+  //     if (days[i].getElementsByClassName('timetable-row')[1].children.length < 1){
+  //       days[i].classList.add('hide');
+  //     }
+  //   }
+  // })
   
   return (
     <>
@@ -98,8 +98,8 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                     const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
                                     return(
                                       <>
-                                      { loc.attributes.title == item.location.data?.attributes.title &&
-                                        <div className={`location ${l}`} key={`loc${l}`}>
+                                      { loc.attributes.title == item.location.data?.attributes.title  &&
+                                        <div className={`location ${loc.attributes.sub ? 'sub' : ''} ${l}`} key={`loc${l}`}>
                                           <p>{loc.attributes.title}</p>
                                         </div>
                                       }
@@ -162,7 +162,7 @@ export async function getServerSideProps() {
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
 	  fetchAPI(`/programme-items?filters[biennial][slug][$eq]=${params.slug}&populate[WhenWhere][populate]=*&populate[WhenWhere][location][populate]=*&populate[community_items][populate]=*&pagination[limit]=${100}`),
-    fetchAPI(`/locations?filters[biennial][slug][$eq]=${params.slug}&populate[programme_items][populate]=*`),
+    fetchAPI(`/locations?filters[biennial][slug][$eq]=${params.slug}&populate[programme_items][populate]=*&sort[0]=title:asc`),
   ])
 
 	
