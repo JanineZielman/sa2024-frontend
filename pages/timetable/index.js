@@ -104,7 +104,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                       }
                                       { loc.attributes.title == item.location.data?.attributes.title &&
                                         <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
-                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme`} style={{'--margin': ((startTime - 7 - number) * 10 + 12) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 10  + 'rem'}}>
+                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme ${prog.attributes.hide_in_timetable ? 'hide' : '' }`} style={{'--margin': ((startTime - 7 - number) * 10 + 12) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 10  + 'rem'}}>
                                             <div className="inner-programme">
                                               <div className="inner-wrapper">
                                                 <div className="time">
