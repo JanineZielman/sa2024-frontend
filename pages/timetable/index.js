@@ -5,7 +5,6 @@ import Moment from 'moment'
 
 
 const Timetable = ({ global, festival, programmes, locRes}) => {
-
   const [loading, setLoading] = useState(true);
 
   function getDates (startDate, endDate) {
@@ -83,8 +82,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                     let items = programme.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
                     if(items[0]?.start_time){
                       list.push(items[0].start_time.slice(0,2))
-                    }
-                   
+                    }            
                   });
                   if (list.sort()[0]){
                     number = list.sort()[0] - 7
@@ -180,7 +178,7 @@ export async function getServerSideProps() {
   const [festivalRes, globalRes, programmeRes, locRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-	  fetchAPI(`/programme-items?filters[biennial][slug][$eq]=${params.slug}&populate[WhenWhere][populate]=*&populate[WhenWhere][location][populate]=*&populate[community_items][populate]=*&pagination[limit]=${100}`),
+	  fetchAPI(`/programme-items?filters[biennial][slug][$eq]=${params.slug}&publicationState=preview&populate[WhenWhere][populate]=*&populate[WhenWhere][location][populate]=*&populate[community_items][populate]=*&pagination[limit]=${100}`),
     fetchAPI(`/locations?filters[biennial][slug][$eq]=${params.slug}&populate[programme_items][populate]=*&sort[0]=title:asc`),
   ])
 
