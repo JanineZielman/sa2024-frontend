@@ -1,3 +1,9 @@
 @import url("https://sonicacts.knoth-renner.com/css/style.css");
 
 *:focus {outline:0;}
+
+.ticket.sold-out {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: progress;
+}

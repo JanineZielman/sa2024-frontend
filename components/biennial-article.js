@@ -216,7 +216,7 @@ const Article = ({page, relations, programmeLocations}) => {
 
 										{relations.attributes.embed == true ?
 											<>
-												<div className={`ticket ${relations?.attributes?.ticket_link ? '' : 'available-soon' } ${relations.attributes?.title?.replace(/\s|:/g, '')}`} onClick={handleShow}>
+												<div className={`ticket ${relations?.attributes?.ticket_link ? '' : 'available-soon' } ${relations?.attributes?.price == 'SOLD OUT' && 'sold-out'} ${relations.attributes?.title?.replace(/\s|:/g, '')}`} onClick={handleShow}>
 
 													<h3>Tickets</h3>
 
