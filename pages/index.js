@@ -11,13 +11,11 @@ const Festival = ({ global, festival}) => {
 		async function getNews() {
 			console.log("news")
 		
-			const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[biennial_cover_image][populate]=*&populate[cover_image][populate]=*");
+			const response = await fetch("https://cms.sonicacts.com/api/news-items?filters[biennials][slug][$eq]=biennial-2024&sort[0]=date%3Adesc&populate[content][populate]=*&populate[biennial_cover_image][populate]=*&populate[cover_image][populate]=*&populate[footnotes][populate]=*");
 	
 			const news = await response.json();
 	
 			$.each(news.data, function( index, value ) {
-	
-				//console.log(value.attributes);
 		
 				var $news = $("<div class='news-item'></div>");
 				var $newsImage = $("<div class='news-image'></div>");
@@ -70,6 +68,7 @@ const Festival = ({ global, festival}) => {
 							$moreContent.append(marked.parse(value.text_block));
 						}
 					}
+
 	
 					if (value.__component == "basic.image") {
 						//console.log(value.image.data.attributes.url);
@@ -85,6 +84,10 @@ const Festival = ({ global, festival}) => {
 					}
 	
 				})
+
+				if(value.attributes.footnotes?.footnotes){
+					$moreContent.append(`<p>${value.attributes.footnotes?.footnotes}</p>`);
+				}
 	
 				$newsContent.append($moreContent);
 	

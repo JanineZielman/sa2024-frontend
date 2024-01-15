@@ -8,7 +8,8 @@ import Modal from 'react-modal';
 
 const Article = ({page, relations, programmeLocations}) => {
 
-	let dates = relations.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+	// let dates = relations.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+	let dates = relations.attributes.WhenWhere;
 	let start_date = new Date(dates?.[0]?.date.split('/').reverse().join('/'));
 	let end_date = new Date(dates?.[dates?.length - 1]?.date.split('/').reverse().join('/'));
 
@@ -203,7 +204,6 @@ const Article = ({page, relations, programmeLocations}) => {
 
 								{relations.attributes.registration_link &&
 									<a href={relations.attributes.registration_link} className="register-wrapper">
-										<span>Register</span>
 										<div>
 											{relations.attributes.registration_label && relations.attributes.registration_label}
 										</div>
@@ -216,7 +216,7 @@ const Article = ({page, relations, programmeLocations}) => {
 
 										{relations.attributes.embed == true ?
 											<>
-												<div className={`ticket ${relations?.attributes?.ticket_link?.link ? '' : 'available-soon' } ${relations.attributes?.title?.replace(/\s|:/g, '')}`} onClick={handleShow}>
+												<div className={`ticket ${relations?.attributes?.ticket_link ? '' : 'available-soon' } ${relations?.attributes?.price == 'SOLD OUT' && 'sold-out'} ${relations.attributes?.title?.replace(/\s|:/g, '')}`} onClick={handleShow}>
 
 													<h3>Tickets</h3>
 
@@ -236,7 +236,7 @@ const Article = ({page, relations, programmeLocations}) => {
 												</Modal>
 											</>
 											:
-											<a className={`ticket ${relations.attributes.programme_item?.data?.attributes?.slug} ${relations.attributes?.title?.replace(/\s|:/g, '')}`} target="_blank">
+											<a href={relations.attributes.ticket_link} className={`ticket ${relations?.attributes?.ticket_link ? '' : 'available-soon' } ${relations.attributes?.title?.replace(/\s|:/g, '')}`} target="_blank">
 												<h3>Tickets</h3>
 												<div className="ticket-content">
 													<ReactMarkdown children={relations.attributes.price}/>

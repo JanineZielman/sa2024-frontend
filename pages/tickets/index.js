@@ -46,7 +46,7 @@ const Tickets = ({global, tickets, festival, params }) => {
                 <>
                   {ticket.embed ?
                     <>
-                    <div className={`ticket ${ticket?.link ? '' : 'available-soon' } ${ticket.title.replace(/\s/g, '')}`}>
+                    <div className={`ticket ${ticket?.link ? '' : 'available-soon' } ${ticket?.price == 'SOLD OUT' && 'sold-out'} ${ticket.title.replace(/\s/g, '')}`}>
                         <div className="ticket-content">
                           <h3>
                             {ticket.title} <br/>
@@ -72,7 +72,7 @@ const Tickets = ({global, tickets, festival, params }) => {
                       </Modal>
                     </>
                     :
-                    <div className={`ticket ${ticket?.link ? '' : 'available-soon' } ${ticket.title.replace(/\s/g, '')}`}>
+                    <div className={`ticket ${ticket?.link ? '' : 'available-soon' } ${ticket?.price == 'SOLD OUT' && 'sold-out'} ${ticket.title.replace(/\s/g, '')}`}>
                       <div className="ticket-content">
                         <h3>
                           {ticket.title} <br/>

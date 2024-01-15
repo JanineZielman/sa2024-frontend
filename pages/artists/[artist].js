@@ -1,7 +1,7 @@
 import { fetchAPI } from "../../lib/api"
 import Layout from "../../components/layout"
 import BiennialArticle from "../../components/biennial-article"
-import LazyLoad from 'react-lazyload';
+import LazyLoad from "react-lazyload";
 import Moment from 'moment';
 import Image from "../../components/image"
 
@@ -15,9 +15,11 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
         <div className="discover sub">
-          <div className="subtitle">
-            <h2>{`Programme${programmes.data.length > 1 ? 's' : ''}`}</h2>
-          </div>
+          {programmes.data.length > 0 &&
+            <div className="subtitle">
+              <h2>{`Programme${programmes.data.length > 1 ? 's' : ''}`}</h2>
+            </div>
+          }
           <div className="discover-container programme-container">
             {programmes.data.map((item, i) => {
               let tags = "";
@@ -70,6 +72,44 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
             })}
           </div>
         </div>
+        {relations.attributes.community_items.data.length > 0 &&
+          <div className="discover artists">
+            <div className="subtitle">
+              <h1>Artists</h1>
+            </div>
+            <div className="discover-container programme-container sub-programme-container">
+              <div className="day-programme">
+                <div className="discover-container programme-container sub-programme-container">
+                  <div className="items-wrapper">
+                    {relations.attributes.community_items.data.map((item, i) => {
+                      return(
+                        <div className="discover-item artist-item">
+                          <LazyLoad height={600}>
+                            <div className="item-wrapper">
+                              <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                                <div className="image">
+                                  <div className="image-inner">
+                                    {item.attributes.cover_image?.data &&
+                                      <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                    }
+                                  </div>
+                                </div>
+
+                                <div className="category-title-wrapper">
+                                  <div className="title" style={{paddingBottom: '0', margin: 0}}>{item.attributes.name}</div>
+                                </div>
+                              </a>
+                            </div>
+                          </LazyLoad>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
       </Layout>
     </section> 
   )
@@ -86,7 +126,7 @@ export async function getServerSideProps({params, query}) {
   );
 
   const pageRel = 
-    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[community_items][populate]=*&populate=*`
   );
   
   const programmesRes = 
