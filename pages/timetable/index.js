@@ -87,24 +87,39 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
              
                 {dates.map((day, i) => {
                   let number = 0;
+                  let end = 24;
                   let list = [];
+                  let list2 = [];
+                  let timeWidth = 24;
                   programmes.forEach((programme) => {
                     let items = programme.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
                     if(items[0]?.start_time){
                       list.push(items[0].start_time.slice(0,2))
+                    }
+                    if(items[0]?.end_time){
+                      if(items[0].end_time.slice(0,1) == 0){
+                        list2.push(24 + Number(items[0].end_time.slice(0,2)))
+                      } else{
+                        list2.push(items[0].end_time.slice(0,2))
+                      }
                     }            
                   });
                   if (list.sort()[0]){
                     number = list.sort()[0] - 7
                   }
+                  if (list2.sort()[0]){
+                    end = Number(list2.sort().reverse()[0]) - number - 1
+                    timeWidth = end - 6
+                  }
+                  
                   return(
                     <div className="timetable-locations" id={`${Moment(day).format('ddd-D-MMM')}`}>
-                      <div className="day timetable-wrapper">
-                        <div className="timetable-row">
+                      <div className="day timetable-wrapper" style={{'--width': timeWidth * 12 + 'rem'}}>
+                        <div className={`timetable-row`}>
                           <h1 className="date">{Moment(day).format('ddd D MMM')}</h1>
                         </div>
-                        <div key={`times${i}`} className="timetable-times">
-                          {times.slice(number).map((time, i) => {
+                        <div key={`times${i}`} className="timetable-times" style={{'--width': timeWidth * 12 + 'rem'}}>
+                          {times.slice(number, end).map((time, i) => {
                             return(
                               <div key={`time${i}`} className="time-block">
                                 <div className="time">{time}</div>
@@ -114,7 +129,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                         </div>
                         {locRes.map((loc, j) => {
                           return(
-                            <div className="timetable-row">
+                            <div className={`timetable-row ${loc.attributes.slug}`}>
                               {loc.attributes.programme_items.data.map((prog, k) => {
                                 let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
                                 let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));

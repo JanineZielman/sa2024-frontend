@@ -45,7 +45,7 @@ body{
 			padding-top: 0;
 		}
 		.timetable-wrapper {
-			width: calc(24 * 12rem);
+			width: var(--width);
 			position: relative;
 		}
 		overflow-x: scroll;
@@ -161,7 +161,8 @@ body{
 	.timetable-times{
 		white-space: nowrap;
 		margin-left: 11rem;
-		width: calc(24 * 12rem + 10rem);
+		width: var(--width);
+		// width: calc(24 * 12rem + 10rem);
 		position: absolute;
 		height: 100%;
 		top: 0;
