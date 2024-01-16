@@ -130,7 +130,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                       }
                                       { loc.attributes.title == item.location.data?.attributes.title &&
                                         <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
-                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme ${prog.attributes.hide_in_timetable ? 'hide' : '' }`} style={{'--margin': ((startTime - 7 - number) * 10 + 11) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 10  + 'rem'}}>
+                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme ${prog.attributes.hide_in_timetable ? 'hide' : '' }`} style={{'--margin': ((startTime - 7 - number) * 12 + 11) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 12  + 'rem'}}>
                                             <div className="inner-programme">
                                               <div className="inner-wrapper">
                                                 <div className="time">
@@ -140,13 +140,15 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                                                   <div className="title">
                                                     {prog.attributes.title}
                                                   </div>
-                                                  <div className="artists">
-                                                    {fullProgItem.attributes.community_items.data.map((com, k) => {
-                                                      return(
-                                                        <div>{com.attributes.name}</div>
-                                                      )
-                                                    })}
-                                                  </div>
+                                                  {prog.attributes.hide_artists_in_timetable != true &&
+                                                    <div className="artists">
+                                                      {fullProgItem.attributes.community_items.data.map((com, k) => {
+                                                        return(
+                                                          <div>{com.attributes.name}</div>
+                                                        )
+                                                      })}
+                                                    </div>
+                                                  } 
                                                 </div>
                                               </div>
                                             </div>
