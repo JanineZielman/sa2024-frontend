@@ -60,6 +60,14 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
       });
     }, 2000);
   }, [])
+
+  useEffect(()=>{
+    for (let j = 0; j<document.getElementsByClassName('timetable-row').length; j=j+1){
+      if(document.getElementsByClassName('timetable-row')[j].children.length == 0){
+        document.getElementsByClassName('timetable-row')[j].remove()
+      }
+    }
+  })
   
   return (
     <>
