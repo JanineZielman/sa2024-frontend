@@ -79,7 +79,9 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
       :
       <section className="festival-wrapper">
         <Layout  global={global} festival={festival}>
-          <div className="title-wrapper"></div>
+          <div className="title-wrapper">
+            <h1 className="page-title">Timetable</h1>
+          </div>
           <div className="timetable">
             
              
