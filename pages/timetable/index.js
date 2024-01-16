@@ -97,7 +97,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                       list.push(items[0].start_time.slice(0,2))
                     }
                     if(items[0]?.end_time){
-                      if(items[0].end_time.slice(0,1) == 0){
+                      if(Number(items[0].end_time.slice(0,2)) < 7){
                         list2.push(24 + Number(items[0].end_time.slice(0,2)))
                       } else{
                         list2.push(items[0].end_time.slice(0,2))
@@ -108,80 +108,82 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                     number = list.sort()[0] - 7
                   }
                   if (list2.sort()[0]){
-                    end = Number(list2.sort().reverse()[0]) - number - 1
-                    timeWidth = end - 6
+                    end = Number(list2.sort().reverse()[0]) - 6
+                    timeWidth = Number(list2.sort().reverse()[0]) -  Number(list.sort()[0])
                   }
                   
                   return(
-                    <div className="timetable-locations" id={`${Moment(day).format('ddd-D-MMM')}`}>
-                      <div className="day timetable-wrapper" style={{'--width': timeWidth * 12 + 'rem'}}>
-                        <div className={`timetable-row`}>
-                          <h1 className="date">{Moment(day).format('ddd D MMM')}</h1>
-                        </div>
-                        <div key={`times${i}`} className="timetable-times" style={{'--width': timeWidth * 12 + 'rem'}}>
-                          {times.slice(number, end).map((time, i) => {
+                    <div className="timetable-locations-outer-wrapper">
+                      <div className="timetable-locations" id={`${Moment(day).format('ddd-D-MMM')}`}>
+                        <div className="day timetable-wrapper" style={{'--width': timeWidth * 12 + 12 + 'rem'}}>
+                          <div className={`timetable-row`}>
+                            <h1 className="date">{Moment(day).format('ddd D MMM')}</h1>
+                          </div>
+                          <div key={`times${i}`} className="timetable-times" style={{'--width': timeWidth * 12 + 12 + 'rem'}}>
+                            {times.slice(number, end).map((time, i) => {
+                              return(
+                                <div key={`time${i}`} className="time-block">
+                                  <div className="time">{time}</div>
+                                </div>
+                              )
+                            })}
+                          </div>
+                          {locRes.map((loc, j) => {
                             return(
-                              <div key={`time${i}`} className="time-block">
-                                <div className="time">{time}</div>
+                              <div className={`timetable-row ${loc.attributes.slug}`}>
+                                {loc.attributes.programme_items.data.map((prog, k) => {
+                                  let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
+                                  let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
+                                  return(
+                                    <>
+                                    {items?.map((item, l) => {
+                                      const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
+                                      const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
+                                      return(
+                                        <>
+                                        { loc.attributes.title == item.location.data?.attributes.title  &&
+                                          <div className={`location ${loc.attributes.sub ? 'sub' : ''} ${l}`} key={`loc${l}`}>
+                                            <p className="loc-text">{loc.attributes.title}</p>
+                                          </div>
+                                        }
+                                        { loc.attributes.title == item.location.data?.attributes.title &&
+                                          <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
+                                            <a href={`/programme/${prog.attributes.slug}`} className={`programme ${prog.attributes.hide_in_timetable ? 'hide' : '' }`} style={{'--margin': ((startTime - 7 - number) * 12 + 11) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 12  + 'rem'}}>
+                                              <div className="inner-programme">
+                                                <div className="inner-wrapper">
+                                                  <div className="time">
+                                                    {item.start_time}–{item.end_time}
+                                                  </div>
+                                                  <div className="title-artist-wrapper">
+                                                    <div className="title">
+                                                      {prog.attributes.title}
+                                                    </div>
+                                                    {prog.attributes.hide_artists_in_timetable != true &&
+                                                      <div className="artists">
+                                                        {fullProgItem.attributes.community_items.data.map((com, k) => {
+                                                          return(
+                                                            <div>{com.attributes.name}</div>
+                                                          )
+                                                        })}
+                                                      </div>
+                                                    } 
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </a>
+                                          </div>
+                                          
+                                        } 
+                                        </>                       
+                                      )
+                                    })}
+                                    </>
+                                  )
+                                })}
                               </div>
                             )
                           })}
                         </div>
-                        {locRes.map((loc, j) => {
-                          return(
-                            <div className={`timetable-row ${loc.attributes.slug}`}>
-                              {loc.attributes.programme_items.data.map((prog, k) => {
-                                let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
-                                let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
-                                return(
-                                  <>
-                                  {items?.map((item, l) => {
-                                    const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
-                                    const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
-                                    return(
-                                      <>
-                                      { loc.attributes.title == item.location.data?.attributes.title  &&
-                                        <div className={`location ${loc.attributes.sub ? 'sub' : ''} ${l}`} key={`loc${l}`}>
-                                          <p className="loc-text">{loc.attributes.title}</p>
-                                        </div>
-                                      }
-                                      { loc.attributes.title == item.location.data?.attributes.title &&
-                                        <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
-                                          <a href={`/programme/${prog.attributes.slug}`} className={`programme ${prog.attributes.hide_in_timetable ? 'hide' : '' }`} style={{'--margin': ((startTime - 7 - number) * 12 + 11) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 12  + 'rem'}}>
-                                            <div className="inner-programme">
-                                              <div className="inner-wrapper">
-                                                <div className="time">
-                                                  {item.start_time}–{item.end_time}
-                                                </div>
-                                                <div className="title-artist-wrapper">
-                                                  <div className="title">
-                                                    {prog.attributes.title}
-                                                  </div>
-                                                  {prog.attributes.hide_artists_in_timetable != true &&
-                                                    <div className="artists">
-                                                      {fullProgItem.attributes.community_items.data.map((com, k) => {
-                                                        return(
-                                                          <div>{com.attributes.name}</div>
-                                                        )
-                                                      })}
-                                                    </div>
-                                                  } 
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </a>
-                                        </div>
-                                        
-                                      } 
-                                      </>                       
-                                    )
-                                  })}
-                                  </>
-                                )
-                              })}
-                            </div>
-                          )
-                        })}
                       </div>
                     </div>
                   )
