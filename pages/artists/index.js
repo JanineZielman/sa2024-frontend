@@ -14,7 +14,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[start]=${posts.length}&pagination[limit]=100 
+      `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug:asc&pagination[start]=${posts.length}&pagination[limit]=100 
       &populate=*`
     );
     const newPosts = await res.data;
@@ -86,11 +86,11 @@ export async function getServerSideProps() {
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100 
+  const items = await fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug:asc&pagination[limit]=100 
   &populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100`);
+    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug:asc&pagination[limit]=100`);
 
   //console.log("items items items items ");
   //console.log(items);
