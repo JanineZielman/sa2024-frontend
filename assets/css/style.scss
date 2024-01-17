@@ -2,6 +2,189 @@
 
 *:focus {outline:0;}
 
+body{
+	scroll-behavior: smooth;
+}
+
+
+.timetable{
+	height: auto;
+	overflow-y: hidden;
+	zoom: 90%;
+  position: relative;
+	.hide{
+		display: none!important;
+	}
+  .date{
+		position: sticky;
+		left: 0;
+		padding: 2.5rem 0 0.5rem 0;
+  }
+  .day{
+    position: relative;
+  }
+	.artists {
+		display: flex;
+		flex-wrap: wrap;
+		font-size: 80%;
+		div {
+			margin-left: 5px;
+		}
+
+		div:after {
+			content: ', '
+		}
+		div:last-child:after {
+			content: ''
+		}
+	}
+
+	.timetable-locations{
+		padding-top: 7rem;
+		&:first-child{
+			padding-top: 0;
+		}
+		.timetable-wrapper {
+			width: var(--width);
+			position: relative;
+		}
+		overflow-x: scroll;
+		/* width */
+		&::-webkit-scrollbar {
+			width: 1rem;
+			height: 1rem;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: transparent;
+			border: 1px solid black;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: black;
+			border-radius: 25px;
+		}
+
+		overflow-y: hidden;
+		padding-bottom: 2rem;
+		.location{
+			height: 100%;
+			border-top: 1px solid black;
+			position: sticky;
+			z-index: 5;
+			left: 0;
+			width: 10rem;
+			background-color: #b4c8c8;
+			display: none;
+			vertical-align: middle;
+			word-break: break-all;
+			&.sub{
+				border-top: none;
+				margin-top: -1px;
+				p{
+					opacity: 0;
+				}
+			}
+			h4{
+				font-weight: 500;
+				margin: 0;
+				padding: 20px 0;
+			}
+			&:first-child{
+        display: inline-block;
+      }
+			p{
+				font-weight: 300;
+				margin: 0;
+				font-size: 1rem;
+				padding: 1.5rem 0;
+				border-bottom: 1px solid black;
+				padding-left: 14px;
+			}
+		}
+	}
+	.timetable-row{
+		vertical-align: middle;
+		position: relative;
+		display: flex;
+		&:nth-child(2){
+			margin-top: 5rem;
+		}
+		.programme{
+			display: inline-block;
+			vertical-align: middle;
+			background-color: white;
+			vertical-align: middle;
+			left: var(--margin);
+			width: var(--width);
+			position: absolute;
+			height: 95%;
+			border-radius: 10px;
+			transition: all 0.4s ease-in-out;
+			top: 0;
+			&:hover{
+				background-color: #000!important;
+				color: white;
+			}
+			.inner-programme {
+				padding: 10px;
+				box-sizing: border-box;
+				font-size: 0.8rem;
+				width: 100%;
+				position: relative;
+				display: flex;
+				height: 100%;
+				.inner-wrapper{
+					position: sticky;
+					left: 10.5rem;
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+				}
+				.time{
+					margin-left: 5px;
+				}
+				.title{
+					font-weight: 500;
+					margin-left: 5px;
+					display: -webkit-box;
+					-webkit-line-clamp: 1;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+				}
+			}
+		}
+	}
+	.timetable-times{
+		white-space: nowrap;
+		margin-left: 11rem;
+		width: var(--width);
+		// width: calc(24 * 12rem + 10rem);
+		position: absolute;
+		height: 100%;
+		top: 0;
+		.time-block{
+			display: inline-block;
+			width: 12rem;
+			border-left: 1px solid black;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			height: 100%;
+			padding-left: 10px;
+      z-index: 999;
+      font-size: 1rem;
+		}
+	}
+	.date.active{
+		background-color: #000;
+		color: white;
+	}
+}
+
 .ticket.sold-out {
   opacity: 0.5;
   pointer-events: none;
