@@ -175,22 +175,35 @@ const Article = ({page, relations, programmeLocations}) => {
 												<div className="location">
 													{
 													    loc.attributes.title.startsWith("Online") ? (
-															<div>
-																<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
-																{relations?.attributes.hide_opening_times != true &&
-																	<ReactMarkdown children={locInfo[0]?.opening_times}/>
-																}
-																<ReactMarkdown 
-																	children={loc.attributes.additional_info} 
-																/>
-															</div>
+																loc.attributes.link ?
+																	<a target="_blank" href={loc.attributes.link}>
+																		<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
+																		{relations?.attributes.hide_opening_times != true &&
+																			<ReactMarkdown children={locInfo[0]?.opening_times}/>
+																		}
+																		<ReactMarkdown 
+																			children={loc.attributes.additional_info} 
+																		/>
+																	</a>
+																:
+																<div>
+																	<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
+																	{relations?.attributes.hide_opening_times != true &&
+																		<ReactMarkdown children={locInfo[0]?.opening_times}/>
+																	}
+																	<ReactMarkdown 
+																		children={loc.attributes.additional_info} 
+																	/>
+																</div>
 														) : (
 															<a href={`/visit`}>
 																<h4>{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}</h4>
 																{relations?.attributes.hide_opening_times != true &&
-																	<ReactMarkdown children={locInfo[0]?.opening_times}/>
+																	<ReactMarkdown className="opening-times" children={locInfo[0]?.opening_times}/>
 																}
+																{loc.attributes.floorplan?.data?.attributes.url && <a className="floorplan" target="_blank" href={'https://cms.sonicacts.com' + loc.attributes.floorplan?.data?.attributes.url}>Floorplan</a>}
 																<ReactMarkdown 
+																	className="additional-info"
 																	children={loc.attributes.additional_info} 
 																/>
 															</a>

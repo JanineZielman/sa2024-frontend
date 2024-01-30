@@ -8,7 +8,7 @@ const Visit = ({ global, festival, programmeLoc }) => {
 
   let programmeLocations = programmeLoc.attributes.location_item;
 
-  console.log(programmeLocations)
+  console.log(festival)
 
   useEffect(() => {
     setTimeout(function(){
@@ -96,10 +96,16 @@ const Visit = ({ global, festival, programmeLoc }) => {
       <Layout global={global} festival={festival}>
         <section className="article visit">
           <div className="content">
+            <div className="info-wrapper">
+              {festival.attributes.visit.map((item, i) => {
+                return(
+                  <ReactMarkdown children={item.text} />
+                )
+              })}
+            </div>
             <div className="wrapper">
               <div className="locations">
                 {programmeLocations.map((item, i) => {
-                  console.log(item)
                   return(
                     <div className="location" data-gps={item.location.data.attributes.gps}>
                       <h2>{item.location.data.attributes.title} {item.location.data.attributes.subtitle && <span> – {item.location.data.attributes.subtitle} </span>}</h2>
@@ -128,7 +134,7 @@ export async function getServerSideProps() {
 	}
   // Run API calls in parallel
   const [festivalRes, globalRes, programmeLoc] = await Promise.all([
-    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*&populate[visit][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI(`/programme-pages?filters[slug][$eq]=programme-2024&populate[location_item][populate]=*`),
   ])
