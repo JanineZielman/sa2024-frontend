@@ -140,9 +140,8 @@ const Article = ({page, relations, programmeLocations}) => {
 						<div className="sidebar">
 
 							<div className="sidebar-content">
-								{page.attributes.hide_when_where != true &&
+								{page.attributes.hide_when_where != true && !page.attributes.custom_when_where?.length > 0 ?
 									<div className="when-wrapper">
-										<h3>When</h3>
 										{dates?.length > 0 &&
 											<div className="when">
 												<span>
@@ -158,11 +157,18 @@ const Article = ({page, relations, programmeLocations}) => {
 												</span>
 											</div>
 										}
-										{relations.attributes.WhenWhere.length == 1 &&
+										{relations.attributes.WhenWhere?.length == 1 &&
 											<div className="time">
 												<span>{relations.attributes.WhenWhere[0].start_time}{relations.attributes.WhenWhere[0].end_time && `–${relations.attributes.WhenWhere[0].end_time}`}</span>
 											</div>
 										}
+									</div>
+									:
+									<div className="when-wrapper">
+										<ReactMarkdown
+											className="when"
+											children={page.attributes.custom_when_where} 
+										/>
 									</div>
 								}
 

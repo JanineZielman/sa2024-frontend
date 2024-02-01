@@ -6,6 +6,32 @@ body, html{
 	scroll-behavior: smooth;
 }
 
+.sidebar{
+	.sidebar-content{
+		.when-wrapper{
+			p{
+				color: #ffbbf1;
+				text-align: center;
+				font-family: "mono", monospace;
+				text-shadow: none;
+				line-height: 1;
+				font-size: 0.7rem;
+				strong{
+					font-family: "geist", sans-serif;
+					font-variation-settings: "wght" 200;
+					font-size: 2.2rem;
+					line-height: 1;
+					letter-spacing: -0.06rem;
+					text-transform: uppercase;
+					color: #ffbbf1;
+					text-align: center;
+					text-shadow: 0px 0px 0.3rem #ff820a;
+				}
+			}
+		}
+	}
+}
+
 .timetable-links{
 	display: flex;
 	flex-wrap: wrap;
