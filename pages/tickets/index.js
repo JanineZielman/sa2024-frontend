@@ -77,13 +77,19 @@ const Tickets = ({global, tickets, festival, params }) => {
                         <h3>
                           {ticket.title} <br/>
                           <ReactMarkdown children={ticket.subtitle}/>
-                          <a href={`/programme/${ticket.programme_item.data?.attributes.slug}`}>Find out more</a>
+                          {ticket.programme_item.data?.attributes.slug && <a href={`/programme/${ticket.programme_item.data?.attributes.slug}`}>Find out more</a>}
                         </h3>
                         
-                        <a className="price" href={ticket.link} target="_blank">
-                          <span>Buy tickets</span>
-                          <ReactMarkdown children={ticket.price}/>
-                        </a>
+                        {ticket.programme_item.data?.attributes.slug ?
+                          <a className="price" href={ticket.link} target="_blank">
+                            <span>Buy tickets</span>
+                            <ReactMarkdown children={ticket.price}/>
+                          </a>
+                        :
+                          <a className="price" href={ticket.link} target="_blank">
+                            <ReactMarkdown children={ticket.price}/>
+                          </a>
+                        }     
                       </div>
                     </div>
                   }
