@@ -2,10 +2,24 @@
 
 *:focus {outline:0;}
 
-body{
+body, html{
 	scroll-behavior: smooth;
 }
 
+.timetable-links{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	.timetable-link{
+		font-size: 0.8rem;
+		background-color: black;
+		color: white;
+		margin: 0 0.2rem;
+		border-radius: 1rem;
+		padding: 0.1rem 0.5rem;
+	}
+	padding-bottom: 2rem;
+}
 
 .timetable{
 	height: auto;

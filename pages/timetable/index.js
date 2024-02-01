@@ -7,6 +7,8 @@ import Moment from 'moment'
 const Timetable = ({ global, festival, programmes, locRes}) => {
   const [loading, setLoading] = useState(true);
 
+  console.log(festival)
+
   function getDates (startDate, endDate) {
     const dates = []
     let currentDate = startDate
@@ -81,6 +83,13 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
         <Layout  global={global} festival={festival}>
           <div className="title-wrapper">
             <h1 className="page-title">Timetable</h1>
+          </div>
+          <div className="timetable-links">
+            {festival.attributes.timetable.map((item, i) => {
+              return(
+                <a className="timetable-link" href={item.url}>{item.label}</a>
+              )
+            })}
           </div>
           <div className="timetable">
             
@@ -205,7 +214,7 @@ export async function getServerSideProps() {
   
   // Run API calls in parallel
   const [festivalRes, globalRes, programmeRes, locRes] = await Promise.all([
-    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*&populate[timetable][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
 	  fetchAPI(`/programme-items?filters[biennial][slug][$eq]=${params.slug}&populate[WhenWhere][populate]=*&populate[WhenWhere][location][populate]=*&populate[community_items][populate]=*&pagination[limit]=${100}`),
     fetchAPI(`/locations?filters[biennial][slug][$eq]=${params.slug}&populate[programme_items][populate]=*&sort[0]=title:asc&pagination[limit]=${100}`),
