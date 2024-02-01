@@ -46,15 +46,9 @@ const Article = ({page, relations, programmeLocations}) => {
 			<>
 				{page.attributes.title &&
 					<div className="title-wrapper">
-						{relations.attributes.biennial_tags?.data && 
+						{relations.attributes.main_programme_items.data[0]?.attributes.title &&
 							<div className="category">
-								{relations.attributes.biennial_tags.data.map((tag, i) => {
-									return(
-										<a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-											{tag.attributes.title}
-										</a>
-									)
-								})}
+								<a href={`/programme/${relations.attributes.main_programme_items.data[0].attributes.slug}`}>{relations.attributes.main_programme_items.data[0].attributes.title}</a>
 							</div>
 						}
 						<h1 className="page-title">{page.attributes.title}</h1>

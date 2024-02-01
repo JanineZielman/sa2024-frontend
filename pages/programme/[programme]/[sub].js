@@ -8,6 +8,8 @@ import Moment from "moment";
 
 const SubProgrammeItem = ({page, global, relations, params, sub, festival, programmeLoc}) => {
 
+  console.log(relations)
+
   let programmeLocations = programmeLoc.attributes.location_item;
 
   const [subItems, setSubItems] = useState();
