@@ -444,6 +444,7 @@ const Layout = ({ children, festival}) => {
         <div class="newsletter" onClick={handleShow}>
             Newsletter
         </div>
+        <a class="radio" href="https://radio.sonicacts.com/" target="_blank">Radio</a>
       </div>
       
       <div id="sa-logo">
