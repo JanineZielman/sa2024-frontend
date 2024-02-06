@@ -53,7 +53,10 @@ body, html{
 	zoom: 90%;
   position: relative;
 	.hide{
-		display: none!important;
+		// display: none!important;
+		visibility: hidden;
+		height: 0;
+		margin-bottom: -4rem;
 	}
   .date{
 		position: sticky;

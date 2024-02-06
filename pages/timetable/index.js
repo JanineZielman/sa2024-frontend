@@ -7,8 +7,6 @@ import Moment from 'moment'
 const Timetable = ({ global, festival, programmes, locRes}) => {
   const [loading, setLoading] = useState(true);
 
-  console.log(festival)
-
   function getDates (startDate, endDate) {
     const dates = []
     let currentDate = startDate
