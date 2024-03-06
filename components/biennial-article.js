@@ -224,7 +224,7 @@ const Article = ({page, relations, programmeLocations}) => {
 								}
 							</div>
 		
-							{relations.attributes.ticket_link &&
+							{relations.attributes.ticket_link ?
 								<div className="tickets-wrapper">
 
 										{relations.attributes.embed == true ?
@@ -257,6 +257,12 @@ const Article = ({page, relations, programmeLocations}) => {
 											</a>
 										}
 
+								</div>
+								:
+								<div className="free-tickets">
+									<div className="ticket-content">
+										<ReactMarkdown children={relations.attributes.price}/>
+									</div>
 								</div>
 							}
 							
