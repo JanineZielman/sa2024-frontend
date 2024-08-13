@@ -56,7 +56,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
                       <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
                         <div className="image">
                             <img 
-                              src={"https://cms.sonicacts.com/public"+item.attributes.cover_image.data.attributes.formats.small?.url}
+                              src={"https://cms.sonicacts.com/public"+item.attributes.cover_image.data?.attributes.formats.small?.url}
                             />
                         </div>
                         <div className="title">
