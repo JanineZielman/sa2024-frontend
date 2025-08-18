@@ -1,7 +1,7 @@
 import { fetchAPI } from "../../lib/api"
 import Layout from "../../components/layout"
 import BiennialArticle from "../../components/biennial-article"
-import LazyLoad from 'react-lazyload';
+import LazyLoad from "react-lazyload";
 import Moment from 'moment';
 import Image from "../../components/image"
 
@@ -9,14 +9,17 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
 
   page.attributes.slug = `community`
 
+
   return (  
     <section className="festival-wrapper template-single-artist">
       <Layout global={global} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
         <div className="discover sub">
-          <div className="filter">
-            Programmes
-          </div>
+          {programmes.data.length > 0 &&
+            <div className="subtitle">
+              <h2>{`Programme${programmes.data.length > 1 ? 's' : ''}`}</h2>
+            </div>
+          }
           <div className="discover-container programme-container">
             {programmes.data.map((item, i) => {
               let tags = "";
@@ -27,77 +30,86 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
               {item.attributes.cover_image}
 
               return(
-                <div className={`discover-item ${tags}`}>
-                  <LazyLoad height={600}>
-                    <div className="item-wrapper">
-                      <a href={`/programme/${item.attributes.slug}`} key={'discover'+i}>
-                        <div className="image">
-                          {item.attributes.cover_image?.data &&
-                            <Image image={item.attributes.cover_image?.data?.attributes} />
-                          }
+                <div className={`discover-item`}>
+                  <div className="item-wrapper">
+                    <a href={'/programme/' +item.attributes.slug} key={'discover'+i}>
+                      <div className="image">
+                        {item.attributes.WhenWhere[0] && page.attributes.hide_when_where == true &&
                           <div className="info-overlay">
-                            {item.attributes.locations.data[0] && 
-                              <>
-                                <span>Locations:</span>
-                                <div className="locations">
-                                  {item.attributes.locations.data.map((loc, j) => {
-                                    return(
-                                      <div className="location">
-                                        <span>{loc.attributes.title}</span>
-                                      </div>
-                                    )
-                                  })}
-                                </div>
-                              </>
-                            }
+                            <div>
+                              { (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
+                                <>
+                                  {Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
+                                </>
+                              : 
+                                <>
+                                  {Moment(start_date).format('D MMM')}   {dates.length > 1 && <>– {Moment(end_date).format('D MMM')}</>}
+                                </>
+                              }
+                            </div>
+                            <div className="times">
+                              <div className="time">
+                                <span>{item.attributes.WhenWhere[0].start_time} {item.attributes.WhenWhere[0].end_time && `— ${item.attributes.WhenWhere[0].end_time}`}</span>
+                              </div>
+                            </div>
                           </div>
+                        }
+                        <div className="image-inner">
+                          {item.attributes.cover_image?.data &&
+                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                          }
+                          
                         </div>
-                        {item.attributes.biennial_tags?.data && 
-                          <div className="category">
-                            {item.attributes.biennial_tags.data.map((tag, i) => {
-                              return(
-                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                  {tag.attributes.title}
-                                </a>
-                              )
-                            })}
-                          </div>
-                        }
-                        {item.attributes.start_date && 
-                          <div className="when">
-                            {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
-                              <>
-                                {Moment(item.attributes.start_date).format('D')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-                              </>
-                            : 
-                              <>
-                                {Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-                              </>
-                            }
-                          </div>
-                        }
-                        <div className="title">
-                          <h1 className="page-title">{item.attributes.title}</h1>
-                        </div>
-                        {item.attributes?.authors?.data &&
-                          <div className="tags">
-                            {item.attributes.authors.data.map((author, i) => {
-                              return(
-                                <a className="author" href={`/artists/${author.attributes.slug}`}>
-                                  {author.attributes.name}
-                                </a>
-                              )
-                            })}
-                          </div>
-                        }
-                      </a>
-                    </div>
-                  </LazyLoad>
+                      </div>
+
+                      <div className="category-title-wrapper">
+                        <div className="title">{item.attributes.title}</div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               )
             })}
           </div>
         </div>
+        {relations.attributes.community_items.data.length > 0 &&
+          <div className="discover artists">
+            <div className="subtitle">
+              <h1>Artists</h1>
+            </div>
+            <div className="discover-container programme-container sub-programme-container">
+              <div className="day-programme">
+                <div className="discover-container programme-container sub-programme-container">
+                  <div className="items-wrapper">
+                    {relations.attributes.community_items.data.map((item, i) => {
+                      return(
+                        <div className="discover-item artist-item">
+                          <LazyLoad height={600}>
+                            <div className="item-wrapper">
+                              <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                                <div className="image">
+                                  <div className="image-inner">
+                                    {item.attributes.cover_image?.data &&
+                                      <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                    }
+                                  </div>
+                                </div>
+
+                                <div className="category-title-wrapper">
+                                  <div className="title" style={{paddingBottom: '0', margin: 0}}>{item.attributes.name}</div>
+                                </div>
+                              </a>
+                            </div>
+                          </LazyLoad>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
       </Layout>
     </section> 
   )
@@ -114,11 +126,11 @@ export async function getServerSideProps({params, query}) {
   );
 
   const pageRel = 
-    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[community_items][populate]=*&populate=*`
   );
   
   const programmesRes = 
-    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[programmes][populate]=*`
+    await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[programme_items][populate]=*`
   );
 
   
@@ -134,7 +146,7 @@ export async function getServerSideProps({params, query}) {
       page: pageRes.data[0], 
       global: globalRes.data, 
       relations: pageRel.data[0], 
-      programmes: programmesRes.data[0].attributes.programmes,
+      programmes: programmesRes.data[0].attributes.programme_items,
       params: params,
     },
   };

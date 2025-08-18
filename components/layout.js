@@ -64,6 +64,9 @@ const Layout = ({ children, festival}) => {
 
           console.log("init");
 
+          $("html").addClass("browser-"+browserCheck);
+          
+
           const threeWapper = $("<div class='three-normal'></div>");
           threeWapper.hide();
 
@@ -213,11 +216,80 @@ const Layout = ({ children, festival}) => {
       });  
 
 
+
+
+      var browserCheck = "";
+
+      if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1) {
+          browserCheck = 'opera';
+        } else if (navigator.userAgent.indexOf("Edg") != -1) {
+          browserCheck = 'edge';
+        } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+          browserCheck = 'chrome';
+        } else if (navigator.userAgent.indexOf("Safari") != -1) {
+          browserCheck = 'safari';
+        } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+          browserCheck = 'firefox';
+        } else if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) //IF IE > 10
+        {
+          browserCheck = 'ie';
+        } else {
+          browserCheck = 'unkown';
+      }
+      
+      
+
+      var scrollTop = 0;
+      var randomNumber = Math.random();
+
+      function setColoredBG() {
+        if (randomNumber > 0.6) {
+          //console.log("case 1");
+
+          $(".colored-bg-01").css({
+            "transform":"translateY(" + Math.min(scrollTop * 0.5, 300) + "px scale(" + Math.min(scrollTop / 2000 + 0.5, 5) + ")",
+            "background-color" : "#58de60",
+            "box-shadow": "0px 0px 2rem 2rem #58de60"
+          })
+
+          $(".colored-bg-02").css({
+            "transform":"translateY(" + (-1 * scrollTop * 0.5) + "px) scale(" + Math.max(-1 *scrollTop / 2000 + 0.5, 0.5) + ")",
+          })
+        }
+
+        if (randomNumber <= 0.6 && randomNumber > 0.3) {
+          //console.log("case 2");
+          $(".colored-bg-01").css({
+            "transform":"translateY(" + -1 * Math.min(scrollTop * 0.5, 300) + "px)"
+          })
+
+          $(".colored-bg-02").css({
+            "transform":"translateY(" + (scrollTop * 0.5) + "px) scale(" + Math.min(scrollTop / 2000 + 0.5, 5) + ")",
+          })
+        }
+
+        if (randomNumber <= 0.3) {
+          //console.log("case 3");
+          $(".colored-bg-01").css({
+            "transform":"translateY(" + Math.min(scrollTop * 0.5, 300) + "px)"
+          })
+
+          $(".colored-bg-02").css({
+            "transform":"translateY(" + (-1 * scrollTop * 0.5) + "px))",
+          })
+        }
+      }
+
+      setColoredBG();
+      setTimeout(function(){
+        setColoredBG();
+      }, 10);
+
       $(window).scroll(function() {
 
-        //console.log($(window).scrollTop());
+        console.log($(window).scrollTop());
 
-        var scrollTop = $(window).scrollTop();
+        scrollTop = $(window).scrollTop();
 
         $("#title-1-sonic, #title-1-sonic-mobile").css({
             "transform":"translate(-50%, calc(-50% - " + scrollTop * 0.4 + "px))"
@@ -249,6 +321,8 @@ const Layout = ({ children, festival}) => {
             "transform":"translateY(" + -1 * Math.min(scrollTop, $(window).width()*0.4) + "px)"
         })
 
+        setColoredBG();
+
         var maxScroll = $(window).width() * 0.1;
         var maxScale = $(window).width() * 0.17; //how small it gets, the smaller the number the smaller
 
@@ -277,96 +351,73 @@ const Layout = ({ children, festival}) => {
     <div id="b-2024" class="hide-at-pageload visible">
             <div id="b-2024-inner">
                 <div id="svg-biennial">
-    <svg version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 5055.6 523.9">
+                  <svg version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 5055.6 523.9">
 
-    <g id="bottom-biennial">
-    	<path id="bottom-biennial-3" class="st321408h124" d="M1314.9,160.2V498 M1271.8,498c-1-13-2.1-25-2.1-46.2V333.2c0-50.1-30.3-70.3-80-70.3
-    		c-42.1,0-72.9,22.2-85.7,41.9 M1261.8,355.9c0,0-37.7-2.9-65.4-2.9c-52.3,0-101.1,23.1-101.1,74.7c0,48.7,25.4,74.2,81.6,74.2
-    		s88.4-28.9,88.4-28.9 M1064,232.1v-71.9 M1064,498V267.2 M655.1,266.7V498 M815.7,498V332.3c0-40.5-26.9-68.9-80.8-68.9
-    		c-15.8,0-34.7,5.5-50.7,14.1l-24.1,17.7 M421.2,381.9h198.3c0,0,0.5-10.1,0-15.4c-5.1-64.1-42.6-103.1-101.1-103.1
-    		c-63.1,0-106.2,47.2-106.2,119.5c0,71.8,42.6,119.9,106.2,119.9 M518.4,502.8c50.3,0,88.8-30.8,99-80 M378.4,232.1v-71.9
-    		 M378.4,498V267.2 M73.6,306.4h188.6c29.5,0,60.8-25.7,60.8-69c0-44.6-34.8-76.6-96.4-76.6h-153V498H206
-    		c75.9,0,129.3-32.8,129.3-105c0-48-29.4-86.6-73.1-86.6"></path>
-    	<line id="bottom-biennial-2" class="st321408h124" x1="857.9" y1="266.7" x2="857.9" y2="498"></line>
-    	<path id="bottom-biennial-1" class="st321408h124" d="M1018.5,498V332.3c0-40.5-26.9-68.9-80.8-68.9c-15.8,0-34.7,5.5-50.7,14.1l-24.1,17.7"></path>
-    </g>
-    </svg>
+                  <g id="bottom-biennial">
+                    <path id="bottom-biennial-3" class="st321408h124" d="M1314.9,160.2V498 M1271.8,498c-1-13-2.1-25-2.1-46.2V333.2c0-50.1-30.3-70.3-80-70.3
+                      c-42.1,0-72.9,22.2-85.7,41.9 M1261.8,355.9c0,0-37.7-2.9-65.4-2.9c-52.3,0-101.1,23.1-101.1,74.7c0,48.7,25.4,74.2,81.6,74.2
+                      s88.4-28.9,88.4-28.9 M1064,232.1v-71.9 M1064,498V267.2 M655.1,266.7V498 M815.7,498V332.3c0-40.5-26.9-68.9-80.8-68.9
+                      c-15.8,0-34.7,5.5-50.7,14.1l-24.1,17.7 M421.2,381.9h198.3c0,0,0.5-10.1,0-15.4c-5.1-64.1-42.6-103.1-101.1-103.1
+                      c-63.1,0-106.2,47.2-106.2,119.5c0,71.8,42.6,119.9,106.2,119.9 M518.4,502.8c50.3,0,88.8-30.8,99-80 M378.4,232.1v-71.9
+                      M378.4,498V267.2 M73.6,306.4h188.6c29.5,0,60.8-25.7,60.8-69c0-44.6-34.8-76.6-96.4-76.6h-153V498H206
+                      c75.9,0,129.3-32.8,129.3-105c0-48-29.4-86.6-73.1-86.6"></path>
+                    <line id="bottom-biennial-2" class="st321408h124" x1="857.9" y1="266.7" x2="857.9" y2="498"></line>
+                    <path id="bottom-biennial-1" class="st321408h124" d="M1018.5,498V332.3c0-40.5-26.9-68.9-80.8-68.9c-15.8,0-34.7,5.5-50.7,14.1l-24.1,17.7"></path>
+                  </g>
+                  </svg>
 
-</div>
-
-
-<div id="svg-2024">
-
-    <svg version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 5055.6 523.9">
-    <g id="bottom-2024">
-    	<path id="bottom-2024-2" class="st012308912h3" d="M4970.2,495.5V168h-23.3l-159.6,239.5l11,17.8h233.4 M4421.9,502.8
-    		c76.4,0,131.9-59.7,131.9-168.6c0-107.9-50.8-168.6-131.9-168.6c-81.6,0-132.9,60.7-132.9,168.6
-    		C4289,443,4344.9,502.8,4421.9,502.8 M4018.5,266.3c10.3-58.3,60.3-100.7,123.6-100.7c88.8,0,114.4,53.9,114.4,96.8
-    		c0,53.5-35.9,61.4-131.3,99.2s-102.4,67.1-119.3,117.7L4020,498h236"></path>
-    	<path id="bottom-2024-1" class="st012308912h3" d="M4586.5,266.3c10.3-58.3,60.3-100.7,123.6-100.7c88.8,0,114.4,43.9,114.4,86.8
-    		c0,53.5-35.9,71.4-131.3,109.2s-102.4,67.1-119.3,117.7L4588,498h236"></path>
-    </g>
-    </svg>
+              </div>
 
 
-</div>
+              <div id="svg-2024">
 
-<div id="svg-bottom-table">
+                  <svg version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 5055.6 523.9">
+                  <g id="bottom-2024">
+                    <path id="bottom-2024-2" class="st012308912h3" d="M4970.2,495.5V168h-23.3l-159.6,239.5l11,17.8h233.4 M4421.9,502.8
+                      c76.4,0,131.9-59.7,131.9-168.6c0-107.9-50.8-168.6-131.9-168.6c-81.6,0-132.9,60.7-132.9,168.6
+                      C4289,443,4344.9,502.8,4421.9,502.8 M4018.5,266.3c10.3-58.3,60.3-100.7,123.6-100.7c88.8,0,114.4,53.9,114.4,96.8
+                      c0,53.5-35.9,61.4-131.3,99.2s-102.4,67.1-119.3,117.7L4020,498h236"></path>
+                    <path id="bottom-2024-1" class="st012308912h3" d="M4586.5,266.3c10.3-58.3,60.3-100.7,123.6-100.7c88.8,0,114.4,43.9,114.4,86.8
+                      c0,53.5-35.9,71.4-131.3,109.2s-102.4,67.1-119.3,117.7L4588,498h236"></path>
+                  </g>
+                  </svg>
+                                
+              </div>
 
-    <svg version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 5055.6 523.9">
+              <div id="svg-bottom-table">
 
-    <g id="bottom-biennial-table">
-    	<line id="bottom-biennial-table-6" class="st1as9213h" x1="21.2" y1="56.5" x2="5031.7" y2="56.5"></line>
-    	<line id="bottom-biennial-table-5" class="st21203912jh3" x1="21.2" y1="524.2" x2="21.2" y2="56.5"></line>
-    	<line id="bottom-biennial-table-4" class="st1as9213h" x1="837.8" y1="524.2" x2="837.8" y2="56.5"></line>
-    	<line id="bottom-biennial-table-3" class="st1as9213h" x1="4042.7" y1="524.2" x2="4042.7" y2="56.5"></line>
-    	<line id="bottom-biennial-table-2" class="st1as9213h" x1="5031.7" y1="524.2" x2="5031.7" y2="56.5"></line>
-    	<line id="bottom-biennial-table-1" class="st1as9213h" x1="21.2" y1="377.7" x2="4042.7" y2="377.7"></line>
-    </g>
-    </svg>
+                  <svg version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 5055.6 523.9">
+
+                  <g id="bottom-biennial-table">
+                    <line id="bottom-biennial-table-6" class="st1as9213h" x1="21.2" y1="56.5" x2="5031.7" y2="56.5"></line>
+                    <line id="bottom-biennial-table-5" class="st21203912jh3" x1="21.2" y1="524.2" x2="21.2" y2="56.5"></line>
+                    <line id="bottom-biennial-table-4" class="st1as9213h" x1="837.8" y1="524.2" x2="837.8" y2="56.5"></line>
+                    <line id="bottom-biennial-table-3" class="st1as9213h" x1="4042.7" y1="524.2" x2="4042.7" y2="56.5"></line>
+                    <line id="bottom-biennial-table-2" class="st1as9213h" x1="5031.7" y1="524.2" x2="5031.7" y2="56.5"></line>
+                    <line id="bottom-biennial-table-1" class="st1as9213h" x1="21.2" y1="377.7" x2="4042.7" y2="377.7"></line>
+                  </g>
+                  </svg>
 
 
-</div>            </div>
-        </div>
+              </div>
+          </div>
+    </div>
+
+    <div className="colored-bg-01"></div>
+    <div className="colored-bg-02"></div>
 
     <div id="social-homelink">
 
       <div id="social-homelink-inner">
-        <div class="social-channel">
-            <a href="https://www.instagram.com/sonicacts" target="_blank" class="social-item">
-                
-                <svg id="Layer_2" viewBox="0 0 48.39 48.39"><g id="design"><g><path d="M29.86,12.65h-11.33c-3.23,0-5.85,2.62-5.85,5.85v11.33c0,3.23,2.62,5.85,5.85,5.85h11.33c3.23,0,5.85-2.63,5.85-5.85v-11.33c0-3.23-2.63-5.85-5.85-5.85Zm-5.55,18.5c-3.85,0-6.99-3.13-6.99-6.99s3.13-6.99,6.99-6.99,6.99,3.13,6.99,6.99-3.13,6.99-6.99,6.99Zm7.39-12.78c-.92,0-1.66-.74-1.66-1.66s.74-1.66,1.66-1.66,1.66,.74,1.66,1.66-.74,1.66-1.66,1.66Z"></path><path d="M24.31,19.69c-2.47,0-4.48,2.01-4.48,4.47s2.01,4.48,4.48,4.48,4.47-2.01,4.47-4.48-2.01-4.47-4.47-4.47Z"></path><path d="M24.19,0C10.83,0,0,10.83,0,24.19s10.83,24.19,24.19,24.19,24.19-10.83,24.19-24.19S37.56,0,24.19,0Zm14.18,29.82c0,4.7-3.82,8.52-8.52,8.52h-11.33c-4.7,0-8.52-3.82-8.52-8.52v-11.33c0-4.7,3.82-8.52,8.52-8.52h11.33c4.7,0,8.52,3.82,8.52,8.52v11.33Z"></path></g></g>
-                    
-                </svg>
-            </a>
 
-            <a href="https://t.me/sonicacts" target="_blank" class="social-item">
-                
-                <svg id="Layer_2" viewBox="0 0 48.39 48.4"><g id="design"><path d="M24.19,0c13.36,0,24.19,10.84,24.19,24.2,0,13.36-10.84,24.2-24.19,24.2C10.82,48.4-.02,37.53,0,24.15,.02,10.82,10.86,0,24.19,0Zm-.33,31.87c.18,.13,.33,.22,.47,.33,1.82,1.34,3.63,2.69,5.46,4.02,1.08,.79,1.98,.44,2.3-.85,.01-.05,.02-.1,.03-.14,1.23-5.78,2.46-11.56,3.68-17.35,.16-.76,.3-1.54,.29-2.3,0-.74-.65-1.13-1.38-.98-.21,.04-.41,.11-.6,.19-5.24,2.02-10.48,4.04-15.72,6.07-2.53,.98-5.06,1.95-7.58,2.94-.45,.18-.97,.41-.93,1,.04,.56,.59,.69,1.03,.83,1.81,.58,3.63,1.13,5.43,1.7,.31,.1,.54,.07,.81-.1,1.82-1.16,3.65-2.31,5.48-3.46,2.61-1.64,5.22-3.29,7.84-4.93,.31-.2,.62-.42,1.14-.19-.18,.2-.31,.39-.47,.54-3.53,3.2-7.06,6.4-10.61,9.58-.28,.25-.4,.52-.42,.88-.05,.99-.13,1.98-.2,2.97-.06,.87-.11,1.74-.16,2.61,.52,.07,.83-.18,1.13-.47,.98-.95,1.97-1.89,2.99-2.88Z"></path></g>
-                    
-                </svg>
-            </a>
-            
-            <a href="https://www.youtube.com/channel/UCOt0sGccfLogAmEJyOxRINQ" target="_blank" class="social-item">
-                <svg fill="#000000" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 97.75 97.75">
-                  <g>
-                    <g>
-                      <path d="M39.969,59.587c7.334-3.803,14.604-7.571,21.941-11.376c-7.359-3.84-14.627-7.63-21.941-11.447
-                        C39.969,44.398,39.969,51.954,39.969,59.587z"></path>
-                      <path d="M48.875,0C21.883,0,0,21.882,0,48.875S21.883,97.75,48.875,97.75S97.75,75.868,97.75,48.875S75.867,0,48.875,0z
-                        M82.176,65.189c-0.846,3.67-3.848,6.377-7.461,6.78c-8.557,0.957-17.217,0.962-25.842,0.957c-8.625,0.005-17.287,0-25.846-0.957
-                        c-3.613-0.403-6.613-3.11-7.457-6.78c-1.203-5.228-1.203-10.933-1.203-16.314s0.014-11.088,1.217-16.314
-                        c0.844-3.67,3.844-6.378,7.457-6.782c8.559-0.956,17.221-0.961,25.846-0.956c8.623-0.005,17.285,0,25.841,0.956
-                        c3.615,0.404,6.617,3.111,7.461,6.782c1.203,5.227,1.193,10.933,1.193,16.314S83.379,59.962,82.176,65.189z"></path>
-                    </g>
-                  </g>
-                </svg>
-            </a>
-        </div>
+        <a class="radio" href="https://radio.sonicacts.com/" target="_blank">Radio</a>
 
         <div class="newsletter" onClick={handleShow}>
             Newsletter
         </div>
+        
+        <a class="magazine" href="https://shop.sonicacts.com/product/ecoes-6/" target="_blank">Magazine</a>
+
       </div>
       
       <div id="sa-logo">
@@ -419,6 +470,32 @@ const Layout = ({ children, festival}) => {
             </svg>
           </a>
       </div>
+
+      <div class="social-channel">
+            <a href="https://www.instagram.com/sonicacts" target="_blank" class="social-item">
+                <svg id="Layer_2" viewBox="0 0 48.39 48.39"><g id="design"><g><path d="M29.86,12.65h-11.33c-3.23,0-5.85,2.62-5.85,5.85v11.33c0,3.23,2.62,5.85,5.85,5.85h11.33c3.23,0,5.85-2.63,5.85-5.85v-11.33c0-3.23-2.63-5.85-5.85-5.85Zm-5.55,18.5c-3.85,0-6.99-3.13-6.99-6.99s3.13-6.99,6.99-6.99,6.99,3.13,6.99,6.99-3.13,6.99-6.99,6.99Zm7.39-12.78c-.92,0-1.66-.74-1.66-1.66s.74-1.66,1.66-1.66,1.66,.74,1.66,1.66-.74,1.66-1.66,1.66Z"></path><path d="M24.31,19.69c-2.47,0-4.48,2.01-4.48,4.47s2.01,4.48,4.48,4.48,4.47-2.01,4.47-4.48-2.01-4.47-4.47-4.47Z"></path><path d="M24.19,0C10.83,0,0,10.83,0,24.19s10.83,24.19,24.19,24.19,24.19-10.83,24.19-24.19S37.56,0,24.19,0Zm14.18,29.82c0,4.7-3.82,8.52-8.52,8.52h-11.33c-4.7,0-8.52-3.82-8.52-8.52v-11.33c0-4.7,3.82-8.52,8.52-8.52h11.33c4.7,0,8.52,3.82,8.52,8.52v11.33Z"></path></g></g></svg>
+            </a>
+
+            <a href="https://t.me/sonicacts" target="_blank" class="social-item">
+                <svg id="Layer_2" viewBox="0 0 48.39 48.4"><g id="design"><path d="M24.19,0c13.36,0,24.19,10.84,24.19,24.2,0,13.36-10.84,24.2-24.19,24.2C10.82,48.4-.02,37.53,0,24.15,.02,10.82,10.86,0,24.19,0Zm-.33,31.87c.18,.13,.33,.22,.47,.33,1.82,1.34,3.63,2.69,5.46,4.02,1.08,.79,1.98,.44,2.3-.85,.01-.05,.02-.1,.03-.14,1.23-5.78,2.46-11.56,3.68-17.35,.16-.76,.3-1.54,.29-2.3,0-.74-.65-1.13-1.38-.98-.21,.04-.41,.11-.6,.19-5.24,2.02-10.48,4.04-15.72,6.07-2.53,.98-5.06,1.95-7.58,2.94-.45,.18-.97,.41-.93,1,.04,.56,.59,.69,1.03,.83,1.81,.58,3.63,1.13,5.43,1.7,.31,.1,.54,.07,.81-.1,1.82-1.16,3.65-2.31,5.48-3.46,2.61-1.64,5.22-3.29,7.84-4.93,.31-.2,.62-.42,1.14-.19-.18,.2-.31,.39-.47,.54-3.53,3.2-7.06,6.4-10.61,9.58-.28,.25-.4,.52-.42,.88-.05,.99-.13,1.98-.2,2.97-.06,.87-.11,1.74-.16,2.61,.52,.07,.83-.18,1.13-.47,.98-.95,1.97-1.89,2.99-2.88Z"></path></g></svg>
+            </a>
+            
+            <a href="https://www.youtube.com/channel/UCOt0sGccfLogAmEJyOxRINQ" target="_blank" class="social-item">
+                <svg fill="#000000" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 97.75 97.75">
+                  <g>
+                    <g>
+                      <path d="M39.969,59.587c7.334-3.803,14.604-7.571,21.941-11.376c-7.359-3.84-14.627-7.63-21.941-11.447
+                        C39.969,44.398,39.969,51.954,39.969,59.587z"></path>
+                      <path d="M48.875,0C21.883,0,0,21.882,0,48.875S21.883,97.75,48.875,97.75S97.75,75.868,97.75,48.875S75.867,0,48.875,0z
+                        M82.176,65.189c-0.846,3.67-3.848,6.377-7.461,6.78c-8.557,0.957-17.217,0.962-25.842,0.957c-8.625,0.005-17.287,0-25.846-0.957
+                        c-3.613-0.403-6.613-3.11-7.457-6.78c-1.203-5.228-1.203-10.933-1.203-16.314s0.014-11.088,1.217-16.314
+                        c0.844-3.67,3.844-6.378,7.457-6.782c8.559-0.956,17.221-0.961,25.846-0.956c8.623-0.005,17.285,0,25.841,0.956
+                        c3.615,0.404,6.617,3.111,7.461,6.782c1.203,5.227,1.193,10.933,1.193,16.314S83.379,59.962,82.176,65.189z"></path>
+                    </g>
+                  </g>
+                </svg>
+            </a>
+        </div>
     </div>
 
     <div id="table-top" class="table hide-at-pageload visible">
@@ -453,7 +530,7 @@ const Layout = ({ children, festival}) => {
                   <span class="table-item">GARAGE NOORD&nbsp;&nbsp;KANAAL40</span>
               </div>
               <div class="table-col table-col-right">
-                  <span class="table-item">OT301 </span><span class="table-item">AND MORE</span>
+              <span class="table-item">OT301 </span><span class="table-item">Het HEM </span><span class="table-item">AND MORE</span>
               </div>
           </div>
       </div>
@@ -497,7 +574,7 @@ const Layout = ({ children, festival}) => {
       </>
     </section>
     <footer className="footer">
-      {festival && festival.attributes.prefooter ?
+    {festival && festival.attributes.prefooter ?
         <div className="prefooter">
           <div className="text-block medium">
             <p className="visually-hidden">{festival.attributes.prefooter.title}</p>
@@ -536,8 +613,22 @@ const Layout = ({ children, festival}) => {
       }
 
 
+      <div id="imprint-menu">  
 
-      <div id="imprint-content" class="closer-target">
+        <div id="imprint-link" class="imprint-item">
+          <a href="/about">Imprint</a>
+        </div>
+        <div class="imprint-item">
+          <a href="https://sonicacts.com/policy" target="_blank">Privacy Policy</a>
+        </div>
+        <div class="imprint-item">
+          <a href="https://sonicacts.com/cookies" target="_blank">Cookies</a>
+        </div>
+  
+      </div>
+    </footer>
+
+    <div id="imprint-content" class="closer-target">
         <div class="imprint-inner">
           <p>
               <a href="https://www.knoth-renner.com/" target="_blank">Knoth &amp; Renner</a> teamed up with <a href="https://www.instagram.com/aeni.kaiser/" target="_blank">Anja Kaiser</a> for the identity and concept of this website, working with Janine Zielman on its development.
@@ -557,23 +648,6 @@ const Layout = ({ children, festival}) => {
           </p>
         </div>    
       </div>
-
-
-
-      <div id="imprint-menu">  
-
-        <div id="imprint-link" class="imprint-item">
-          <a href="/about">Imprint</a>
-        </div>
-        <div class="imprint-item">
-          <a href="https://sonicacts.com/policy" target="_blank">Privacy Policy</a>
-        </div>
-        <div class="imprint-item">
-          <a href="https://sonicacts.com/cookies" target="_blank">Cookies</a>
-        </div>
-  
-      </div>
-    </footer>
 
     <Modal  isOpen={show} onHide={handleClose} className={`mail-modal`} ariaHideApp={false} style={modalStyles}>
         <div onClick={handleClose} className="close">

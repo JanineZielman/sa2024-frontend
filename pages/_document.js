@@ -15,6 +15,9 @@ class MyDocument extends Document {
 
           <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
           <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+
+          <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+          <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
           
           <script
             type="importmap"
@@ -37,7 +40,7 @@ class MyDocument extends Document {
           <script async src="//npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"/>
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-7W61454VLF"
+            src="https://www.googletagmanager.com/gtag/js?id=G-L6M1VKE89V"
           />
           <script
             dangerouslySetInnerHTML={{
@@ -45,7 +48,21 @@ class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-7W61454VLF', { 'anonymize_ip': true });
+                gtag('config', 'G-L6M1VKE89V', { 'anonymize_ip': true });
+              `,
+            }}
+          />
+           <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=GTM-N67ZLWP"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'GTM-N67ZLWP', { 'anonymize_ip': true });
               `,
             }}
           />
@@ -56,7 +73,13 @@ class MyDocument extends Document {
           <link rel="manifest" href="/assets/favicon/site.webmanifest" />
           <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
+          <meta name="theme-color" content="#000000" />
+
+          <meta property="og:title" content="Sonic Acts Biennial 2024 🟠 The Spell of the Sensuous" />
+          <meta property="og:description" content="Celebrating 30 years of cutting-edge experiments in sound, moving image and contemporary theory 🟢 2 Feb - 24 Mar 2024" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://2024.sonicacts.com" />
+          <meta property="og:image" content="/assets/img/ogimage-230905-SonicActs-2024-16by9-1920x1080px.jpg" />
 
         </Head>
         <body className={slug}>
@@ -71,9 +94,12 @@ class MyDocument extends Document {
 
           <section class="minimal-nav">
             <ul>
-              <li><a href="/artists">Artists</a></li>
-              <li><a href="/programme">Programme</a></li>
-              <li><a href="/about">Information</a></li>
+              <li><a href="/artists" className={`${slug.includes('artists') ? 'active' : ''}`}>Artists</a></li>
+              <li><a href="/programme" className={`${slug.includes('programme') ? 'active' : ''}`}>Programme</a></li>
+              <li><a href="/timetable" className={`${slug.includes('timetable') ? 'active' : ''}`}>Timetable</a></li>
+              <li><a href="/tickets" className={`${slug.includes('tickets') ? 'active' : ''}`}>Tickets</a></li>
+              <li><a href="/visit" className={`${slug.includes('visit') ? 'active' : ''}`}>Visit</a></li>
+              <li><a href="/about" className={`${slug.includes('information') ? 'active' : ''}`}>Information</a></li>
             </ul>
           </section>
           

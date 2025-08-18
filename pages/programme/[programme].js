@@ -4,228 +4,165 @@ import Layout from "../../components/layout"
 import BiennialArticle from "../../components/biennial-article"
 import LazyLoad from 'react-lazyload';
 import Image from "../../components/image"
-import Moment from 'moment';
-import Collapsible from "../../components/collapsible";
 
-const ProgrammeItem = ({page, global, relations, params, sub, festival}) => {
+import Moment from "moment";
 
-  const [dates, setDates] = useState([]);
-  const [locations, setLocations] = useState([]);
+const ProgrammeItem = ({page, global, relations, params, sub, festival, programmeLoc}) => {
 
-  function removeusingSet(arr) {
-    let outputArray = Array.from(new Set(arr))
-    return outputArray
-  }
+  let programmeLocations = programmeLoc.attributes.location_item;
+
+  const [subItems, setSubItems] = useState();
 
   useEffect(() => {
-    let list = []
-    let list2 = []
-    for (let i = 0; i < sub.length; i++) {
-      for (let j = 0; j < sub[i].attributes.WhenWhere?.length; j++) {
-        for (let k = 0; k < sub[i].attributes.WhenWhere[j]?.dates.length; k++) {
-          list.push(sub[i].attributes.WhenWhere[j]?.dates[k].start_date);
-          list.sort(function (a, b) {
-            return a.localeCompare(b);
-          });
+
+    if (page.attributes.hide_when_where != true){
+      setSubItems(sub.sort((a, b) => {
+        if (a.attributes.title.toLowerCase() < b.attributes.title.toLowerCase()) {
+          return -1;
         }
-      }
+        if (a.attributes.title.toLowerCase() > b.attributes.title.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      }))
+    } else {
+      setSubItems(sub.sort(function(a,b){
+        let date1 = new Date(`${a.attributes.WhenWhere[0]?.date.split('/').reverse().join('-')}T${a.attributes.WhenWhere[0]?.start_time}Z`);
+        let date2 = new Date(`${b.attributes.WhenWhere[0]?.date.split('/').reverse().join('-')}T${b.attributes.WhenWhere[0]?.start_time}Z`);
+        return date1 - date2
+
+      }));
     }
-    for (let i = 0; i < sub.length; i++) {
-      for (let j = 0; j < sub[i].attributes.locations.data?.length; j++) {
-        list2.push(sub[i].attributes.locations.data[j].attributes.title);
+
+    relations.attributes.community_items.data.sort((a, b) => {
+      if (a.attributes.slug.toLowerCase() < b.attributes.slug.toLowerCase()) {
+        return -1;
       }
-    }
+      if (a.attributes.slug.toLowerCase() > b.attributes.slug.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    })
 
-    setDates(removeusingSet(list))
-    setLocations(removeusingSet(list2))
-
-    sub.sort(function (a, b) {
-      return a.attributes.WhenWhere[0]?.times[0]?.start_time?.localeCompare(b.attributes.WhenWhere[0]?.times[0]?.start_time);
-    });
-
-  }, [])
-
+  }, [subItems])
 
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout global={global} festival={festival}>
-        <BiennialArticle page={page} relations={relations} params={params}/>
-        {sub[0] && 
-          <>
+        <BiennialArticle page={page} relations={relations} programmeLocations={programmeLocations} />
+        {subItems?.length > 0 && 
+          <> 
             <div className="discover sub">
-              <div className="filter">
+              <div className="subtitle">
                 {relations.attributes.sub_programmes_title &&
                   <h1>{relations.attributes.sub_programmes_title}</h1>
                 }
               </div>
               <div className="discover-container programme-container sub-programme-container">
-                {dates.length > 2 ?
-                  <>
-                    {dates.map((date, j) => {
+                <div className="day-programme">
+                  <div className="discover-container programme-container sub-programme-container">
+                    {subItems.map((item, i) => {
+                      let dates = item.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+                      let start_date = new Date(dates?.[0]?.date.split('/').reverse().join('/'));
+                      let end_date = new Date(dates?.[dates?.length - 1]?.date.split('/').reverse().join('/'));
                       return(
-                        <div className="day-programme">
-                          <div className="collapsible">
-                            <Collapsible trigger={Moment(date).format('D MMM')} open={true}>
-                              <div className="discover-container programme-container sub-programme-container">
-                                {locations.map((loc, l) => {
-                                  return(
-                                    <>
-                                      {sub.filter(el2 => el2.attributes.locations.data[0]?.attributes.title === `${loc}`).map((item, i) => {
-                                        let allDates = [];
-                                        let repeatedEvent = 0;
-                                        for (let j = 0; j < item.attributes.WhenWhere?.length; j++) {
-                                          repeatedEvent = j;
-                                          for (let k = 0; k < item.attributes.WhenWhere[j]?.dates.length; k++) {
-                                            allDates.push(item.attributes.WhenWhere[j]?.dates[k].start_date);
-                                          }
-                                        }
-                                        return(
-                                          <>
-                                            {allDates.includes(date) &&
-                                            <div className={`discover-item`}>
-                                              {i == 0 &&
-                                                <div className="loc-item">{loc}</div>
-                                              }
-                                              <div className="item-wrapper">
-                                                <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                                                  <div className="image">
-                                                    {item.attributes.cover_image?.data &&
-                                                      <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                                    }
-                                                    <div className="info-overlay">
-                                                      {item.attributes.WhenWhere[0]?.times[0] && 
-                                                        <>
-                                                          <div className="times">
-                                                            {item.attributes.WhenWhere[repeatedEvent]?.times.map((time, j) => {
-                                                              return(
-                                                                <div className="time">
-                                                                  <span>{time.start_time} {time.end_time && `— ${time.end_time}`}</span>
-                                                                </div>
-                                                              )
-                                                            })}
-                                                          </div>
-                                                        </>
-                                                      }
-                                                    </div>
-                                                  </div>
-                                                  {item.attributes.biennial_tags?.data && 
-                                                    <div className="category">
-                                                      {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
-                                                        return(
-                                                          <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                                            {tag.attributes.title}
-                                                          </a>
-                                                        )
-                                                      })}
-                                                    </div>
-                                                  }
-                                                  <div className="title-wrapper">
-                                                    <div className="authors">
-                                                      {item.attributes?.authors?.data &&
-                                                        item.attributes.authors.data.map((author, i) => {
-                                                          return( 
-                                                            <div className="author">{author.attributes.name}</div>
-                                                          )
-                                                        })
-                                                      }
-                                                    </div>
-                                                    <div className="title">{item.attributes.title}</div>
-                                                  </div>
-                                                </a>
-                                              </div>
-                                            </div>
-                                            }
-                                          </>
-                                        )
-                                      })}
-                                    </>
-                                  )
-                                })}
-                              </div>
-                            </Collapsible>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </>
-                :
-                  <>
-                    <div className="day-programme">
-                      <div className="discover-container programme-container sub-programme-container">
-                        {locations.map((loc, l) => {
-                          return(
-                            <>
-                              {sub.filter(el2 => el2.attributes.locations.data[0].attributes.title === `${loc}`).map((item, i) => {
+                        <>
+                          <div className={`discover-item`}>
+                            <div className="location-wrapper">
+                              {item.attributes.locations?.data?.map((loc,i) => {
                                 return(
-                                  <>
-                                    <div className={`discover-item`}>
-                                      {i == 0 &&
-                                        <div className="loc-item">{loc}</div>
-                                      }
-                                      <LazyLoad height={600}>
-                                        <div className="item-wrapper">
-                                          <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                                            <div className="image">
-                                              {item.attributes.cover_image?.data &&
-                                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                                              }
-                                              <div className="info-overlay">
-                                                {item.attributes.WhenWhere[0]?.times[0] && 
-                                                  <>
-                                                    <div className="times">
-                                                      {item.attributes.WhenWhere[0]?.times.map((time, j) => {
-                                                        return(
-                                                          <div className="time">
-                                                            <span>{time.start_time} {time.end_time && `— ${time.end_time}`}</span>
-                                                          </div>
-                                                        )
-                                                      })}
-                                                    </div>
-                                                  </>
-                                                }
-                                              </div>
-                                            </div>
-                                            {item.attributes.biennial_tags?.data && 
-                                              <div className="category">
-                                                {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
-                                                  return(
-                                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                                      {tag.attributes.title}
-                                                    </a>
-                                                  )
-                                                })}
-                                              </div>
-                                            }
-                                            <div className="title-wrapper">
-                                              <div className="authors">
-                                                {item.attributes?.authors?.data &&
-                                                  item.attributes.authors.data.map((author, i) => {
-                                                    return( 
-                                                      <div className="author">{author.attributes.name}</div>
-                                                    )
-                                                  })
-                                                }
-                                              </div>
-                                              <div className="title">{item.attributes.title}</div>
-                                            </div>
-                                          </a>
-                                        </div>
-                                      </LazyLoad>
-                                    </div>
-                                  </>
+                                  <div>{loc.attributes.title}</div>
                                 )
                               })}
-                            </>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  </>
-                }
+                            </div>
+                            <LazyLoad height={600}>
+                              <div className="item-wrapper">
+                                <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                                  <div className="image">
+                                    {item.attributes.WhenWhere[0] && page.attributes.hide_when_where == true &&
+                                      <div className="info-overlay">
+                                        <div className="date">
+                                          { (Moment(start_date).format('MMM') == Moment(end_date).format('MMM') && dates.length > 1) ?
+                                            <>
+                                              {Moment(start_date).format('D')}{dates.length > 1 && <>–{Moment(end_date).format('D MMM')}</>}
+                                            </>
+                                          : 
+                                            <>
+                                              {Moment(start_date).format('D MMM')}   {dates.length > 1 && <>– {Moment(end_date).format('D MMM')}</>}
+                                            </>
+                                          }
+                                        </div>
+                                        <div className="times">
+                                          <div className="time">
+                                            <span>{item.attributes.WhenWhere[0].start_time}{item.attributes.WhenWhere[0].end_time && `—${item.attributes.WhenWhere[0].end_time}`}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    }
+                                    <div className="image-inner">
+                                      {item.attributes.cover_image?.data &&
+                                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                      }
+                                      
+                                    </div>
+                                  </div>
+
+                                  <div className="category-title-wrapper">
+                                    <div className="title">{item.attributes.title}</div>
+                                  </div>
+                                </a>
+                              </div>
+                            </LazyLoad>
+                          </div>
+                        </>
+                      )
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </>
         }
+
+        {relations.attributes.community_items.data.length > 0 &&
+          <div className="discover artists">
+            <div className="subtitle">
+              <h1>Artists</h1>
+            </div>
+            <div className="discover-container programme-container sub-programme-container">
+              <div className="day-programme">
+                <div className="discover-container programme-container sub-programme-container">
+                  <div className="items-wrapper">
+                    {relations.attributes.community_items.data.map((item, i) => {
+                      return(
+                        <div className="discover-item artist-item">
+                          <LazyLoad height={600}>
+                            <div className="item-wrapper">
+                              <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                                <div className="image">
+                                  <div className="image-inner">
+                                    {item.attributes.cover_image?.data &&
+                                      <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                    }
+                                  </div>
+                                </div>
+
+                                <div className="category-title-wrapper">
+                                  <div className="title">{item.attributes.name}</div>
+                                </div>
+                              </a>
+                            </div>
+                          </LazyLoad>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
       </Layout>
     </section> 
   )
@@ -234,27 +171,28 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival}) => {
 
 export async function getServerSideProps({params, query}) {
   const biennial = {
-		slug: "biennial-2022"
+		slug: "biennial-2024"
 	}
   
   const preview = query.preview
   const pageRes = 
-    await fetchAPI( `/programmes?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
 
   const pageRel = 
-    await fetchAPI( `/programmes?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programmes][populate]=*&populate[locations][populate]=*&populate[sub_programmes][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
+    await fetchAPI( `/programme-items?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[community_items][populate]=*`
   );
 
   const subRes = 
-    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${biennial.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&pagination[limit]=${100}&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate[authors][populate]=*&populate=*`
-  );
+  await fetchAPI( `/programme-items?&filters[main_programme_items][slug][$eq]=${params.programme}&pagination[limit]=${100}&populate[biennial][populate]=*&populate[main_programme_items][populate]=*&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate=*`
+);
   
 
-  const [globalRes, categoryRes, festivalRes] = await Promise.all([
+  const [globalRes, categoryRes, festivalRes, programmeLoc] = await Promise.all([
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI(`/biennial-tags?filters[biennials][slug][$eq]=${biennial.slug}&populate=*`),
     fetchAPI(`/biennials?filters[slug][$eq]=${biennial.slug}&populate[prefooter][populate]=*`),
+    fetchAPI(`/programme-pages?filters[slug][$eq]=programme-2024&populate[location_item][populate]=*`),
   ])
 
   return {
@@ -266,6 +204,7 @@ export async function getServerSideProps({params, query}) {
 			params: params, 
       categories: categoryRes.data,
       festival: festivalRes.data[0],
+      programmeLoc: programmeLoc.data[0]
     },
   };
 }

@@ -14,7 +14,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[start]=${posts.length}&pagination[limit]=100 
+      `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug:asc&pagination[start]=${posts.length}&pagination[limit]=100 
       &populate=*`
     );
     const newPosts = await res.data;
@@ -30,7 +30,7 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
   
   return (
     <section className="festival-wrapper template-artists">
-      <div className="title">
+      <div className="title-wrapper">
         <h1 className="page-title">Artists</h1>
       </div>
       <Layout  global={global} festival={festival}>
@@ -40,15 +40,13 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
               children={festival.attributes.ArtistsIntro} 
             />
           </div>
-          <div className="filter">
-            <Search params={`artists`}/>
-          </div>
           <div className="discover-container">
             <InfiniteScroll
               dataLength={posts.length}
               next={getMorePosts}
               hasMore={hasMore}
               loader={<h4>Loading...</h4>}
+              className={`items-wrapper`}
             >
               {posts.map((item, i) => {
                 //console.log(item.attributes.cover_image.data.attributes.formats);
@@ -58,10 +56,10 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
                       <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
                         <div className="image">
                             <img 
-                              src={"https://cms.sonicacts.com/public"+item.attributes.cover_image.data.attributes.formats.small?.url}
+                              src={"https://cms.sonicacts.com/public"+item.attributes.cover_image.data?.attributes.formats.small?.url}
                             />
                         </div>
-                        <div className="info">
+                        <div className="title">
                           {item.attributes.name} 
                           {/* <div>{item.attributes.job_description}</div>  */}
                         </div>
@@ -88,11 +86,11 @@ export async function getServerSideProps() {
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100 
+  const items = await fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug:asc&pagination[limit]=100 
   &populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=name:asc&pagination[limit]=100`);
+    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug:asc&pagination[limit]=100`);
 
   //console.log("items items items items ");
   //console.log(items);
