@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'bazaine-mono';
+    src: url('/assets/fonts/BSTBazaineMono-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'limpet';
+    src: url('/assets/fonts/JLLimpetGraniteTrial-Medium.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    cursor: pointer;
+    //display: inline-block;
+    color: var(--color-pink);
+    transition: 0.2s all ease;
+}

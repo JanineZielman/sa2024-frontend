@@ -1,3 +1,4 @@
+import { BIENNIAL_SLUG } from "../../lib/constants"
 import React, {useEffect, useState} from "react"
 
 import Moment from 'moment';
@@ -103,7 +104,7 @@ const News = ({ global, items, numberOfPosts, params, festival, page }) => {
 
 export async function getServerSideProps() {
 	const params = {
-		slug: "biennial-2024"
+		slug: BIENNIAL_SLUG
 	}
   // Run API calls in parallel
   const [festivalRes, pageRes, globalRes] = await Promise.all([

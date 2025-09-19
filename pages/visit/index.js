@@ -1,3 +1,4 @@
+import { BIENNIAL_SLUG, PROGRAMME_SLUG } from "../../lib/constants"
 import React, {useState, useEffect} from "react"
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout"
@@ -24,7 +25,7 @@ const Visit = ({ global, festival, programmeLoc }) => {
           zoom: 12.3 // Set default zoom level
       });
 
-      var keycolors = ["#ff820a", "#ffbbf1", "#EEE", "#6c4b34", "#58de60"]; //orange pink white brown green
+      var keycolors = Array(5).fill("transparent");
 
       let lastPopup = null; // To keep track of the current open popup
 
@@ -130,13 +131,13 @@ const Visit = ({ global, festival, programmeLoc }) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2024"
+    slug: BIENNIAL_SLUG
 	}
   // Run API calls in parallel
   const [festivalRes, globalRes, programmeLoc] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*&populate[visit][populate]=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-    fetchAPI(`/programme-pages?filters[slug][$eq]=programme-2024&populate[location_item][populate]=*`),
+    fetchAPI(`/programme-pages?filters[slug][$eq]=${PROGRAMME_SLUG}&populate[location_item][populate]=*`),
   ])
 
 

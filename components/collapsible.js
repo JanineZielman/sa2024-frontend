@@ -8,15 +8,23 @@ const Collapsible = ({children, trigger, open}) => {
 
 	useEffect(() => {
 		setTimeout(function() {
-			if (document.getElementById(window.location.hash.replace('#', '') + "-content")){
-				document.getElementById(window.location.hash.replace('#', '') + "-content").style.height = document.getElementById(window.location.hash.replace('#', '') + "-content").scrollHeight + 'px'
-				window.scrollTo({
-					top: document.getElementById(window.location.hash.replace('#', ''))?.offsetTop,
-					behavior: 'smooth'
-				});
+			if (typeof window === 'undefined') return;
+			const hash = window.location && typeof window.location.hash === 'string' ? window.location.hash : '';
+			if (!hash) return;
+			const id = hash.replace('#', '');
+			const contentEl = document.getElementById(`${id}-content`);
+			if (contentEl) {
+				contentEl.style.height = contentEl.scrollHeight + 'px';
+				const target = document.getElementById(id);
+				if (target) {
+					window.scrollTo({
+						top: target.offsetTop,
+						behavior: 'smooth'
+					});
+				}
 			}
 		}, 100);
-	})
+	}, [])
 
 
 	const toggle = (e) => {

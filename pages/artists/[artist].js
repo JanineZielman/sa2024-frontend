@@ -1,3 +1,4 @@
+import { BIENNIAL_SLUG } from "../../lib/constants"
 import { fetchAPI } from "../../lib/api"
 import Layout from "../../components/layout"
 import BiennialArticle from "../../components/biennial-article"
@@ -117,7 +118,7 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
 
 export async function getServerSideProps({params, query}) {
   const biennial = {
-		slug: "biennial-2024"
+		slug: BIENNIAL_SLUG
 	}
 
   const preview = query.preview

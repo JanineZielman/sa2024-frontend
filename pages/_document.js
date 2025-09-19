@@ -67,19 +67,13 @@ class MyDocument extends Document {
             }}
           />
 
-          <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png" />
-          <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-          <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5" />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#000000" />
+          {/* Favicons to do */}
 
-          <meta property="og:title" content="Sonic Acts Biennial 2024 🟠 The Spell of the Sensuous" />
+          <meta property="og:title" content="Sonic Acts Biennial 2026 🫠 Melted for Love" />
           <meta property="og:description" content="Celebrating 30 years of cutting-edge experiments in sound, moving image and contemporary theory 🟢 2 Feb - 24 Mar 2024" />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://2024.sonicacts.com" />
-          <meta property="og:image" content="/assets/img/ogimage-230905-SonicActs-2024-16by9-1920x1080px.jpg" />
+          <meta property="og:url" content="https://2026.sonicacts.com" />
+          {/* OG image to do */}
 
         </Head>
         <body className={slug}>
@@ -92,16 +86,21 @@ class MyDocument extends Document {
             </a>
           </div>
 
-          <section class="minimal-nav">
-            <ul>
-              <li><a href="/artists" className={`${slug.includes('artists') ? 'active' : ''}`}>Artists</a></li>
-              <li><a href="/programme" className={`${slug.includes('programme') ? 'active' : ''}`}>Programme</a></li>
-              <li><a href="/timetable" className={`${slug.includes('timetable') ? 'active' : ''}`}>Timetable</a></li>
-              <li><a href="/tickets" className={`${slug.includes('tickets') ? 'active' : ''}`}>Tickets</a></li>
-              <li><a href="/visit" className={`${slug.includes('visit') ? 'active' : ''}`}>Visit</a></li>
-              <li><a href="/about" className={`${slug.includes('information') ? 'active' : ''}`}>Information</a></li>
-            </ul>
-          </section>
+          <header id="main-header">
+            <section class="minimal-nav">
+              <ul class="group-1">
+                <li><a href="/news" className={`${slug.includes('news') ? 'active' : ''}`}>News</a></li>
+                <li><a href="/artists" className={`${slug.includes('artists') ? 'active' : ''}`}>Artists</a></li>
+                <li><a href="/tickets" className={`${slug.includes('tickets') ? 'active' : ''}`}>Tickets</a></li>
+                <li><a href="/visit" className={`${slug.includes('visit') ? 'active' : ''}`}>Visit</a></li>
+              </ul>
+              <ul>
+                <li><a href="/programme" className={`${slug.includes('programme') ? 'active' : ''}`}>Programme</a></li>
+                <li><a href="/timetable" className={`${slug.includes('timetable') ? 'active' : ''}`}>Timetable</a></li>
+                <li><a href="/about" className={`${slug.includes('information') ? 'active' : ''}`}>Information</a></li>
+              </ul>
+            </section>
+          </header>
           
           <Main />
           <NextScript />

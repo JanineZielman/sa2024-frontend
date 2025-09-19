@@ -1,143 +1,61 @@
-.col-1 {
-  width: 8.3333333333%;
-  /*
-  @include mobile() {
-    width: 100%;
+// Breakpoint mixins restored from original SCSS
+@mixin mobile {
+  @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait),
+         only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    @content;
   }
-  */
 }
 
-.col-2 {
-  width: 16.6666666667%;
-  /*
-  @include mobile() {
-    width: 100%;
+@mixin desktop {
+  @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3),
+         only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2),
+         only screen and (orientation: landscape) {
+    @content;
   }
-  */
 }
 
-.col-3 {
-  width: 25%;
-  /*
-  @include mobile() {
+$grid-columns: 12;
+
+@mixin col-width($span) {
+  width: percentage($span / $grid-columns);
+  @include mobile {
     width: 100%;
   }
-  */
 }
 
-.col-4 {
-  width: 33.3333333333%;
-  /*
-  @include mobile() {
-    width: 100%;
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    @include col-width($i);
   }
-  */
-}
-
-.col-5 {
-  width: 41.6666666667%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
-}
-
-.col-6 {
-  width: 50%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
-}
-
-.col-7 {
-  width: 58.3333333333%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
-}
-
-.col-8 {
-  width: 66.6666666667%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
-}
-
-.col-9 {
-  width: 75%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
-}
-
-.col-10 {
-  width: 83.3333333333%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
-}
-
-.col-11 {
-  width: 91.6666666667%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
-}
-
-.col-12 {
-  width: 100%;
-  /*
-  @include mobile() {
-    width: 100%;
-  }
-  */
 }
 
 @font-face {
-  font-family: "geist";
-  src: url("/assets/fonts/GeistVariableVF.woff2") format("woff");
+  font-family: "mono";
+  src: local('Courier New'), local('Courier');
   font-style: normal;
 }
 @font-face {
   font-family: "mono";
-  src: url("/assets/fonts/CodaBetaV8-MonoSerif.woff2") format("woff");
-  font-style: normal;
-}
-@font-face {
-  font-family: "mono";
-  src: url("/assets/fonts/CodaBetaV8-MonoSerifItalic.woff") format("woff");
+  src: local('Courier New Italic'), local('Courier Italic'), local('Courier New'), local('Courier');
   font-style: italic;
 }
 @font-face {
   font-family: "mono-prop";
-  src: url("/assets/fonts/CodaBetaV8-ProportionalSans.woff2") format("woff");
+  src: local('Helvetica'), local('Arial'), local('sans-serif');
   font-style: normal;
 }
 @font-face {
   font-family: "mono-prop";
-  src: url("/assets/fonts/CodaBetaV8-ProportionalSansItalic.woff2") format("woff");
+  src: local('Helvetica Oblique'), local('Arial Italic'), local('Helvetica'), local('Arial');
   font-style: italic;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   html {
     font-size: 3.26vw;
     line-height: 1.1;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   html {
     font-size: 1.2vw;
     line-height: 1.1;
@@ -186,20 +104,20 @@ strong {
   color: #6c4b34;
 }
 strong:nth-child(4n) {
-  color: #ff820a;
-  text-shadow: 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00;
+  color: inherit;
+  text-shadow: none;
 }
 strong:nth-child(4n+1) {
-  color: #58de60;
-  text-shadow: 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00;
+  color: inherit;
+  text-shadow: none;
 }
 strong:nth-child(4n+2) {
-  color: #ffbbf1;
-  text-shadow: 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00;
+  color: inherit;
+  text-shadow: none;
 }
 strong:nth-child(4n+3) {
-  color: #58de60;
-  text-shadow: 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00, 0px 0px 0.1rem #b47e00;
+  color: inherit;
+  text-shadow: none;
 }
 
 p, li {
@@ -208,7 +126,7 @@ p, li {
   font-size: 0.84rem;
   line-height: 1.28;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   p, li {
     font-size: 1.4rem;
   }
@@ -271,7 +189,7 @@ em {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .prefooter .logos {
     flex-wrap: wrap;
     justify-content: center;
@@ -280,17 +198,17 @@ em {
 .prefooter .logos .logo {
   padding: 0.5rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .prefooter .logos .logo {
     width: 7.1428571429%;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .prefooter .logos .logo {
     width: 33%;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .prefooter .logos .logo {
     padding-top: 0;
     padding-bottom: 0;
@@ -305,7 +223,7 @@ em {
   width: auto !important;
   margin: 0 !important;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .prefooter .logos .logo img {
     height: 1.5rem;
   }
@@ -314,7 +232,7 @@ em {
   min-width: 12rem;
   margin-top: -2rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .prefooter .logos .logo#logo-id-2573 {
     min-width: 20rem;
     max-height: 11rem !important;
@@ -328,7 +246,7 @@ em {
 .prefooter .logos .logo#logo-id-2576 {
   max-width: 5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .prefooter .logos .logo#logo-id-2576 {
     max-width: 7rem;
     height: 7rem !important;
@@ -363,7 +281,7 @@ em {
   color: black;
   text-align: center;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #imprint-menu div {
     width: 25%;
     /*
@@ -373,12 +291,12 @@ em {
     */
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #imprint-menu div {
     font-size: 0.8rem;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #imprint-menu {
     padding-top: 4rem;
     padding-bottom: 10rem;
@@ -392,12 +310,12 @@ em {
   top: 50%;
   transform: translate(-50%, -50%);
   padding: 2rem;
-  background-color: #ff820a;
-  box-shadow: 0 0 1rem #ff820a;
+  background-color: inherit;
+  box-shadow: none;
   width: 28rem;
   display: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #imprint-content {
     top: 6rem;
     transform: translate(-50%, 0);
@@ -423,7 +341,7 @@ em {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .template-single-artist .title {
     max-width: 80vw;
     margin: 0 auto;
@@ -443,12 +361,12 @@ em {
 .template-single-artist .wrapper.community .image.community img {
   object-fit: cover;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .template-single-artist .wrapper.community .image.community img {
     width: 50vw;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .template-single-artist .wrapper.community .image.community img {
     width: 100%;
     height: auto;
@@ -458,23 +376,23 @@ em {
   position: relative;
   padding-bottom: 1rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .template-single-artist .wrapper.community .community-block {
     left: 49vw;
     width: 46vw;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .template-single-artist .wrapper.community .community-block {
     width: 100%;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .template-single-artist .wrapper.community .community-block p, .template-single-artist .wrapper.community .community-block li {
     font-size: 1.2rem;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .template-single-artist .wrapper.community .community-block p, .template-single-artist .wrapper.community .community-block li {
     font-size: 1.2rem;
   }
@@ -485,7 +403,7 @@ em {
 .template-single-artist .wrapper.community .community-block img {
   border-radius: 0.5rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .template-single-artist .wrapper.community .community-block:first-child {
     position: absolute;
     left: 2rem;
@@ -509,15 +427,15 @@ em {
   display: inline-block;
   display: inline-block;
   border-radius: 1rem;
-  background-color: #ffbbf1;
+  background-color: inherit;
   padding: 0.4rem;
-  color: #b47e00;
+  color: inherit;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .template-single-artist .wrapper.community .community-block .text-block a {
     font-size: 1rem;
   }
@@ -531,7 +449,7 @@ em {
 .template-single-artist .text-block strong {
   color: black;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .template-single-artist .biennial-article {
     min-height: 50rem;
   }
@@ -632,12 +550,12 @@ html {
 }
 
 body {
-  background-color: #b47e00;
+  background-color: inherit;
   padding: 0;
   padding-top: 8rem;
   margin: 0;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body {
     padding-top: 10rem;
     padding-bottom: 0rem;
@@ -652,110 +570,10 @@ body {
   overflow: hidden;
   pointer-events: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #intro-wrapper {
     height: 100dvh;
     width: calc(100vw - 2rem);
-  }
-}
-
-.minimal-nav {
-  z-index: 10000;
-  box-shadow: 0 0 1rem 0 #b47e00;
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .minimal-nav {
-    position: fixed;
-    width: 100vw;
-  }
-}
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
-  .minimal-nav {
-    position: fixed;
-    width: 20rem;
-    right: 18rem;
-    top: 1rem;
-  }
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .minimal-nav {
-    left: 0;
-    top: auto;
-    right: auto;
-    bottom: 0;
-    width: 100vw;
-  }
-}
-.minimal-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-}
-.minimal-nav ul li {
-  width: 33.3333%;
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .minimal-nav ul li {
-    width: 33.3333333333%;
-    padding: 0.2rem 0 0.2rem 0;
-  }
-}
-.minimal-nav ul li.active {
-  background-color: white !important;
-}
-.minimal-nav ul li:hover {
-  background-color: #eee !important;
-}
-.minimal-nav ul li:nth-child(4n) {
-  background-color: #ff820a;
-}
-.minimal-nav ul li:nth-child(4n+1) {
-  background-color: #58de60;
-}
-.minimal-nav ul li:nth-child(4n+2) {
-  background-color: #ffbbf1;
-}
-.minimal-nav ul li:nth-child(4n+3) {
-  background-color: #ff820a;
-}
-.minimal-nav ul li a {
-  text-decoration: none;
-  display: block;
-  text-align: center;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-}
-
-#writing .character {
-  position: fixed;
-  z-index: 10;
-  pointer-events: none;
-}
-#writing .character svg {
-  width: 2rem;
-  height: auto;
-}
-#writing #character-01 {
-  left: 2rem;
-  top: 20vh;
-}
-#writing #character-02 {
-  left: 1rem;
-  bottom: 20vh;
-}
-#writing #character-03 {
-  right: 1rem;
-  top: 20vh;
-}
-#writing #character-04 {
-  right: 1rem;
-  top: 70vh;
-}
-#writing #character-05 {
-  right: 35vw;
-  bottom: 2vh;
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  #writing #character-05 {
-    display: none;
   }
 }
 
@@ -789,7 +607,7 @@ body {
   border: 0.08rem solid black;
   display: flex;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #social-homelink {
     top: 1rem;
   }
@@ -821,7 +639,7 @@ body {
   cursor: pointer;
   border-top: 0.08rem solid black;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #social-homelink .newsletter {
     font-size: 0.8rem;
   }
@@ -839,7 +657,7 @@ body {
   cursor: pointer;
   display: block;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #social-homelink .magazine, #social-homelink .radio {
     font-size: 0.8rem;
   }
@@ -873,7 +691,7 @@ body {
 html.browser-safari #social-homelink #sa-logo svg {
   animation: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #social-homelink #sa-logo svg {
     animation: none;
   }
@@ -891,12 +709,12 @@ html.browser-safari #social-homelink #sa-logo svg {
   padding: 1rem 0 2rem 0;
   margin-bottom: 0rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .title-wrapper {
     margin-top: 18rem;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .title-wrapper {
     margin-top: 10rem;
   }
@@ -910,11 +728,11 @@ html.browser-safari #social-homelink #sa-logo svg {
   line-height: 0.8;
   font-weight: 100;
   font-variation-settings: "wght" 100;
-  text-shadow: 0 0 0.2rem #ff820a;
+  text-shadow: none;
   text-align: center;
   color: #6c4b34;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .title-wrapper h1.page-title {
     font-size: 5.5rem;
     letter-spacing: -0.4rem;
@@ -928,19 +746,12 @@ html.browser-safari #social-homelink #sa-logo svg {
   font-size: 0.7rem;
   color: black;
   text-transform: uppercase;
-  color: #58de60;
+  color: inherit;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .title-wrapper .subtitle {
     font-size: 0.8rem;
   }
-}
-
-#writing {
-  display: none;
-}
-.festival-home #writing {
-  display: block;
 }
 
 #b-2024-inner {
@@ -948,19 +759,19 @@ html.browser-safari #social-homelink #sa-logo svg {
   position: absolute;
   pointer-events: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #b-2024-inner svg {
     width: auto;
     height: 10vh;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #b-2024-inner svg {
     height: auto;
     width: 100vw;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #b-2024-inner {
     display: none;
   }
@@ -979,7 +790,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   bottom: 0;
   z-index: 10;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #svg-biennial {
     bottom: calc(5.5rem + 1rem);
     left: 0.5rem;
@@ -992,7 +803,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   bottom: 0;
   z-index: 10;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #svg-2024 {
     bottom: calc(5.5rem + 1rem);
     right: 0.5rem;
@@ -1005,7 +816,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   bottom: 0;
   z-index: 9;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #svg-bottom-table {
     bottom: 5.5rem;
   }
@@ -1014,7 +825,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
     height: auto;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #svg-bottom-table svg {
     height: 5rem;
   }
@@ -1115,8 +926,8 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   margin-top: 6rem;
   position: relative;
   z-index: 3;
-  background-color: #b47e00;
-  box-shadow: 0px 0px 4rem 4rem #b47e00;
+  background-color: inherit;
+  box-shadow: none;
 }
 .discover.artists .subtitle {
   position: relative;
@@ -1134,8 +945,8 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   font-weight: 100;
   font-variation-settings: "wght" 100;
   text-align: center;
-  color: #58de60;
-  text-shadow: 0 0 0.2rem #ffbbf1;
+  color: inherit;
+  text-shadow: none;
 }
 
 /*Normals*/
@@ -1156,7 +967,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   height: 100vh;
   object-position: center bottom;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #background-1 img {
     object-position: left top;
   }
@@ -1214,7 +1025,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   padding: 0;
   pointer-events: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #title-1-sonic {
     display: none;
   }
@@ -1241,7 +1052,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   position: fixed;
   pointer-events: none;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #title-1-sonic-mobile {
     display: none;
   }
@@ -1279,7 +1090,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   padding: 0;
   pointer-events: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #title-2-acts {
     display: none;
   }
@@ -1308,7 +1119,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   position: fixed;
   pointer-events: none;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #title-2-acts-mobile {
     display: none;
   }
@@ -1344,13 +1155,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   position: absolute;
   top: calc(100vh - 11rem);
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #sub-title {
     left: 50%;
     transform: translateX(-50%) translateY(-100%);
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #sub-title {
     top: auto;
     bottom: 10rem;
@@ -1364,7 +1175,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   }
 }
 
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #date {
     position: absolute;
     z-index: 20;
@@ -1379,7 +1190,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
     justify-content: space-between;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #date #date-inner {
     z-index: 20;
     position: absolute;
@@ -1391,7 +1202,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
     width: 27vw;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #date #date-inner {
     display: flex;
     flex-wrap: wrap;
@@ -1401,7 +1212,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
     width: 36%;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #date #date-location {
     z-index: 30;
     position: absolute;
@@ -1419,40 +1230,10 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   padding: 0.17rem 0.3rem 0.1rem 0.3rem;
   font-size: 0.8rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .black-label {
     font-size: 1rem;
   }
-}
-
-#writing .character {
-  position: fixed;
-  z-index: 10;
-  pointer-events: none;
-}
-#writing .character svg {
-  width: 2rem;
-  height: auto;
-}
-#writing #character-01 {
-  left: 2rem;
-  top: 20vh;
-}
-#writing #character-02 {
-  left: 1rem;
-  bottom: 20vh;
-}
-#writing #character-03 {
-  right: 1rem;
-  top: 20vh;
-}
-#writing #character-04 {
-  right: 1rem;
-  top: 70vh;
-}
-#writing #character-05 {
-  right: 35vw;
-  bottom: 2vh;
 }
 
 .table {
@@ -1462,7 +1243,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   text-transform: uppercase;
   border-top: 0.08rem solid black;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .table {
     font-size: 0.8rem;
   }
@@ -1472,7 +1253,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   border-right: 0.08rem solid black;
   display: flex;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .table .table-row {
     border-bottom: 0.08rem solid black;
   }
@@ -1484,13 +1265,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   width: 50%;
   padding: 0.12rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .table .table-col {
     display: flex;
     justify-content: space-around;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .table .table-col {
     width: 50%;
     padding: 0;
@@ -1500,12 +1281,12 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 .table .table-col-left {
   border-right: 0.08rem solid black;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .table .table-col-left {
     width: 50%;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .table .table-item {
     display: block;
     text-align: center;
@@ -1523,7 +1304,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   left: 1rem;
   width: 50%;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #table-top {
     width: 56%;
     left: 1rem;
@@ -1544,12 +1325,12 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   font-size: 0.7rem;
   color: black;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #center-type {
     font-size: 0.8rem;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #center-type {
     top: 70vh;
   }
@@ -1559,7 +1340,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   margin: 0 auto;
   text-align: center;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #center-type p {
     width: 100vw;
     font-family: "mono", monospace;
@@ -1567,7 +1348,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
     color: black;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #center-type p {
     font-size: 0.8rem;
   }
@@ -1586,7 +1367,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   display: grid;
   place-items: center;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #locations-inner {
     font-size: 0.8rem;
   }
@@ -1605,7 +1386,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 #locations-inner .locations-center .locations-item {
   width: 10vw;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #locations-inner .locations-center .locations-item {
     width: 15vw;
   }
@@ -1638,7 +1419,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   width: 45vw;
   transform: translateY(-50%);
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #normal-01 {
     top: 30vh;
     right: 4rem;
@@ -1674,7 +1455,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   pointer-events: none;
 }
 
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #eyes-video {
     pointer-events: none;
   }
@@ -1823,7 +1604,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   padding: 1rem 1rem 0 1rem;
   margin-bottom: 6rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #curatorial-statement p {
     font-size: 1.1rem;
   }
@@ -1842,7 +1623,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   margin: 0 0 0.5rem 0;
   padding: 0 0.5rem 0 0.5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #curatorial-statement p {
     width: 100% !important;
   }
@@ -1855,7 +1636,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 }
 #curatorial-statement .footnote-number {
   background: #6c4b34;
-  color: #ff820a;
+  color: inherit;
   padding: 0.1rem 0.2rem 0.2rem 0.2rem;
   border-radius: 50%;
   font-size: 0.6rem;
@@ -1878,14 +1659,14 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 }
 #curatorial-statement .footnotes ul li {
   width: 50%;
-  background: #ff820a;
+  background: none;
   color: #6c4b34;
   border-radius: 0.3rem;
   padding: 0.2rem;
   margin: 0 0 0.3rem 0;
   display: inline-block;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #curatorial-statement .footnotes ul li {
     width: 100% !important;
     margin: 0 0 0.5rem 0 !important;
@@ -1950,7 +1731,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 #curatorial-statement .line-break {
   width: 100%;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #curatorial-statement .text-span {
     width: 100% !important;
   }
@@ -1981,14 +1762,14 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 .read-more .read-more-inner {
   display: inline-block;
   border-radius: 1rem;
-  background-color: #ffbbf1;
+  background-color: inherit;
   padding: 0.4rem;
-  color: #b47e00;
+  color: inherit;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .read-more .read-more-inner {
     font-size: 1rem;
   }
@@ -2017,7 +1798,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   display: inline-block;
   font-size: 0.8rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .section-header .section-header-inner {
     font-size: 1rem;
   }
@@ -2044,14 +1825,14 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   position: sticky;
   top: 10vh;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #news-container .news-item .news-image {
     width: 100%;
     height: auto;
     margin-bottom: 1rem;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #news-container .news-item .news-image {
     width: 50%;
     flex: 1;
@@ -2070,7 +1851,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 #news-container .news-item .news-image img {
   border-radius: 0.2rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   #news-container .news-item .news-image img {
     position: absolute;
     top: 0;
@@ -2086,7 +1867,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   width: 50%;
   padding: 0 3rem 0 0.5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #news-container .news-item .news-content {
     width: 100%;
     padding: 0;
@@ -2118,14 +1899,14 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   */
 }
 #news-container .news-item .news-headline-wrapper h2.news-headline p {
-  color: #ffbbf1;
-  text-shadow: #b47e00 0px 0 0.7rem;
+  color: inherit;
+  text-shadow: none;
   padding: 0 0 0 3rem;
   border-left: 0.08rem solid black;
   font-size: 1.2rem;
   transition: color 0.3s ease;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #news-container .news-item .news-headline-wrapper h2.news-headline p {
     font-size: 2rem;
   }
@@ -2151,7 +1932,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   margin: 0 0 1rem 0 !important;
 }
 #news-container .news-item h2 {
-  color: #58de60;
+  color: inherit;
   margin: 0 0 1rem 0;
 }
 #news-container .news-item .news-text {
@@ -2167,13 +1948,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 }
 
 /*Mobile / Desktop*/
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .mobile-only {
     display: none;
   }
 }
 
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .desktop-only {
     display: none;
   }
@@ -2200,8 +1981,8 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   font-weight: 100;
   font-variation-settings: "wght" 100;
   text-align: center;
-  color: #58de60;
-  text-shadow: 0 0 0.2rem #ff820a;
+  color: inherit;
+  text-shadow: none;
 }
 .discover.programme-wrapper img, .discover.sub img {
   width: 15rem !important;
@@ -2243,18 +2024,18 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   margin-bottom: 1rem;
   padding: 0rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item, .discover.sub .programme-container .discover-item {
     width: 50%;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .discover.programme-wrapper .programme-container .discover-item, .discover.sub .programme-container .discover-item {
     height: 15rem !important;
     max-height: 15rem !important;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item, .discover.sub .programme-container .discover-item {
     height: 13rem !important;
     max-height: 13rem !important;
@@ -2263,13 +2044,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
 .discover.programme-wrapper .programme-container .discover-item .item-wrapper, .discover.sub .programme-container .discover-item .item-wrapper {
   width: 100%;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .discover.programme-wrapper .programme-container .discover-item .item-wrapper, .discover.sub .programme-container .discover-item .item-wrapper {
     height: 15rem !important;
     max-height: 15rem !important;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .item-wrapper, .discover.sub .programme-container .discover-item .item-wrapper {
     height: 13rem !important;
     max-height: 13rem !important;
@@ -2279,13 +2060,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   position: relative;
   display: block;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .discover.programme-wrapper .programme-container .discover-item > a, .discover.sub .programme-container .discover-item > a {
     height: 15rem !important;
     max-height: 15rem !important;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item > a, .discover.sub .programme-container .discover-item > a {
     height: 13rem !important;
     max-height: 13rem !important;
@@ -2314,7 +2095,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   text-transform: uppercase;
   color: white;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .info-overlay, .discover.sub .programme-container .discover-item .info-overlay {
     font-size: 0.8rem;
   }
@@ -2337,13 +2118,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   left: 0;
   width: 100%;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .discover.programme-wrapper .programme-container .discover-item .image, .discover.sub .programme-container .discover-item .image {
     height: 15rem !important;
     max-height: 15rem !important;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .image, .discover.sub .programme-container .discover-item .image {
     height: 13rem !important;
     max-height: 13rem !important;
@@ -2357,13 +2138,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   width: 100% !important;
   object-fit: cover;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .discover.programme-wrapper .programme-container .discover-item .image img, .discover.sub .programme-container .discover-item .image img {
     height: 15rem !important;
     max-height: 15rem !important;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .image img, .discover.sub .programme-container .discover-item .image img {
     height: 13rem !important;
     max-height: 13rem !important;
@@ -2388,13 +2169,13 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .discover.programme-wrapper .programme-container .discover-item .image .image-inner, .discover.sub .programme-container .discover-item .image .image-inner {
     height: 15rem !important;
     max-height: 15rem !important;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .image .image-inner, .discover.sub .programme-container .discover-item .image .image-inner {
     height: 13rem !important;
     max-height: 13rem !important;
@@ -2411,7 +2192,7 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   text-transform: uppercase;
   text-align: right;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .location-wrapper, .discover.sub .programme-container .discover-item .location-wrapper {
     font-size: 0.8rem;
   }
@@ -2431,9 +2212,9 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   text-transform: uppercase;
   width: 100%;
   text-align: center;
-  color: #58de60;
+  color: inherit;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .category-title-wrapper .category, .discover.sub .programme-container .discover-item .category-title-wrapper .category {
     font-size: 0.8rem;
   }
@@ -2446,12 +2227,12 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   line-height: 0.9;
   letter-spacing: -0.06rem;
   text-transform: uppercase;
-  color: #ffbbf1;
+  color: inherit;
   text-align: center;
   text-shadow: 0px 0px 0.3rem #6c4b34;
   padding: 0 0.5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .discover.programme-wrapper .programme-container .discover-item .category-title-wrapper .title, .discover.sub .programme-container .discover-item .category-title-wrapper .title {
     font-size: 2rem;
   }
@@ -2463,35 +2244,35 @@ body.slug- #svg-biennial, body.slug- #svg-2024, body.slug- #svg-bottom-table {
   transform: scale(1.2);
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n) .image-inner, .discover.sub .programme-container .discover-item:nth-child(5n) .image-inner {
-  background-color: #ffbbf1;
+  background-color: inherit;
   -webkit-mask-image: url(/assets/img/blurs/blur-01.png) !important;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n) .title, .discover.sub .programme-container .discover-item:nth-child(5n) .title {
-  color: #58de60 !important;
+  color: inherit !important;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n+1) .image-inner, .discover.sub .programme-container .discover-item:nth-child(5n+1) .image-inner {
-  background-color: #ff820a;
+  background-color: inherit;
   -webkit-mask-image: url(/assets/img/blurs/blur-02.png) !important;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n+1) .title, .discover.sub .programme-container .discover-item:nth-child(5n+1) .title {
-  color: #ffbbf1 !important;
+  color: inherit !important;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n+2) .image-inner, .discover.sub .programme-container .discover-item:nth-child(5n+2) .image-inner {
   -webkit-mask-image: url(/assets/img/blurs/blur-03.png) !important;
-  background-color: #58de60;
+  background-color: inherit;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n+2) .title, .discover.sub .programme-container .discover-item:nth-child(5n+2) .title {
-  color: #ff820a !important;
+  color: inherit !important;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n+3) .image-inner, .discover.sub .programme-container .discover-item:nth-child(5n+3) .image-inner {
-  background-color: #ff820a;
+  background-color: inherit;
   -webkit-mask-image: url(/assets/img/blurs/blur-01.png) !important;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n+3) .title, .discover.sub .programme-container .discover-item:nth-child(5n+3) .title {
-  color: #58de60 !important;
+  color: inherit !important;
 }
 .discover.programme-wrapper .programme-container .discover-item:nth-child(5n+4) .image-inner, .discover.sub .programme-container .discover-item:nth-child(5n+4) .image-inner {
-  background-color: #b47e00;
+  background-color: inherit;
   -webkit-mask-image: url(/assets/img/blurs/blur-02.png);
 }
 .discover.programme-wrapper .programme-container .image span, .discover.sub .programme-container .image span {
@@ -2536,7 +2317,7 @@ body.slug-programme .location-wrapper {
   padding: 1rem 0 2rem 0;
   font-size: 1.3rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .festival-wrapper.about-page .container {
     padding: 0 18rem;
   }
@@ -2604,7 +2385,7 @@ body.slug-programme .location-wrapper {
   padding-top: 6rem;
 }
 
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .template-artists .container, .discover.artists .container {
     padding: 0;
   }
@@ -2620,7 +2401,7 @@ body.slug-programme .location-wrapper {
   justify-content: center;
   width: 100%;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .template-artists .items-wrapper, .discover.artists .items-wrapper {
     padding: 0;
   }
@@ -2633,7 +2414,7 @@ body.slug-programme .location-wrapper {
   mask-image: radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 40%);
   mask-size: 100% 100%;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .template-artists .items-wrapper .artist-item, .discover.artists .items-wrapper .artist-item {
     width: calc(33.3333333333% + 0.99rem);
   }
@@ -2645,21 +2426,21 @@ body.slug-programme .location-wrapper {
   padding-top: 0.2rem;
 }
 .template-artists .items-wrapper .artist-item:nth-child(5n), .discover.artists .items-wrapper .artist-item:nth-child(5n) {
-  background-color: #ff820a;
+  background-color: inherit;
   mask-image: radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 40%);
   mask-image: radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 40%);
 }
 .template-artists .items-wrapper .artist-item:nth-child(5n+1), .discover.artists .items-wrapper .artist-item:nth-child(5n+1) {
-  background-color: #58de60;
+  background-color: inherit;
 }
 .template-artists .items-wrapper .artist-item:nth-child(5n+2), .discover.artists .items-wrapper .artist-item:nth-child(5n+2) {
-  background-color: #b47e00;
+  background-color: inherit;
 }
 .template-artists .items-wrapper .artist-item:nth-child(5n+3), .discover.artists .items-wrapper .artist-item:nth-child(5n+3) {
-  background-color: #ffbbf1;
+  background-color: inherit;
 }
 .template-artists .items-wrapper .artist-item:nth-child(5n+4), .discover.artists .items-wrapper .artist-item:nth-child(5n+4) {
-  background-color: #58de60;
+  background-color: inherit;
 }
 .template-artists .items-wrapper .artist-item span, .discover.artists .items-wrapper .artist-item span {
   position: relative !important;
@@ -2710,15 +2491,15 @@ body.slug-programme .location-wrapper {
   stroke-miterlimit: 10;
 }
 #small-logo .uuid-1b36f86d-6d74-44e6-b3b4-37d62bac4ab9, #small-logo .uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904 {
-  stroke: #ff820a;
+  stroke: currentColor;
 }
 #small-logo .uuid-4c84452d-7097-4022-a1de-bfb3db769bbe {
-  stroke: #ffbbf1;
+  stroke: currentColor;
 }
 #small-logo .uuid-9d9bc929-5ee4-43c3-9eb8-663d32bb7904 {
-  fill: #ffbbf1;
+  fill: currentColor;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #small-logo {
     padding-top: 2rem;
     left: 50%;
@@ -2738,12 +2519,12 @@ body.scrolled #small-logo, body.slug-timetable #small-logo {
   top: 1rem;
   padding: 0;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.scrolled #small-logo, body.slug-timetable #small-logo {
     width: 70vw;
   }
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   body.scrolled #small-logo, body.slug-timetable #small-logo {
     left: 1rem;
   }
@@ -2754,7 +2535,7 @@ body.scrolled #small-logo, body.slug-timetable #small-logo {
 body.slug-timetable #small-logo {
   position: absolute;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-timetable #small-logo {
     left: 10rem;
     width: 18rem;
@@ -2774,8 +2555,8 @@ body.slug-timetable #small-logo {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: #ff820a;
-  box-shadow: 0 0 1rem #ff820a;
+  background-color: inherit;
+  box-shadow: none;
   width: 28rem;
 }
 #mc_embed_shell .indicates-required, #mc_embed_shell .mce-EMAIL, .ReactModal__Content .indicates-required, .ReactModal__Content .mce-EMAIL {
@@ -2790,7 +2571,7 @@ body.slug-timetable #small-logo {
 #mc_embed_shell .newsletter-headline, .ReactModal__Content .newsletter-headline {
   font-size: 1.2rem;
   padding-bottom: 1rem;
-  color: #ffbbf1;
+  color: inherit;
   text-align: center;
 }
 #mc_embed_shell input[type=email], .ReactModal__Content input[type=email] {
@@ -2806,7 +2587,7 @@ body.slug-timetable #small-logo {
   font-size: 0.7rem;
   color: black;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #mc_embed_shell input[type=email], .ReactModal__Content input[type=email] {
     font-size: 0.8rem;
   }
@@ -2832,9 +2613,9 @@ body.slug-timetable #small-logo {
 #mc_embed_shell .clear #mc-embedded-subscribe, .ReactModal__Content .clear #mc-embedded-subscribe {
   display: inline-block;
   border-radius: 1rem;
-  background-color: #ffbbf1;
+  background-color: inherit;
   padding: 0.4rem;
-  color: #b47e00;
+  color: inherit;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2842,7 +2623,7 @@ body.slug-timetable #small-logo {
   border: 0px transparent solid;
   margin-top: 1rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #mc_embed_shell .clear #mc-embedded-subscribe, .ReactModal__Content .clear #mc-embedded-subscribe {
     font-size: 1rem;
   }
@@ -2858,9 +2639,9 @@ body.slug-timetable #small-logo {
 #mc_embed_shell .flex .wp-block-button__link, .ReactModal__Content .flex .wp-block-button__link {
   display: inline-block;
   border-radius: 1rem;
-  background-color: #ffbbf1;
+  background-color: inherit;
   padding: 0.4rem;
-  color: #b47e00;
+  color: inherit;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2869,7 +2650,7 @@ body.slug-timetable #small-logo {
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #mc_embed_shell .flex .wp-block-button__link, .ReactModal__Content .flex .wp-block-button__link {
     font-size: 1rem;
   }
@@ -2882,9 +2663,9 @@ body.slug-timetable #small-logo {
   font-family: "mono", monospace;
   font-size: 0.7rem;
   color: black;
-  color: #ffbbf1;
+  color: inherit;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   #mc_embed_shell #mce-responses, .ReactModal__Content #mce-responses {
     font-size: 0.8rem;
   }
@@ -2908,17 +2689,17 @@ body.slug-timetable #small-logo {
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 0.5rem;
-  color: #ff820a;
+  color: inherit;
   padding: 0 0.5rem 0 0.5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .biennial-article .category {
     font-size: 0.8rem;
   }
 }
 .biennial-article .category a:link,
 .biennial-article .category a:visited {
-  color: #58de60;
+  color: inherit;
   padding: 0 0.5rem 0 0.5rem;
 }
 .biennial-article .author {
@@ -2931,21 +2712,21 @@ body.slug-timetable #small-logo {
   padding: 0.4rem;
 }
 .biennial-article .author:nth-child(5n) {
-  background-color: #ff820a;
+  background-color: inherit;
   mask-image: radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 40%);
   mask-image: radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 40%);
 }
 .biennial-article .author:nth-child(5n+1) {
-  background-color: #58de60;
+  background-color: inherit;
 }
 .biennial-article .author:nth-child(5n+2) {
-  background-color: #b47e00;
+  background-color: inherit;
 }
 .biennial-article .author:nth-child(5n+3) {
-  background-color: #ffbbf1;
+  background-color: inherit;
 }
 .biennial-article .author:nth-child(5n+4) {
-  background-color: #58de60;
+  background-color: inherit;
 }
 .biennial-article .author span {
   position: relative !important;
@@ -2983,7 +2764,7 @@ body.slug-timetable #small-logo {
   color: black;
   text-transform: uppercase;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .biennial-article .author .info {
     font-size: 0.8rem;
   }
@@ -3007,11 +2788,11 @@ body.slug-timetable #small-logo {
   left: 8rem;
   margin-top: 20vh;
   border-radius: 5rem;
-  background-color: #ff820a;
-  box-shadow: 0px 0px 2rem 2rem #ff820a;
+  background-color: inherit;
+  box-shadow: none;
   transition: all 0.3s ease;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .colored-bg-01, .colored-bg-02 {
     left: 4rem;
   }
@@ -3024,10 +2805,10 @@ body.slug- .colored-bg-01, body.slug- .colored-bg-02 {
   top: 18rem;
   left: 60vw;
   width: 20vw;
-  background-color: #ffbbf1;
-  box-shadow: 0px 0px 2rem 2rem #ffbbf1;
+  background-color: inherit;
+  box-shadow: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .colored-bg-02 {
     left: 65vw;
     width: 25vw;
@@ -3037,7 +2818,7 @@ body.scrolled .colored-bg-02 {
   top: 2rem;
 }
 
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .slug-programmeprogramme .article,
   .slug-programmeprogrammesub .article {
     padding: 0 14rem;
@@ -3108,7 +2889,7 @@ body.scrolled .colored-bg-02 {
 .content {
   position: relative;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .content {
     display: flex;
     flex-direction: column-reverse;
@@ -3127,8 +2908,8 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   position: fixed;
   left: 2rem;
   width: 10vw;
-  background-color: #b47e00;
-  box-shadow: 0px 0px 2rem 2rem #b47e00;
+  background-color: inherit;
+  box-shadow: none;
   z-index: 3;
 }
 
@@ -3140,20 +2921,20 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   text-transform: uppercase;
   text-transform: none;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .sidebar {
     position: fixed;
     right: 2rem;
     width: 16vw;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar {
     width: 80%;
     margin: 0 auto 2rem auto;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar {
     font-size: 0.8rem;
   }
@@ -3167,7 +2948,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   text-transform: uppercase;
   text-transform: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar p,
   .sidebar h2,
   .sidebar h3 {
@@ -3177,12 +2958,12 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
 .sidebar .when-wrapper {
   padding: 0 2rem 0 2rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .sidebar .when-wrapper {
     margin-bottom: 3rem;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .when-wrapper {
     margin-bottom: 2rem;
   }
@@ -3204,14 +2985,14 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   line-height: 1;
   letter-spacing: -0.06rem;
   text-transform: uppercase;
-  color: #ffbbf1;
-  color: #ffbbf1;
+  color: inherit;
+  color: inherit;
   text-align: center;
-  text-shadow: 0px 0px 0.3rem #ff820a;
+  text-shadow: none;
 }
 .sidebar .when-wrapper .time {
   text-align: center;
-  color: #ffbbf1;
+  color: inherit;
 }
 .sidebar .locations-wrapper {
   /* From https://css.glass */
@@ -3221,7 +3002,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   -webkit-backdrop-filter: blur(0.5);
   border-bottom: 1px solid black;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .locations-wrapper {
     width: 60%;
     margin: 0 auto 0 auto;
@@ -3248,7 +3029,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   text-transform: uppercase;
   margin-bottom: 0.3rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .locations-wrapper .location h4 {
     font-size: 0.8rem;
   }
@@ -3263,7 +3044,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   padding: 0.2rem;
   text-align: center;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .locations-wrapper h3 {
     font-size: 0.8rem;
   }
@@ -3271,9 +3052,9 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
 .sidebar .register-wrapper {
   display: inline-block;
   border-radius: 1rem;
-  background-color: #ffbbf1;
+  background-color: inherit;
   padding: 0.4rem;
-  color: #b47e00;
+  color: inherit;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -3281,9 +3062,9 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   display: block;
   width: 50%;
   text-align: center;
-  box-shadow: 0 0 1rem 0 #b47e00;
+  box-shadow: none;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .register-wrapper {
     font-size: 1rem;
   }
@@ -3296,7 +3077,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   width: 100%;
   cursor: pointer;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .tickets-wrapper {
     width: 60%;
     margin: 0 auto;
@@ -3306,7 +3087,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   margin-top: 3rem;
   display: flex;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .tickets-wrapper .ticket {
     margin-top: 2rem;
   }
@@ -3322,15 +3103,15 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
   padding: 0.5rem;
-  border-right: 0.1rem dotted #b47e00;
+  border-right: 0.1rem dotted currentColor;
   display: inline-block;
 }
 .sidebar .tickets-wrapper .ticket-content {
   display: inline-block;
   border-radius: 1rem;
-  background-color: #ffbbf1;
+  background-color: inherit;
   padding: 0.4rem;
-  color: #b47e00;
+  color: inherit;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -3340,12 +3121,12 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   border-radius: 0.1rem;
   border-bottom-left-radius: 0.25rem;
   border-top-left-radius: 0.25rem;
-  border-left: 0.1rem dotted #b47e00;
+  border-left: 0.1rem dotted currentColor;
   transform: translateX(-0.1rem) rotate(-0.02deg) scale(1.00002);
   transform-origin: left top;
   transition: transform 0.3s ease;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .tickets-wrapper .ticket-content {
     font-size: 1rem;
   }
@@ -3357,7 +3138,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   margin: 0;
   font-size: 0.7rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .sidebar .tickets-wrapper .ticket-content p {
     font-size: 1rem;
   }
@@ -3370,7 +3151,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   display: flex;
   flex-wrap: wrap;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .slug-tickets .tickets-container {
     margin: 1rem;
   }
@@ -3380,12 +3161,12 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   display: block;
   margin-right: 1rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .slug-tickets .tickets-container .ticket {
     width: calc(33.3% - 1rem);
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .slug-tickets .tickets-container .ticket {
     width: auto;
   }
@@ -3406,11 +3187,11 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   padding: 0.5rem;
-  border-right: 0.15rem dotted #b47e00;
+  border-right: 0.15rem dotted currentColor;
   transition: transform 0.3s ease;
   z-index: 2;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .slug-tickets .tickets-container .ticket-content h3 {
     min-width: 16rem;
   }
@@ -3430,7 +3211,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   left: 0.5rem;
   bottom: 0.5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .slug-tickets .tickets-container .ticket-content h3 a {
     font-size: 0.8rem;
   }
@@ -3442,9 +3223,9 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   width: 8rem;
   display: inline-block;
   border-radius: 1rem;
-  background-color: #ffbbf1;
+  background-color: inherit;
   padding: 0.4rem;
-  color: #b47e00;
+  color: inherit;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -3454,13 +3235,13 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   border-radius: 0.2rem;
   border-bottom-left-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
-  border-left: 0.15rem dotted #b47e00;
+  border-left: 0.15rem dotted currentColor;
   z-index: 1;
   transform: translateX(-0.15rem) rotate(-0.02deg) scale(1.00002);
   transform-origin: left top;
   transition: transform 0.3s ease;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .slug-tickets .tickets-container .ticket-content .price {
     font-size: 1rem;
   }
@@ -3477,7 +3258,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   color: black;
   text-transform: uppercase;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .slug-tickets .tickets-container .ticket-content .price p {
     font-size: 0.8rem;
   }
@@ -3491,7 +3272,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   color: black;
   text-transform: uppercase;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .slug-tickets .tickets-container .ticket-content .price span {
     font-size: 0.8rem;
   }
@@ -3504,7 +3285,7 @@ body.scrolled .article .authors, body.scrolled .article .sidebar {
   margin-top: 0rem;
   margin-bottom: 4rem;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   .slug-tickets .info-wrapper {
     width: 50vw;
   }
@@ -3537,7 +3318,7 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 .ticket-modal {
   width: 550px;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .ticket-modal {
     width: 100vw;
     height: 100vh;
@@ -3546,7 +3327,7 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 .ticket-modal iframe {
   height: 90vh;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   .ticket-modal iframe {
     height: 100vh;
   }
@@ -3556,9 +3337,9 @@ body.slug-timetable {
   background-color: #6c4b34;
 }
 body.slug-timetable .page-title {
-  color: #ff820a;
+  color: inherit;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-timetable .container {
     padding: 0;
   }
@@ -3585,12 +3366,12 @@ body.slug-timetable .timetable .date {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-timetable .timetable .date {
     width: 7.2rem;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-timetable .timetable .date {
     font-size: 1rem;
   }
@@ -3603,14 +3384,14 @@ body.slug-timetable .timetable .timetable-times {
   z-index: 0;
   margin-left: 10.8rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-timetable .timetable .timetable-times {
     margin-left: 7.2rem;
   }
 }
 body.slug-timetable .timetable .timetable-times .time-block {
   padding-left: 0;
-  background-color: #b47e00;
+  background-color: inherit;
   top: 1.35rem;
   position: relative;
 }
@@ -3623,46 +3404,46 @@ body.slug-timetable .timetable .timetable-times .time-block .time {
   color: white;
 }
 body.slug-timetable .timetable .timetable-row .location {
-  background-color: #ffbbf1;
+  background-color: inherit;
 }
 body.slug-timetable .timetable .timetable-row .inner-programme .title-artist-wrapper {
-  background-color: #ffbbf1 !important;
+  background-color: inherit !important;
 }
 body.slug-timetable .timetable .timetable-row.w139 .location, body.slug-timetable .timetable .timetable-row.sub-W139 .location, body.slug-timetable .timetable .timetable-row.muziekgebouw .location, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .location, body.slug-timetable .timetable .timetable-row.rijksakademie .location {
-  background-color: #ff820a;
+  background-color: inherit;
 }
 body.slug-timetable .timetable .timetable-row.w139 .programme:hover, body.slug-timetable .timetable .timetable-row.sub-W139 .programme:hover, body.slug-timetable .timetable .timetable-row.muziekgebouw .programme:hover, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .programme:hover, body.slug-timetable .timetable .timetable-row.rijksakademie .programme:hover {
   background-color: transparent !important;
 }
 body.slug-timetable .timetable .timetable-row.w139 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-W139 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.muziekgebouw .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.rijksakademie .inner-programme .title-artist-wrapper {
-  background-color: #ff820a !important;
+  background-color: inherit !important;
 }
 body.slug-timetable .timetable .timetable-row.zone-2-source .location, body.slug-timetable .timetable .timetable-row.ot301 .location, body.slug-timetable .timetable .timetable-row.online .location, body.slug-timetable .timetable .timetable-row.online-anywhere .location, body.slug-timetable .timetable .timetable-row.oude-kerk .location, body.slug-timetable .timetable .timetable-row.paradiso .location, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .location, body.slug-timetable .timetable .timetable-row.sub-stedelijk .location {
-  background-color: #58de60;
+  background-color: inherit;
 }
 body.slug-timetable .timetable .timetable-row.zone-2-source .programme:hover, body.slug-timetable .timetable .timetable-row.ot301 .programme:hover, body.slug-timetable .timetable .timetable-row.online .programme:hover, body.slug-timetable .timetable .timetable-row.online-anywhere .programme:hover, body.slug-timetable .timetable .timetable-row.oude-kerk .programme:hover, body.slug-timetable .timetable .timetable-row.paradiso .programme:hover, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .programme:hover, body.slug-timetable .timetable .timetable-row.sub-stedelijk .programme:hover {
   background-color: transparent !important;
 }
 body.slug-timetable .timetable .timetable-row.zone-2-source .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.ot301 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.online .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.online-anywhere .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.oude-kerk .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.paradiso .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-stedelijk .inner-programme .title-artist-wrapper {
-  background-color: #58de60 !important;
+  background-color: inherit !important;
 }
 body.slug-timetable .timetable .timetable-row.looiersgracht60 .location, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .location, body.slug-timetable .timetable .timetable-row.jacuzzi .location {
-  background-color: #ffbbf1;
+  background-color: inherit;
 }
 body.slug-timetable .timetable .timetable-row.looiersgracht60 .programme:hover, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .programme:hover, body.slug-timetable .timetable .timetable-row.jacuzzi .programme:hover {
   background-color: transparent !important;
 }
 body.slug-timetable .timetable .timetable-row.looiersgracht60 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.jacuzzi .inner-programme .title-artist-wrapper {
-  background-color: #ffbbf1 !important;
+  background-color: inherit !important;
 }
 body.slug-timetable .timetable .timetable-row.bimhuis .location, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .location, body.slug-timetable .timetable .timetable-row.eye .location, body.slug-timetable .timetable .timetable-row.garage-noord .location, body.slug-timetable .timetable .timetable-row.het-hem .location, body.slug-timetable .timetable .timetable-row.sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.het-hem-2 .location {
-  background-color: #58de60;
+  background-color: inherit;
 }
 body.slug-timetable .timetable .timetable-row.bimhuis .programme:hover, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .programme:hover, body.slug-timetable .timetable .timetable-row.eye .programme:hover, body.slug-timetable .timetable .timetable-row.garage-noord .programme:hover, body.slug-timetable .timetable .timetable-row.het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.het-hem-2 .programme:hover {
   background-color: transparent !important;
 }
 body.slug-timetable .timetable .timetable-row.bimhuis .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.eye .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.garage-noord .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.het-hem-2 .inner-programme .title-artist-wrapper {
-  background-color: #58de60 !important;
+  background-color: inherit !important;
 }
 body.slug-timetable .timetable .timetable-row .programme {
   background-color: transparent;
@@ -3673,7 +3454,7 @@ body.slug-timetable .timetable .timetable-row .programme {
   left: calc(var(--margin) + 0.2rem);
   width: calc(var(--width) - 0.4rem);
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-timetable .timetable .timetable-row .programme {
     left: calc(var(--margin) - 3.6rem);
   }
@@ -3751,7 +3532,7 @@ body.slug-timetable .timetable .timetable-locations-outer-wrapper::before {
   height: calc(100% - 1.35rem);
   display: block;
   z-index: 10;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #b47e00 100%);
+  background: none;
   pointer-events: none;
 }
 body.slug-timetable .timetable .timetable-locations {
@@ -3760,7 +3541,7 @@ body.slug-timetable .timetable .timetable-locations {
 }
 body.slug-timetable .timetable .timetable-locations::before {
   content: " ";
-  background-color: #b47e00;
+  background-color: inherit;
   position: absolute;
   top: 1.4rem;
   width: 100%;
@@ -3791,19 +3572,19 @@ body.slug-timetable .timetable .timetable-locations::-webkit-scrollbar-track {
   border-radius: 0.5rem;
 }
 body.slug-timetable .timetable .timetable-locations:nth-child(3n)::-webkit-scrollbar-thumb {
-  background: #58de60;
+  background: none;
 }
 body.slug-timetable .timetable .timetable-locations:nth-child(3n+1)::-webkit-scrollbar-thumb {
-  background: #ff820a;
+  background: none;
 }
 body.slug-timetable .timetable .timetable-locations:nth-child(3n+2)::-webkit-scrollbar-thumb {
-  background: #ffbbf1;
+  background: none;
 }
 body.slug-timetable .timetable .timetable-locations .location {
   width: 10.8rem;
   border-top: 0px solid black;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-timetable .timetable .timetable-locations .location {
     width: 7.2rem;
   }
@@ -3822,7 +3603,7 @@ body.slug-timetable .timetable .timetable-locations .location.sub p {
   padding-left: 2rem;
 }
 
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit {
     padding-top: 6rem;
   }
@@ -3834,7 +3615,7 @@ body.slug-visit #small-logo {
   left: 1rem;
   padding: 0;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit #small-logo {
     width: 60vw;
     transform: translateX(0);
@@ -3853,7 +3634,7 @@ body.slug-visit .wrapper {
   align-items: flex-start;
   width: 100%;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit .wrapper {
     flex-direction: column-reverse;
   }
@@ -3862,13 +3643,13 @@ body.slug-visit .wrapper .locations {
   display: flex;
   flex-wrap: wrap;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   body.slug-visit .wrapper .locations {
     width: 65%;
     margin-right: 1rem;
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit .wrapper .locations {
     height: auto;
     overflow: scroll;
@@ -3882,11 +3663,11 @@ body.slug-visit .wrapper .locations .location {
   flex-direction: row;
   justify-content: flex-start;
   flex-direction: column;
-  background-color: #58de60;
+  background-color: inherit;
   padding: 0.5rem;
   text-align: left;
 }
-@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+@include desktop {
   body.slug-visit .wrapper .locations .location {
     width: 33.3333333333%;
     /*
@@ -3896,7 +3677,7 @@ body.slug-visit .wrapper .locations .location {
     */
   }
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit .wrapper .locations .location {
     width: 50%;
   }
@@ -3916,7 +3697,7 @@ body.slug-visit .wrapper .locations .location h3 {
   min-height: 1.8rem;
   margin-top: 0.1rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit .wrapper .locations .location h3 {
     font-size: 0.8rem;
   }
@@ -3941,13 +3722,13 @@ body.slug-visit .wrapper .locations .location .additional-info p {
   margin-bottom: 0;
 }
 body.slug-visit .wrapper .locations .location:nth-child(5n+0) {
-  background-color: #58de60;
+  background-color: inherit;
 }
 body.slug-visit .wrapper .locations .location:nth-child(5n+1) {
-  background-color: #ff820a;
+  background-color: inherit;
 }
 body.slug-visit .wrapper .locations .location:nth-child(5n+2) {
-  background-color: #ffbbf1;
+  background-color: inherit;
 }
 body.slug-visit .wrapper .locations .location:nth-child(5n+3) {
   background-color: white;
@@ -3964,7 +3745,7 @@ body.slug-visit .wrapper #map {
   width: 35%;
   border-radius: 0.5rem;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit .wrapper #map {
     height: calc(40vh - 7rem);
     margin-bottom: 1rem;
@@ -3990,7 +3771,7 @@ body.slug-visit .wrapper .mapboxgl-popup-content p {
   margin-bottom: 0;
   font-family: mono-prop;
 }
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+@include mobile {
   body.slug-visit .wrapper .mapboxgl-popup-content p {
     font-size: 1rem;
   }

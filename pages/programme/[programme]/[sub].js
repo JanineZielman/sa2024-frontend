@@ -1,3 +1,4 @@
+import { BIENNIAL_SLUG, PROGRAMME_SLUG } from "../../../lib/constants"
 import { fetchAPI } from "../../../lib/api"
 import React, { useEffect, useState } from "react"
 import Layout from "../../../components/layout"
@@ -171,7 +172,7 @@ const SubProgrammeItem = ({page, global, relations, params, sub, festival, progr
 
 export async function getServerSideProps({params, query}) {
   const biennial = {
-		slug: "biennial-2024"
+		slug: BIENNIAL_SLUG
 	}
   const preview = query.preview
   const pageRes = 
@@ -190,7 +191,7 @@ export async function getServerSideProps({params, query}) {
   const [globalRes, festivalRes, programmeLoc] = await Promise.all([
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI(`/biennials?filters[slug][$eq]=${biennial.slug}&populate[prefooter][populate]=*`),
-    fetchAPI(`/programme-pages?filters[slug][$eq]=programme-2024&populate[location_item][populate]=*`),
+    fetchAPI(`/programme-pages?filters[slug][$eq]=${PROGRAMME_SLUG}&populate[location_item][populate]=*`),
   ])
 
   return {

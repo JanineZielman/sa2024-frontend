@@ -1,3 +1,4 @@
+import { BIENNIAL_SLUG } from "../../lib/constants"
 import React, {useEffect, useState} from "react"
 import Layout from "../../components/layout"
 import { fetchAPI } from "../../lib/api"
@@ -207,7 +208,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2024"
+		slug: BIENNIAL_SLUG
 	}
   
   // Run API calls in parallel

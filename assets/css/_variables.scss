@@ -9,10 +9,10 @@ $desktopVideoWidth: 36rem;
 $key-color: #f7dbff;
 
 
-$keycolor1: #58de60; //green
-$keycolor2: #ff820a; //orange
-$keycolor3: #ffbbf1; //rosa
-$keycolor4: #b47e00; //brown
+$keycolor1: null;
+$keycolor2: null;
+$keycolor3: null;
+$keycolor4: null;
 $keycolor5: #6c4b34; //brown
 
 
@@ -23,7 +23,7 @@ $ticket-color:#f1ff8b;
 
 $mid-grey: #8b8b8b;
 
-$backgroundColor: #b47e00;
+$backgroundColor: transparent;
 
 $tableBorderStrokeWidth: 0.08rem;
 $tableBorder: $tableBorderStrokeWidth solid black;

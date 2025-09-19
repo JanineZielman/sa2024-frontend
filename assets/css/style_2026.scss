@@ -1,0 +1,367 @@
+html, body { height: 100%; margin: 0; background:#111; }
+#app { position: fixed; inset: 0; }
+
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+ * {
+ }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+  resize: vertical;
+}
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+
+:root {
+  --color-pink: #ed92e8;
+  --color-grey: #babade;
+  --color-brown: #7a3700;
+  --color-blue: #7b87ff;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 1vw;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    border: 1px solid yellow;
+    height: auto;
+    width: 100%;
+
+    background: var(--color-grey);
+}
+
+#app {
+  background-color: var(--color-brown);
+  z-index: 10;
+
+  canvas {
+    background-color: var(--color-brown);
+  }
+
+  body.has-scrolled & {
+    pointer-events: none;
+  }
+}
+
+#sonic-acts {
+  z-index: 1000;
+  position: relative;
+  width: 100%;
+  svg {
+    height: 100%;
+    width: auto;
+  }
+  #sonic {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    height: 60vh;
+    max-height: 60vh;
+    transition: max-height 0.1s ease;
+  }
+
+  #acts {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    height: 60vh;
+    max-height: 60vh;
+    transition: max-height 0.1s ease;
+    transition-delay: 0.3s;
+  }
+
+
+
+  body.has-scrolled & {
+    #sonic,
+    #acts {
+      max-height: 20vh;
+    }
+
+    svg {
+      path {
+        fill: var(--color-brown) !important;
+      }
+    }
+  }
+}
+
+//#background-overlay,
+#app {
+  transition: opacity 0.3s ease;
+  body.has-scrolled & {
+    opacity: 0;
+  }
+}
+
+#background-overlay {
+  body.has-scrolled & {
+    z-index: 2 !important;
+  }
+}
+
+#date {
+  transition: all 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+
+  body.has-scrolled & {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+}
+
+#locations {
+  position: fixed;
+  z-index: 1000;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease;
+  transition-delay: 0.4s;
+
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+  }
+}
+
+.visuals-svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+
+  pointer-events: none;
+
+  img {
+    position: fixed;
+    left: 50vw;
+    top: 50vh;
+    height: 100vh;
+    width:100%;
+    object-fit: cover;
+    z-index: 100;
+    pointer-events: none;
+    transform-origin: center center;
+    transform: translate(-50%, -50%);
+  }
+
+}
+
+
+#main {
+  width: 100%;
+}
+
+#aqua-01 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  body.has-scrolled & {
+    opacity: 1;
+  }
+}
+
+#aqua-02 {
+  position: fixed;
+  top: -5%;
+  left: -5%;
+  width: 25%;
+
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  body.has-scrolled & {
+    opacity: 1;
+  }
+
+}
+
+#aqua-03 {
+  position: fixed;
+  top: 10vw;
+  left: calc(50% - 35vw);
+  width: 80vw;
+
+  z-index: 3;
+
+  img {
+    width: auto;
+    height: 80vh;
+  }
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  body.has-scrolled & {
+    opacity: 0.5;
+  }
+
+}
+
+#curatorial{
+  font-family: 'limpet';
+  color: var(--color-brown);
+  padding: 100vh 22rem 5rem 22rem;
+  position: relative;
+
+  z-index: 2;
+
+  h2 {
+    font-family: 'bazaine-mono';
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0vh 0 10rem 10rem;
+    font-weight: normal;
+    color: var(--color-brown);
+  }
+
+  p {
+    font-size: 1.5rem;
+    line-height: 1.55rem;
+
+  }
+}
+
+#news-container {
+  margin-top: 100vh;
+}
+
+#news {
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+
+  font-family: 'limpet';
+  color: var(--color-brown);
+
+  padding: 10rem 1rem 0 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+
+  gap: 0.5rem;
+
+  .news-item {
+    width: 22%;
+
+    margin: 0 0 3rem 0;
+
+  }
+
+}
+.frontpage-landing {
+  transition: opacity 0.4s ease;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  &.frontpage-landing--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+

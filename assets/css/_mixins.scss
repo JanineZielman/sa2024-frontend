@@ -20,10 +20,10 @@
     display: inline-block;
     border-radius: 1rem;
 
-    background-color: $keycolor3;
+    background-color: transparent;
 
     padding: 0.4rem;
-    color: $keycolor4;
+    color: inherit;
     font-size: 0.8rem;
 
     cursor: pointer;
@@ -35,7 +35,7 @@
     }
 
     &:hover {
-        background-color: white;
+        background-color: transparent;
     }
 }
 

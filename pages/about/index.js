@@ -1,3 +1,4 @@
+import { BIENNIAL_SLUG } from "../../lib/constants"
 import React from "react"
 import Layout from "../../components/layout"
 import { fetchAPI } from "../../lib/api"
@@ -29,7 +30,7 @@ const About = ({ global, page}) => {
 
 export async function getServerSideProps() {
   const params = {
-		slug: "biennial-2024"
+		slug: BIENNIAL_SLUG
 	}
   // Run API calls in parallel
   const [pageRes, globalRes] = await Promise.all([

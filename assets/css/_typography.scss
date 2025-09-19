@@ -1,31 +1,24 @@
 @font-face {
-    font-family: 'geist';
-    src: url('/assets/fonts/GeistVariableVF.woff2') format('woff');
-    font-style: normal;
-}
-
-
-@font-face {
     font-family: 'mono';
-    src: url('/assets/fonts/CodaBetaV8-MonoSerif.woff2') format('woff');
+    src: local('Courier New'), local('Courier');
     font-style: normal;
 }
 
 @font-face {
     font-family: 'mono';
-    src: url('/assets/fonts/CodaBetaV8-MonoSerifItalic.woff') format('woff');
+    src: local('Courier New Italic'), local('Courier Italic'), local('Courier New'), local('Courier');
     font-style: italic;
 }
 
 @font-face {
     font-family: 'mono-prop';
-    src: url('/assets/fonts/CodaBetaV8-ProportionalSans.woff2') format('woff');
+    src: local('Helvetica'), local('Arial'), local('sans-serif');
     font-style: normal;
 }
 
 @font-face {
     font-family: 'mono-prop';
-    src: url('/assets/fonts/CodaBetaV8-ProportionalSansItalic.woff2') format('woff');
+    src: local('Helvetica Oblique'), local('Arial Italic'), local('Helvetica'), local('Arial');
     font-style: italic;
 }
 
@@ -87,23 +80,7 @@ a:visited {
 
 strong {
     font-weight: normal;
-    color: $keycolor5;
-
-    &:nth-child(4n) {
-        color: $keycolor2;
-    }
-
-    &:nth-child(4n+1) {
-        color: $keycolor1;
-    }
-
-    &:nth-child(4n+2) {
-        color: $keycolor3;
-    }
-
-    &:nth-child(4n+3) {
-        color: $keycolor1;
-    }
+    color: inherit;
 }
 
 p, li {
