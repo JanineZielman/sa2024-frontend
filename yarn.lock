@@ -3259,11 +3259,6 @@ stop-iteration-iterator@^1.1.0:
     es-errors "^1.3.0"
     internal-slot "^1.1.0"
 
-strapi-plugin-populate-deep@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/strapi-plugin-populate-deep/-/strapi-plugin-populate-deep-3.0.1.tgz"
-  integrity sha512-7t1bPPBN1AGKZlFT/6qsqmwgd7SzTA9CNzEBSzeYEjL/e0GKD2lf4wF11C2vMkfsQW2GhRAXZQRCGlLnV2XHFQ==
-
 streamsearch@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/streamsearch/-/streamsearch-1.1.0.tgz"
