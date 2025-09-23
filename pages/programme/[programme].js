@@ -63,22 +63,23 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                 <div className="day-programme">
                   <div className="discover-container programme-container sub-programme-container">
                     {subItems.map((item, i) => {
-                      let dates = item.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
-                      let start_date = new Date(dates?.[0]?.date.split('/').reverse().join('/'));
-                      let end_date = new Date(dates?.[dates?.length - 1]?.date.split('/').reverse().join('/'));
+                      const subProgrammeKey = item.id || item.attributes?.slug || `sub-programme-${i}`;
+                      const dates = item.attributes.WhenWhere?.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
+                      const start_date = new Date(dates?.[0]?.date.split('/').reverse().join('/'));
+                      const end_date = new Date(dates?.[dates?.length - 1]?.date.split('/').reverse().join('/'));
                       return(
-                        <>
-                          <div className={`discover-item`}>
-                            <div className="location-wrapper">
-                              {item.attributes.locations?.data?.map((loc,i) => {
-                                return(
-                                  <div>{loc.attributes.title}</div>
-                                )
-                              })}
-                            </div>
-                            <LazyLoad height={600}>
-                              <div className="item-wrapper">
-                                <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                        <div className={`discover-item`} key={subProgrammeKey}>
+                          <div className="location-wrapper">
+                            {item.attributes.locations?.data?.map((loc, j) => {
+                              const locationKey = loc.id || loc.attributes?.slug || `${subProgrammeKey}-location-${j}`;
+                              return(
+                                <div key={locationKey}>{loc.attributes.title}</div>
+                              )
+                            })}
+                          </div>
+                          <LazyLoad height={600}>
+                            <div className="item-wrapper">
+                              <a href={page?.attributes.slug+'/'+item.attributes.slug}>
                                   <div className="image">
                                     {item.attributes.WhenWhere[0] && page.attributes.hide_when_where == true &&
                                       <div className="info-overlay">
@@ -115,9 +116,8 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                               </div>
                             </LazyLoad>
                           </div>
-                        </>
-                      )
-                    })}
+                        )
+                      })}
                   </div>
                 </div>
               </div>
@@ -135,11 +135,12 @@ const ProgrammeItem = ({page, global, relations, params, sub, festival, programm
                 <div className="discover-container programme-container sub-programme-container">
                   <div className="items-wrapper">
                     {relations.attributes.community_items.data.map((item, i) => {
+                      const communityKey = item.id || item.attributes?.slug || `community-${i}`;
                       return(
-                        <div className="discover-item artist-item">
+                        <div className="discover-item artist-item" key={communityKey}>
                           <LazyLoad height={600}>
                             <div className="item-wrapper">
-                              <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                              <a href={'/artists/'+item.attributes.slug}>
                                 <div className="image">
                                   <div className="image-inner">
                                     {item.attributes.cover_image?.data &&

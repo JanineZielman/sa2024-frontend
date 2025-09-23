@@ -268,89 +268,6 @@ const Layout = ({ children, festival}) => {
           browserCheck = 'unkown';
       }
       
-      
-
-      var scrollTop = 0;
-      var randomNumber = Math.random();
-
-      function setColoredBG() {
-        if (randomNumber > 0.6) {
-          //console.log("case 1");
-
-          $(".colored-bg-01").css({
-            "transform":"translateY(" + Math.min(scrollTop * 0.5, 300) + "px scale(" + Math.min(scrollTop / 2000 + 0.5, 5) + ")",
-            "background-color" : "transparent",
-            "box-shadow": "none"
-          })
-
-          $(".colored-bg-02").css({
-            "transform":"translateY(" + (-1 * scrollTop * 0.5) + "px) scale(" + Math.max(-1 *scrollTop / 2000 + 0.5, 0.5) + ")",
-          })
-        }
-
-        if (randomNumber <= 0.6 && randomNumber > 0.3) {
-          //console.log("case 2");
-          $(".colored-bg-01").css({
-            "transform":"translateY(" + -1 * Math.min(scrollTop * 0.5, 300) + "px)"
-          })
-
-          $(".colored-bg-02").css({
-            "transform":"translateY(" + (scrollTop * 0.5) + "px) scale(" + Math.min(scrollTop / 2000 + 0.5, 5) + ")",
-          })
-        }
-
-        if (randomNumber <= 0.3) {
-          //console.log("case 3");
-          $(".colored-bg-01").css({
-            "transform":"translateY(" + Math.min(scrollTop * 0.5, 300) + "px)"
-          })
-
-          $(".colored-bg-02").css({
-            "transform":"translateY(" + (-1 * scrollTop * 0.5) + "px))",
-          })
-        }
-      }
-
-      setColoredBG();
-      setTimeout(function(){
-        setColoredBG();
-      }, 10);
-
-      $(window).scroll(function() {
-
-        console.log($(window).scrollTop());
-
-        scrollTop = $(window).scrollTop();
-
-        // Removed title animations (#title-1-sonic, #title-1-sonic-mobile, #title-2-acts, #title-2-acts-mobile)
-
-
-        // Removed 2024-specific SVG transforms
-
-        $("#background-1, #normal-01").css({
-            "opacity": 1 - scrollTop/120
-        })
-
-        $("#background-bottom").css({
-            "transform":"translateY(" + -1 * Math.min(scrollTop, $(window).width()*0.4) + "px)"
-        })
-
-        setColoredBG();
-
-        var maxScroll = $(window).width() * 0.1;
-        var maxScale = $(window).width() * 0.17; //how small it gets, the smaller the number the smaller
-
-        if (
-            scrollTop > ($("#intro-wrapper").outerHeight() + $("#curatorial-statement").outerHeight() - $(window).height())
-            || scrollTop < $(window).height()/2
-        ) {
-            $(".background-layer-1").fadeOut();
-        } else {
-
-            $(".background-layer-1").fadeIn();
-        }
-      })
-
 
     }, 100);
 
@@ -474,45 +391,6 @@ const Layout = ({ children, festival}) => {
             </a>
         </div>
     </div>
-
-    <div id="table-top" className="table hide-at-pageload visible">
-      <div className="table-wrapper">
-        <div className="table-row">
-          <div className="table-col table-col-left">
-                  <span className="table-item">Paradiso</span><span className="table-item">Muziekgebouw</span>
-              </div>
-              <div className="table-col table-col-right">
-                  <span className="table-item"></span><span className="table-item">BIMHUIS</span>
-              </div>
-          </div>
-          <div className="table-row">
-              <div className="table-col table-col-left">
-              EYE FILMMUSEUM
-              </div>
-              <div className="table-col table-col-right">
-                  <span className="table-item">STEDELIJK MUSEUM</span><span className="table-item">W139</span>
-              </div>
-          </div>
-          <div className="table-row">
-              <div className="table-col table-col-left">
-                  <span className="table-item">LOOIERSGRACHT 60</span>
-                  <span className="table-item">&nbsp;</span>
-              </div>
-              <div className="table-col table-col-right">
-                  <span className="table-item">ZONE2SOURCE</span><span className="table-item">OUDE KERK</span>
-              </div>
-          </div>
-          <div className="table-row">
-              <div className="table-col table-col-left">
-                  <span className="table-item">GARAGE NOORD&nbsp;&nbsp;KANAAL40</span>
-              </div>
-              <div className="table-col table-col-right">
-              <span className="table-item">OT301 </span><span className="table-item">Het HEM </span><span className="table-item">AND MORE</span>
-              </div>
-          </div>
-      </div>
-  </div>
-
 
     <section className={`container ${festival?.attributes?.radio ? 'topbanner' : ''}`}>
       <>

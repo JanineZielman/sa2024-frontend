@@ -23,6 +23,7 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
           }
           <div className="discover-container programme-container">
             {programmes.data.map((item, i) => {
+              const programmeKey = item.id || item.attributes?.slug || `programme-${i}`;
               let tags = "";
               for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {
                 tags += `${item.attributes.biennial_tags.data[i].attributes.slug} `;
@@ -31,9 +32,9 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
               {item.attributes.cover_image}
 
               return(
-                <div className={`discover-item`}>
+                <div className={`discover-item`} key={programmeKey}>
                   <div className="item-wrapper">
-                    <a href={'/programme/' +item.attributes.slug} key={'discover'+i}>
+                    <a href={'/programme/' +item.attributes.slug}>
                       <div className="image">
                         {item.attributes.WhenWhere[0] && page.attributes.hide_when_where == true &&
                           <div className="info-overlay">
@@ -83,11 +84,12 @@ const CommunityItem = ({params, page, global, relations, programmes, festival}) 
                 <div className="discover-container programme-container sub-programme-container">
                   <div className="items-wrapper">
                     {relations.attributes.community_items.data.map((item, i) => {
+                      const communityKey = item.id || item.attributes?.slug || `community-${i}`;
                       return(
-                        <div className="discover-item artist-item">
+                        <div className="discover-item artist-item" key={communityKey}>
                           <LazyLoad height={600}>
                             <div className="item-wrapper">
-                              <a href={'/artists/'+item.attributes.slug} key={'discover'+i}>
+                              <a href={'/artists/'+item.attributes.slug}>
                                 <div className="image">
                                   <div className="image-inner">
                                     {item.attributes.cover_image?.data &&

@@ -169,10 +169,11 @@ const Article = ({page, relations, programmeLocations}) => {
 								{relations?.attributes?.locations?.data.length > 0 &&
 									<div className="locations-wrapper">
 										<h3>{`Location${relations?.attributes?.locations?.data.length > 1 ? 's' : ''}`}</h3>
-										{relations?.attributes?.locations?.data?.map((loc, j) => {
-											let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
-											return(
-												<div className="location">
+								{relations?.attributes?.locations?.data?.map((loc, j) => {
+										let locInfo =  programmeLocations?.filter((item) => item.title == loc.attributes.title);
+										const locationKey = loc.id || loc.attributes?.slug || `location-${j}`;
+										return(
+											<div className="location" key={locationKey}>
 													{
 													    loc.attributes.title.startsWith("Online") ? (
 																loc.attributes.link ?

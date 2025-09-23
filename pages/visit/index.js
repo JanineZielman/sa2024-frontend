@@ -9,7 +9,7 @@ const Visit = ({ global, festival, programmeLoc }) => {
 
   let programmeLocations = programmeLoc.attributes.location_item;
 
-  console.log(festival)
+  //console.log(festival)
 
   useEffect(() => {
     setTimeout(function(){
@@ -99,16 +99,18 @@ const Visit = ({ global, festival, programmeLoc }) => {
           <div className="content">
             <div className="info-wrapper">
               {festival.attributes.visit.map((item, i) => {
+                const visitKey = item.id || `visit-${i}`;
                 return(
-                  <ReactMarkdown children={item.text} />
+                  <ReactMarkdown key={visitKey} children={item.text} />
                 )
               })}
             </div>
             <div className="wrapper">
               <div className="locations">
                 {programmeLocations.map((item, i) => {
+                  const locationKey = item.id || item.location?.data?.id || `programme-location-${i}`;
                   return(
-                    <div className="location" data-gps={item.location.data.attributes.gps}>
+                    <div key={locationKey} className="location" data-gps={item.location.data.attributes.gps}>
                       <h2>{item.location.data.attributes.title} {item.location.data.attributes.subtitle && <span> – {item.location.data.attributes.subtitle} </span>}</h2>
                       <h3>{item.location.data.attributes.location}</h3>
                       <ReactMarkdown className="opening-times" children={item.opening_times}/>

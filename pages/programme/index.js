@@ -16,17 +16,18 @@ const Programme = ({ global, festival, programme}) => {
         <div className="discover programme-wrapper">
           <div className="discover-container programme-container">
             {programme.attributes.programme_item.map((pro_item, i) => {
-                let item = pro_item.programme_item.data;
+                const item = pro_item.programme_item.data;
+                const programmeKey = item?.id || item?.attributes?.slug || `programme-${i}`;
 
                 let dates = item.attributes.WhenWhere.sort((a,b)=>new Date(a.date).getTime()-new Date(b.date).getTime());
                 let start_date = new Date(dates[0]?.date.split('/').reverse().join('/'));
                 let end_date = new Date(dates[dates.length - 1]?.date.split('/').reverse().join('/'));
 
                 return (
-                  <div className={`discover-item`}>
+                  <div className={`discover-item`} key={programmeKey}>
                     <LazyLoad height={600}>
                       <div className="item-wrapper">
-                        <a href={`programme/${item.attributes.slug}`} key={'discover'+i}>
+                        <a href={`programme/${item.attributes.slug}`}>
 
                           
                           <div className="image">
@@ -64,8 +65,9 @@ const Programme = ({ global, festival, programme}) => {
                                   {item.attributes.locations.data[0] && 
                                     <>
                                         {item.attributes.locations.data.map((loc, j) => {
+                                          const locationKey = loc.id || `${programmeKey}-location-${j}`;
                                           return(
-                                            <span className="location">{(j ? ', ' : '') + loc.attributes.title}</span>
+                                            <span className="location" key={locationKey}>{(j ? ', ' : '') + loc.attributes.title}</span>
                                           )
                                         })}
                                     </>

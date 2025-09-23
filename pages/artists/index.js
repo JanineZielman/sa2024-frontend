@@ -52,9 +52,9 @@ const Artists = ({ festival, global, items, numberOfPosts, params }) => {
               {posts.map((item, i) => {
                 //console.log(item.attributes.cover_image.data.attributes.formats);
                 return (
-                  <div className="discover-item artist-item">
+                  <div className="discover-item artist-item" key={item.id || item.attributes.slug || i}>
                     <div className="item-wrapper">
-                      <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
+                      <a href={'artists/' + item.attributes.slug}>
                         <div className="image">
                             <img 
                               src={"https://cms.sonicacts.com/public"+item.attributes.cover_image.data?.attributes.formats.small?.url}

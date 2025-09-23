@@ -8,6 +8,47 @@ import Moment from 'moment'
 const Timetable = ({ global, festival, programmes, locRes}) => {
   const [loading, setLoading] = useState(true);
 
+  const normalizeDate = (dateStr) => {
+    if (!dateStr) {
+      return null;
+    }
+
+    if (dateStr instanceof Date) {
+      return dateStr.toISOString().split('T')[0];
+    }
+
+    if (typeof dateStr !== 'string') {
+      return null;
+    }
+
+    const trimmed = dateStr.trim();
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+      return trimmed;
+    }
+
+    if (/^\d{4}\/\d{2}\/\d{2}$/.test(trimmed)) {
+      return trimmed.replace(/\//g, '-');
+    }
+
+    const tokens = trimmed.split('/');
+    if (tokens.length === 3) {
+      const [first, second, third] = tokens;
+      if (third.length === 4) {
+        const day = first.padStart(2, '0');
+        const month = second.padStart(2, '0');
+        return `${third}-${month}-${day}`;
+      }
+      if (first.length === 4) {
+        const month = second.padStart(2, '0');
+        const day = third.padStart(2, '0');
+        return `${first}-${month}-${day}`;
+      }
+    }
+
+    return trimmed;
+  };
+
   function getDates (startDate, endDate) {
     const dates = []
     let currentDate = startDate
@@ -49,7 +90,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
   }, [])
 
   useEffect(() => {
-    const currentDate = Moment(new Date().toDateString()).format('ddd-D-MMM');
+    const currentDate = Moment(new Date()).format('ddd-D-MMM');
     setTimeout(function() {
       $("body, html").animate({
         scrollTop: 200
@@ -73,7 +114,7 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
   return (
     <>
     
-    <div class="timetable"></div>
+    <div className="timetable"></div>
     
     {loading ?
       <div className="loader"></div>
@@ -85,8 +126,9 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
           </div>
           <div className="timetable-links">
             {festival.attributes.timetable.map((item, i) => {
+              const linkKey = item.id || `${item.label || 'timetable'}-${i}`;
               return(
-                <a className="timetable-link" href={item.url}>{item.label}</a>
+                <a key={linkKey} className="timetable-link" href={item.url}>{item.label}</a>
               )
             })}
           </div>
@@ -100,7 +142,13 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                   let list2 = [];
                   let timeWidth = 24;
                   programmes.forEach((programme) => {
-                    let items = programme.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
+                    const items = programme.attributes.WhenWhere.filter((when) => {
+                      const normalized = normalizeDate(when.date);
+                      if (!normalized) {
+                        return false;
+                      }
+                      return Moment(normalized).format('DD MM') === Moment(day).format('DD MM');
+                    });
                     if(items[0]?.start_time){
                       list.push(items[0].start_time.slice(0,2))
                     }
@@ -120,8 +168,10 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                     timeWidth = Number(list2.sort().reverse()[0]) -  Number(list.sort()[0])
                   }
                   
+                  const dayKey = `${Moment(day).format('YYYY-MM-DD')}-${i}`;
+
                   return(
-                    <div className="timetable-locations-outer-wrapper">
+                    <div className="timetable-locations-outer-wrapper" key={dayKey}>
                       <div className="timetable-locations" id={`${Moment(day).format('ddd-D-MMM')}`}>
                         <div className="day timetable-wrapper" style={{'--width': timeWidth * 12 + 12 + 'rem'}}>
                           <div className={`timetable-row`}>
@@ -138,54 +188,59 @@ const Timetable = ({ global, festival, programmes, locRes}) => {
                           </div>
                           {locRes.map((loc, j) => {
                             return(
-                              <div className={`timetable-row ${loc.attributes.slug}`}>
+                              <div className={`timetable-row ${loc.attributes.slug}`} key={loc.id || `location-${j}`}>
                                 {loc.attributes.programme_items.data.map((prog, k) => {
-                                  let fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
-                                  let items = fullProgItem.attributes.WhenWhere.filter(when => Moment(when.date.split('/').reverse().join('/')).format('DD MM') == Moment(day).format('DD MM'));
+                                  const fullProgItem = programmes.filter(fullProg => fullProg.attributes.slug == prog.attributes.slug)[0];
+                                  const items = fullProgItem.attributes.WhenWhere.filter((when) => {
+                                    const normalized = normalizeDate(when.date);
+                                    if (!normalized) {
+                                      return false;
+                                    }
+                                    return Moment(normalized).format('DD MM') === Moment(day).format('DD MM');
+                                  });
                                   return(
-                                    <>
+                                    <React.Fragment key={prog.id || `${loc.id || loc.attributes.slug}-programme-${k}`}>
                                     {items?.map((item, l) => {
                                       const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
                                       const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
                                       return(
-                                        <>
-                                        { loc.attributes.title == item.location.data?.attributes.title  &&
-                                          <div className={`location ${loc.attributes.sub ? 'sub' : ''} ${l}`} key={`loc${l}`}>
-                                            <p className="loc-text">{loc.attributes.title}</p>
-                                          </div>
-                                        }
-                                        { loc.attributes.title == item.location.data?.attributes.title &&
-                                          <div key={`programme${l}`} id="programme_wrapper" className={`programme-wrapper`}>
-                                            <a href={`/programme/${prog.attributes.slug}`} className={`programme ${prog.attributes.hide_in_timetable ? 'hide' : '' }`} style={{'--margin': ((startTime - 7 - number) * 12 + 11) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 12  + 'rem'}}>
-                                              <div className="inner-programme">
-                                                <div className="inner-wrapper">
-                                                  <div className="time">
-                                                    {item.start_time}–{item.end_time}
-                                                  </div>
-                                                  <div className="title-artist-wrapper">
-                                                    <div className="title">
-                                                      {prog.attributes.title}
+                                        <React.Fragment key={`${prog.id || prog.attributes.slug}-instance-${l}`}>
+                                          { loc.attributes.title == item.location.data?.attributes.title  &&
+                                            <div className={`location ${loc.attributes.sub ? 'sub' : ''} ${l}`} key={`${prog.id || prog.attributes.slug}-location-${l}`}>
+                                              <p className="loc-text">{loc.attributes.title}</p>
+                                            </div>
+                                          }
+                                          { loc.attributes.title == item.location.data?.attributes.title &&
+                                            <div key={`${prog.id || prog.attributes.slug}-programme-${l}`} id="programme_wrapper" className={`programme-wrapper`}>
+                                              <a href={`/programme/${prog.attributes.slug}`} className={`programme ${prog.attributes.hide_in_timetable ? 'hide' : '' }`} style={{'--margin': ((startTime - 7 - number) * 12 + 11) + 'rem',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 12  + 'rem'}}>
+                                                <div className="inner-programme">
+                                                  <div className="inner-wrapper">
+                                                    <div className="time">
+                                                      {item.start_time}–{item.end_time}
                                                     </div>
-                                                    {prog.attributes.hide_artists_in_timetable != true &&
-                                                      <div className="artists">
-                                                        {fullProgItem.attributes.community_items.data.map((com, k) => {
-                                                          return(
-                                                            <div>{com.attributes.name}</div>
-                                                          )
-                                                        })}
+                                                    <div className="title-artist-wrapper">
+                                                      <div className="title">
+                                                        {prog.attributes.title}
                                                       </div>
-                                                    } 
+                                                      {prog.attributes.hide_artists_in_timetable != true &&
+                                                        <div className="artists">
+                                                          {fullProgItem.attributes.community_items.data.map((com, k) => {
+                                                            return(
+                                                              <div key={`${prog.id || prog.attributes.slug}-artist-${k}`}>{com.attributes.name}</div>
+                                                            )
+                                                          })}
+                                                        </div>
+                                                      } 
+                                                    </div>
                                                   </div>
                                                 </div>
-                                              </div>
-                                            </a>
-                                          </div>
-                                          
-                                        } 
-                                        </>                       
+                                              </a>
+                                            </div>
+                                          } 
+                                        </React.Fragment>                       
                                       )
                                     })}
-                                    </>
+                                    </React.Fragment>
                                   )
                                 })}
                               </div>

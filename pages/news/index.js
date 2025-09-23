@@ -58,11 +58,12 @@ const News = ({ global, items, numberOfPosts, params, festival, page }) => {
 							loader={<h4>Loading...</h4>}
 						>
 							{posts.map((item, i) => {
+								const postKey = item.id || item.attributes?.slug || `news-${i}`;
 								return (
-									<div className="discover-item">
+									<div className="discover-item" key={postKey}>
 										<LazyLoad height={600}>
 											<div className="item-wrapper">
-												<a href={'/news/'+item.attributes.slug} key={'link'+i}>
+												<a href={'/news/'+item.attributes.slug}>
 													<div className="image">
 														{item.attributes.cover_image?.data?.attributes &&
 															<Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
