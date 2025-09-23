@@ -81,7 +81,7 @@ const Layout = ({ children, festival}) => {
         const video = $(this).find('video')[0];
         const textureLoader = new THREE.TextureLoader();
         const texture = textureLoader.load($(this).find("img").attr("src"));
-        texture.encoding = THREE.sRGBEncoding;
+        texture.colorSpace = THREE.SRGBColorSpace;
 
         init();
 
