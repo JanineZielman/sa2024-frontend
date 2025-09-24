@@ -9,8 +9,7 @@ import { getStrapiMedia } from '../../lib/media';
 const NEWS_QUERY = (slug) =>
   `/news-items?filters[biennials][slug][$eq]=${slug}&sort[0]=date%3Adesc&populate[content][populate]=*&populate[biennial_cover_image][populate]=*&populate[cover_image][populate]=*&populate[footnotes][populate]=*`;
 
-const supportsViewTransition =
-  typeof document !== 'undefined' && typeof document.startViewTransition === 'function';
+const supportsViewTransition = false; // temporary: disable View Transition animation
 
 function selectImage(attributes) {
   if (!attributes) {

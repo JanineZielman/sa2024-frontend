@@ -1381,11 +1381,11 @@ html.browser-safari #social-homelink #sa-logo svg {
   z-index: 7;
   margin: 0 auto;
   padding-top: calc(100vh + 3rem);
-  width: 95vw;
+  width: 84vw;
   max-width: 1600px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 3rem 2.5rem;
+  gap: 5rem 6rem;
 
   @include mobile {
     grid-template-columns: 1fr;
@@ -1476,8 +1476,10 @@ html.browser-safari #social-homelink #sa-logo svg {
       margin-top: auto;
 
       .read-more-inner {
-        border: 0;
-        background: none;
+        
+        background: var(--color-pink);
+        border: none;
+
         font: inherit;
         cursor: pointer;
         appearance: none;
@@ -3059,7 +3061,7 @@ body.news-overlay-open {
   bottom: 0;
   width:     calc(50vw + 1.25vw);
   max-width: calc(50vw + 1.25vw);
-  background: #fff;
+  background: var(--color-grey);
   color: inherit;
   z-index: 1055;
   overflow-y: auto;
@@ -3071,15 +3073,13 @@ body.news-overlay-open {
   gap: 1.5rem;
   box-shadow: 0 0 3rem rgba(0, 0, 0, 0.15);
 
-  &--left {
-    left: 0;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-  }
+  left: 50vw;
+  transform: translateX(-50%);
 
-  &--right {
-    right: 0;
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-  }
+  height: calc(100vh - 2rem);
+  top: 1rem;
+  border-radius: 1rem;
+
 
   &__close {
     position: sticky;

@@ -37,13 +37,6 @@ const FrontpageVisuals = () => (
       <DateSvg aria-hidden="true" />
     </div>
 
-    <div id="frontpage-locations">
-      <img
-        src={`${IMAGE_BASE_PATH}/250904-SonicActs-2026-WebSketch4.svg`}
-        alt="Festival locations"
-      />
-    </div>
-
     <div className="frontpage-visuals-svg">
       <img
         src={`${IMAGE_BASE_PATH}/250904-SonicActs-2026-WebSketch3.svg`}
