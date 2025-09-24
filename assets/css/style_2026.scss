@@ -71,11 +71,17 @@ textarea {
 
 
 :root {
-  --color-pink: #ed92e8;
-  --color-grey: #babade;
-  --color-brown: #7a3700;
+  --color-pink: #ff87ff;
   --color-blue: #7b87ff;
+  --color-grey: #babadf;
+  --color-brown: #7a3800;
+
+  --color-drawing-pink: #ff87ff;
+  --color-drawing-blue: #9ca4f0;
+  --color-drawing-grey: #a89aa8;
+  --color-drawing-brown: #7a3800;
 }
+
 
 html {
     box-sizing: border-box;
@@ -116,11 +122,18 @@ body {
 
   #sonic {
     left: 1rem;
+    path {
+      fill: var(--color-grey);
+    }
   }
 
   #acts {
     right: 1rem;
     transition-delay: 0.3s;
+
+    path {
+      fill: var(--color-pink);
+    }
   }
 
   #sonic, #acts {

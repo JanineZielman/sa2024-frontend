@@ -8,7 +8,7 @@ const FrontpageVisuals = () => (
   <>
     <img
       id="frontpage-background-overlay"
-      src={`${IMAGE_BASE_PATH}/250904-SonicActs-2026-WebSketch5.png`}
+      src={`${IMAGE_BASE_PATH}/250904-SonicActs-2026-WebSketch5_pink_ff87ff.png`}
       alt="Sonic Acts overlay"
       style={{
         position: 'fixed',
