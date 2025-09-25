@@ -23,60 +23,67 @@ const FrontpageLanding = () => {
   }, []);
 
   return (
-    <div className={`frontpage-landing${isScrolled ? ' frontpage-landing--hidden' : ''}`}>
-      <FrontpageVisuals />
+    <>
+      <img
+        id="frontpage-background-overlay"
+        src={`${IMAGE_BASE_PATH}/250904-SonicActs-2026-WebSketch5_pink_ff87ff.png`}
+        alt="Sonic Acts overlay"
+      />
 
-      <div id="frontpage-main">
-        <CuratorialSection />
+      <div className={`frontpage-landing${isScrolled ? ' frontpage-landing--hidden' : ''}`}>
+        <FrontpageVisuals />
 
-        <div
-          id="frontpage-aqua-01"
-          data-tilt
-          data-tilt-full-page-listening=""
-          data-tilt-max="4"
-          data-tilt-speed="50"
-          data-tilt-perspective="500"
-        >
-          <img
-            src={`${IMAGE_BASE_PATH}/aquarell-10-2-10.png`}
-            loading="lazy"
-            alt="Watercolour overlay"
-          />
+        <div id="frontpage-main">
+          <CuratorialSection />
+
+          <div
+            id="frontpage-aqua-01"
+            data-tilt
+            data-tilt-full-page-listening=""
+            data-tilt-max="4"
+            data-tilt-speed="50"
+            data-tilt-perspective="500"
+          >
+            <img
+              src={`${IMAGE_BASE_PATH}/aquarell-10-2-10.png`}
+              loading="lazy"
+              alt="Watercolour overlay"
+            />
+          </div>
+
+          <div
+            id="frontpage-aqua-02"
+            data-tilt
+            data-tilt-full-page-listening=""
+            data-tilt-max="4"
+            data-tilt-speed="50"
+            data-tilt-perspective="500"
+          >
+            <img
+              src={`${IMAGE_BASE_PATH}/aquarell-10-2-6.png`}
+              loading="lazy"
+              alt="Watercolour overlay"
+            />
+          </div>
+
+          <div
+            id="frontpage-aqua-03"
+            data-tilt
+            data-tilt-full-page-listening=""
+            data-tilt-max="4"
+            data-tilt-speed="50"
+            data-tilt-perspective="500"
+          >
+            <img
+              src={`${IMAGE_BASE_PATH}/aquarell-10-2-1.png`}
+              loading="lazy"
+              alt="Watercolour overlay"
+            />
+          </div>
         </div>
-
-        <div
-          id="frontpage-aqua-02"
-          data-tilt
-          data-tilt-full-page-listening=""
-          data-tilt-max="4"
-          data-tilt-speed="50"
-          data-tilt-perspective="500"
-        >
-          <img
-            src={`${IMAGE_BASE_PATH}/aquarell-10-2-6.png`}
-            loading="lazy"
-            alt="Watercolour overlay"
-          />
-        </div>
-
-        <div
-          id="frontpage-aqua-03"
-          data-tilt
-          data-tilt-full-page-listening=""
-          data-tilt-max="4"
-          data-tilt-speed="50"
-          data-tilt-perspective="500"
-        >
-          <img
-            src={`${IMAGE_BASE_PATH}/aquarell-10-2-1.png`}
-            loading="lazy"
-            alt="Watercolour overlay"
-          />
-        </div>
+        <RaycastCanvas />
       </div>
-
-      <RaycastCanvas />
-    </div>
+    </>
   );
 };
 

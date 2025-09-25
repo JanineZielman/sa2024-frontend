@@ -6,24 +6,6 @@ const IMAGE_BASE_PATH = '/assets/frontpage';
 
 const FrontpageVisuals = () => (
   <>
-    <img
-      id="frontpage-background-overlay"
-      src={`${IMAGE_BASE_PATH}/250904-SonicActs-2026-WebSketch5_pink_ff87ff.png`}
-      alt="Sonic Acts overlay"
-      style={{
-        position: 'fixed',
-        left: '50vw',
-        top: 0,
-        width: '100vw',
-        height: 'auto',
-        objectFit: 'cover',
-        zIndex: 100,
-        pointerEvents: 'none',
-        transformOrigin: 'top center',
-        transform: 'translateX(-50%)',
-      }}
-    />
-
     <div id="frontpage-sonic-acts">
       <div id="frontpage-sonic">
         <SonicSvg aria-hidden="true" />

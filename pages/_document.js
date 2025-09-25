@@ -79,17 +79,29 @@ class MyDocument extends Document {
         <body className={slug}>
 
           <header id="main-header">
-            <section class="minimal-nav">
-              <ul class="group-1">
-                <li><a href="/news" className={`${slug.includes('news') ? 'active' : ''}`}>News</a></li>
-                <li><a href="/artists" className={`${slug.includes('artists') ? 'active' : ''}`}>Artists</a></li>
-                <li><a href="/tickets" className={`${slug.includes('tickets') ? 'active' : ''}`}>Tickets</a></li>
-                <li><a href="/visit" className={`${slug.includes('visit') ? 'active' : ''}`}>Visit</a></li>
+            <section className="minimal-nav">
+              <ul className="group-1">
+                <li>
+                  <a href="/news" className={`${slug.includes('news') ? 'active' : ''}`}>
+                    News
+                  </a>
+                </li>
+                {/**
+                 * <li><a href="/artists" className={`${slug.includes('artists') ? 'active' : ''}`}>Artists</a></li>
+                 * <li><a href="/tickets" className={`${slug.includes('tickets') ? 'active' : ''}`}>Tickets</a></li>
+                 * <li><a href="/visit" className={`${slug.includes('visit') ? 'active' : ''}`}>Visit</a></li>
+                 */}
               </ul>
               <ul>
-                <li><a href="/programme" className={`${slug.includes('programme') ? 'active' : ''}`}>Programme</a></li>
-                <li><a href="/timetable" className={`${slug.includes('timetable') ? 'active' : ''}`}>Timetable</a></li>
-                <li><a href="/about" className={`${slug.includes('information') ? 'active' : ''}`}>Information</a></li>
+                {/**
+                 * <li><a href="/programme" className={`${slug.includes('programme') ? 'active' : ''}`}>Programme</a></li>
+                 * <li><a href="/timetable" className={`${slug.includes('timetable') ? 'active' : ''}`}>Timetable</a></li>
+                 */}
+                <li>
+                  <a href="/about" className={`${slug.includes('information') ? 'active' : ''}`}>
+                    Information
+                  </a>
+                </li>
               </ul>
             </section>
           </header>

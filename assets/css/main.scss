@@ -1376,118 +1376,6 @@ html.browser-safari #social-homelink #sa-logo svg {
   }
 }
 
-#news-container {
-  position: relative;
-  z-index: 7;
-  margin: 0 auto;
-  padding-top: calc(100vh + 3rem);
-  width: 84vw;
-  max-width: 1600px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 5rem 6rem;
-
-  @include mobile {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .news-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    &__image {
-      padding: 0;
-      border: 0;
-      background: none;
-      cursor: pointer;
-      display: block;
-      appearance: none;
-
-      img {
-        display: block;
-        width: 100%;
-        border-radius: 0.5rem;
-        aspect-ratio: 5 / 4;
-        object-fit: cover;
-        object-position: center;
-        max-height: 50vw;
-        margin: 0;
-      }
-    }
-
-    &__header {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    &__title {
-      @include headline-h3;
-      margin: 0;
-      flex: 1 1 80%;
-
-      button {
-        border: 0;
-        background: none;
-        padding: 0;
-        text-align: left;
-        cursor: pointer;
-        font: inherit;
-        color: inherit;
-        appearance: none;
-        display: inline-block;
-        width: 100%;
-
-        span {
-          display: inline-block;
-        }
-      }
-    }
-
-    &__date {
-      flex: 0 0 20%;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08rem;
-      opacity: 0.7;
-      text-align: right;
-    }
-
-    &__excerpt {
-      flex: 1;
-      font-size: 1rem;
-
-      p {
-        margin: 0 0 1rem;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
-      }
-
-      p:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .read-more {
-      margin-top: auto;
-
-      .read-more-inner {
-        
-        background: var(--color-pink);
-        border: none;
-
-        font: inherit;
-        cursor: pointer;
-        appearance: none;
-        color: inherit;
-      }
-    }
-  }
-}
 
 /*Mobile / Desktop*/
 @include desktop {
@@ -2608,261 +2496,293 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 
 body.slug-timetable {
   background-color: #6c4b34;
-}
-body.slug-timetable .page-title {
-  color: inherit;
-}
-@include mobile {
-  body.slug-timetable .container {
-    padding: 0;
-  }
-}
-body.slug-timetable .colored-bg-01, body.slug-timetable .colored-bg-02 {
-  display: none;
-}
-body.slug-timetable .title-wrapper {
-  margin-top: 0;
-}
-body.slug-timetable .timetable .date {
-  padding: 0.5rem 0 0 0.5rem;
-  background-color: black;
-  width: 10.8rem;
-  color: white !important;
-  height: 3rem;
-  font-family: "geist", sans-serif;
-  font-variation-settings: "wght" 200;
-  font-size: 1.8rem;
-  z-index: 10;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-}
-@include mobile {
-  body.slug-timetable .timetable .date {
-    width: 7.2rem;
-  }
-}
-@include mobile {
-  body.slug-timetable .timetable .date {
-    font-size: 1rem;
-  }
-}
-body.slug-timetable .timetable .date:hover {
-  color: white !important;
-}
-body.slug-timetable .timetable .timetable-times {
-  display: flex;
-  z-index: 0;
-  margin-left: 10.8rem;
-}
-@include mobile {
-  body.slug-timetable .timetable .timetable-times {
-    margin-left: 7.2rem;
-  }
-}
-body.slug-timetable .timetable .timetable-times .time-block {
-  padding-left: 0;
-  background-color: inherit;
-  top: 1.35rem;
-  position: relative;
-}
-body.slug-timetable .timetable .timetable-times .time-block .time {
-  padding: 0.3rem 0.5rem;
-  height: 1.65rem;
-  border-bottom: 1px solid black;
-  font-size: 0.7rem;
-  background-color: black;
-  color: white;
-}
-body.slug-timetable .timetable .timetable-row .location {
-  background-color: inherit;
-}
-body.slug-timetable .timetable .timetable-row .inner-programme .title-artist-wrapper {
-  background-color: inherit !important;
-}
-body.slug-timetable .timetable .timetable-row.w139 .location, body.slug-timetable .timetable .timetable-row.sub-W139 .location, body.slug-timetable .timetable .timetable-row.muziekgebouw .location, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .location, body.slug-timetable .timetable .timetable-row.rijksakademie .location {
-  background-color: inherit;
-}
-body.slug-timetable .timetable .timetable-row.w139 .programme:hover, body.slug-timetable .timetable .timetable-row.sub-W139 .programme:hover, body.slug-timetable .timetable .timetable-row.muziekgebouw .programme:hover, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .programme:hover, body.slug-timetable .timetable .timetable-row.rijksakademie .programme:hover {
-  background-color: transparent !important;
-}
-body.slug-timetable .timetable .timetable-row.w139 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-W139 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.muziekgebouw .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.rijksakademie .inner-programme .title-artist-wrapper {
-  background-color: inherit !important;
-}
-body.slug-timetable .timetable .timetable-row.zone-2-source .location, body.slug-timetable .timetable .timetable-row.ot301 .location, body.slug-timetable .timetable .timetable-row.online .location, body.slug-timetable .timetable .timetable-row.online-anywhere .location, body.slug-timetable .timetable .timetable-row.oude-kerk .location, body.slug-timetable .timetable .timetable-row.paradiso .location, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .location, body.slug-timetable .timetable .timetable-row.sub-stedelijk .location {
-  background-color: inherit;
-}
-body.slug-timetable .timetable .timetable-row.zone-2-source .programme:hover, body.slug-timetable .timetable .timetable-row.ot301 .programme:hover, body.slug-timetable .timetable .timetable-row.online .programme:hover, body.slug-timetable .timetable .timetable-row.online-anywhere .programme:hover, body.slug-timetable .timetable .timetable-row.oude-kerk .programme:hover, body.slug-timetable .timetable .timetable-row.paradiso .programme:hover, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .programme:hover, body.slug-timetable .timetable .timetable-row.sub-stedelijk .programme:hover {
-  background-color: transparent !important;
-}
-body.slug-timetable .timetable .timetable-row.zone-2-source .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.ot301 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.online .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.online-anywhere .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.oude-kerk .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.paradiso .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-stedelijk .inner-programme .title-artist-wrapper {
-  background-color: inherit !important;
-}
-body.slug-timetable .timetable .timetable-row.looiersgracht60 .location, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .location, body.slug-timetable .timetable .timetable-row.jacuzzi .location {
-  background-color: inherit;
-}
-body.slug-timetable .timetable .timetable-row.looiersgracht60 .programme:hover, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .programme:hover, body.slug-timetable .timetable .timetable-row.jacuzzi .programme:hover {
-  background-color: transparent !important;
-}
-body.slug-timetable .timetable .timetable-row.looiersgracht60 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.jacuzzi .inner-programme .title-artist-wrapper {
-  background-color: inherit !important;
-}
-body.slug-timetable .timetable .timetable-row.bimhuis .location, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .location, body.slug-timetable .timetable .timetable-row.eye .location, body.slug-timetable .timetable .timetable-row.garage-noord .location, body.slug-timetable .timetable .timetable-row.het-hem .location, body.slug-timetable .timetable .timetable-row.sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.het-hem-2 .location {
-  background-color: inherit;
-}
-body.slug-timetable .timetable .timetable-row.bimhuis .programme:hover, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .programme:hover, body.slug-timetable .timetable .timetable-row.eye .programme:hover, body.slug-timetable .timetable .timetable-row.garage-noord .programme:hover, body.slug-timetable .timetable .timetable-row.het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.het-hem-2 .programme:hover {
-  background-color: transparent !important;
-}
-body.slug-timetable .timetable .timetable-row.bimhuis .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.eye .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.garage-noord .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.het-hem-2 .inner-programme .title-artist-wrapper {
-  background-color: inherit !important;
-}
-body.slug-timetable .timetable .timetable-row .programme {
-  background-color: transparent;
-  height: auto;
-  top: 0.4rem;
-  border-radius: 0.2rem;
-  overflow: hidden;
-  left: calc(var(--margin) + 0.2rem);
-  width: calc(var(--width) - 0.4rem);
-}
-@include mobile {
-  body.slug-timetable .timetable .timetable-row .programme {
-    left: calc(var(--margin) - 3.6rem);
-  }
-}
-body.slug-timetable .timetable .timetable-row .programme:hover {
-  background-color: transparent !important;
-}
-body.slug-timetable .timetable .timetable-row .programme .inner-programme {
-  width: 100%;
-  padding: 0;
-  height: auto;
-  line-height: 0.8rem;
-}
-body.slug-timetable .timetable .timetable-row .programme .inner-programme .inner-wrapper {
-  width: 100%;
-  padding-top: 0rem;
-  display: inline-block !important;
-}
-body.slug-timetable .timetable .timetable-row .programme .inner-programme .title-artist-wrapper {
-  width: 100%;
-  display: block;
-  line-height: 0.8rem;
-  border-top-right-radius: 0.25rem;
-  overflow: hidden;
-}
-body.slug-timetable .timetable .timetable-row .programme .inner-programme .time {
-  font-size: 0.7rem;
-  display: inline-flex;
-  background-color: black;
-  color: white;
-  margin-left: 0;
-  padding: 0rem 0.2rem;
-  border-top-right-radius: 0.25rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-body.slug-timetable .timetable .timetable-row .programme .inner-programme .title {
-  display: inline-block;
-  margin-left: 0;
-  padding: 0.2rem 0.2rem 0 0.2rem;
-  font-size: 0.7rem !important;
-  line-height: 0.8rem;
-  max-height: 1.84rem;
-  -webkit-line-clamp: 2;
-  text-transform: uppercase;
-  font-family: "mono-prop";
-}
-body.slug-timetable .timetable .timetable-row .programme .inner-programme .artists {
-  font-size: 0.5rem;
-  line-height: 1;
-  display: block;
-  font-family: "mono-prop";
-  padding-left: 0.2rem;
-  padding-top: 0;
-  padding-bottom: 0.2rem;
-  margin-top: -0.2rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-body.slug-timetable .timetable .timetable-row .programme .inner-programme .artists div {
-  display: inline;
-  margin-left: 0;
-  white-space: nowrap;
-}
-body.slug-timetable .timetable .timetable-locations-outer-wrapper {
-  position: relative;
-  margin-bottom: 4rem;
-}
-body.slug-timetable .timetable .timetable-locations-outer-wrapper::before {
-  content: " ";
-  position: absolute;
-  right: 0;
-  top: 1.35rem;
-  width: 3rem;
-  height: calc(100% - 1.35rem);
-  display: block;
-  z-index: 10;
-  background: none;
-  pointer-events: none;
-}
-body.slug-timetable .timetable .timetable-locations {
-  padding-bottom: 0;
-  padding-top: 0;
-}
-body.slug-timetable .timetable .timetable-locations::before {
-  content: " ";
-  background-color: inherit;
-  position: absolute;
-  top: 1.4rem;
-  width: 100%;
-  height: calc(100% - 1.4rem);
-  z-index: -1;
-}
-body.slug-timetable .timetable .timetable-locations:hover {
-  margin-bottom: -0.6rem;
-}
-body.slug-timetable .timetable .timetable-locations:hover::-webkit-scrollbar {
-  height: 1rem;
-}
-body.slug-timetable .timetable .timetable-locations::-webkit-scrollbar {
-  height: 0.4rem;
-  border: 1px solid #000;
-  background-color: black;
-  cursor: pointer;
-}
-body.slug-timetable .timetable .timetable-locations::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 1rem;
-  border: 2px solid transparent;
-  height: calc(0.5rem - 2px);
-  cursor: pointer;
-}
-body.slug-timetable .timetable .timetable-locations::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 0.5rem;
-}
 
-body.slug-timetable .timetable .timetable-locations .location {
-  width: 10.8rem;
-  border-top: 0px solid black;
-}
-@include mobile {
-  body.slug-timetable .timetable .timetable-locations .location {
-    width: 7.2rem;
+  .page-title {
+    color: inherit;
   }
-}
-body.slug-timetable .timetable .timetable-locations .location p {
-  border-top: 0px solid black;
-  border-bottom: 0px solid black;
-  border-right: 0px solid black;
-  margin-bottom: -1px;
-  font-size: 0.7rem;
-  padding: 1.5rem 0 1.5rem 0.5rem;
-  word-break: break-word;
-}
-body.slug-timetable .timetable .timetable-locations .location.sub p {
-  opacity: 0;
-  padding-left: 2rem;
+
+  @include mobile {
+    .container {
+      padding: 0;
+    }
+  }
+
+  .colored-bg-01,
+  .colored-bg-02 {
+    display: none;
+  }
+
+  .title-wrapper {
+    margin-top: 0;
+  }
+
+  .timetable {
+    .date {
+      padding: 0.5rem 0 0 0.5rem;
+      background-color: black;
+      width: 10.8rem;
+      color: white !important;
+      height: 3rem;
+      font-family: "geist", sans-serif;
+      font-variation-settings: "wght" 200;
+      font-size: 1.8rem;
+      z-index: 10;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
+
+      &:hover {
+        color: white !important;
+      }
+
+      @include mobile {
+        width: 7.2rem;
+        font-size: 1rem;
+      }
+    }
+
+    .timetable-times {
+      display: flex;
+      z-index: 0;
+      margin-left: 10.8rem;
+
+      @include mobile {
+        margin-left: 7.2rem;
+      }
+
+      .time-block {
+        padding-left: 0;
+        background-color: inherit;
+        top: 1.35rem;
+        position: relative;
+
+        .time {
+          padding: 0.3rem 0.5rem;
+          height: 1.65rem;
+          border-bottom: 1px solid black;
+          font-size: 0.7rem;
+          background-color: black;
+          color: white;
+        }
+      }
+    }
+
+    .timetable-row {
+      .location {
+        background-color: inherit;
+      }
+
+      .programme {
+        background-color: transparent;
+        height: auto;
+        top: 0.4rem;
+        border-radius: 0.2rem;
+        overflow: hidden;
+        left: calc(var(--margin) + 0.2rem);
+        width: calc(var(--width) - 0.4rem);
+
+        @include mobile {
+          left: calc(var(--margin) - 3.6rem);
+        }
+
+        &:hover {
+          background-color: transparent !important;
+        }
+
+        .inner-programme {
+          width: 100%;
+          padding: 0;
+          height: auto;
+          line-height: 0.8rem;
+
+          .inner-wrapper {
+            width: 100%;
+            padding-top: 0;
+            display: inline-block !important;
+          }
+
+          .title-artist-wrapper {
+            width: 100%;
+            display: block;
+            line-height: 0.8rem;
+            border-top-right-radius: 0.25rem;
+            overflow: hidden;
+            background-color: inherit !important;
+          }
+
+          .time {
+            font-size: 0.7rem;
+            display: inline-flex;
+            background-color: black;
+            color: white;
+            margin-left: 0;
+            padding: 0 0.2rem;
+            border-top-right-radius: 0.25rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          .title {
+            display: inline-block;
+            margin-left: 0;
+            padding: 0.2rem 0.2rem 0 0.2rem;
+            font-size: 0.7rem !important;
+            line-height: 0.8rem;
+            max-height: 1.84rem;
+            -webkit-line-clamp: 2;
+            text-transform: uppercase;
+            font-family: "mono-prop";
+          }
+
+          .artists {
+            font-size: 0.5rem;
+            line-height: 1;
+            display: block;
+            font-family: "mono-prop";
+            padding-left: 0.2rem;
+            padding-top: 0;
+            padding-bottom: 0.2rem;
+            margin-top: -0.2rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            div {
+              display: inline;
+              margin-left: 0;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+
+      &.w139,
+      &.sub-W139,
+      &.muziekgebouw,
+      &.sub-muziekgebouw,
+      &.rijksakademie,
+      &.zone-2-source,
+      &.ot301,
+      &.online,
+      &.online-anywhere,
+      &.oude-kerk,
+      &.paradiso,
+      &.stedelijk-amsterdam,
+      &.sub-stedelijk,
+      &.looiersgracht60,
+      &.sub-looiersgracht60,
+      &.jacuzzi,
+      &.bimhuis,
+      &.sub-BIMHUIS,
+      &.eye,
+      &.garage-noord,
+      &.het-hem,
+      &.sub-het-hem,
+      &.sub-sub-het-hem,
+      &.sub-sub-sub-het-hem,
+      &.sub-sub-sub-sub-het-hem,
+      &.het-hem-2 {
+        .location {
+          background-color: inherit;
+        }
+
+        .programme {
+          &:hover {
+            background-color: transparent !important;
+          }
+
+          .inner-programme {
+            .title-artist-wrapper {
+              background-color: inherit !important;
+            }
+          }
+        }
+      }
+    }
+
+    .timetable-locations-outer-wrapper {
+      position: relative;
+      margin-bottom: 4rem;
+
+      &::before {
+        content: " ";
+        position: absolute;
+        right: 0;
+        top: 1.35rem;
+        width: 3rem;
+        height: calc(100% - 1.35rem);
+        display: block;
+        z-index: 10;
+        background: none;
+        pointer-events: none;
+      }
+    }
+
+    .timetable-locations {
+      padding-bottom: 0;
+      padding-top: 0;
+
+      &::before {
+        content: " ";
+        background-color: inherit;
+        position: absolute;
+        top: 1.4rem;
+        width: 100%;
+        height: calc(100% - 1.4rem);
+        z-index: -1;
+      }
+
+      &:hover {
+        margin-bottom: -0.6rem;
+
+        &::-webkit-scrollbar {
+          height: 1rem;
+        }
+      }
+
+      &::-webkit-scrollbar {
+        height: 0.4rem;
+        border: 1px solid #000;
+        background-color: black;
+        cursor: pointer;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 1rem;
+        border: 2px solid transparent;
+        height: calc(0.5rem - 2px);
+        cursor: pointer;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 0.5rem;
+      }
+
+      .location {
+        width: 10.8rem;
+        border-top: 0 solid black;
+
+        @include mobile {
+          width: 7.2rem;
+        }
+
+        p {
+          border-top: 0 solid black;
+          border-bottom: 0 solid black;
+          border-right: 0 solid black;
+          margin-bottom: -1px;
+          font-size: 0.7rem;
+          padding: 1.5rem 0 1.5rem 0.5rem;
+          word-break: break-word;
+        }
+
+        &.sub p {
+          opacity: 0;
+          padding-left: 2rem;
+        }
+      }
+    }
+  }
 }
 
 body.slug-visit {
@@ -3036,154 +2956,3 @@ body.slug-visit {
   width: 1px;
 }
 
-
-html.news-overlay-open,
-body.news-overlay-open {
-  overflow: hidden;
-}
-
-.news-overlay-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(4px);
-  border: 0;
-  padding: 0;
-  margin: 0;
-  z-index: 1050;
-  appearance: none;
-  cursor: pointer;
-}
-
-.news-overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width:     calc(50vw + 1.25vw);
-  max-width: calc(50vw + 1.25vw);
-  background: var(--color-grey);
-  color: inherit;
-  z-index: 1055;
-  overflow-y: auto;
-  
-  padding: 0rem 2.5vw 3rem 2.5vw;
-  
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  box-shadow: 0 0 3rem rgba(0, 0, 0, 0.15);
-
-  left: 50vw;
-  transform: translateX(-50%);
-
-  height: calc(100vh - 2rem);
-  top: 1rem;
-  border-radius: 1rem;
-
-
-  &__close {
-    position: sticky;
-    top: 1rem;
-    right: -1rem;
-    align-self: flex-end;
-    width: 2.5rem;
-    min-height: 2.5rem;
-    display: block;
-    border: 0;
-    background: #ffffff;
-    cursor: pointer;
-    appearance: none;
-    z-index: 1;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.08);
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: calc(100% - 0.5rem);
-      height: 0.12rem;
-      background: currentColor;
-      transform-origin: center;
-      border-radius: 0.12rem;
-      transition: background 0.3s ease;
-    }
-
-    &:before {
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-
-    &:after {
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-
-    &:hover,
-    &:focus {
-      box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.15);
-
-      &:before,
-      &:after {
-        background: rgba(0, 0, 0, 0.6);
-      }
-    }
-  }
-
-  &__image {
-    img {
-      width: 100%;
-      border-radius: 0.5rem;
-      aspect-ratio: 5 / 4;
-      object-fit: cover;
-      margin: 0;
-    }
-  }
-
-  &__headline {
-    @include headline-h3;
-    margin: 0;
-
-    span {
-      display: block;
-    }
-  }
-
-  &__date {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-  }
-
-  &__body {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    p {
-      margin: 0 0 1rem;
-    }
-
-    img {
-      width: 100%;
-      border-radius: 0.5rem;
-      aspect-ratio: 5 / 4;
-      object-fit: cover;
-      margin: 0;
-    }
-  }
-
-  &__footnotes {
-    font-size: 0.85rem;
-    opacity: 0.75;
-  }
-
-  @include mobile {
-    width: 100vw;
-    max-width: 100vw;
-    left: 0;
-    right: 0;
-    padding: 1.5rem 1.5rem 3rem;
-  }
-}

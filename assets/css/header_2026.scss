@@ -2,11 +2,11 @@
     position: fixed;
     bottom: 1rem;
 
-    z-index: 1000;
+    z-index: 10000;
     text-align: center;
 
     width: 100%;
-    font-family: 'bazaine-mono';
+    
 
     font-size: 1.5rem;
     letter-spacing: -0.00rem;
@@ -39,6 +39,7 @@
             transition: background 0.3s ease;
 
             font-size: 2rem;
+            font-family: 'bazaine-mono';
 
             &:hover {
                 background: var(--color-blue);
